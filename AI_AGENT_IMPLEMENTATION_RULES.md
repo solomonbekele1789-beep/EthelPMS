@@ -2,8 +2,8 @@
 
 > **MANDATORY INSTRUCTION**: All AI coding agents, engineers, models, and subagents working on this codebase MUST strictly adhere to every rule in this document without exception. These rules are specifically designed for the EthelPMS unified NGO Project Management System and supersede any default agent behaviors.
 
-**Stack:** ASP.NET Core 8 + Angular 18 + Supabase PostgreSQL
-**Architecture:** Clean Architecture (Domain → Application → Infrastructure → API)
+**Stack:** ASP.NET Core 8 + Angular 18 (Nx) + Supabase PostgreSQL
+**Architecture:** Modular Monolith — schema-per-module, Clean Architecture per module, Transactional Outbox
 **Companion Document:** `IMPLEMENTATION_PLAN.md` defines WHAT to build and WHEN. This document defines HOW to build it.
 
 ---
@@ -33,31 +33,71 @@
 
 # B. Architecture and Business Logic
 
-## B1. Solution Structure (Mandatory)
+## B1. Solution Structure (Mandatory — Modular Monolith)
 ```
 src/
-  NGO.PMS.Domain/          — Entities, value objects, domain services, interfaces. ZERO external dependencies.
-  NGO.PMS.Application/     — Use cases (MediatR handlers), DTOs, validators, mappings. Depends only on Domain.
-  NGO.PMS.Infrastructure/  — EF Core, external services, identity, jobs. Depends on Application.
-  NGO.PMS.API/             — Controllers, hubs, middleware, filters. Depends on Infrastructure + Application.
-  NGO.PMS.Shared/          — Constants, extensions, helpers. Referenced by all projects.
+  Shared/
+    NGO.PMS.SharedKernel/     — Base entities, value objects, common interfaces. ZERO external deps.
+    NGO.PMS.Contracts/        — Integration events + public query interfaces (cross-module API)
+  Modules/
+    Identity/                 — schema: identity
+      NGO.PMS.Identity.Domain/
+      NGO.PMS.Identity.Application/
+      NGO.PMS.Identity.Infrastructure/
+      NGO.PMS.Identity.API/
+    Projects/                 — schema: projects
+      NGO.PMS.Projects.Domain/  ... (same 4-layer pattern)
+    Planning/                 — schema: planning
+    Reporting/                — schema: reporting
+    MEAL/                     — schema: meal
+    Participants/             — schema: participants
+    Procurement/              — schema: procurement
+    FundAccounting/           — schema: fundacct
+    Assets/                   — schema: assets
+    Training/                 — schema: training
+    Tasks/                    — schema: tasks
+    Risk/                     — schema: risk
+    Donors/                   — schema: donors
+    Chat/                     — schema: chat
+    Notifications/            — schema: notifications
+    Documents/                — schema: documents
+    Feedback/                 — schema: feedback
+    PlatformAdmin/            — schema: platform (SuperAdmin control plane)
+  Host/
+    NGO.PMS.API/              — Composition root, registers all modules
 tests/
-  NGO.PMS.Domain.Tests/
-  NGO.PMS.Application.Tests/
-  NGO.PMS.Infrastructure.Tests/
-  NGO.PMS.API.Tests/        — Integration tests
-  NGO.PMS.E2E.Tests/        — Playwright E2E
+  per-module test projects + E2E
 ```
 
-## B2. Dependency Direction
-- **Domain has ZERO references** to any other project, NuGet package (except primitives), or external service.
-- **Application references only Domain.** Application defines interfaces (e.g., `IApplicationDbContext`, `IEmailService`, `IStorageService`); Infrastructure implements them.
-- **Infrastructure references Application and Domain.** This is where EF Core, MailKit, Firebase, Redis, Hangfire, and external service clients live.
-- **API references Infrastructure and Application.** Controllers are thin — they receive a request, dispatch via MediatR, and return the response.
+### B1a. Schema-per-Module Rules (CRITICAL)
+- Each module's DbContext MUST call `HasDefaultSchema("{schema_name}")`.
+- Each module has its own PostgreSQL role with GRANT only on its own schema.
+- **NO cross-module database joins.** If Module A needs data from Module B, use `NGO.PMS.Contracts` integration events or public query interfaces.
+- Shared read-only reference data (currencies, geography, calendars) lives in the `reference` schema.
+- Audit records go to the `audit` schema (INSERT-only PostgreSQL role — no UPDATE/DELETE).
+- ArchUnitNET tests in CI enforce: no module references another module's Domain/Application/Infrastructure directly.
+
+### B1b. Transactional Outbox Pattern (CRITICAL)
+- When a module needs to publish an integration event, it writes to its own `outbox` table in the SAME database transaction as the business write.
+- A Hangfire poller reads unpublished outbox entries and dispatches them to consumers.
+- Consumer modules track processed events in an `inbox` table for idempotency.
+- **Never publish events outside a transaction.** This guarantees delivery even if the consumer is temporarily down.
+
+### B1c. Immutable Audit Trail
+- The `audit` schema uses a PostgreSQL role with INSERT-only permissions (no UPDATE, no DELETE).
+- Use Audit.NET for automatic audit record creation on all entity changes.
+- Audit records include: entity type, entity ID, action (create/update/delete), old values, new values, user ID, timestamp, organization ID.
+
+## B2. Dependency Direction (Per Module)
+- **Module.Domain has ZERO references** to any other project, NuGet package (except SharedKernel), or external service.
+- **Module.Application references only Module.Domain + SharedKernel + Contracts.** Defines interfaces; Infrastructure implements them.
+- **Module.Infrastructure references Module.Application and Module.Domain.** This is where EF Core DbContext, external service clients, and outbox relay live.
+- **Module.API references Module.Infrastructure and Module.Application.** Controllers are thin — dispatch via MediatR, return response.
+- **Cross-module:** A module may reference `NGO.PMS.Contracts` to consume integration events or call public query interfaces from other modules. It must NEVER reference another module's Domain/Application/Infrastructure directly.
 - **Never add a direct reference from Domain or Application to Infrastructure.** If you need an infrastructure capability in Application, define an interface in Application and implement it in Infrastructure.
 
 ## B3. Feature Organization (Vertical Slices)
-Inside `NGO.PMS.Application/Features/`, each module has its own folder:
+Inside each module's Application layer (e.g., `src/Modules/Projects/NGO.PMS.Projects.Application/Features/`):
 ```
 Features/
   Projects/
@@ -86,20 +126,35 @@ Features/
 - If the same rule exists in two places, one will inevitably drift. Find the canonical location and remove the duplicate.
 
 ## B5. Shared Services
-These services are defined once in Application (interface) and Infrastructure (implementation):
+These services are defined in SharedKernel (interface) and implemented in relevant modules:
 - `ICurrencyConverterService` — all currency conversion goes through this
 - `IGeofenceService` — all GPS distance calculations go through this
 - `IEmailService` — all email sending goes through this
 - `INotificationService` — all notification dispatch (3 channels) goes through this
 - `IStorageService` — all file upload/download goes through this
 - `IReportAggregationService` — all report data aggregation goes through this
-- `IAuditLogService` — all audit logging goes through this
+- `IAuditLogService` — all audit logging goes through this (backed by Audit.NET)
 - `IPillarStageCalculator` — graduation pillar computation goes through this
+- `ITenantContext` — current tenant info from Finbuckle (org ID, tier, schema)
+- `IOutboxPublisher` — publish integration events to module outbox table
+- `IRulesEngineService` — evaluate dynamic business rules (Microsoft.RulesEngine)
+- `IFeatureFlagService` — check per-tenant feature flags (OpenFeature)
 - **Never call an external service directly from a controller or handler.** Always go through the service interface.
 
 ## B6. No Unauthorized Dependencies
 - Do not add NuGet packages, npm packages, or external services not listed in the approved technology stack (`NGO-PMS-Technology-Stack-Part1/2/3.md`).
+- **Approved additional libraries (v2 additions):** Finbuckle.MultiTenant, ArchUnitNET, Stateless, NodaMoney, Audit.NET, Microsoft.RulesEngine, OpenFeature, openapi-typescript, openapi-fetch.
 - If you believe a new dependency is needed, document it in `docs/ARCHITECTURE_DECISIONS.md` with: what it does, why it's needed, what alternatives exist, license implications, and request approval before adding it.
+
+## B7. Financial Arithmetic (CRITICAL)
+- **All monetary calculations MUST use NodaMoney** (or decimal with explicit rounding). Never use `float` or `double` for money.
+- Currency conversion must go through `ICurrencyConverterService` with historical exchange rates.
+- Fund accounting journal entries must always balance: sum of debits = sum of credits. Enforce with a database CHECK constraint.
+
+## B8. State Machine Workflows
+- Use the **Stateless** library for all multi-step lifecycle workflows: procurement (Plan→Request→Approve→PO→GR→Pay), graduation (enrolled→training→assessed→graduated), tenant lifecycle (provisioned→active→suspended→terminated).
+- Define states and triggers as enums in the Domain layer. Configure the state machine in the Application handler.
+- Persist the current state as an enum column on the entity. Stateless rehydrates from this on each request.
 
 ---
 
@@ -109,8 +164,9 @@ These services are defined once in Application (interface) and Infrastructure (i
 - **Primary key:** `Id` (UUID, generated by PostgreSQL `gen_random_uuid()`)
 - **Audit fields on all entities:** `CreatedAt` (DateTimeOffset), `CreatedBy` (UUID, nullable), `UpdatedAt` (DateTimeOffset), `UpdatedBy` (UUID, nullable). Populated by `AuditableEntityInterceptor`.
 - **Soft delete:** Entities requiring soft delete implement `ISoftDeletable` with `IsDeleted` (bool) and `DeletedAt` (DateTimeOffset?). Handled by `SoftDeleteInterceptor` and global query filter.
-- **Multi-tenancy:** Every business entity has `OrganizationId` (UUID, FK to Organizations). RLS policy enforces isolation.
+- **Multi-tenancy:** Every business entity has `OrganizationId` (UUID). Isolation enforced by Finbuckle.MultiTenant + RLS policy (belt-and-suspenders). Finbuckle resolves tenant from subdomain/header/JWT, sets `app.current_org_id` session variable for RLS.
 - **Office scoping:** Entities scoped by office have `AreaOfficeId` and `BranchOfficeId` (both nullable UUIDs).
+- **Schema isolation:** Each module's tables live in their own PostgreSQL schema. Never create tables in the `public` schema.
 
 ## C2. Naming Conventions
 
@@ -188,12 +244,15 @@ These services are defined once in Application (interface) and Infrastructure (i
 # D. UI/UX Consistency
 
 ## D1. Design System
+- **Workspace:** Nx monorepo with `apps/web` (tenant app), `apps/platform-console` (SuperAdmin), and `libs/` for shared code.
 - **Component library:** Angular Material 18 as base, with custom theme overrides.
 - **Data grids:** AG Grid Community Edition for all tabular data.
 - **Charts:** Apache ECharts (via ngx-echarts) for all visualizations.
 - **Maps:** Leaflet with OpenStreetMap tiles.
 - **Icons:** Material Icons (consistent set throughout).
 - **Typography:** System font stack (`-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`). No custom web fonts (performance).
+- **API client:** Auto-generated from OpenAPI spec using openapi-typescript + openapi-fetch. Never manually write HTTP service methods for API calls.
+- **Module libraries:** Each backend module maps to an Angular library in `libs/modules/{name}`. Libraries enforce module boundaries at build time.
 
 ## D2. Theme & Branding
 - All colors use CSS custom properties: `--theme-primary`, `--theme-primary-hover`, `--theme-accent`, `--theme-background`, `--theme-surface`, `--theme-text`, `--theme-text-secondary`, `--theme-border`, `--theme-success`, `--theme-warning`, `--theme-danger`.

@@ -1,6 +1,6 @@
 # EthelPMS — Requirements Traceability Matrix
-**Version:** 1.0
-**Date:** 2026-10-12
+**Version:** 2.0
+**Date:** 2026-10-12 (v2 — added Fund Accounting, Asset Management, SuperAdmin Platform modules)
 **Source Legend:** A = MERHA PMS (System A), B = DICAC PMS (System B), A+B = Both systems, New = NGO best practice addition
 
 ---
@@ -433,7 +433,7 @@
 
 ---
 
-## Phase 7: Procurement, Budget & Finance (Weeks 19-21)
+## Phase 7: Procurement, Budget, Finance, Fund Accounting & Assets (Weeks 19-22)
 
 ### Procurement (REQ-PROC)
 
@@ -470,9 +470,50 @@
 | REQ-BUD-009 | Budget utilization rate calculation | A | 7 | Must | Pending |
 | REQ-BUD-010 | Multi-currency budget support with base currency normalization | A | 7 | Must | Pending |
 
+### Fund Accounting (REQ-FA) — NEW
+
+| REQ ID | Description | Source | Phase | Priority | Status |
+|--------|-------------|--------|-------|----------|--------|
+| REQ-FA-001 | Chart of accounts CRUD with hierarchical account tree | New | 7 | Must | Pending |
+| REQ-FA-002 | Chart of accounts seeded templates per organization type | New | 7 | Should | Pending |
+| REQ-FA-003 | Fund type management (unrestricted, temporarily restricted, permanently restricted) | New | 7 | Must | Pending |
+| REQ-FA-004 | Journal entry creation with double-entry validation (debits must equal credits, NodaMoney) | New | 7 | Must | Pending |
+| REQ-FA-005 | Fund restriction tracking — link restricted funds to donor grants | New | 7 | Must | Pending |
+| REQ-FA-006 | Restriction release — record when restricted funds are spent per donor conditions | New | 7 | Must | Pending |
+| REQ-FA-007 | Statement of Financial Position generation (PDF/Excel) | New | 7 | Must | Pending |
+| REQ-FA-008 | Statement of Activities generation (PDF/Excel) | New | 7 | Must | Pending |
+| REQ-FA-009 | Statement of Cash Flows generation (PDF/Excel) | New | 7 | Should | Pending |
+| REQ-FA-010 | Configurable indirect cost allocation rules per org (Microsoft.RulesEngine) | New | 7 | Should | Pending |
+
+### Asset & Supply Chain (REQ-ASSET) — NEW
+
+| REQ ID | Description | Source | Phase | Priority | Status |
+|--------|-------------|--------|-------|----------|--------|
+| REQ-ASSET-001 | Fixed asset register CRUD (category, serial number, location, donor, purchase date, cost) | New | 7 | Must | Pending |
+| REQ-ASSET-002 | Asset depreciation calculation (straight-line and reducing balance methods) | New | 7 | Must | Pending |
+| REQ-ASSET-003 | Asset auto-creation from goods receipt (PO → GR → Asset) | New | 7 | Must | Pending |
+| REQ-ASSET-004 | Asset disposal workflow with donor approval requirement | New | 7 | Must | Pending |
+| REQ-ASSET-005 | Vehicle management — vehicle register with fuel and maintenance tracking | New | 7 | Should | Pending |
+| REQ-ASSET-006 | Vehicle log (trip records, mileage, driver assignment) | New | 7 | Should | Pending |
+| REQ-ASSET-007 | Maintenance scheduling with alerts | New | 7 | Should | Pending |
+| REQ-ASSET-008 | Asset register export (PDF/Excel) with donor tagging for audit | New | 7 | Must | Pending |
+
+### SuperAdmin / Platform Management (REQ-PLAT) — NEW
+
+| REQ ID | Description | Source | Phase | Priority | Status |
+|--------|-------------|--------|-------|----------|--------|
+| REQ-PLAT-001 | Tenant directory — searchable/filterable list of all organizations | New | 1 | Must | Pending |
+| REQ-PLAT-002 | Tenant provisioning with crypto-random one-time activation key | New | 1 | Must | Pending |
+| REQ-PLAT-003 | Tenant lifecycle state machine (Provisioned→Active→Suspended→Terminated) | New | 1 | Must | Pending |
+| REQ-PLAT-004 | Per-tenant module toggle (enable/disable modules via OpenFeature) | New | 1 | Must | Pending |
+| REQ-PLAT-005 | Subscription/package management (Monthly/Quarterly/Annual) | New | 1 | Should | Pending |
+| REQ-PLAT-006 | Platform-level RBAC (4 roles: Platform Owner, Support Engineer, Billing Admin, Compliance Officer) | New | 1 | Must | Pending |
+| REQ-PLAT-007 | Platform analytics dashboard (active tenants, module adoption, KPIs) | New | 10 | Should | Pending |
+| REQ-PLAT-008 | Platform announcements to filtered tenant admins | New | 9 | Should | Pending |
+
 ---
 
-## Phase 8: Training, Tasks, Risk, Donors (Weeks 22-24)
+## Phase 8: Training, Tasks, Risk, Donors (Weeks 23-25)
 
 ### Training Management (REQ-TRN)
 

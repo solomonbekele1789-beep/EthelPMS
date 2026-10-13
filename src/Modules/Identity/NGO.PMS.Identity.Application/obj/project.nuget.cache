@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "eiOY7rf/E1k=",
+  "success": true,
+  "projectFilePath": "E:\\ppt\\NGOPMSs\\EthelPMS\\src\\Modules\\Identity\\NGO.PMS.Identity.Application\\NGO.PMS.Identity.Application.csproj",
+  "expectedPackageFiles": [
+    "E:\\nuget-cache\\automapper\\16.2.0\\automapper.16.2.0.nupkg.sha512",
+    "E:\\nuget-cache\\fluentvalidation\\12.2.0\\fluentvalidation.12.2.0.nupkg.sha512",
+    "E:\\nuget-cache\\mediatr\\14.2.0\\mediatr.14.2.0.nupkg.sha512",
+    "E:\\nuget-cache\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "E:\\nuget-cache\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0\\microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
+    "E:\\nuget-cache\\microsoft.extensions.logging.abstractions\\10.0.0\\microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
+    "E:\\nuget-cache\\microsoft.extensions.options\\10.0.0\\microsoft.extensions.options.10.0.0.nupkg.sha512",
+    "E:\\nuget-cache\\microsoft.extensions.primitives\\10.0.0\\microsoft.extensions.primitives.10.0.0.nupkg.sha512",
+    "E:\\nuget-cache\\microsoft.identitymodel.abstractions\\8.14.0\\microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
+    "E:\\nuget-cache\\microsoft.identitymodel.jsonwebtokens\\8.14.0\\microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
+    "E:\\nuget-cache\\microsoft.identitymodel.logging\\8.14.0\\microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
+    "E:\\nuget-cache\\microsoft.identitymodel.tokens\\8.14.0\\microsoft.identitymodel.tokens.8.14.0.nupkg.sha512",
+    "E:\\nuget-cache\\nodamoney\\2.9.0\\nodamoney.2.9.0.nupkg.sha512"
+  ],
+  "logs": []
+}

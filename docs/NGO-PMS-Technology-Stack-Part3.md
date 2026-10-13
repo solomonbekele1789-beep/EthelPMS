@@ -245,6 +245,15 @@ Microsoft.EntityFrameworkCore 8.x
 Npgsql.EntityFrameworkCore.PostgreSQL 8.x
 Dapper 2.x
 DbUp-PostgreSQL 5.x
+Finbuckle.MultiTenant 7.x (multi-tenancy resolution + per-tenant DbContext)
+
+<!-- Architecture (v2 additions) -->
+Audit.NET.EntityFrameworkCore 23.x (automatic audit trail)
+Stateless 5.x (state machine workflows)
+NodaMoney 3.x (financial arithmetic without float errors)
+Microsoft.RulesEngine 5.x (dynamic business rules per org)
+OpenFeature 2.x (CNCF per-tenant feature flags)
+ArchUnitNET 0.11.x (architecture fitness tests in CI)
 
 <!-- Auth -->
 Microsoft.AspNetCore.Identity.EntityFrameworkCore 8.x

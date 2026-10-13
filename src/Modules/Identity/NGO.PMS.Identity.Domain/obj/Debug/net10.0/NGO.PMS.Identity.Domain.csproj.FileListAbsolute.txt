@@ -1,0 +1,16 @@
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\bin\Debug\net10.0\NGO.PMS.Identity.Domain.deps.json
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\bin\Debug\net10.0\NGO.PMS.Identity.Domain.dll
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\bin\Debug\net10.0\NGO.PMS.Identity.Domain.pdb
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\bin\Debug\net10.0\NGO.PMS.SharedKernel.dll
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\bin\Debug\net10.0\NGO.PMS.SharedKernel.pdb
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS.Identity.Domain.csproj.AssemblyReference.cache
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS.Identity.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS.Identity.Domain.AssemblyInfoInputs.cache
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS.Identity.Domain.AssemblyInfo.cs
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS.Identity.Domain.csproj.CoreCompileInputs.cache
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS.Identity.Domain.sourcelink.json
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS..7AF8F57D.Up2Date
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS.Identity.Domain.dll
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\refint\NGO.PMS.Identity.Domain.dll
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\NGO.PMS.Identity.Domain.pdb
+E:\ppt\NGOPMSs\EthelPMS\src\Modules\Identity\NGO.PMS.Identity.Domain\obj\Debug\net10.0\ref\NGO.PMS.Identity.Domain.dll

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "XP8gmCvwPaE=",
+  "success": true,
+  "projectFilePath": "E:\\ppt\\NGOPMSs\\EthelPMS\\src\\Modules\\PlatformAdmin\\NGO.PMS.PlatformAdmin.Domain\\NGO.PMS.PlatformAdmin.Domain.csproj",
+  "expectedPackageFiles": [
+    "E:\\nuget-cache\\nodamoney\\2.9.0\\nodamoney.2.9.0.nupkg.sha512"
+  ],
+  "logs": []
+}

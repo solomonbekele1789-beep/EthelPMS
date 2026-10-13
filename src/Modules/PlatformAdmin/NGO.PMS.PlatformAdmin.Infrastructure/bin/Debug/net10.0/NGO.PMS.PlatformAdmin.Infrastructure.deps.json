@@ -1,0 +1,106 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "NGO.PMS.PlatformAdmin.Infrastructure/1.0.0": {
+        "dependencies": {
+          "NGO.PMS.PlatformAdmin.Application": "1.0.0"
+        },
+        "runtime": {
+          "NGO.PMS.PlatformAdmin.Infrastructure.dll": {}
+        }
+      },
+      "NodaMoney/2.9.0": {
+        "runtime": {
+          "lib/net10.0/NodaMoney.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.9.0.0"
+          }
+        }
+      },
+      "NGO.PMS.Contracts/1.0.0": {
+        "dependencies": {
+          "NGO.PMS.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "NGO.PMS.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "NGO.PMS.PlatformAdmin.Application/1.0.0": {
+        "dependencies": {
+          "NGO.PMS.Contracts": "1.0.0",
+          "NGO.PMS.PlatformAdmin.Domain": "1.0.0"
+        },
+        "runtime": {
+          "NGO.PMS.PlatformAdmin.Application.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "NGO.PMS.PlatformAdmin.Domain/1.0.0": {
+        "dependencies": {
+          "NGO.PMS.SharedKernel": "1.0.0"
+        },
+        "runtime": {
+          "NGO.PMS.PlatformAdmin.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "NGO.PMS.SharedKernel/1.0.0": {
+        "dependencies": {
+          "NodaMoney": "2.9.0"
+        },
+        "runtime": {
+          "NGO.PMS.SharedKernel.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "NGO.PMS.PlatformAdmin.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NodaMoney/2.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KXNn3J5AyZwnMoKclgHNA3fpOJBS7p0kpu2twXYwwZDXaU1yihMsh7hQ99V5IaxAy4Ms1DHE/MYs4M1l1fcieg==",
+      "path": "nodamoney/2.9.0",
+      "hashPath": "nodamoney.2.9.0.nupkg.sha512"
+    },
+    "NGO.PMS.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NGO.PMS.PlatformAdmin.Application/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NGO.PMS.PlatformAdmin.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NGO.PMS.SharedKernel/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

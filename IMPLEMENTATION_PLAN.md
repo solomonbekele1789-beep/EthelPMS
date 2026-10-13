@@ -1,8 +1,8 @@
 # EthelPMS — Unified NGO Project Management System
 # Complete Implementation Plan
 
-**Version:** 1.0
-**Date:** October 12, 2026
+**Version:** 2.0
+**Date:** October 12, 2026 (v2 — merged Nati team architectural improvements)
 **Stack:** ASP.NET Core 8 + Angular 18 + Supabase PostgreSQL
 **Source Systems:** EECMY-DASSC-WEB (MERHA PMS) + EOTC-PMS (DICAC PMS)
 
@@ -30,17 +30,44 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 ## 0.2 Tasks
 
 ### Backend
-- [ ] Create ASP.NET Core 8 solution with Clean Architecture structure:
-  - `NGO.PMS.Domain` (no dependencies)
-  - `NGO.PMS.Application` (depends on Domain)
-  - `NGO.PMS.Infrastructure` (depends on Application)
-  - `NGO.PMS.API` (depends on Infrastructure, Application)
-  - `NGO.PMS.Shared` (shared kernel)
+- [ ] Create ASP.NET Core 8 solution as **Modular Monolith** with schema-per-module:
+  - `src/Shared/NGO.PMS.SharedKernel` — base entities, value objects, common interfaces
+  - `src/Shared/NGO.PMS.Contracts` — published integration events + public query interfaces (cross-module API)
+  - `src/Modules/Identity/` — Domain, Application, Infrastructure, API (schema: `identity`)
+  - `src/Modules/Projects/` — Domain, Application, Infrastructure, API (schema: `projects`)
+  - `src/Modules/Planning/` — Domain, Application, Infrastructure, API (schema: `planning`)
+  - `src/Modules/Reporting/` — Domain, Application, Infrastructure, API (schema: `reporting`)
+  - `src/Modules/MEAL/` — Domain, Application, Infrastructure, API (schema: `meal`)
+  - `src/Modules/Participants/` — Domain, Application, Infrastructure, API (schema: `participants`)
+  - `src/Modules/Procurement/` — Domain, Application, Infrastructure, API (schema: `procurement`)
+  - `src/Modules/FundAccounting/` — Domain, Application, Infrastructure, API (schema: `fundacct`) ← NEW
+  - `src/Modules/Assets/` — Domain, Application, Infrastructure, API (schema: `assets`) ← NEW
+  - `src/Modules/Training/` — Domain, Application, Infrastructure, API (schema: `training`)
+  - `src/Modules/Tasks/` — Domain, Application, Infrastructure, API (schema: `tasks`)
+  - `src/Modules/Risk/` — Domain, Application, Infrastructure, API (schema: `risk`)
+  - `src/Modules/Donors/` — Domain, Application, Infrastructure, API (schema: `donors`)
+  - `src/Modules/Chat/` — Domain, Application, Infrastructure, API (schema: `chat`)
+  - `src/Modules/Notifications/` — Domain, Application, Infrastructure, API (schema: `notifications`)
+  - `src/Modules/Documents/` — Domain, Application, Infrastructure, API (schema: `documents`)
+  - `src/Modules/Feedback/` — Domain, Application, Infrastructure, API (schema: `feedback`)
+  - `src/Modules/Dashboard/` — read-only projections (schema: `reporting`)
+  - `src/Host/NGO.PMS.API` — composition root, registers all modules
+  - Each module has its own EF Core DbContext with `HasDefaultSchema()` and its own PostgreSQL role with GRANT only on its schema
+  - Cross-module communication ONLY through `NGO.PMS.Contracts` (integration events + public interfaces)
+  - NO cross-module database joins — enforced by ArchUnitNET tests in CI
 - [ ] Configure EF Core 8 with Npgsql provider
 - [ ] Configure Serilog with Console + File sinks
 - [ ] Add Swagger/OpenAPI via Swashbuckle
 - [ ] Add MediatR + FluentValidation pipeline
 - [ ] Add AutoMapper
+- [ ] Add Finbuckle.MultiTenant for tenant resolution (subdomain/header/JWT → cached ITenantInfo → connection string)
+- [ ] Add Transactional Outbox Pattern: outbox table per module (same ACID transaction as business write), Hangfire poller for relay, inbox tracking for idempotent consumers
+- [ ] Add Audit.NET for automatic audit trail with INSERT-only PostgreSQL role on `audit` schema
+- [ ] Add Microsoft.RulesEngine for dynamic business policies (approval thresholds, budget ceilings per org)
+- [ ] Add Stateless library for state machine workflows (procurement, graduation, approvals)
+- [ ] Add NodaMoney for financial arithmetic (no floating-point rounding errors)
+- [ ] Add OpenFeature (CNCF) for per-tenant feature flags (module/sub-feature toggles)
+- [ ] Add ArchUnitNET architecture fitness tests (enforce no cross-module dependencies, dependency direction)
 - [ ] Create base entity classes: `BaseEntity`, `AuditableEntity`, `ISoftDeletable`
 - [ ] Create `AuditableEntityInterceptor` for automatic created_at/updated_at
 - [ ] Create `SoftDeleteInterceptor`
@@ -49,11 +76,17 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 - [ ] Add health check endpoint (/health)
 
 ### Frontend
-- [ ] Create Angular 18 project with Angular CLI
+- [ ] Create Angular 18 **Nx monorepo workspace** with:
+  - `apps/web` — tenant-facing Angular app
+  - `apps/platform-console` — SuperAdmin control plane (separate app, dark ops-console theme)
+  - `libs/shared/ui` — shared UI components (reused by both apps)
+  - `libs/shared/core` — shared services, interceptors, auth
+  - `libs/modules/*` — 1:1 library per backend module (e.g., libs/modules/identity, libs/modules/projects)
 - [ ] Configure Angular Material 18 with custom theme
 - [ ] Set up NgRx Store (auth, ui slices)
 - [ ] Set up @ngx-translate with en.json and am.json skeleton
 - [ ] Configure HttpClient with base URL interceptor
+- [ ] Set up OpenAPI-generated typed client (openapi-typescript + openapi-fetch) — auto-generate Angular HTTP services from Swagger spec
 - [ ] Configure error handling interceptor
 - [ ] Create shared module structure
 - [ ] Create core module structure
@@ -65,6 +98,10 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 - [ ] Create initial EF Core migration (empty baseline)
 - [ ] Configure connection string with environment variables
 - [ ] Create DbUp runner for PostgreSQL-specific objects (functions, triggers, RLS)
+- [ ] Create PostgreSQL schemas for each module (identity, projects, planning, reporting, meal, participants, procurement, fundacct, assets, training, tasks, risk, donors, chat, notifications, documents, feedback, audit, reference)
+- [ ] Create PostgreSQL roles per module schema with restricted GRANT/REVOKE
+- [ ] Create immutable `audit` schema with INSERT-only PostgreSQL role (no UPDATE/DELETE)
+- [ ] Create shared `reference` schema for global read-only data (currencies, geography, Ethiopian calendar)
 
 ### Infrastructure
 - [ ] Create Docker Compose file: api, angular-dev, postgres, valkey
@@ -86,12 +123,20 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 - Swagger UI accessible at /swagger
 - Health check returns 200 OK with DB status
 - CI pipeline green on push
+- ArchUnitNET tests pass (no cross-module dependency violations)
+- Outbox table created and relay job scheduled
+- Audit schema INSERT-only constraint verified
+- Finbuckle tenant resolution working (test with two test tenants)
+- OpenAPI spec generated and typed client compiles
 
 ## 0.4 Exit Criteria (Gate to Phase 1)
 - [ ] All acceptance criteria met
 - [ ] Repository access confirmed for all contributors
 - [ ] CLAUDE.md committed with project rules
 - [ ] Empty test suites run green in CI
+- [ ] Schema-per-module isolation verified (each module DbContext targets its own schema)
+- [ ] ArchUnitNET fitness tests green in CI
+- [ ] Nx workspace builds both apps (web + platform-console)
 
 ---
 
@@ -111,6 +156,17 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 - REQ-THEME-001: Theme system (dark/light, organization branding)
 
 ## 1.3 Backend Tasks
+
+### SuperAdmin Control Plane (NEW — `platform` schema)
+- [ ] Create PlatformAdmin entities: PlatformTenant, SubscriptionPackage, TenantAccessKey, ModuleAccessGrant, SuperAdminAuditLog
+- [ ] Implement TenantLifecycleService: state machine (Provisioned → Active → Expiring → Suspended → Terminated) using Stateless library
+- [ ] Implement TenantOnboardingService: generate crypto-random one-time activation key (hash-only storage), guided activation wizard
+- [ ] Implement ModuleAccessService: per-tenant module toggles (OpenFeature), live propagation via SignalR
+- [ ] Implement PlatformRBAC: 4 roles (Platform Owner, Support Engineer, Billing Admin, Compliance Officer) — distinct claim namespace from tenant RBAC
+- [ ] Implement PlatformTenantsController: tenant directory, provision, activate, suspend, terminate
+- [ ] Implement PlatformAnalyticsService: active tenants by tier, module adoption rates, platform KPIs
+
+### Tenant Identity & Organization
 - [ ] Create domain entities: Organization, User, Role, Permission, RolePermission, RefreshToken, PrivilegeDelegation, Office, OfficeHierarchy, Location (Region/Zone/Woreda/Kebele)
 - [ ] Create EF Core configurations for all entities
 - [ ] Create migration for identity and organization tables
@@ -138,6 +194,15 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 - [ ] Write integration tests for: Auth endpoints (login success/failure, token refresh, 401/403 scenarios), RBAC enforcement
 
 ### Frontend Tasks
+
+### Platform Console (SuperAdmin App — apps/platform-console)
+- [ ] Build Platform Console shell (dark ops-console theme, separate from tenant app)
+- [ ] Build Tenant Directory page (searchable/filterable list with status badges)
+- [ ] Build Tenant Provisioning wizard (create tenant → generate access key → display QR)
+- [ ] Build Module Access Matrix (AG Grid toggle matrix: tenant × module)
+- [ ] Build Subscription Management page (package assignment, expiry tracking)
+
+### Tenant App (apps/web)
 - [ ] Create AuthService (login, logout, refresh, password operations)
 - [ ] Create JwtInterceptor (attach cookies, handle 401 redirect)
 - [ ] Create AuthGuard (route protection)
@@ -539,9 +604,9 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 
 ---
 
-# PHASE 7: Procurement, Budget & Finance
-**Duration:** Weeks 19-21
-**Objective:** Complete procurement lifecycle, budget management with approval, finance dashboard.
+# PHASE 7: Procurement, Budget, Finance, Fund Accounting & Assets
+**Duration:** Weeks 19-22 (extended +1 week for new modules)
+**Objective:** Complete procurement lifecycle (Stateless state machine), budget management, simplified fund accounting, asset register, finance dashboard.
 
 ## 7.1 Prerequisites
 - Phase 2 complete (projects, currency)
@@ -555,7 +620,21 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 - [ ] Implement BudgetController: categories (hierarchical), lines, requests with multi-level approval
 - [ ] ~~PayrollController~~ — EXCLUDED per decision D10 (use dedicated HR/payroll software)
 - [ ] Implement FinanceDashboardService: aggregate spend from activity reports + procurement payments
-- [ ] Write unit tests for: budget verification, threshold checking, three-way matching, bid scoring
+- [ ] **Fund Accounting (NEW):**
+  - [ ] Create fund accounting entities in `fundacct` schema: ChartOfAccounts, Account, FundType (unrestricted/temporarily restricted/permanently restricted), JournalEntry, JournalLine, FundRestriction, RestrictionRelease
+  - [ ] Implement ChartOfAccountsService: hierarchical account tree, seeded templates per org type
+  - [ ] Implement JournalEntryService: double-entry posting, debit/credit validation (must balance using NodaMoney), fund restriction tracking
+  - [ ] Implement RestrictionReleaseService: track when restricted funds are spent per donor conditions
+  - [ ] Implement FinancialStatementService: generate Statement of Financial Position, Statement of Activities, Statement of Cash Flows (all using Dapper for read performance)
+  - [ ] Implement fund-to-grant linking (each grant maps to a restricted fund)
+  - [ ] Use Microsoft.RulesEngine for configurable indirect cost allocation rules per org
+- [ ] **Asset & Supply Chain (NEW):**
+  - [ ] Create asset entities in `assets` schema: FixedAsset, AssetCategory, AssetDisposal, Vehicle, VehicleLog, MaintenanceRecord
+  - [ ] Implement AssetRegisterService: CRUD, depreciation calculation (straight-line, reducing balance), donor tagging
+  - [ ] Implement VehicleManagementService: vehicle log, fuel tracking, maintenance scheduling
+  - [ ] Implement AssetDisposalService: disposal workflow with donor approval requirement
+  - [ ] Link assets to procurement (PO → GR → Asset auto-creation)
+- [ ] Write unit tests for: budget verification, threshold checking, three-way matching, bid scoring, double-entry balance validation, depreciation calculation
 
 ### Frontend Tasks
 - [ ] Build Procurement Dashboard (pipeline status, spend analysis)
@@ -567,13 +646,26 @@ Every requirement carries a unique identifier: `REQ-{MODULE}-{NNN}`. The master 
 - [ ] Build Budget tree view (categories → lines)
 - [ ] Build Budget Request workflow pages
 - [ ] Build Finance Dashboard (budget vs actual, burn rate, currency breakdown)
-- [ ] Write E2E test: Procurement request → approve → PO → GR → three-way match
+- [ ] **Fund Accounting UI (NEW):**
+  - [ ] Build Chart of Accounts tree view (hierarchical, collapsible)
+  - [ ] Build Journal Entry form (double-entry with debit/credit columns, auto-balance check)
+  - [ ] Build Fund Restrictions dashboard (restricted vs unrestricted balances, restriction release timeline)
+  - [ ] Build Financial Statements viewer (Statement of Financial Position, Activities, Cash Flows — PDF/Excel export)
+- [ ] **Asset Management UI (NEW):**
+  - [ ] Build Asset Register page (AG Grid with filters by category, location, donor, status)
+  - [ ] Build Asset Detail page (depreciation schedule, maintenance history, disposal record)
+  - [ ] Build Vehicle Fleet dashboard (utilization, fuel costs, upcoming maintenance)
+  - [ ] Build Asset Disposal workflow page (request → approve → record)
+- [ ] Write E2E test: Procurement request → approve → PO → GR → three-way match → asset created
 
 ## 7.3 Acceptance Criteria
-- Complete procurement lifecycle end-to-end
+- Complete procurement lifecycle end-to-end (Stateless state machine)
 - Budget and threshold validations enforce limits
-- Three-way matching detects discrepancies with 0.01 tolerance
+- Three-way matching detects discrepancies with 0.01 tolerance (NodaMoney arithmetic)
 - Finance dashboard aggregates from both activity reports and procurement
+- Fund Accounting: journal entries always balance (debit = credit); restricted fund balances track correctly; restriction releases deduct from correct fund
+- Asset Register: assets auto-created from goods receipt; depreciation calculates correctly; disposal requires approval
+- Vehicle log: fuel and maintenance records linked to vehicle
 
 ---
 

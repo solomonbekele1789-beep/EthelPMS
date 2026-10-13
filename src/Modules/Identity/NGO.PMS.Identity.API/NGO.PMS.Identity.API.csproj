@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\NGO.PMS.Identity.Infrastructure\NGO.PMS.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\NGO.PMS.Identity.Application\NGO.PMS.Identity.Application.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

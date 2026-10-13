@@ -1,0 +1,28 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Host/">
+    <Project Path="src/Host/NGO.PMS.API/NGO.PMS.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Identity/">
+    <Project Path="src/Modules/Identity/NGO.PMS.Identity.API/NGO.PMS.Identity.API.csproj" />
+    <Project Path="src/Modules/Identity/NGO.PMS.Identity.Application/NGO.PMS.Identity.Application.csproj" />
+    <Project Path="src/Modules/Identity/NGO.PMS.Identity.Domain/NGO.PMS.Identity.Domain.csproj" />
+    <Project Path="src/Modules/Identity/NGO.PMS.Identity.Infrastructure/NGO.PMS.Identity.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/PlatformAdmin/">
+    <Project Path="src/Modules/PlatformAdmin/NGO.PMS.PlatformAdmin.API/NGO.PMS.PlatformAdmin.API.csproj" />
+    <Project Path="src/Modules/PlatformAdmin/NGO.PMS.PlatformAdmin.Application/NGO.PMS.PlatformAdmin.Application.csproj" />
+    <Project Path="src/Modules/PlatformAdmin/NGO.PMS.PlatformAdmin.Domain/NGO.PMS.PlatformAdmin.Domain.csproj" />
+    <Project Path="src/Modules/PlatformAdmin/NGO.PMS.PlatformAdmin.Infrastructure/NGO.PMS.PlatformAdmin.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/NGO.PMS.Contracts/NGO.PMS.Contracts.csproj" />
+    <Project Path="src/Shared/NGO.PMS.SharedKernel/NGO.PMS.SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/NGO.PMS.API.Tests/NGO.PMS.API.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Identity.Tests/NGO.PMS.Identity.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.PlatformAdmin.Tests/NGO.PMS.PlatformAdmin.Tests.csproj" />
+  </Folder>
+</Solution>

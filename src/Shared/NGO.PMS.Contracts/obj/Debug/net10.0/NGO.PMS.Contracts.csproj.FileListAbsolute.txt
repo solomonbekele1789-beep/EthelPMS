@@ -1,0 +1,16 @@
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\bin\Debug\net10.0\NGO.PMS.Contracts.deps.json
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\bin\Debug\net10.0\NGO.PMS.Contracts.dll
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\bin\Debug\net10.0\NGO.PMS.Contracts.pdb
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\bin\Debug\net10.0\NGO.PMS.SharedKernel.dll
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\bin\Debug\net10.0\NGO.PMS.SharedKernel.pdb
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS.Contracts.csproj.AssemblyReference.cache
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS.Contracts.AssemblyInfoInputs.cache
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS.Contracts.AssemblyInfo.cs
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS.Contracts.csproj.CoreCompileInputs.cache
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS.Contracts.sourcelink.json
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS..368385D7.Up2Date
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS.Contracts.dll
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\refint\NGO.PMS.Contracts.dll
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\NGO.PMS.Contracts.pdb
+E:\ppt\NGOPMSs\EthelPMS\src\Shared\NGO.PMS.Contracts\obj\Debug\net10.0\ref\NGO.PMS.Contracts.dll
