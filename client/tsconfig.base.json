@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "strict": false,
-    "paths": {}
+    "paths": {
+      "@client/shared-ui": ["./libs/shared/ui/src/index.ts"],
+      "@client/shared-core": ["./libs/shared/core/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
