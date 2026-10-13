@@ -54,3 +54,4 @@ appsettings.*.local.json
 # Coverage
 coverage/
 *.lcov
+npm-cache/
