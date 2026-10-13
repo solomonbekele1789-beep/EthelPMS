@@ -4,17 +4,113 @@
     <Project Path="src/Host/NGO.PMS.API/NGO.PMS.API.csproj" />
   </Folder>
   <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Assets/">
+    <Project Path="src/Modules/Assets/NGO.PMS.Assets.API/NGO.PMS.Assets.API.csproj" />
+    <Project Path="src/Modules/Assets/NGO.PMS.Assets.Application/NGO.PMS.Assets.Application.csproj" />
+    <Project Path="src/Modules/Assets/NGO.PMS.Assets.Domain/NGO.PMS.Assets.Domain.csproj" />
+    <Project Path="src/Modules/Assets/NGO.PMS.Assets.Infrastructure/NGO.PMS.Assets.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Chat/">
+    <Project Path="src/Modules/Chat/NGO.PMS.Chat.API/NGO.PMS.Chat.API.csproj" />
+    <Project Path="src/Modules/Chat/NGO.PMS.Chat.Application/NGO.PMS.Chat.Application.csproj" />
+    <Project Path="src/Modules/Chat/NGO.PMS.Chat.Domain/NGO.PMS.Chat.Domain.csproj" />
+    <Project Path="src/Modules/Chat/NGO.PMS.Chat.Infrastructure/NGO.PMS.Chat.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Documents/">
+    <Project Path="src/Modules/Documents/NGO.PMS.Documents.API/NGO.PMS.Documents.API.csproj" />
+    <Project Path="src/Modules/Documents/NGO.PMS.Documents.Application/NGO.PMS.Documents.Application.csproj" />
+    <Project Path="src/Modules/Documents/NGO.PMS.Documents.Domain/NGO.PMS.Documents.Domain.csproj" />
+    <Project Path="src/Modules/Documents/NGO.PMS.Documents.Infrastructure/NGO.PMS.Documents.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Donors/">
+    <Project Path="src/Modules/Donors/NGO.PMS.Donors.API/NGO.PMS.Donors.API.csproj" />
+    <Project Path="src/Modules/Donors/NGO.PMS.Donors.Application/NGO.PMS.Donors.Application.csproj" />
+    <Project Path="src/Modules/Donors/NGO.PMS.Donors.Domain/NGO.PMS.Donors.Domain.csproj" />
+    <Project Path="src/Modules/Donors/NGO.PMS.Donors.Infrastructure/NGO.PMS.Donors.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Feedback/">
+    <Project Path="src/Modules/Feedback/NGO.PMS.Feedback.API/NGO.PMS.Feedback.API.csproj" />
+    <Project Path="src/Modules/Feedback/NGO.PMS.Feedback.Application/NGO.PMS.Feedback.Application.csproj" />
+    <Project Path="src/Modules/Feedback/NGO.PMS.Feedback.Domain/NGO.PMS.Feedback.Domain.csproj" />
+    <Project Path="src/Modules/Feedback/NGO.PMS.Feedback.Infrastructure/NGO.PMS.Feedback.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/FundAccounting/">
+    <Project Path="src/Modules/FundAccounting/NGO.PMS.FundAccounting.API/NGO.PMS.FundAccounting.API.csproj" />
+    <Project Path="src/Modules/FundAccounting/NGO.PMS.FundAccounting.Application/NGO.PMS.FundAccounting.Application.csproj" />
+    <Project Path="src/Modules/FundAccounting/NGO.PMS.FundAccounting.Domain/NGO.PMS.FundAccounting.Domain.csproj" />
+    <Project Path="src/Modules/FundAccounting/NGO.PMS.FundAccounting.Infrastructure/NGO.PMS.FundAccounting.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Modules/Identity/">
     <Project Path="src/Modules/Identity/NGO.PMS.Identity.API/NGO.PMS.Identity.API.csproj" />
     <Project Path="src/Modules/Identity/NGO.PMS.Identity.Application/NGO.PMS.Identity.Application.csproj" />
     <Project Path="src/Modules/Identity/NGO.PMS.Identity.Domain/NGO.PMS.Identity.Domain.csproj" />
     <Project Path="src/Modules/Identity/NGO.PMS.Identity.Infrastructure/NGO.PMS.Identity.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Modules/MEAL/">
+    <Project Path="src/Modules/MEAL/NGO.PMS.MEAL.API/NGO.PMS.MEAL.API.csproj" />
+    <Project Path="src/Modules/MEAL/NGO.PMS.MEAL.Application/NGO.PMS.MEAL.Application.csproj" />
+    <Project Path="src/Modules/MEAL/NGO.PMS.MEAL.Domain/NGO.PMS.MEAL.Domain.csproj" />
+    <Project Path="src/Modules/MEAL/NGO.PMS.MEAL.Infrastructure/NGO.PMS.MEAL.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Notifications/">
+    <Project Path="src/Modules/Notifications/NGO.PMS.Notifications.API/NGO.PMS.Notifications.API.csproj" />
+    <Project Path="src/Modules/Notifications/NGO.PMS.Notifications.Application/NGO.PMS.Notifications.Application.csproj" />
+    <Project Path="src/Modules/Notifications/NGO.PMS.Notifications.Domain/NGO.PMS.Notifications.Domain.csproj" />
+    <Project Path="src/Modules/Notifications/NGO.PMS.Notifications.Infrastructure/NGO.PMS.Notifications.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Participants/">
+    <Project Path="src/Modules/Participants/NGO.PMS.Participants.API/NGO.PMS.Participants.API.csproj" />
+    <Project Path="src/Modules/Participants/NGO.PMS.Participants.Application/NGO.PMS.Participants.Application.csproj" />
+    <Project Path="src/Modules/Participants/NGO.PMS.Participants.Domain/NGO.PMS.Participants.Domain.csproj" />
+    <Project Path="src/Modules/Participants/NGO.PMS.Participants.Infrastructure/NGO.PMS.Participants.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Planning/">
+    <Project Path="src/Modules/Planning/NGO.PMS.Planning.API/NGO.PMS.Planning.API.csproj" />
+    <Project Path="src/Modules/Planning/NGO.PMS.Planning.Application/NGO.PMS.Planning.Application.csproj" />
+    <Project Path="src/Modules/Planning/NGO.PMS.Planning.Domain/NGO.PMS.Planning.Domain.csproj" />
+    <Project Path="src/Modules/Planning/NGO.PMS.Planning.Infrastructure/NGO.PMS.Planning.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Modules/PlatformAdmin/">
     <Project Path="src/Modules/PlatformAdmin/NGO.PMS.PlatformAdmin.API/NGO.PMS.PlatformAdmin.API.csproj" />
     <Project Path="src/Modules/PlatformAdmin/NGO.PMS.PlatformAdmin.Application/NGO.PMS.PlatformAdmin.Application.csproj" />
     <Project Path="src/Modules/PlatformAdmin/NGO.PMS.PlatformAdmin.Domain/NGO.PMS.PlatformAdmin.Domain.csproj" />
     <Project Path="src/Modules/PlatformAdmin/NGO.PMS.PlatformAdmin.Infrastructure/NGO.PMS.PlatformAdmin.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Procurement/">
+    <Project Path="src/Modules/Procurement/NGO.PMS.Procurement.API/NGO.PMS.Procurement.API.csproj" />
+    <Project Path="src/Modules/Procurement/NGO.PMS.Procurement.Application/NGO.PMS.Procurement.Application.csproj" />
+    <Project Path="src/Modules/Procurement/NGO.PMS.Procurement.Domain/NGO.PMS.Procurement.Domain.csproj" />
+    <Project Path="src/Modules/Procurement/NGO.PMS.Procurement.Infrastructure/NGO.PMS.Procurement.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Projects/">
+    <Project Path="src/Modules/Projects/NGO.PMS.Projects.API/NGO.PMS.Projects.API.csproj" />
+    <Project Path="src/Modules/Projects/NGO.PMS.Projects.Application/NGO.PMS.Projects.Application.csproj" />
+    <Project Path="src/Modules/Projects/NGO.PMS.Projects.Domain/NGO.PMS.Projects.Domain.csproj" />
+    <Project Path="src/Modules/Projects/NGO.PMS.Projects.Infrastructure/NGO.PMS.Projects.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Reporting/">
+    <Project Path="src/Modules/Reporting/NGO.PMS.Reporting.API/NGO.PMS.Reporting.API.csproj" />
+    <Project Path="src/Modules/Reporting/NGO.PMS.Reporting.Application/NGO.PMS.Reporting.Application.csproj" />
+    <Project Path="src/Modules/Reporting/NGO.PMS.Reporting.Domain/NGO.PMS.Reporting.Domain.csproj" />
+    <Project Path="src/Modules/Reporting/NGO.PMS.Reporting.Infrastructure/NGO.PMS.Reporting.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Risk/">
+    <Project Path="src/Modules/Risk/NGO.PMS.Risk.API/NGO.PMS.Risk.API.csproj" />
+    <Project Path="src/Modules/Risk/NGO.PMS.Risk.Application/NGO.PMS.Risk.Application.csproj" />
+    <Project Path="src/Modules/Risk/NGO.PMS.Risk.Domain/NGO.PMS.Risk.Domain.csproj" />
+    <Project Path="src/Modules/Risk/NGO.PMS.Risk.Infrastructure/NGO.PMS.Risk.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Tasks/">
+    <Project Path="src/Modules/Tasks/NGO.PMS.Tasks.API/NGO.PMS.Tasks.API.csproj" />
+    <Project Path="src/Modules/Tasks/NGO.PMS.Tasks.Application/NGO.PMS.Tasks.Application.csproj" />
+    <Project Path="src/Modules/Tasks/NGO.PMS.Tasks.Domain/NGO.PMS.Tasks.Domain.csproj" />
+    <Project Path="src/Modules/Tasks/NGO.PMS.Tasks.Infrastructure/NGO.PMS.Tasks.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Training/">
+    <Project Path="src/Modules/Training/NGO.PMS.Training.API/NGO.PMS.Training.API.csproj" />
+    <Project Path="src/Modules/Training/NGO.PMS.Training.Application/NGO.PMS.Training.Application.csproj" />
+    <Project Path="src/Modules/Training/NGO.PMS.Training.Domain/NGO.PMS.Training.Domain.csproj" />
+    <Project Path="src/Modules/Training/NGO.PMS.Training.Infrastructure/NGO.PMS.Training.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/NGO.PMS.Contracts/NGO.PMS.Contracts.csproj" />

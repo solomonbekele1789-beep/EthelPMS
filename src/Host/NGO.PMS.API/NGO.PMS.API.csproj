@@ -27,6 +27,38 @@
     <ProjectReference Include="..\..\Modules\Identity\NGO.PMS.Identity.API\NGO.PMS.Identity.API.csproj" />
     <ProjectReference Include="..\..\Modules\PlatformAdmin\NGO.PMS.PlatformAdmin.API\NGO.PMS.PlatformAdmin.API.csproj" />
     <ProjectReference Include="..\..\Shared\NGO.PMS.SharedKernel\NGO.PMS.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\Modules\Projects\NGO.PMS.Projects.API\NGO.PMS.Projects.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Projects\NGO.PMS.Projects.Infrastructure\NGO.PMS.Projects.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Planning\NGO.PMS.Planning.API\NGO.PMS.Planning.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Planning\NGO.PMS.Planning.Infrastructure\NGO.PMS.Planning.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Reporting\NGO.PMS.Reporting.API\NGO.PMS.Reporting.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Reporting\NGO.PMS.Reporting.Infrastructure\NGO.PMS.Reporting.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\MEAL\NGO.PMS.MEAL.API\NGO.PMS.MEAL.API.csproj" />
+    <ProjectReference Include="..\..\Modules\MEAL\NGO.PMS.MEAL.Infrastructure\NGO.PMS.MEAL.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Participants\NGO.PMS.Participants.API\NGO.PMS.Participants.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Participants\NGO.PMS.Participants.Infrastructure\NGO.PMS.Participants.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Procurement\NGO.PMS.Procurement.API\NGO.PMS.Procurement.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Procurement\NGO.PMS.Procurement.Infrastructure\NGO.PMS.Procurement.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\FundAccounting\NGO.PMS.FundAccounting.API\NGO.PMS.FundAccounting.API.csproj" />
+    <ProjectReference Include="..\..\Modules\FundAccounting\NGO.PMS.FundAccounting.Infrastructure\NGO.PMS.FundAccounting.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Assets\NGO.PMS.Assets.API\NGO.PMS.Assets.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Assets\NGO.PMS.Assets.Infrastructure\NGO.PMS.Assets.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Training\NGO.PMS.Training.API\NGO.PMS.Training.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Training\NGO.PMS.Training.Infrastructure\NGO.PMS.Training.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Tasks\NGO.PMS.Tasks.API\NGO.PMS.Tasks.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Tasks\NGO.PMS.Tasks.Infrastructure\NGO.PMS.Tasks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Risk\NGO.PMS.Risk.API\NGO.PMS.Risk.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Risk\NGO.PMS.Risk.Infrastructure\NGO.PMS.Risk.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Donors\NGO.PMS.Donors.API\NGO.PMS.Donors.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Donors\NGO.PMS.Donors.Infrastructure\NGO.PMS.Donors.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Chat\NGO.PMS.Chat.API\NGO.PMS.Chat.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Chat\NGO.PMS.Chat.Infrastructure\NGO.PMS.Chat.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Notifications\NGO.PMS.Notifications.API\NGO.PMS.Notifications.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Notifications\NGO.PMS.Notifications.Infrastructure\NGO.PMS.Notifications.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Documents\NGO.PMS.Documents.API\NGO.PMS.Documents.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Documents\NGO.PMS.Documents.Infrastructure\NGO.PMS.Documents.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Feedback\NGO.PMS.Feedback.API\NGO.PMS.Feedback.API.csproj" />
+    <ProjectReference Include="..\..\Modules\Feedback\NGO.PMS.Feedback.Infrastructure\NGO.PMS.Feedback.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
