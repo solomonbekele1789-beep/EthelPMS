@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Notifications.Application;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. Application types are in Abstractions/, Commands/, DTOs/, Mappings/, and Queries/.

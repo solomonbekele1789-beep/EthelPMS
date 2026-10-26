@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\NGO.PMS.Settings.Infrastructure\NGO.PMS.Settings.Infrastructure.csproj" />
+    <ProjectReference Include="..\NGO.PMS.Settings.Application\NGO.PMS.Settings.Application.csproj" />
+  </ItemGroup>
+</Project>

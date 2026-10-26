@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Identity.Infrastructure;
-
-public class Class1
-{
-
-}
+﻿// Placeholder removed — module implemented.

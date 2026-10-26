@@ -1,7 +1,11 @@
+> **⚠ ARCHIVED** — This comparison has been completed. All accepted recommendations are now
+> incorporated into `docs/plans/00-MASTER-PLAN.md` and recorded in `DECISIONS_LOG.md` (D11-D24).
+> This document is historical reference only — do not treat its recommendations as open items.
+
 # EthelPMS vs Nati Team Plan — Comparison Report
 **Date:** 2026-10-12
 **Purpose:** Identify new functionalities, missing features, improvements, and recommended additions from the Nati team's plan that are NOT in our current EthelPMS plan.
-**Status:** For review — nothing has been merged yet.
+**Status:** ~~For review — nothing has been merged yet.~~ **COMPLETED — decisions captured in DECISIONS_LOG.md**
 
 > **Note:** 2 of 9 Nati files (.docx) could not be read due to VM unavailability. Those are: Enhancement Addendum v1.0 and Module Specification & Dependency Map v3.0. Findings below are based on the other 7 files.
 

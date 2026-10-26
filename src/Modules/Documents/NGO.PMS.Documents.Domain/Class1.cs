@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Documents.Domain;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. See Entities/, Enums/, Events/ folders.

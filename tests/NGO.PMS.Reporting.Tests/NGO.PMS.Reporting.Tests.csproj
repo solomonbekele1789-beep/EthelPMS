@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\Reporting\NGO.PMS.Reporting.Application\NGO.PMS.Reporting.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Reporting\NGO.PMS.Reporting.Infrastructure\NGO.PMS.Reporting.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(XunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitRunnerVersion)" />
+    <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
+    <PackageReference Include="NSubstitute" Version="$(NSubstituteVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(EFCoreVersion)" />
+    <PackageReference Include="FluentValidation.TestHelper" Version="$(FluentValidationVersion)" />
+  </ItemGroup>
+
+</Project>

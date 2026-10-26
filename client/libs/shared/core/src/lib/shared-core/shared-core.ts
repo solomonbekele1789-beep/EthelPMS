@@ -1,9 +1,3 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'lib-shared-core',
-  imports: [],
-  templateUrl: './shared-core.html',
-  styleUrl: './shared-core.scss',
-})
-export class SharedCore {}
+// DEPRECATED: This placeholder component is no longer used.
+// Delete this entire shared-core directory.
+// The shared/core library now uses services, interceptors, guards, directives, and store.

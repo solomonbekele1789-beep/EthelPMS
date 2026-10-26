@@ -1,13 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\NGO.PMS.MEAL.Infrastructure\NGO.PMS.MEAL.Infrastructure.csproj" />
     <ProjectReference Include="..\NGO.PMS.MEAL.Application\NGO.PMS.MEAL.Application.csproj" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
 
 </Project>

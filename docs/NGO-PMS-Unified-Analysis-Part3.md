@@ -1,3 +1,7 @@
+> **⚠ SUPERSEDED** — This architecture design is outdated. It shows a flat single-Domain structure.
+> The authoritative architecture is the modular monolith (schema-per-module) described in:
+> `docs/plans/00-CODING-STANDARDS.md`, `docs/plans/backend/BACKEND-OVERVIEW.md`, `docs/plans/shared/DATABASE-ARCHITECTURE.md`.
+
 # DELIVERABLE 5: Unified Architecture Design
 
 ## 5.1 System Architecture Overview

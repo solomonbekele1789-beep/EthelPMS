@@ -1,0 +1,12 @@
+{
+  "name": "modules-chat",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/modules/chat/src",
+  "prefix": "chat",
+  "tags": ["scope:chat", "type:feature"],
+  "targets": {
+    "lint": { "executor": "@nx/eslint:lint" },
+    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+  }
+}

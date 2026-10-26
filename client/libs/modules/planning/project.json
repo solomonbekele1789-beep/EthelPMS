@@ -1,0 +1,12 @@
+{
+  "name": "modules-planning",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/modules/planning/src",
+  "prefix": "planning",
+  "tags": ["scope:planning", "type:feature"],
+  "targets": {
+    "lint": { "executor": "@nx/eslint:lint" },
+    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+  }
+}

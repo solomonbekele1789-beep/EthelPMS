@@ -1,0 +1,27 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591;NU1902;NU1903</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Company>EthelPMS</Company>
+    <Product>EthelPMS - NGO Project Management System</Product>
+    <Copyright>Copyright © 2026 EthelPMS. All rights reserved.</Copyright>
+  </PropertyGroup>
+
+  <!-- Centralized package versions -->
+  <PropertyGroup>
+    <EFCoreVersion>10.0.12</EFCoreVersion>
+    <MediatRVersion>14.2.0</MediatRVersion>
+    <FluentValidationVersion>12.2.0</FluentValidationVersion>
+    <AutoMapperVersion>16.2.0</AutoMapperVersion>
+    <NpgsqlEFCoreVersion>10.0.3</NpgsqlEFCoreVersion>
+    <EFCoreNamingConventionsVersion>10.0.0</EFCoreNamingConventionsVersion>
+  </PropertyGroup>
+</Project>

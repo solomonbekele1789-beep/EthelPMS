@@ -1,7 +1,11 @@
+> **⚠ SUPERSEDED** — This file is replaced by `docs/plans/00-MASTER-PLAN.md` (v3.0).
+> Do NOT use this document for implementation. It references .NET 8 + Angular 18 (outdated).
+> Kept for historical reference only.
+
 # EthelPMS — Unified NGO Project Management System
 # Complete Implementation Plan
 
-**Version:** 2.0
+**Version:** 2.0 ~~(SUPERSEDED by docs/plans/00-MASTER-PLAN.md v3.0)~~
 **Date:** October 12, 2026 (v2 — merged Nati team architectural improvements)
 **Stack:** ASP.NET Core 8 + Angular 18 + Supabase PostgreSQL
 **Source Systems:** EECMY-DASSC-WEB (MERHA PMS) + EOTC-PMS (DICAC PMS)

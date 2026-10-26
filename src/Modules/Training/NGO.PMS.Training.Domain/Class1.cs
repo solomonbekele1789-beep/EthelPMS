@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Training.Domain;
-
-public class Class1
-{
-
-}
+﻿// Placeholder removed — module implemented.

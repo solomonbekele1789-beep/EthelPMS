@@ -1,3 +1,5 @@
+> **⚠ SUPERSEDED** — Replaced by `docs/plans/00-TECH-STACK.md`.
+
 # SECTION 6: INFRASTRUCTURE & DEVOPS
 
 ---

@@ -1,0 +1,2753 @@
+{
+  "common": {
+    "save": "አስቀምጥ",
+    "cancel": "ሰርዝ",
+    "delete": "ሰርዝ",
+    "confirm": "አረጋግጥ",
+    "search": "ፈልግ...",
+    "loading": "በመጫን ላይ...",
+    "noData": "መረጃ አልተገኘም",
+    "create": "ፍጠር",
+    "edit": "አስተካክል",
+    "back": "ተመለስ",
+    "actions": "እርምጃዎች",
+    "yes": "አዎ",
+    "no": "አይደለም",
+    "submit": "ላክ",
+    "close": "ዝጋ",
+    "export": "ላክ",
+    "import": "አስገባ",
+    "filter": "አጣር",
+    "reset": "ዓድስ አስቀምጥ",
+    "refresh": "ኣድስ",
+    "view": "እይ",
+    "download": "አውርድ",
+    "upload": "ጫን",
+    "select": "ምረጥ",
+    "selectAll": "ሁሉንም ምረጥ",
+    "required": "አስፈላጊ",
+    "optional": "አማራጪ",
+    "status": "ሁኔታ",
+    "active": "ንቁ",
+    "inactive": "የተሰረዘ",
+    "enabled": "ንቁ",
+    "disabled": "የተሰረዘ",
+    "all": "ሁሉም",
+    "add": "ጨምር",
+    "created": "የተፈጠረ",
+    "update": "አዘምን",
+    "none": "ምንም"
+  },
+  "auth": {
+    "login": {
+      "title": "ወደ EthelPMS ይግቡ",
+      "email": "ኢሜይል አድራሻ",
+      "password": "የሚስጥር ቁልፍ",
+      "submit": "ግባ",
+      "forgotPassword": "የሚስጥር ቁልፍዎን ረሱ?",
+      "rememberMe": "አስታውሰኝ",
+      "togglePassword": "የሚስጥር ቁልፍ ታይነት ቀይር"
+    },
+    "forgotPassword": {
+      "title": "የሚስጥር ቁልፍ ዓድስ አስቀምጥ",
+      "email": "ኢሜይል አድራሻ",
+      "submit": "የዓድስ ማስቀመጢያ ላክ",
+      "backToLogin": "ወደ መግቢያ ተመለስ",
+      "successMessage": "በዚየ ኢሜይል መለያ ካለ የዓድስ ማስቀመጢያ መሳያ ተላያል።",
+      "description": "የኢሜይል አድራሻዎን ያስገቡ እና የሚስጥር ቁልፍዎን ለማስቀመጥ አገናኝ እንልክልዎታለን።"
+    },
+    "resetPassword": {
+      "title": "አዲስ የሚስጥር ቁልፍ አስቀምጥ",
+      "password": "አዲስ የሚስጥር ቁልፍ",
+      "confirmPassword": "የሚስጥር ቁልፍ አረጋግጥ",
+      "submit": "የሚስጥር ቁልፍ ዓድስ አስቀምጥ",
+      "successMessage": "የሚስጥር ቁልፍዎ በተሳካ ሁኔታ ዓድስ ተቀምጧል።",
+      "togglePassword": "የሚስጥር ቁልፍ ታይነት ቀይር",
+      "toggleConfirm": "የሚስጥር ቁልፍ ታይነት ቀይር",
+      "backToLogin": "ወደ መግቢያ ተመለስ",
+      "errorGeneric": "የሚስጥር ቁልፍ ማስቀመጥ አልተሳካም። እባክዎን እንደገና ይሞክሩ።"
+    },
+    "setupPassword": {
+      "title": "የሚስጥር ቁልፍዎን ያስቀምጡ",
+      "password": "የሚስጥር ቁልፍ",
+      "confirmPassword": "የሚስጥር ቁልፍ አረጋግጥ",
+      "submit": "የሚስጥር ቁልፍ አስቀምጥ",
+      "successMessage": "የሚስጥር ቁልፍዎ ተቀምጧል። አሁን መግባት ይችላሉ።",
+      "description": "ለመለያዎ የሚስጥር ቁልፍ ይፍጠሩ።",
+      "togglePassword": "የሚስጥር ቁልፍ ታይነት ቀይር",
+      "toggleConfirm": "የሚስጥር ቁልፍ ታይነት ቀይር",
+      "backToLogin": "ወደ መግቢያ ተመለስ",
+      "errorGeneric": "የሚስጥር ቁልፍ ማስቀመጥ አልተሳካም። እባክዎን እንደገና ይሞክሩ።"
+    }
+  },
+  "nav": {
+    "dashboard": "ዳሽቦርድ",
+    "users": "ተጠቃሚዎች",
+    "roles": "የስራ ድልድሎች",
+    "offices": "ቢሮዎች",
+    "locations": "አካባቢዎች",
+    "projects": "ፕሮጀክቶች",
+    "planning": "ዕቅድ",
+    "reporting": "ሪፖርት",
+    "meal": "ምገባነ ጥራት",
+    "participants": "ተሳታፊዎች",
+    "procurement": "ግዛት",
+    "finance": "ፋይናንስ",
+    "assets": "ንብረቶች",
+    "training": "ስልጠና",
+    "tasks": "ትዕዛዖች",
+    "risk": "የስጋት መዝገብ",
+    "donors": "ለጋሾች",
+    "chat": "ጩት",
+    "notifications": "ማሰታወቂያዎች",
+    "documents": "ሰነዶች",
+    "feedback": "አስተያየት",
+    "settings": "ቀይሮች",
+    "knowledge": "የዕውቀት ምንጭ",
+    "partnerships": "አጣርነርሻፖች",
+    "reports": "ሪፖርቶች",
+    "importExport": "አስገባ/ላክ",
+    "dashboards": "ዳሽቦርዶች",
+    "organizationSettings": "የድርጅት ቀይሮች"
+  },
+  "dashboard": {
+    "welcome": "እንቡአን ደህና መጡ, {{name}}",
+    "title": "ዳሽቦርድ"
+  },
+  "errors": {
+    "unauthorized": "መድረስ አልተፈቀደም",
+    "unauthorizedMessage": "ይህንን ገጽ ለማየት ፍቃድ የሎትም።",
+    "moduleNotAvailable": "ሞዱል አይገኘም",
+    "moduleNotAvailableMessage": "ይህ ሞዱል በምዝገባዎ ውስጥ አይካተትም።",
+    "notFound": "ገጽ አልተገኘም",
+    "notFoundMessage": "የፈለጉት ገጽ የለም።",
+    "serverError": "የሰርቨር ስህተት",
+    "serverErrorMessage": "ችግር ተፈጥሯል። እባክዎን ዘንድሞ ይሞክሩ።",
+    "networkError": "የአውታር ስህተት",
+    "networkErrorMessage": "ወደ ሰርቨር መግባት አልተቻለም። እባክዎን ግንኙነትዎን ይፈትሱ።"
+  },
+  "users": {
+    "list": {
+      "title": "የተጠቃሚ አስተዳደር",
+      "createButton": "አዲስ ተጠቃሚ"
+    },
+    "create": {
+      "title": "ተጠቃሚ ፍጠር",
+      "invitationNote": "ለተጠቃሚው የሚስጥር ቁልፍ እንዲያዘጋጅ የግብዣ ኢሜይል ይላካል።"
+    },
+    "detail": {
+      "title": "የተጠቃሚ ዝርዝር",
+      "tabProfile": "መገለጫ",
+      "tabRoles": "የስራ ድልድሎች",
+      "tabActivity": "እንቅስቃሴ",
+      "assignedRoles": "የተመደቡ የስራ ድልድሎች",
+      "addRole": "የስራ ድልድል ጨምር",
+      "assign": "መድብ",
+      "activityComingSoon": "የእንቅስቃሴ ዝርዝር በቅርቡ ይመጣል"
+    },
+    "actions": {
+      "deactivate": "አሰናክል",
+      "activate": "አንቃ"
+    },
+    "fields": {
+      "firstName": "ስም",
+      "lastName": "የአባት ስም",
+      "email": "ኢሜይል",
+      "phone": "ስልክ",
+      "role": "የስራ ድልድል",
+      "office": "ቢሮ",
+      "roles": "የስራ ድልድሎች",
+      "status": "ሁኔታ",
+      "createdAt": "የተፈጠረበት",
+      "lastLogin": "የመጨረሻ ግቢያ"
+    }
+  },
+  "roles": {
+    "list": {
+      "title": "የስራ ድልድል አስተዳደር",
+      "createButton": "አዲስ የስራ ድልድል"
+    },
+    "detail": {
+      "title": "የስራ ድልድል ዝርዝር",
+      "basicInfo": "መሰረታዊ መረጃ"
+    },
+    "fields": {
+      "name": "የስራ ድልድል ስም",
+      "description": "መግለጫ",
+      "permissions": "ፍቃዶች",
+      "userCount": "ተጠቃሚዎች"
+    }
+  },
+  "offices": {
+    "list": {
+      "title": "የቢሮ አስተዳደር",
+      "createButton": "አዲስ ቢሮ"
+    },
+    "detail": {
+      "locationComingSoon": "የአካባቢ ምርጫ በቅርቡ ይመጣል"
+    },
+    "fields": {
+      "name": "የቢሮ ስም",
+      "code": "የቢሮ ኮድ",
+      "type": "የቢሮ አይነት",
+      "location": "አካባቢ",
+      "parentOffice": "ወላጅ ቢሮ"
+    }
+  },
+  "locations": {
+    "list": {
+      "title": "የአካባቢ አስተዳደር",
+      "createButton": "አዲስ አካባቢ"
+    },
+    "fields": {
+      "name": "የአካባቢ ስም",
+      "code": "የአካባቢ ኮድ",
+      "type": "የአካባቢ አይነት",
+      "parentLocation": "ወላጅ አካባቢ"
+    }
+  },
+  "organization": {
+    "settings": {
+      "title": "የድርጅት ቀይሮች",
+      "general": "አጠቃላይ",
+      "branding": "ምልክት",
+      "modules": "ሞዱሎች",
+      "nameLabel": "የድርጅት ስም",
+      "timezoneLabel": "የሰዓት ቀጠና",
+      "calendarLabel": "የቀን መቁጠሪያ",
+      "logoLabel": "አርማ",
+      "users": "ተጠቃሚዎች",
+      "offices": "ቢሮዎች"
+    }
+  },
+  "projects": {
+    "list": {
+      "title": "ፕሮጀክቶች",
+      "createButton": "አዲስ ፕሮጀክት",
+      "noProjects": "ፕሮጀክቶች አልተገኙም",
+      "filterByStatus": "በሁኔታ አጣራ"
+    },
+    "create": {
+      "title": "ፕሮጀክት ፍጠር",
+      "basicInfo": "መሠረታዊ መረጃ",
+      "budgetInfo": "በጀት እና የገንዘብ ምንጭ",
+      "success": "ፕሮጀክት በተሳካ ሁኔታ ተፈጥሯል"
+    },
+    "detail": {
+      "title": "የፕሮጀክት ዝርዝር",
+      "overview": "አጠቃላይ እይታ",
+      "logframe": "ሎግፍሬም",
+      "team": "ቡድን",
+      "interventionAreas": "የጣልቃ ገብነት ቦታዎች",
+      "generalInfo": "አጠቃላይ መረጃ",
+      "beneficiaries": "ተጠቃሚዎች",
+      "narrative": "ትረካ",
+      "directMale": "ቀጥተኛ ወንድ",
+      "directFemale": "ቀጥተኛ ሴት",
+      "indirectMale": "ቀጥተኛ ያልሆነ ወንድ",
+      "indirectFemale": "ቀጥተኛ ያልሆነ ሴት",
+      "pwd": "አካል ጉዳተኞች",
+      "totalDirect": "ጠቅላላ ቀጥተኛ",
+      "totalIndirect": "ጠቅላላ ቀጥተኛ ያልሆነ"
+    },
+    "fields": {
+      "code": "የፕሮጀክት ኮድ",
+      "name": "የፕሮጀክት ስም",
+      "description": "ማብራሪያ",
+      "status": "ሁኔታ",
+      "operationalStatus": "የስራ ሁኔታ",
+      "startDate": "የመጀመሪያ ቀን",
+      "endDate": "የማብቂያ ቀን",
+      "budget": "ጠቅላላ በጀት",
+      "currency": "ምንዛሪ",
+      "donor": "ለጋሽ",
+      "sector": "ዘርፍ",
+      "programPillar": "የፕሮግራም ምሰሶ",
+      "office": "ቢሮ",
+      "projectManager": "የፕሮጀክት ሥራ አስኪያጅ",
+      "scope": "ወሰን",
+      "assumptions": "ግምቶች",
+      "risks": "ስጋቶች",
+      "meansOfVerification": "የማረጋገጫ መንገዶች",
+      "beneficiaries": "ተጠቃሚዎች",
+      "createdAt": "የተፈጠረበት ቀን"
+    },
+    "status": {
+      "draft": "ረቂቅ",
+      "submitted": "ቀርቧል",
+      "approved": "ፀድቋል",
+      "rejected": "ተቀባይነት አላገኘም",
+      "amendment": "ማሻሻያ"
+    },
+    "operationalStatus": {
+      "notStarted": "አልተጀመረም",
+      "inProgress": "በሂደት ላይ",
+      "suspended": "ታግዷል",
+      "completed": "ተጠናቅቋል",
+      "cancelled": "ተሰርዟል"
+    },
+    "actions": {
+      "submit": "ለማፅደቅ አቅርብ",
+      "approve": "አፅድቅ",
+      "reject": "አትቀበል",
+      "addTeamMember": "የቡድን አባል ጨምር",
+      "removeTeamMember": "አስወግድ",
+      "submitSuccess": "ፕሮጀክት በተሳካ ሁኔታ ቀርቧል",
+      "approveSuccess": "ፕሮጀክት በተሳካ ሁኔታ ፀድቋል",
+      "rejectSuccess": "ፕሮጀክት ተቀባይነት አላገኘም",
+      "updateSuccess": "ፕሮጀክት በተሳካ ሁኔታ ተዘምኗል"
+    },
+    "logframe": {
+      "title": "ሎጂካል ፍሬምወርክ",
+      "outcomes": "ውጤቶች",
+      "outputs": "ውፅዓቶች",
+      "activities": "ተግባራት",
+      "indicators": "አመላካቾች",
+      "baseline": "መነሻ",
+      "target": "ግብ",
+      "noLogframe": "የሎግፍሬም ውሂብ የለም። ውጤቶችን ያክሉ።"
+    },
+    "interventionAreas": {
+      "title": "የጣልቃ ገብነት ቦታዎች",
+      "createButton": "አዲስ የጣልቃ ገብነት ቦታ",
+      "allocate": "ለፕሮጀክት ይመድቡ",
+      "budgetAllocated": "የተመደበ በጀት",
+      "budgetPercentage": "የበጀት %",
+      "noAreas": "የጣልቃ ገብነት ቦታዎች አልተገለጹም"
+    },
+    "team": {
+      "title": "የቡድን አባላት",
+      "addMember": "አባል ጨምር",
+      "role": "ሚና",
+      "noMembers": "የቡድን አባላት አልተመደቡም"
+    }
+  },
+  "planning": {
+    "list": {
+      "title": "ዕቅዶች",
+      "createButton": "ዕቅድ ፍጠር",
+      "searchPlaceholder": "ዕቅዶችን ፈልግ...",
+      "viewHierarchy": "ተዋረድ ይመልከቱ",
+      "project": "ፕሮጀክት"
+    },
+    "create": {
+      "title": "ዕቅድ ፍጠር",
+      "successMessage": "ዕቅዱ በተሳካ ሁኔታ ተፈጥሯል"
+    },
+    "detail": {
+      "title": "የዕቅድ ዝርዝር",
+      "overview": "አጠቃላይ",
+      "activities": "ተግባራት",
+      "indicators": "የአመልካች ድልድል",
+      "addActivity": "ተግባር ጨምር"
+    },
+    "hierarchy": {
+      "title": "የዕቅድ ተዋረድ",
+      "noData": "ለዚህ ፕሮጀክት የዕቅድ ተዋረድ አልተገኘም።"
+    },
+    "fields": {
+      "level": "ደረጃ",
+      "title": "ርዕስ",
+      "description": "መግለጫ",
+      "projectId": "ፕሮጀክት",
+      "parentId": "ዋና ዕቅድ",
+      "fiscalYear": "የበጀት ዓመት",
+      "quarter": "ሩብ ዓመት",
+      "month": "ወር",
+      "weekNumber": "ሳምንት",
+      "dayDate": "ቀን",
+      "plannedStartDate": "የታቀደ መጀመሪያ",
+      "plannedEndDate": "የታቀደ መጨረሻ",
+      "actualStartDate": "ትክክለኛ መጀመሪያ",
+      "actualEndDate": "ትክክለኛ መጨረሻ",
+      "plannedBudget": "የታቀደ በጀት",
+      "actualBudget": "ትክክለኛ በጀት",
+      "beneficiariesMale": "ወንድ ተጠቃሚዎች",
+      "beneficiariesFemale": "ሴት ተጠቃሚዎች",
+      "totalBeneficiaries": "ጠቅላላ ተጠቃሚዎች",
+      "beneficiaries": "ተጠቃሚዎች",
+      "status": "ሁኔታ",
+      "approvalStatus": "የማጽደቅ ሁኔታ",
+      "progressPercentage": "ሂደት",
+      "progress": "ሂደት"
+    },
+    "levels": {
+      "Annual": "ዓመታዊ",
+      "Quarterly": "ሩብ ዓመታዊ",
+      "Monthly": "ወርሃዊ",
+      "Weekly": "ሳምንታዊ",
+      "Daily": "ዕለታዊ"
+    },
+    "status": {
+      "NotStarted": "አልተጀመረም",
+      "InProgress": "በሂደት ላይ",
+      "Completed": "ተጠናቋል",
+      "Delayed": "ዘግይቷል",
+      "Pending": "በመጠባበቅ ላይ",
+      "Cancelled": "ተሰርዟል"
+    },
+    "approvalStatus": {
+      "Draft": "ረቂቅ",
+      "Submitted": "ቀርቧል",
+      "Approved": "ጸድቋል",
+      "Rejected": "ተቀባይነት አላገኘም"
+    },
+    "actions": {
+      "submit": "ለማጽደቅ ላክ",
+      "approve": "አጽድቅ",
+      "reject": "ውድቅ አድርግ"
+    },
+    "dip": {
+      "title": "ዝርዝር የትግበራ ዕቅድ",
+      "addItem": "ዝርዝር ጨምር",
+      "addMilestone": "ምዕራፍ ጨምር",
+      "milestones": "ምዕራፎች",
+      "fields": {
+        "title": "ርዕስ",
+        "description": "መግለጫ",
+        "plannedStartDate": "መጀመሪያ ቀን",
+        "plannedEndDate": "መጨረሻ ቀን",
+        "budgetAllocated": "በጀት",
+        "responsibleUser": "ኃላፊ",
+        "sortOrder": "ቅደም ተከተል",
+        "status": "ሁኔታ"
+      },
+      "milestone": {
+        "title": "ርዕስ",
+        "dueDate": "የመጨረሻ ቀን",
+        "completed": "ተጠናቋል"
+      }
+    },
+    "config": {
+      "title": "የዕቅድ ውቅረት",
+      "planLevels": "የዕቅድ ደረጃዎች",
+      "generalSettings": "አጠቃላይ ቅንብሮች",
+      "enableAnnual": "ዓመታዊ ዕቅድን አንቃ",
+      "enableQuarterly": "ሩብ ዓመታዊ ዕቅድን አንቃ",
+      "enableMonthly": "ወርሃዊ ዕቅድን አንቃ",
+      "enableWeekly": "ሳምንታዊ ዕቅድን አንቃ",
+      "enableDaily": "ዕለታዊ ዕቅድን አንቃ",
+      "fiscalYearStartMonth": "የበጀት ዓመት መጀመሪያ ወር",
+      "defaultApprovalRequired": "ማጽደቅ እንዲያስፈልግ አድርግ",
+      "saved": "የዕቅድ ውቅረት ተቀምጧል"
+    }
+  },
+  "reporting": {
+    "list": {
+      "title": "ሪፖርቶች",
+      "templates": "የሪፖርት ቅጦች",
+      "financialSummary": "የፋይናንስ ማጠቃለያ"
+    },
+    "create": {
+      "title": "ሪፖርት ፍጠር"
+    },
+    "detail": {
+      "title": "የሪፖርት ዝርዝር",
+      "overview": "አጠቃላይ",
+      "sections": "ክፍሎች",
+      "comments": "አስተያየቶች",
+      "approvalHistory": "የማጽደቅ ታሪክ",
+      "narrative": "ትረካ",
+      "incident": "የአደጋ ዝርዝር",
+      "budget": "በጀት እና ፋይናንስ"
+    },
+    "fields": {
+      "title": "ርዕስ",
+      "reportType": "የሪፖርት ዓይነት",
+      "status": "ሁኔታ",
+      "period": "ጊዜ",
+      "periodStart": "የጊዜ መጀመሪያ",
+      "periodEnd": "የጊዜ ማብቂያ",
+      "fiscalYear": "የፊስካል ዓመት",
+      "quarter": "ሩብ ዓመት",
+      "month": "ወር",
+      "weekNumber": "የሳምንት ቁጥር",
+      "plannedBudget": "የታቀደ በጀት",
+      "actualSpent": "ትክክለኛ ወጪ",
+      "variance": "ልዩነት",
+      "utilizationRate": "የበጀት አጠቃቀም ምጣኔ",
+      "cumulativeYtd": "ድምር ዓመታዊ ወጪ",
+      "burnRate": "የማቃጠል ምጣኔ",
+      "deadline": "የማስረከቢያ ገደብ",
+      "executiveSummary": "የአስፈፃሚ ማጠቃለያ",
+      "challenges": "ተግዳሮቶች",
+      "lessonsLearned": "የተማሩ ትምህርቶች",
+      "recommendations": "ምክረ ሃሳቦች",
+      "template": "የሪፖርት ቅጽ",
+      "projectId": "ፕሮጀክት",
+      "approvalLevel": "የማጽደቅ ደረጃ",
+      "currentLevel": "ያሁኑ የማጽደቅ ደረጃ",
+      "requiredLevels": "የሚያስፈልግ የማጽደቅ ደረጃ",
+      "incidentDate": "የአደጋ ቀን",
+      "incidentLocation": "የአደጋ ቦታ",
+      "incidentType": "የአደጋ ዓይነት",
+      "peopleInvolved": "የተሳተፉ ሰዎች",
+      "injuries": "የጉዳት መግለጫ",
+      "impact": "የተፅዕኖ መግለጫ"
+    },
+    "reportType": {
+      "Activity": "የእንቅስቃሴ ሪፖርት",
+      "Weekly": "ሳምንታዊ ሪፖርት",
+      "Monthly": "ወርሃዊ ሪፖርት",
+      "Quarterly": "ሩብ ዓመታዊ ሪፖርት",
+      "BiAnnual": "ግማሽ ዓመታዊ ሪፖርት",
+      "Annual": "ዓመታዊ ሪፖርት",
+      "Incident": "የአደጋ ሪፖርት"
+    },
+    "status": {
+      "Draft": "ረቂቅ",
+      "Submitted": "የቀረበ",
+      "UnderReview": "በግምገማ ላይ",
+      "Approved": "የፀደቀ",
+      "Rejected": "የተመለሰ"
+    },
+    "sectionType": {
+      "Narrative": "ትረካ",
+      "Financial": "ፋይናንስ",
+      "Indicator": "አመላካች",
+      "Beneficiary": "ተጠቃሚ",
+      "Risk": "ስጋት",
+      "Challenge": "ተግዳሮት",
+      "Custom": "ብጁ"
+    },
+    "actions": {
+      "submit": "ሪፖርት አስረክብ",
+      "approve": "ሪፖርት አጽድቅ",
+      "reject": "ሪፖርት መልስ"
+    },
+    "templates": {
+      "title": "የሪፖርት ቅጦች",
+      "create": "ቅጽ ፍጠር",
+      "name": "የቅጽ ስም",
+      "description": "መግለጫ",
+      "approvalLevels": "የሚያስፈልግ የማጽደቅ ደረጃ",
+      "deadlineDays": "የማስረከቢያ ገደብ (ቀናት)",
+      "active": "ንቁ",
+      "sections": "የቅጽ ክፍሎች",
+      "addSection": "ክፍል ጨምር",
+      "sectionType": "የክፍል ዓይነት",
+      "sortOrder": "የቅደም ተከተል",
+      "required": "አስፈላጊ",
+      "instructions": "መመሪያ"
+    },
+    "financialSummary": {
+      "title": "የፋይናንስ ማጠቃለያ",
+      "totalPlanned": "ጠቅላላ የታቀደ በጀት",
+      "totalSpent": "ጠቅላላ ትክክለኛ ወጪ",
+      "variance": "ልዩነት",
+      "utilizationRate": "የበጀት አጠቃቀም ምጣኔ",
+      "ytdSpent": "ድምር ዓመታዊ ወጪ",
+      "burnRate": "የማቃጠል ምጣኔ",
+      "reportCount": "የሪፖርት ብዛት",
+      "load": "ማጠቃለያ ጫን"
+    },
+    "comments": {
+      "add": "አስተያየት ጨምር",
+      "reply": "መልስ",
+      "placeholder": "አስተያየት ይጻፉ..."
+    }
+  },
+  "meal": {
+    "plans": {
+      "title": "MEAL እቅዶች",
+      "create": "MEAL እቅድ ፍጠር",
+      "overall": "አጠቃላይ ሙሉነት",
+      "sections": "የእቅድ ክፍሎች",
+      "section1": "ውጤቶች እና አመልካቾች",
+      "section2": "የመረጃ ጥራት",
+      "section3": "የአመልካች ግስጋሴ እቅዶች",
+      "section4": "የትምህርት እቅድ",
+      "section5": "M&EL እንቅስቃሴዎች",
+      "section6": "M&EL በጀት",
+      "section7": "የሪፖርት እቅድ",
+      "section8": "የግንኙነት እቅድ",
+      "completeness": "ሙሉነት",
+      "overview": "አጠቃላይ"
+    },
+    "fields": {
+      "title": "ርዕስ",
+      "description": "መግለጫ",
+      "projectId": "ፕሮጀክት",
+      "status": "ሁኔታ",
+      "overallCompleteness": "አጠቃላይ ሙሉነት",
+      "completeness": "ሙሉነት"
+    },
+    "planStatus": {
+      "Draft": "ረቂቅ",
+      "Submitted": "የቀረበ",
+      "Approved": "የፀደቀ",
+      "Rejected": "የተመለሰ"
+    },
+    "actions": {
+      "submit": "እቅድ አስረክብ",
+      "approve": "እቅድ አጽድቅ",
+      "reject": "እቅድ መልስ"
+    },
+    "indicators": {
+      "title": "አመልካቾች",
+      "add": "አመልካች ጨምር",
+      "name": "የአመልካች ስም",
+      "level": "ደረጃ",
+      "baseline": "መነሻ ዋጋ",
+      "target": "ግብ ዋጋ",
+      "frequency": "የመሰብሰብ ድግግሞሽ"
+    },
+    "measurements": {
+      "title": "ልኬቶች",
+      "record": "ልኬት መዝግብ",
+      "period": "ጊዜ",
+      "value": "ዋጋ",
+      "date": "የመለኪያ ቀን",
+      "male": "ወንድ",
+      "female": "ሴት"
+    },
+    "evaluations": {
+      "title": "ግምገማዎች",
+      "create": "ግምገማ ፍጠር",
+      "type": "የግምገማ ዓይነት",
+      "status": "ሁኔታ",
+      "dacCriteria": "DAC መስፈርት",
+      "dates": "ቀናት",
+      "budget": "በጀት",
+      "methodology": "ዘዴ",
+      "scope": "ወሰን",
+      "keyQuestions": "ዋና ጥያቄዎች",
+      "complete": "ግምገማ ጨርስ",
+      "overview": "አጠቃላይ"
+    },
+    "evalType": {
+      "Monitoring": "ክትትል",
+      "Evaluation": "ግምገማ",
+      "Learning": "ትምህርት"
+    },
+    "evalStatus": {
+      "Planned": "የታቀደ",
+      "InProgress": "በሂደት ላይ",
+      "Completed": "የተጠናቀቀ",
+      "Cancelled": "የተሰረዘ"
+    },
+    "dacCriteria": {
+      "Relevance": "አግባብነት",
+      "Coherence": "ተጣጣሚነት",
+      "Effectiveness": "ውጤታማነት",
+      "Efficiency": "ቅልጥፍና",
+      "Impact": "ተፅዕኖ",
+      "Sustainability": "ዘላቂነት"
+    },
+    "findings": {
+      "title": "ግኝቶች",
+      "add": "ግኝት ጨምር",
+      "finding": "ግኝት",
+      "recommendation": "ምክረ ሃሳብ",
+      "respond": "ምላሽ ስጥ",
+      "verify": "አረጋግጥ",
+      "response": "የአስተዳደር ምላሽ",
+      "status": "ሁኔታ"
+    },
+    "findingStatus": {
+      "Open": "ክፍት",
+      "ResponseProvided": "ምላሽ ተሰጥቷል",
+      "Verified": "ተረጋግጧል",
+      "Closed": "ተዘግቷል"
+    },
+    "gesi": {
+      "title": "GESI ግምገማዎች",
+      "add": "ግምገማ ጨምር",
+      "score": "የፆታ ማርከር ነጥብ",
+      "analysis": "GESI ትንተና",
+      "justification": "ማጣቀሻ",
+      "findings": "ዋና ግኝቶች",
+      "recommendations": "ምክረ ሃሳቦች",
+      "date": "የግምገማ ቀን"
+    },
+    "lessons": {
+      "title": "የተማሩ ትምህርቶች",
+      "add": "ትምህርት ጨምር",
+      "category": "ምድብ",
+      "context": "አውድ",
+      "actionTaken": "የተወሰደ እርምጃ",
+      "impact": "ተፅዕኖ",
+      "recommendedAction": "የሚመከር እርምጃ"
+    },
+    "history": {
+      "title": "ታሪክ",
+      "submittedBy": "ያስረከበ",
+      "submittedAt": "የተላከበት ቀን",
+      "approvedBy": "ያጸደቀ",
+      "approvedAt": "የፀደቀበት ቀን",
+      "rejectionReason": "የመመለሻ ምክንያት"
+    }
+  },
+  "participants": {
+    "title": "ተሳታፊዎች",
+    "register": "ተሳታፊ ያስመዝግቡ",
+    "detail": {
+      "title": "የተሳታፊ ዝርዝር",
+      "profile": "መገለጫ",
+      "address": "አድራሻ",
+      "enrollments": "ምዝገባዎች",
+      "services": "አገልግሎቶች",
+      "household": "ቤተሰብ"
+    },
+    "fields": {
+      "firstName": "ስም",
+      "middleName": "የአባት ስም",
+      "lastName": "የአያት ስም",
+      "fullName": "ሙሉ ስም",
+      "code": "የተሳታፊ ኮድ",
+      "gender": "ፆታ",
+      "dateOfBirth": "የልደት ቀን",
+      "idNumber": "መታወቂያ ቁጥር",
+      "phone": "ስልክ",
+      "email": "ኢሜይል",
+      "status": "ሁኔታ",
+      "registrationDate": "የምዝገባ ቀን",
+      "vulnerabilityScore": "የተጋላጭነት ውጤት",
+      "woreda": "ወረዳ",
+      "kebele": "ቀበሌ",
+      "region": "ክልል",
+      "zone": "ዞን",
+      "address": "አድራሻ",
+      "projectId": "ፕሮጀክት",
+      "participantId": "ተሳታፊ",
+      "enrollmentDate": "የምዝገባ ቀን",
+      "exitDate": "የወጣበት ቀን",
+      "exitReason": "የመውጣት ምክንያት",
+      "cohortName": "የቡድን ስም",
+      "serviceName": "የአገልግሎት ስም",
+      "serviceDate": "የአገልግሎት ቀን",
+      "quantity": "መጠን",
+      "unit": "አሃድ",
+      "description": "ማብራሪያ",
+      "notes": "ማስታወሻዎች",
+      "householdCode": "የቤተሰብ ኮድ",
+      "relationship": "ከራስ ጋር ያለ ዝምድና",
+      "headOfHousehold": "የቤተሰብ ራስ",
+      "householdSize": "የቤተሰብ ብዛት"
+    },
+    "actions": {
+      "editProfile": "መገለጫ ያርትዑ",
+      "editAddress": "አድራሻ ያርትዑ",
+      "exitEnrollment": "ከምዝገባ ያውጡ",
+      "confirmExit": "መውጣት ያረጋግጡ",
+      "enroll": "ያስመዝግቡ",
+      "recordService": "አገልግሎት ይመዝግቡ",
+      "addMember": "አባል ያክሉ"
+    },
+    "status": {
+      "Active": "ንቁ",
+      "Inactive": "ቦዝኖ",
+      "Graduated": "ተመርቋል",
+      "Exited": "ወጥቷል"
+    },
+    "genderOptions": {
+      "Male": "ወንድ",
+      "Female": "ሴት",
+      "Other": "ሌላ"
+    },
+    "profile": "መገለጫ",
+    "editProfile": "መገለጫ ያርትዑ",
+    "editAddress": "አድራሻ ያርትዑ",
+    "enrollments": {
+      "title": "ምዝገባዎች",
+      "enroll": "ያስመዝግቡ",
+      "exit": "ከምዝገባ ያውጡ",
+      "projectId": "ፕሮጀክት",
+      "cohortName": "የቡድን ስም",
+      "enrollmentDate": "የምዝገባ ቀን",
+      "exitDate": "የወጣበት ቀን",
+      "exitReason": "የመውጣት ምክንያት",
+      "status": "ሁኔታ",
+      "enrollmentStatus": {
+        "Enrolled": "ተመዝግቧል",
+        "Completed": "ተጠናቋል",
+        "Exited": "ወጥቷል",
+        "Graduated": "ተመርቋል"
+      }
+    },
+    "services": {
+      "title": "አገልግሎቶች",
+      "record": "አገልግሎት ይመዝግቡ",
+      "serviceName": "የአገልግሎት ስም",
+      "serviceDate": "የአገልግሎት ቀን",
+      "quantity": "መጠን",
+      "unit": "አሃድ",
+      "description": "ማብራሪያ",
+      "notes": "ማስታወሻዎች"
+    },
+    "household": {
+      "title": "ቤተሰብ",
+      "add": "አባል ያክሉ",
+      "householdCode": "የቤተሰብ ኮድ",
+      "isHead": "የቤተሰብ ራስ",
+      "relationship": "ከራስ ጋር ያለ ዝምድና",
+      "householdSize": "የቤተሰብ ብዛት",
+      "members": "የቤተሰብ አባላት"
+    },
+    "graduation": {
+      "title": "ምረቃ",
+      "benchmarks": "የምረቃ መመዘኛዎች",
+      "pipeline": "የምረቃ ቧንቧ",
+      "decisions": "የምረቃ ውሳኔዎች",
+      "addBenchmark": "መመዘኛ ያክሉ",
+      "editBenchmark": "መመዘኛ ያርትዑ",
+      "name": "ስም",
+      "domain": "ጎራ",
+      "description": "ማብራሪያ",
+      "thresholdP2": "P2 ገደብ",
+      "thresholdP3": "P3 ገደብ",
+      "thresholdP4": "P4 ገደብ",
+      "weight": "ክብደት",
+      "requiredForGraduation": "ያስፈልጋል",
+      "isActive": "ንቁ",
+      "totalParticipants": "ጠቅላላ ተሳታፊዎች",
+      "graduationRate": "የምረቃ ምጣኔ",
+      "graduated": "ተመርቋል",
+      "confirmReject": "ውድቅ ያረጋግጡ",
+      "stages": {
+        "P1": "P1 - መግቢያ",
+        "P2": "P2 - ግንባታ",
+        "P3": "P3 - ልማት",
+        "P4": "P4 - ዝግጁ",
+        "Graduated": "ተመርቋል"
+      },
+      "fields": {
+        "name": "ስም",
+        "domain": "ጎራ",
+        "weight": "ክብደት",
+        "required": "ያስፈልጋል",
+        "requiredMet": "የተሟሉ መስፈርቶች %",
+        "readyToGraduate": "ለምረቃ ዝግጁ",
+        "decisionDate": "የውሳኔ ቀን",
+        "rejectionReason": "የመመለሻ ምክንያት"
+      },
+      "createDecision": "ውሳኔ ይፍጠሩ",
+      "participantId": "ተሳታፊ",
+      "projectId": "ፕሮጀክት",
+      "notes": "ማስታወሻዎች",
+      "requiredMetPercentage": "የተሟሉ መስፈርቶች %",
+      "isReadyToGraduate": "ለምረቃ ዝግጁ",
+      "decisionDate": "የውሳኔ ቀን",
+      "rejectionReason": "የመመለሻ ምክንያት",
+      "approve": "ያጽድቁ",
+      "reject": "ይመልሱ",
+      "decisionStatus": {
+        "Pending": "በመጠባበቅ",
+        "Approved": "ጸድቋል",
+        "Rejected": "ተመልሷል"
+      }
+    }
+  },
+  "procurement": {
+    "title": "ግዢ",
+    "suppliers": {
+      "title": "አቅራቢዎች",
+      "create": "አቅራቢ ያክሉ",
+      "detail": "የአቅራቢ ዝርዝር",
+      "name": "ስም",
+      "contactPerson": "ግንኙነት ሰው",
+      "email": "ኢሜይል",
+      "phone": "ስልክ",
+      "address": "አድራሻ",
+      "taxId": "የግብር መለያ ቁጥር",
+      "status": "ሁኔታ",
+      "rating": "ደረጃ",
+      "rate": "አቅራቢ ደረጃ ይስጡ",
+      "blacklist": "አቅራቢ ያግዱ",
+      "edit": "አቅራቢ ያርትዑ",
+      "score": "ውጤት",
+      "blacklistReason": "የማገድ ምክንያት",
+      "supplierStatus": {
+        "Active": "ንቁ",
+        "Inactive": "ቦዝኖ",
+        "Blacklisted": "የታገደ"
+      }
+    },
+    "plans": {
+      "title": "የግዢ ዕቅዶች",
+      "detail": "የዕቅድ ዝርዝር",
+      "referenceNumber": "ማጣቀሻ ቁጥር",
+      "projectId": "ፕሮጀክት",
+      "fiscalYear": "የበጀት ዓመት",
+      "description": "ማብራሪያ",
+      "totalEstimatedValue": "ጠቅላላ ግምት",
+      "items": "የዕቅድ ንጥሎች",
+      "addItem": "ንጥል ያክሉ",
+      "estimatedCost": "የተገመተ ዋጋ",
+      "method": "የግዢ ዘዴ",
+      "quantity": "መጠን",
+      "unit": "አሃድ",
+      "plannedQuarter": "የታቀደ ሩብ ዓመት",
+      "submit": "ዕቅድ ያስረክቡ",
+      "approve": "ዕቅድ ያጽድቁ"
+    },
+    "requests": {
+      "title": "የግዢ ጥያቄዎች",
+      "create": "ጥያቄ ይፍጠሩ",
+      "detail": "የጥያቄ ዝርዝር",
+      "referenceNumber": "ማጣቀሻ ቁጥር",
+      "projectId": "ፕሮጀክት",
+      "justification": "ማስረጃ",
+      "totalAmount": "ጠቅላላ መጠን",
+      "method": "ዘዴ",
+      "items": "ንጥሎች",
+      "addItem": "ንጥል ያክሉ",
+      "description": "ማብራሪያ",
+      "quantity": "መጠን",
+      "unit": "አሃድ",
+      "estimatedUnitCost": "የተገመተ ዋጋ",
+      "specification": "ዝርዝር",
+      "submit": "ጥያቄ ያስረክቡ",
+      "approve": "ጥያቄ ያጽድቁ",
+      "procurementPlanItemId": "የዕቅድ ንጥል"
+    },
+    "rfq": {
+      "title": "የዋጋ ጥቆማ ጥያቄ",
+      "create": "RFQ ይፍጠሩ",
+      "referenceNumber": "ማጣቀሻ ቁጥር",
+      "deadline": "የማብቂያ ቀን",
+      "termsAndConditions": "ውል እና ሁኔታዎች",
+      "minimumResponses": "ዝቅተኛ ምላሾች",
+      "submitResponse": "ምላሽ ያስረክቡ",
+      "supplierId": "አቅራቢ",
+      "totalQuotedAmount": "የተጠቀሰ መጠን",
+      "deliveryDays": "የማድረሻ ቀናት",
+      "notes": "ማስታወሻዎች",
+      "evaluateBid": "ጨረታ ይገምግሙ",
+      "technicalScore": "ቴክኒካል ውጤት",
+      "financialScore": "የፋይናንስ ውጤት",
+      "technicalWeight": "ቴክኒካል ክብደት",
+      "financialWeight": "የፋይናንስ ክብደት"
+    },
+    "orders": {
+      "title": "የግዢ ትዕዛዞች",
+      "create": "ትዕዛዝ ይፍጠሩ",
+      "detail": "የትዕዛዝ ዝርዝር",
+      "referenceNumber": "ማጣቀሻ ቁጥር",
+      "supplierId": "አቅራቢ",
+      "status": "ሁኔታ",
+      "totalAmount": "ጠቅላላ መጠን",
+      "expectedDelivery": "የሚጠበቅ ማድረሻ",
+      "items": "ንጥሎች",
+      "issue": "ትዕዛዝ ያውጡ",
+      "unitPrice": "የአሃድ ዋጋ",
+      "receivedQuantity": "የተቀበለ መጠን",
+      "purchaseOrderStatus": {
+        "Draft": "ረቂቅ",
+        "Issued": "የወጣ",
+        "PartiallyReceived": "በከፊል የተቀበለ",
+        "FullyReceived": "ሙሉ የተቀበለ",
+        "Closed": "የተዘጋ",
+        "Cancelled": "የተሰረዘ"
+      }
+    },
+    "grn": {
+      "title": "የዕቃ ደረሰኝ",
+      "create": "ደረሰኝ ይፍጠሩ",
+      "referenceNumber": "ማጣቀሻ ቁጥር",
+      "receivedDate": "የተቀበለበት ቀን",
+      "receivedBy": "የተቀበለው",
+      "deliveryNoteNumber": "የማድረሻ ማስታወሻ #",
+      "remarks": "አስተያየቶች"
+    },
+    "invoices": {
+      "title": "ደረሰኞች",
+      "create": "ደረሰኝ ይፍጠሩ",
+      "invoiceNumber": "የደረሰኝ ቁጥር",
+      "invoiceAmount": "የደረሰኝ መጠን",
+      "invoiceDate": "የደረሰኝ ቀን",
+      "dueDate": "የመክፈያ ቀን",
+      "grnId": "የደረሰኝ ማጣቀሻ"
+    },
+    "payments": {
+      "title": "ክፍያዎች",
+      "create": "ክፍያ ይፍጠሩ",
+      "referenceNumber": "ማጣቀሻ ቁጥር",
+      "amount": "መጠን",
+      "paymentMethod": "የክፍያ ዘዴ",
+      "bankDetails": "የባንክ ዝርዝር"
+    },
+    "invoicePayment": {
+      "title": "ደረሰኝ እና ክፍያ",
+      "createInvoice": "ደረሰኝ ይፍጠሩ",
+      "createPayment": "ክፍያ ይፍጠሩ"
+    },
+    "fields": {
+      "referenceNumber": "ማጣቀሻ ቁጥር",
+      "projectId": "ፕሮጀክት",
+      "method": "ዘዴ",
+      "procurementPlanItemId": "የዕቅድ ንጥል",
+      "justification": "ማስረጃ",
+      "purchaseRequestId": "የግዢ ጥያቄ",
+      "supplierId": "አቅራቢ",
+      "totalAmount": "ጠቅላላ መጠን",
+      "expectedDeliveryDate": "የሚጠበቅ የማድረሻ ቀን",
+      "description": "ማብራሪያ",
+      "quantity": "መጠን",
+      "unit": "አሃድ",
+      "unitPrice": "የአሃድ ዋጋ",
+      "receivedQuantity": "የተቀበለ መጠን",
+      "receivedDate": "የተቀበለበት ቀን",
+      "receivedBy": "የተቀበለው",
+      "deliveryNoteNumber": "የማድረሻ ማስታወሻ ቁጥር",
+      "remarks": "አስተያየቶች",
+      "invoiceNumber": "የደረሰኝ ቁጥር",
+      "invoiceAmount": "የደረሰኝ መጠን",
+      "invoiceDate": "የደረሰኝ ቀን",
+      "dueDate": "የመክፈያ ቀን",
+      "grnId": "የደረሰኝ ማጣቀሻ",
+      "amount": "መጠን",
+      "paymentMethod": "የክፍያ ዘዴ",
+      "bankDetails": "የባንክ ዝርዝር",
+      "title": "ርዕስ",
+      "fiscalYear": "የበጀት ዓመት",
+      "totalEstimatedValue": "ጠቅላላ ግምት",
+      "estimatedCost": "የተገመተ ዋጋ",
+      "plannedQuarter": "የታቀደ ሩብ ዓመት",
+      "estimatedUnitCost": "የተገመተ የአሃድ ዋጋ",
+      "specification": "ዝርዝር",
+      "approvedBy": "ያጸደቀው",
+      "approvalDate": "የማጽደቅ ቀን",
+      "deadline": "የማብቂያ ቀን",
+      "termsAndConditions": "ውል እና ሁኔታዎች",
+      "minimumResponses": "ዝቅተኛ ምላሾች",
+      "totalQuotedAmount": "ጠቅላላ የተጠቀሰ መጠን",
+      "deliveryDays": "የማድረሻ ቀናት",
+      "notes": "ማስታወሻዎች",
+      "rfqResponseId": "የRFQ ምላሽ",
+      "technicalScore": "ቴክኒካል ውጤት",
+      "financialScore": "የፋይናንስ ውጤት",
+      "technicalWeight": "ቴክኒካል ክብደት",
+      "financialWeight": "የፋይናንስ ክብደት",
+      "name": "ስም",
+      "contactPerson": "ግንኙነት ሰው",
+      "email": "ኢሜይል",
+      "phone": "ስልክ",
+      "address": "አድራሻ",
+      "taxIdNumber": "የግብር መለያ ቁጥር",
+      "rating": "ደረጃ",
+      "score": "ውጤት"
+    },
+    "actions": {
+      "submit": "ያስረክቡ",
+      "approve": "ያጽድቁ"
+    },
+    "procurementStatus": {
+      "Draft": "ረቂቅ",
+      "Submitted": "የቀረበ",
+      "UnderReview": "በግምገማ ላይ",
+      "Approved": "ጸድቋል",
+      "Rejected": "ተመልሷል",
+      "Cancelled": "ተሰርዟል"
+    },
+    "procurementMethod": {
+      "DirectPurchase": "ቀጥታ ግዢ",
+      "RequestForQuotation": "የዋጋ ጥቆማ ጥያቄ",
+      "OpenBidding": "ክፍት ጨረታ",
+      "RestrictedBidding": "ውስን ጨረታ",
+      "SingleSource": "ነጠላ ምንጭ"
+    }
+  },
+  "finance": {
+    "title": "የገንዘብ ሒሳብ",
+    "accounts": {
+      "title": "የሒሳብ ሰንጠረዥ",
+      "create": "ሒሳብ ፍጠር",
+      "edit": "ሒሳብ አርትዕ"
+    },
+    "fundCodes": {
+      "title": "የገንዘብ ኮዶች",
+      "create": "የገንዘብ ኮድ ፍጠር",
+      "edit": "የገንዘብ ኮድ አርትዕ",
+      "restrictions": "የገንዘብ ገደቦች",
+      "addRestriction": "ገደብ ጨምር",
+      "releaseRestriction": "ገደብ ክፈት"
+    },
+    "journals": {
+      "title": "የጆርናል ግቤቶች",
+      "create": "የጆርናል ግቤት ፍጠር",
+      "post": "ግቤት ለጥፍ",
+      "detail": "የጆርናል ግቤት ዝርዝር",
+      "header": "የጆርናል ግቤት ራስጌ",
+      "lines": "የጆርናል መስመሮች",
+      "addLine": "መስመር ጨምር",
+      "unbalanced": "ግቤቱ ሚዛናዊ አይደለም"
+    },
+    "restrictions": {
+      "title": "የገንዘብ ገደቦች",
+      "none": "ምንም ገደብ አልተገኘም",
+      "release": "ክፈት",
+      "add": "ገደብ ጨምር"
+    },
+    "budgets": {
+      "title": "በጀቶች",
+      "create": "በጀት ፍጠር",
+      "detail": "የበጀት ዝርዝር",
+      "addLine": "የበጀት መስመር ጨምር",
+      "submit": "በጀት አስገባ",
+      "approve": "በጀት አጽድቅ",
+      "lookupTitle": "በጀት ፈልግ",
+      "lookupDescription": "ያለውን በጀት ለመፈለግ የበጀት መታወቂያ ያስገቡ።",
+      "lookup": "ፈልግ",
+      "viewDetail": "ዝርዝር ይመልከቱ",
+      "lines": "የበጀት መስመሮች",
+      "noLines": "እስካሁን ምንም የበጀት መስመሮች አልተጨመሩም።"
+    },
+    "fields": {
+      "accountCode": "የሒሳብ ኮድ",
+      "accountName": "የሒሳብ ስም",
+      "accountType": "የሒሳብ ዓይነት",
+      "categoryName": "ምድብ",
+      "description": "መግለጫ",
+      "isActive": "ንቁ",
+      "isSystemAccount": "የስርዓት ሒሳብ",
+      "code": "ኮድ",
+      "name": "ስም",
+      "fundType": "የገንዘብ ዓይነት",
+      "donorGrantId": "የለጋሽ ድጋፍ",
+      "originalAmount": "ዋናው መጠን",
+      "releasedAmount": "የተለቀቀ መጠን",
+      "remainingAmount": "የቀረ መጠን",
+      "conditionDescription": "ሁኔታ",
+      "expiryDate": "የማለፊያ ቀን",
+      "status": "ሁኔታ",
+      "referenceNumber": "የማጣቀሻ ቁጥር",
+      "transactionDate": "የግብይት ቀን",
+      "totalDebit": "ጠቅላላ ዴቢት",
+      "totalCredit": "ጠቅላላ ክሬዲት",
+      "projectId": "ፕሮጀክት",
+      "fundCodeId": "የገንዘብ ኮድ",
+      "memo": "ማስታወሻ",
+      "accountId": "ሒሳብ",
+      "debitAmount": "ዴቢት",
+      "creditAmount": "ክሬዲት",
+      "title": "ርዕስ",
+      "fiscalYear": "የበጀት ዓመት",
+      "currencyCode": "ምንዛሬ",
+      "exchangeRate": "የምንዛሬ ተመን",
+      "totalAmount": "ጠቅላላ መጠን",
+      "version": "ቅጂ",
+      "q1Amount": "ሩብ 1 መጠን",
+      "q2Amount": "ሩብ 2 መጠን",
+      "q3Amount": "ሩብ 3 መጠን",
+      "q4Amount": "ሩብ 4 መጠን",
+      "annualAmount": "ዓመታዊ መጠን",
+      "actualAmount": "ትክክለኛ መጠን",
+      "variance": "ልዩነት",
+      "utilizationRate": "የአጠቃቀም መጠን",
+      "category": "ምድብ",
+      "condition": "ሁኔታ",
+      "fundCode": "የገንዘብ ኮድ",
+      "account": "ሒሳብ",
+      "debit": "ዴቢት",
+      "credit": "ክሬዲት",
+      "currency": "ምንዛሬ",
+      "annual": "ዓመታዊ",
+      "actual": "ትክክለኛ",
+      "utilization": "አጠቃቀም",
+      "releaseAmount": "የሚለቀቅ መጠን",
+      "totals": "ጠቅላላ",
+      "difference": "ልዩነት",
+      "budgetId": "የበጀት መታወቂያ",
+      "amount": "መጠን"
+    },
+    "actions": {
+      "create": "ፍጠር",
+      "edit": "አርትዕ",
+      "save": "አስቀምጥ",
+      "cancel": "ሰርዝ",
+      "post": "ለጥፍ",
+      "submit": "አስገባ",
+      "approve": "አጽድቅ",
+      "addLine": "መስመር ጨምር",
+      "addRestriction": "ገደብ ጨምር",
+      "release": "ክፈት"
+    },
+    "types": {
+      "asset": "ንብረት",
+      "liability": "ዕዳ",
+      "netAssets": "ተጣራ ንብረቶች",
+      "revenue": "ገቢ",
+      "expense": "ወጪ",
+      "unrestricted": "ያልተገደበ",
+      "temporarilyRestricted": "ጊዜያዊ የተገደበ",
+      "permanentlyRestricted": "ቋሚ የተገደበ",
+      "draft": "ረቂቅ",
+      "posted": "የተለጠፈ",
+      "reversed": "የተገለበጠ",
+      "submitted": "የቀረበ",
+      "approved": "የጸደቀ",
+      "rejected": "የተቀናቀነ",
+      "revised": "የተሻሻለ"
+    },
+    "messages": {
+      "accountCreated": "ሒሳብ በተሳካ ሁኔታ ተፈጥሯል",
+      "accountUpdated": "ሒሳብ በተሳካ ሁኔታ ተዘምኗል",
+      "fundCodeCreated": "የገንዘብ ኮድ በተሳካ ሁኔታ ተፈጥሯል",
+      "fundCodeUpdated": "የገንዘብ ኮድ በተሳካ ሁኔታ ተዘምኗል",
+      "restrictionCreated": "ገደብ በተሳካ ሁኔታ ተፈጥሯል",
+      "restrictionReleased": "ገደብ በተሳካ ሁኔታ ተለቋል",
+      "journalCreated": "የጆርናል ግቤት በተሳካ ሁኔታ ተፈጥሯል",
+      "journalPosted": "የጆርናል ግቤት በተሳካ ሁኔታ ተለጥፏል",
+      "budgetCreated": "በጀት በተሳካ ሁኔታ ተፈጥሯል",
+      "budgetLineAdded": "የበጀት መስመር በተሳካ ሁኔታ ተጨምሯል",
+      "budgetSubmitted": "በጀት በተሳካ ሁኔታ ቀርቧል",
+      "budgetApproved": "በጀት በተሳካ ሁኔታ ጸድቋል",
+      "debitsCreditsUnbalanced": "ጠቅላላ ዴቢት ከጠቅላላ ክሬዲት ጋር እኩል መሆን አለበት"
+    }
+  },
+  "assets": {
+    "title": "የንብረት አስተዳደር",
+    "categories": {
+      "title": "የንብረት ምድቦች",
+      "create": "ምድብ ፍጠር",
+      "edit": "ምድብ አርትዕ"
+    },
+    "register": {
+      "title": "ንብረት መዝግብ",
+      "list": "ንብረቶች"
+    },
+    "detail": {
+      "title": "የንብረት ዝርዝር",
+      "overview": "አጠቃላይ",
+      "transfers": "ዝውውሮች",
+      "assignments": "ምደባዎች",
+      "depreciation": "የዋጋ ቅናሽ"
+    },
+    "disposals": {
+      "title": "ማስወገድ",
+      "initiate": "ማስወገድ ጀምር",
+      "complete": "ማስወገድ አጠናቅቅ"
+    },
+    "maintenance": {
+      "title": "ጥገና",
+      "schedule": "ጥገና መርሐግብር",
+      "complete": "ጥገና አጠናቅቅ"
+    },
+    "stock": {
+      "title": "የክምችት ዕቃዎች",
+      "create": "የክምችት ዕቃ ፍጠር",
+      "detail": "የክምችት ዕቃ ዝርዝር",
+      "recordMovement": "እንቅስቃሴ መዝግብ"
+    },
+    "fields": {
+      "assetCode": "የንብረት ኮድ",
+      "name": "ስም",
+      "description": "መግለጫ",
+      "code": "ኮድ",
+      "category": "ምድብ",
+      "categoryName": "ምድብ",
+      "serialNumber": "ተከታታይ ቁጥር",
+      "modelNumber": "የሞዴል ቁጥር",
+      "location": "ቦታ",
+      "donorGrantId": "የለጋሽ ድጋፍ",
+      "projectId": "ፕሮጀክት",
+      "purchaseDate": "የግዢ ቀን",
+      "purchaseCost": "የግዢ ዋጋ",
+      "currentBookValue": "ያሁኑ የመጽሐፍ ዋጋ",
+      "depreciationMethod": "የዋጋ ቅናሽ ዘዴ",
+      "usefulLifeYears": "ጠቃሚ ዕድሜ (ዓመታት)",
+      "residualValue": "ቀሪ ዋጋ",
+      "annualDepreciation": "ዓመታዊ ዋጋ ቅናሽ",
+      "accumulatedDepreciation": "የተጠራቀመ ዋጋ ቅናሽ",
+      "status": "ሁኔታ",
+      "condition": "ሁኔታ",
+      "assignedToName": "የተመደበለት",
+      "assignedToUserId": "ለተጠቃሚ መደብ",
+      "assignmentDate": "የምደባ ቀን",
+      "returnDate": "የመመለሻ ቀን",
+      "notes": "ማስታወሻዎች",
+      "fromLocation": "ከቦታ",
+      "toLocation": "ወደ ቦታ",
+      "transferDate": "የዝውውር ቀን",
+      "reason": "ምክንያት",
+      "approvedBy": "ያጸደቀው",
+      "disposalMethod": "የማስወገጃ ዘዴ",
+      "disposalValue": "የማስወገጃ ዋጋ",
+      "bookValueAtDisposal": "በማስወገጃ ጊዜ የመጽሐፍ ዋጋ",
+      "disposalDate": "የማስወገጃ ቀን",
+      "requiresDonorApproval": "የለጋሽ ፈቃድ ያስፈልጋል",
+      "donorApprovalReference": "የለጋሽ ፈቃድ ማጣቀሻ",
+      "scheduledDate": "የተመደበ ቀን",
+      "completedDate": "የተጠናቀቀ ቀን",
+      "cost": "ወጪ",
+      "performedBy": "ያከናወነው",
+      "nextScheduledDate": "ቀጣይ የተመደበ ቀን",
+      "isCompleted": "ተጠናቋል",
+      "itemCode": "የዕቃ ኮድ",
+      "unit": "ክፍል",
+      "quantityOnHand": "ያለው መጠን",
+      "reorderLevel": "የማዘዣ ደረጃ",
+      "unitCost": "የአንድ ዋጋ",
+      "storageLocation": "የማከማቻ ቦታ",
+      "movementType": "የእንቅስቃሴ ዓይነት",
+      "quantity": "መጠን",
+      "movementDate": "የእንቅስቃሴ ቀን",
+      "referenceNumber": "የማጣቀሻ ቁጥር",
+      "asOfDate": "እስከ ቀን",
+      "defaultDepreciationMethod": "ነባሪ የዋጋ ቅናሽ ዘዴ",
+      "defaultUsefulLifeYears": "ነባሪ ጠቃሚ ዕድሜ (ዓመታት)",
+      "defaultResidualValuePercent": "ነባሪ ቀሪ ዋጋ %",
+      "isActive": "ንቁ",
+      "purchaseOrderId": "የግዢ ትዕዛዝ"
+    },
+    "actions": {
+      "register": "መዝግብ",
+      "update": "አዘምን",
+      "transfer": "ዝውውር",
+      "assign": "ምደብ",
+      "calculate": "አስላ",
+      "initiate": "ጀምር",
+      "complete": "አጠናቅቅ",
+      "schedule": "መርሐግብር",
+      "record": "መዝግብ",
+      "create": "ፍጠር"
+    },
+    "types": {
+      "straightLine": "ቀጥተኛ መስመር",
+      "reducingBalance": "እየቀነሰ ሚዛን",
+      "active": "ንቁ",
+      "inMaintenance": "በጥገና ላይ",
+      "disposed": "ተወገደ",
+      "lost": "ጠፋ",
+      "transferred": "ተዘዋውሯል",
+      "new": "አዲስ",
+      "good": "ጥሩ",
+      "fair": "መካከለኛ",
+      "poor": "ደካማ",
+      "damaged": "ተጎድቷል",
+      "pending": "በመጠባበቅ ላይ",
+      "donorApprovalRequested": "የለጋሽ ፈቃድ ተጠይቋል",
+      "donorApproved": "ለጋሽ አጽድቋል",
+      "donorRejected": "ለጋሽ ውድቅ አድርጓል",
+      "receipt": "ደረሰኝ",
+      "issue": "ወጪ",
+      "return": "ተመላሽ",
+      "adjustment": "ማስተካከያ"
+    },
+    "messages": {
+      "categoryCreated": "ምድብ በተሳካ ሁኔታ ተፈጥሯል",
+      "categoryUpdated": "ምድብ በተሳካ ሁኔታ ተዘምኗል",
+      "assetRegistered": "ንብረት በተሳካ ሁኔታ ተመዝግቧል",
+      "assetUpdated": "ንብረት በተሳካ ሁኔታ ተዘምኗል",
+      "assetTransferred": "ንብረት በተሳካ ሁኔታ ተዘዋውሯል",
+      "assetAssigned": "ንብረት በተሳካ ሁኔታ ተመድቧል",
+      "depreciationCalculated": "ዋጋ ቅናሽ በተሳካ ሁኔታ ተሰልቷል",
+      "disposalInitiated": "ማስወገድ በተሳካ ሁኔታ ተጀምሯል",
+      "disposalCompleted": "ማስወገድ በተሳካ ሁኔታ ተጠናቅቋል",
+      "maintenanceScheduled": "ጥገና በተሳካ ሁኔታ ተመድቧል",
+      "maintenanceCompleted": "ጥገና በተሳካ ሁኔታ ተጠናቅቋል",
+      "stockCreated": "የክምችት ዕቃ በተሳካ ሁኔታ ተፈጥሯል",
+      "movementRecorded": "የክምችት እንቅስቃሴ በተሳካ ሁኔታ ተመዝግቧል",
+      "lowStock": "የክምችት ማስጠንቀቂያ"
+    }
+  },
+  "training": {
+    "title": "የስልጠና አስተዳደር",
+    "programs": {
+      "title": "የስልጠና ፕሮግራሞች",
+      "create": "ፕሮግራም ፍጠር",
+      "detail": "የፕሮግራም ዝርዝር",
+      "edit": "ፕሮግራም አርትዕ",
+      "sessions": "ክፍለ ጊዜዎች",
+      "materials": "ቁሳቁሶች",
+      "createButton": "አዲስ ፕሮግራም",
+      "info": "የፕሮግራም መረጃ"
+    },
+    "sessions": {
+      "title": "የስልጠና ክፍለ ጊዜዎች",
+      "create": "ክፍለ ጊዜ ፍጠር",
+      "detail": "የክፍለ ጊዜ ዝርዝር",
+      "complete": "ክፍለ ጊዜ አጠናቅቅ",
+      "participants": "ተሳታፊዎች",
+      "registerParticipant": "ተሳታፊ መዝግብ",
+      "recordAttendance": "ተገኝነት መዝግብ",
+      "createButton": "አዲስ ክፍለ ጊዜ",
+      "info": "የክፍለ ጊዜ መረጃ"
+    },
+    "trainers": {
+      "title": "አሰልጣኞች",
+      "create": "አሰልጣኝ ፍጠር",
+      "createButton": "አዲስ አሰልጣኝ"
+    },
+    "materials": {
+      "title": "የስልጠና ቁሳቁሶች",
+      "add": "ቁሳቁስ ጨምር"
+    },
+    "fields": {
+      "title": "ርዕስ",
+      "description": "መግለጫ",
+      "category": "ምድብ",
+      "projectId": "ፕሮጀክት",
+      "totalSessions": "ጠቅላላ ክፍለ ጊዜዎች",
+      "isActive": "ንቁ",
+      "venue": "ቦታ",
+      "scheduledDate": "የተመደበ ቀን",
+      "endDate": "የማጠናቀቂያ ቀን",
+      "status": "ሁኔታ",
+      "maxParticipants": "ከፍተኛ ተሳታፊዎች",
+      "notes": "ማስታወሻዎች",
+      "fullName": "ሙሉ ስም",
+      "email": "ኢሜይል",
+      "phone": "ስልክ",
+      "specialization": "ስፔሻላይዜሽን",
+      "organization": "ድርጅት",
+      "isInternal": "ውስጣዊ",
+      "participantId": "የተሳታፊ መታወቂያ",
+      "attendanceStatus": "የተገኝነት ሁኔታ",
+      "preTestScore": "ቅድመ ፈተና ውጤት",
+      "postTestScore": "ድህረ ፈተና ውጤት",
+      "certificateNumber": "የምስክር ወረቀት ቁጥር",
+      "materialType": "የቁሳቁስ ዓይነት",
+      "fileUrl": "የፋይል አድራሻ",
+      "programId": "ፕሮግራም",
+      "fromDate": "ከቀን",
+      "toDate": "እስከ ቀን",
+      "trainingProgramId": "የስልጠና ፕሮግራም",
+      "createdAt": "የተፈጠረበት ቀን",
+      "participantCount": "የተሳታፊዎች ብዛት"
+    },
+    "actions": {
+      "create": "ፍጠር",
+      "update": "አዘምን",
+      "complete": "አጠናቅቅ",
+      "register": "መዝግብ",
+      "record": "መዝግብ",
+      "add": "ጨምር"
+    },
+    "types": {
+      "technical": "ቴክኒካል",
+      "lifeSkills": "የሕይወት ክህሎት",
+      "financial": "ፋይናንሺያል",
+      "health": "ጤና",
+      "agriculture": "ግብርና",
+      "other": "ሌላ"
+    },
+    "status": {
+      "draft": "ረቂቅ",
+      "scheduled": "የታቀደ",
+      "inProgress": "በሂደት ላይ",
+      "completed": "ተጠናቋል",
+      "cancelled": "ተሰርዟል"
+    },
+    "attendance": {
+      "registered": "ተመዝግቧል",
+      "attended": "ተገኝቷል",
+      "absent": "ቀርቷል",
+      "walkIn": "ያልተመዘገበ ተሳታፊ"
+    },
+    "messages": {
+      "programCreated": "የስልጠና ፕሮግራም በተሳካ ሁኔታ ተፈጥሯል",
+      "programUpdated": "የስልጠና ፕሮግራም በተሳካ ሁኔታ ተዘምኗል",
+      "sessionCreated": "የስልጠና ክፍለ ጊዜ በተሳካ ሁኔታ ተፈጥሯል",
+      "sessionCompleted": "የስልጠና ክፍለ ጊዜ በተሳካ ሁኔታ ተጠናቋል",
+      "participantRegistered": "ተሳታፊ በተሳካ ሁኔታ ተመዝግቧል",
+      "attendanceRecorded": "ተገኝነት በተሳካ ሁኔታ ተመዝግቧል",
+      "trainerCreated": "አሰልጣኝ በተሳካ ሁኔታ ተፈጥሯል",
+      "materialAdded": "የስልጠና ቁሳቁስ በተሳካ ሁኔታ ተጨምሯል"
+    }
+  },
+  "tasks": {
+    "title": "የተግባር አስተዳደር",
+    "boards": {
+      "title": "የተግባር ሰሌዳዎች",
+      "create": "ሰሌዳ ፍጠር",
+      "detail": "የሰሌዳ ዝርዝር",
+      "lookup": "ሰሌዳ ይመልከቱ",
+      "addList": "ዝርዝር ጨምር",
+      "createButton": "አዲስ ሰሌዳ",
+      "lookupLabel": "የሰሌዳ መታወቂያ",
+      "viewBoard": "ሰሌዳ ይመልከቱ",
+      "default": "ነባሪ",
+      "lists": "ዝርዝሮች"
+    },
+    "lists": {
+      "title": "የተግባር ዝርዝሮች",
+      "create": "ዝርዝር ፍጠር",
+      "add": "ዝርዝር ጨምር",
+      "empty": "በዚህ ዝርዝር ውስጥ ተግባር የለም"
+    },
+    "tabs": {
+      "info": "የተግባር መረጃ",
+      "statusProgress": "ሁኔታ እና ሂደት",
+      "assignments": "ምደባዎች",
+      "commentsApproval": "አስተያየቶች እና ማጽደቅ"
+    },
+    "tasks": {
+      "title": "ተግባሮች",
+      "create": "ተግባር ፍጠር",
+      "detail": "የተግባር ዝርዝር",
+      "edit": "ተግባር አርትዕ",
+      "createButton": "አዲስ ተግባር"
+    },
+    "comments": {
+      "title": "አስተያየቶች",
+      "add": "አስተያየት ጨምር",
+      "noComments": "ገና አስተያየት የለም",
+      "reply": "ምላሽ",
+      "replyingTo": "ለአስተያየት ምላሽ"
+    },
+    "approvals": {
+      "title": "ማጽደቅ",
+      "submit": "ለማጽደቅ አስገባ",
+      "approve": "አጽድቅ",
+      "reject": "ውድቅ አድርግ",
+      "history": "የማጽደቅ ታሪክ",
+      "comments": "አስተያየቶች"
+    },
+    "fields": {
+      "name": "ስም",
+      "title": "ርዕስ",
+      "description": "መግለጫ",
+      "projectId": "ፕሮጀክት",
+      "isDefault": "ነባሪ ሰሌዳ",
+      "sortOrder": "የደረጃ ቅደም ተከተል",
+      "color": "ቀለም",
+      "taskCount": "የተግባር ብዛት",
+      "status": "ሁኔታ",
+      "priority": "ቅድሚያ",
+      "dueDate": "የማጠናቀቂያ ቀን",
+      "progress": "ሂደት",
+      "progressPercentage": "ሂደት",
+      "assignedToUserId": "የተመደበለት (መታወቂያ)",
+      "assignedToName": "የተመደበለት",
+      "parentTaskId": "ዋና ተግባር",
+      "taskListId": "የተግባር ዝርዝር",
+      "boardId": "ሰሌዳ",
+      "role": "ሚና",
+      "assignedDate": "የምደባ ቀን",
+      "content": "ይዘት",
+      "authorName": "ደራሲ",
+      "approvalLevel": "የማጽደቅ ደረጃ",
+      "approverName": "አጽዳቂ",
+      "action": "ድርጊት",
+      "commentsCount": "አስተያየቶች",
+      "createdAt": "የተፈጠረበት ቀን",
+      "createdBy": "የፈጠረው",
+      "targetListId": "ወደ ዝርዝር",
+      "search": "ፈልግ"
+    },
+    "actions": {
+      "create": "ፍጠር",
+      "update": "አዘምን",
+      "assign": "ምደብ",
+      "move": "አንቀሳቅስ",
+      "submit": "አስገባ",
+      "approve": "አጽድቅ",
+      "reject": "ውድቅ አድርግ",
+      "addComment": "አስተያየት ጨምር",
+      "updateStatus": "ሁኔታ አዘምን",
+      "updateProgress": "ሂደት አዘምን",
+      "moveTask": "ተግባር አንቀሳቅስ"
+    },
+    "status": {
+      "toDo": "ለመሥራት",
+      "inProgress": "በሂደት ላይ",
+      "inReview": "በግምገማ ላይ",
+      "approved": "ጸድቋል",
+      "rejected": "ውድቅ ተደርጓል",
+      "done": "ተጠናቋል"
+    },
+    "priority": {
+      "low": "ዝቅተኛ",
+      "medium": "መካከለኛ",
+      "high": "ከፍተኛ",
+      "critical": "ወሳኝ"
+    },
+    "approvalAction": {
+      "submitted": "ቀርቧል",
+      "approved": "ጸድቋል",
+      "rejected": "ውድቅ ተደርጓል",
+      "returnedForRevision": "ለእርምት ተመልሷል"
+    },
+    "messages": {
+      "boardCreated": "የተግባር ሰሌዳ በተሳካ ሁኔታ ተፈጥሯል",
+      "listCreated": "የተግባር ዝርዝር በተሳካ ሁኔታ ተፈጥሯል",
+      "taskCreated": "ተግባር በተሳካ ሁኔታ ተፈጥሯል",
+      "taskUpdated": "ተግባር በተሳካ ሁኔታ ተዘምኗል",
+      "statusUpdated": "የተግባር ሁኔታ በተሳካ ሁኔታ ተዘምኗል",
+      "progressUpdated": "የተግባር ሂደት በተሳካ ሁኔታ ተዘምኗል",
+      "taskAssigned": "ተግባር በተሳካ ሁኔታ ተመድቧል",
+      "taskMoved": "ተግባር በተሳካ ሁኔታ ተዘዋውሯል",
+      "commentAdded": "አስተያየት በተሳካ ሁኔታ ተጨምሯል",
+      "submittedForApproval": "ተግባር ለማጽደቅ ቀርቧል",
+      "taskApproved": "ተግባር በተሳካ ሁኔታ ጸድቋል",
+      "taskRejected": "ተግባር ውድቅ ተደርጓል"
+    }
+  },
+  "risk": {
+    "title": "የአደጋ አስተዳደር",
+    "categories": {
+      "title": "የአደጋ ምድቦች",
+      "create": "ምድብ ፍጠር",
+      "createButton": "አዲስ ምድብ"
+    },
+    "risks": {
+      "title": "የአደጋ መዝገብ",
+      "create": "አደጋ ፍጠር",
+      "detail": "የአደጋ ዝርዝር",
+      "createButton": "አዲስ አደጋ"
+    },
+    "matrix": {
+      "title": "የአደጋ ማትሪክስ",
+      "loadButton": "ማትሪክስ ጫን",
+      "projectRequired": "የፕሮጀክት መታወቂያ ያስፈልጋል"
+    },
+    "tabs": {
+      "overview": "አጠቃላይ",
+      "mitigations": "ማቃለያዎች",
+      "assessments": "ግምገማዎች"
+    },
+    "mitigations": {
+      "title": "ማቃለያዎች",
+      "add": "ማቃለያ ጨምር",
+      "complete": "አጠናቅ"
+    },
+    "assessments": {
+      "title": "ግምገማዎች",
+      "record": "ግምገማ መዝግብ",
+      "latest": "የቅርብ ጊዜ ግምገማ"
+    },
+    "fields": {
+      "name": "ስም",
+      "title": "ርዕስ",
+      "description": "መግለጫ",
+      "color": "ቀለም",
+      "sortOrder": "ቅደም ተከተል",
+      "projectId": "ፕሮጀክት",
+      "likelihood": "ዕድል",
+      "impact": "ተፅዕኖ",
+      "riskScore": "የአደጋ ውጤት",
+      "status": "ሁኔታ",
+      "owner": "ባለቤት",
+      "ownerUserId": "የባለቤት መታወቂያ",
+      "location": "ቦታ",
+      "identifiedDate": "የተለየበት ቀን",
+      "resolvedDate": "የተፈታበት ቀን",
+      "residualRiskNotes": "ቀሪ አደጋ ማስታወሻዎች",
+      "riskCategoryId": "ምድብ",
+      "action": "ድርጊት",
+      "responsiblePerson": "ኃላፊ ሰው",
+      "responsibleUserId": "የኃላፊ መታወቂያ",
+      "plannedDate": "የታቀደ ቀን",
+      "completedDate": "የተጠናቀቀ ቀን",
+      "estimatedCost": "ግምታዊ ወጪ",
+      "notes": "ማስታወሻዎች",
+      "assessedBy": "ገምጋሚ",
+      "assessmentDate": "የግምገማ ቀን",
+      "source": "ምንጭ",
+      "createdAt": "የተፈጠረበት ቀን"
+    },
+    "actions": {
+      "reassess": "እንደገና ገምግም",
+      "resolve": "ፍታ",
+      "addMitigation": "ማቃለያ ጨምር",
+      "completeMitigation": "ማቃለያ አጠናቅ",
+      "recordAssessment": "ግምገማ መዝግብ",
+      "viewMatrix": "የአደጋ ማትሪክስ",
+      "viewCategories": "ምድቦች"
+    },
+    "likelihood": {
+      "veryLow": "በጣም ዝቅተኛ",
+      "low": "ዝቅተኛ",
+      "medium": "መካከለኛ",
+      "high": "ከፍተኛ",
+      "veryHigh": "በጣም ከፍተኛ"
+    },
+    "impact": {
+      "negligible": "ቸል ሊባል የሚችል",
+      "minor": "ትንሽ",
+      "moderate": "መካከለኛ",
+      "major": "ዋና",
+      "catastrophic": "አደገኛ"
+    },
+    "riskStatus": {
+      "identified": "ተለይቷል",
+      "assessed": "ተገምግሟል",
+      "mitigating": "በማቃለል ላይ",
+      "resolved": "ተፈትቷል",
+      "accepted": "ተቀባይነት አግኝቷል",
+      "closed": "ተዘግቷል"
+    },
+    "mitigationStatus": {
+      "planned": "የታቀደ",
+      "inProgress": "በሂደት ላይ",
+      "completed": "ተጠናቅቋል",
+      "overdue": "ጊዜው ያለፈ"
+    },
+    "messages": {
+      "categoryCreated": "የአደጋ ምድብ በተሳካ ሁኔታ ተፈጥሯል",
+      "riskCreated": "አደጋ በተሳካ ሁኔታ ተፈጥሯል",
+      "riskReassessed": "አደጋ በተሳካ ሁኔታ እንደገና ተገምግሟል",
+      "riskResolved": "አደጋ በተሳካ ሁኔታ ተፈትቷል",
+      "mitigationCreated": "ማቃለያ በተሳካ ሁኔታ ተፈጥሯል",
+      "mitigationCompleted": "ማቃለያ በተሳካ ሁኔታ ተጠናቅቋል",
+      "assessmentRecorded": "ግምገማ በተሳካ ሁኔታ ተመዝግቧል"
+    }
+  },
+  "donors": {
+    "donors": {
+      "title": "ለጋሾች",
+      "create": "አዲስ ለጋሽ",
+      "createButton": "አዲስ ለጋሽ",
+      "detail": "የለጋሽ ዝርዝር",
+      "editButton": "ለጋሽ አርትዕ",
+      "updateSuccess": "ለጋሽ በተሳካ ሁኔታ ተዘምኗል",
+      "createSuccess": "ለጋሽ በተሳካ ሁኔታ ተፈጥሯል"
+    },
+    "grants": {
+      "title": "ድጋፎች",
+      "create": "አዲስ ድጋፍ",
+      "createButton": "አዲስ ድጋፍ",
+      "detail": "የድጋፍ ዝርዝር",
+      "createSuccess": "ድጋፍ በተሳካ ሁኔታ ተፈጥሯል",
+      "activate": "ድጋፍ አንቃ",
+      "activateSuccess": "ድጋፍ በተሳካ ሁኔታ ነቅቷል",
+      "activateButton": "ድጋፍ አንቃ"
+    },
+    "contacts": {
+      "title": "አድራሻዎች",
+      "add": "አድራሻ ጨምር",
+      "addButton": "አድራሻ ጨምር",
+      "addSuccess": "አድራሻ በተሳካ ሁኔታ ተጨምሯል"
+    },
+    "communications": {
+      "title": "ግንኙነቶች",
+      "record": "ግንኙነት መዝግብ",
+      "recordButton": "ግንኙነት መዝግብ",
+      "recordSuccess": "ግንኙነት በተሳካ ሁኔታ ተመዝግቧል"
+    },
+    "compliance": {
+      "title": "ተገዢነት ዳሽቦርድ",
+      "overdueConditions": "ያለፈባቸው ሁኔታዎች",
+      "nextDueDate": "ቀጣይ የማስረከቢያ ቀን"
+    },
+    "conditions": {
+      "title": "ሁኔታዎች",
+      "add": "ሁኔታ ጨምር",
+      "addButton": "ሁኔታ ጨምር",
+      "addSuccess": "ሁኔታ በተሳካ ሁኔታ ተጨምሯል",
+      "markMet": "ተሟልቷል ምልክት አድርግ",
+      "markMetButton": "ተሟልቷል ምልክት አድርግ",
+      "markMetSuccess": "ሁኔታ ተሟልቷል ተብሎ ተመዝግቧል"
+    },
+    "reports": {
+      "title": "ሪፖርቶች",
+      "submit": "ሪፖርት አስገባ",
+      "submitButton": "ሪፖርት አስገባ",
+      "submitSuccess": "ሪፖርት በተሳካ ሁኔታ ቀርቧል"
+    },
+    "fields": {
+      "name": "ስም",
+      "acronym": "ምህጻረ ቃል",
+      "country": "ሀገር",
+      "website": "ድረ-ገጽ",
+      "email": "ኢሜይል",
+      "phone": "ስልክ",
+      "address": "አድራሻ",
+      "notes": "ማስታወሻዎች",
+      "isActive": "ንቁ",
+      "defaultProcurementThreshold": "ነባሪ የግዢ ገደብ",
+      "grantCount": "ድጋፎች",
+      "fullName": "ሙሉ ስም",
+      "title": "ማዕረግ",
+      "isPrimary": "ዋና አድራሻ",
+      "grantNumber": "የድጋፍ ቁጥር",
+      "grantTitle": "የድጋፍ ርዕስ",
+      "status": "ሁኔታ",
+      "totalAmount": "ጠቅላላ መጠን",
+      "currencyCode": "ምንዛሪ",
+      "startDate": "የመጀመሪያ ቀን",
+      "endDate": "የመጨረሻ ቀን",
+      "complianceStatus": "ተገዢነት",
+      "description": "ገለጻ",
+      "projectId": "ፕሮጀክት",
+      "coFinancingAmount": "የጋራ ፋይናንስ መጠን",
+      "coFinancingPartner": "የጋራ ፋይናንስ አጋር",
+      "donorId": "ለጋሽ",
+      "dueDate": "የማስረከቢያ ቀን",
+      "completionNotes": "የማጠናቀቂያ ማስታወሻ",
+      "completedDate": "የተጠናቀቀበት ቀን",
+      "reportType": "የሪፖርት ዓይነት",
+      "submittedDate": "የቀረበበት ቀን",
+      "isSubmitted": "ቀርቧል",
+      "fileUrl": "የፋይል አድራሻ",
+      "type": "ዓይነት",
+      "subject": "ርዕሰ ጉዳይ",
+      "content": "ይዘት",
+      "communicationDate": "ቀን",
+      "contactedBy": "ያገናኘው",
+      "outcome": "ውጤት",
+      "donorName": "የለጋሽ ስም",
+      "grantId": "ድጋፍ"
+    },
+    "tabs": {
+      "overview": "አጠቃላይ",
+      "contacts": "አድራሻዎች",
+      "grants": "ድጋፎች",
+      "communications": "ግንኙነቶች",
+      "conditions": "ሁኔታዎች",
+      "reports": "ሪፖርቶች"
+    },
+    "status": {
+      "active": "ንቁ",
+      "inactive": "ቦዝኗል",
+      "draft": "ረቂቅ",
+      "activated": "ንቁ",
+      "suspended": "ታግዷል",
+      "completed": "ተጠናቋል",
+      "terminated": "ተቋርጧል"
+    },
+    "complianceStatus": {
+      "green": "አረንጓዴ",
+      "amber": "ብርቱካንማ",
+      "red": "ቀይ"
+    },
+    "conditionStatus": {
+      "pending": "በመጠባበቅ",
+      "met": "ተሟልቷል",
+      "overdue": "ያለፈበት",
+      "waived": "ተትቷል"
+    },
+    "communicationType": {
+      "email": "ኢሜይል",
+      "meeting": "ስብሰባ",
+      "phoneCall": "ስልክ ጥሪ",
+      "letter": "ደብዳቤ",
+      "report": "ሪፖርት",
+      "other": "ሌላ"
+    }
+  },
+  "notifications": {
+    "notifications": {
+      "title": "ማሳወቂያዎች",
+      "markAllRead": "ሁሉንም እንደተነበቡ ምልክት አድርግ",
+      "markAllReadSuccess": "ሁሉም ማሳወቂያዎች እንደተነበቡ ምልክት ተደርጓል",
+      "markReadSuccess": "ማሳወቂያ እንደተነበበ ምልክት ተደርጓል",
+      "unreadCount": "ያልተነበቡ",
+      "unread": "ያልተነበቡ",
+      "statusFilter": "ሁኔታ",
+      "eventTypeFilter": "የክስተት ዓይነት"
+    },
+    "templates": {
+      "title": "የማሳወቂያ አብነቶች",
+      "create": "አዲስ አብነት",
+      "createButton": "አዲስ አብነት",
+      "createSuccess": "አብነት በተሳካ ሁኔታ ተፈጥሯል",
+      "updateSuccess": "አብነት በተሳካ ሁኔታ ተዘምኗል",
+      "editButton": "አብነት አርትዕ",
+      "edit": "አብነት አርትዕ",
+      "activeFilter": "ሁኔታ",
+      "fields": {
+        "eventType": "የክስተት ዓይነት",
+        "defaultChannel": "ነባሪ ቻናል",
+        "titleTemplateEn": "ርዕስ (እንግሊዝኛ)",
+        "bodyTemplateEn": "ይዘት (እንግሊዝኛ)",
+        "titleTemplateAm": "ርዕስ (አማርኛ)",
+        "bodyTemplateAm": "ይዘት (አማርኛ)"
+      }
+    },
+    "preferences": {
+      "title": "የማሳወቂያ ምርጫዎች",
+      "updateSuccess": "ምርጫ በተሳካ ሁኔታ ተዘምኗል",
+      "eventType": "የክስተት ዓይነት",
+      "inApp": "በመተግበሪያ ውስጥ",
+      "email": "ኢሜይል",
+      "push": "ፑሽ",
+      "sms": "ኤስኤምኤስ"
+    },
+    "fields": {
+      "eventType": "የክስተት ዓይነት",
+      "titleText": "ርዕስ",
+      "body": "ይዘት",
+      "priority": "ቅድሚያ",
+      "status": "ሁኔታ",
+      "channel": "ቻናል",
+      "actionUrl": "የድርጊት አድራሻ",
+      "entityId": "የአካል መታወቂያ",
+      "entityType": "የአካል ዓይነት",
+      "readAt": "የተነበበበት",
+      "sentAt": "የተላከበት",
+      "titleTemplateEn": "ርዕስ (እንግሊዝኛ)",
+      "bodyTemplateEn": "ይዘት (እንግሊዝኛ)",
+      "titleTemplateAm": "ርዕስ (አማርኛ)",
+      "bodyTemplateAm": "ይዘት (አማርኛ)",
+      "defaultChannel": "ነባሪ ቻናል",
+      "isActive": "ንቁ",
+      "inAppEnabled": "በመተግበሪያ ውስጥ",
+      "emailEnabled": "ኢሜይል",
+      "pushEnabled": "ፑሽ",
+      "smsEnabled": "ኤስኤምኤስ"
+    },
+    "priority": {
+      "low": "ዝቅተኛ",
+      "normal": "መደበኛ",
+      "high": "ከፍተኛ",
+      "urgent": "አስቸኳይ"
+    },
+    "status": {
+      "pending": "በመጠባበቅ",
+      "sent": "ተልኳል",
+      "read": "ተነብቧል",
+      "failed": "አልተሳካም",
+      "archived": "ተመዝግቧል"
+    },
+    "channel": {
+      "inApp": "በመተግበሪያ ውስጥ",
+      "email": "ኢሜይል",
+      "push": "ፑሽ",
+      "sms": "ኤስኤምኤስ"
+    }
+  },
+  "chat": {
+    "rooms": {
+      "title": "የውይይት ክፍሎች",
+      "create": "አዲስ ክፍል",
+      "createButton": "አዲስ ክፍል",
+      "createSuccess": "የውይይት ክፍል በተሳካ ሁኔታ ተፈጥሯል",
+      "detail": "የውይይት ክፍል"
+    },
+    "messages": {
+      "title": "መልዕክቶች",
+      "send": "ላክ",
+      "sendPlaceholder": "መልዕክት ይጻፉ...",
+      "sendSuccess": "መልዕክት ተልኳል",
+      "edit": "አርትዕ",
+      "editSuccess": "መልዕክት ተስተካክሏል",
+      "delete": "ሰርዝ",
+      "deleteConfirm": "ይህን መልዕክት ይሰርዙ?",
+      "deleteSuccess": "መልዕክት ተሰርዟል",
+      "deleted": "መልዕክት ተሰርዟል",
+      "edited": "ተስተካክሏል",
+      "react": "ምላሽ",
+      "reactSuccess": "ምላሽ ተጨምሯል",
+      "noMessages": "ገና መልዕክት የለም",
+      "startConversation": "መልዕክት በመላክ ውይይቱን ይጀምሩ።"
+    },
+    "participants": {
+      "title": "ተሳታፊዎች",
+      "add": "ተሳታፊ ጨምር",
+      "addButton": "ተሳታፊ ጨምር",
+      "addSuccess": "ተሳታፊ በተሳካ ሁኔታ ተጨምሯል",
+      "remove": "አስወግድ",
+      "removeConfirm": "ይህን ተሳታፊ ያስወግዱ?",
+      "removeSuccess": "ተሳታፊ በተሳካ ሁኔታ ተወግዷል"
+    },
+    "thread": {
+      "title": "ክር",
+      "replies": "ምላሾች",
+      "replyPlaceholder": "ለክሩ ምላሽ ይስጡ...",
+      "backToRoom": "ወደ ክፍል ተመለስ"
+    },
+    "fields": {
+      "name": "የክፍል ስም",
+      "type": "ዓይነት",
+      "description": "ገለጻ",
+      "avatarUrl": "የአምሳል አድራሻ",
+      "participantUserIds": "የተሳታፊ መታወቂያዎች",
+      "participantCount": "ተሳታፊዎች",
+      "lastMessagePreview": "የመጨረሻ መልዕክት",
+      "userId": "የተጠቃሚ መታወቂያ",
+      "displayName": "የማሳያ ስም",
+      "isAdmin": "አስተዳዳሪ",
+      "content": "መልዕክት",
+      "parentMessageId": "ዋና መልዕክት",
+      "attachmentUrl": "የአባሪ አድራሻ",
+      "attachmentName": "የአባሪ ስም",
+      "emoji": "ስሜት ገላጭ",
+      "presence": "ሁኔታ",
+      "threadReplyCount": "ምላሾች"
+    },
+    "tabs": {
+      "messages": "መልዕክቶች",
+      "participants": "ተሳታፊዎች"
+    },
+    "roomType": {
+      "direct": "ቀጥታ",
+      "group": "ቡድን",
+      "channel": "ቻናል"
+    },
+    "messageStatus": {
+      "sent": "ተልኳል",
+      "delivered": "ደርሷል",
+      "read": "ተነብቧል",
+      "deleted": "ተሰርዟል"
+    },
+    "presence": {
+      "online": "መስመር ላይ",
+      "away": "ርቆ",
+      "offline": "ከመስመር ውጪ",
+      "doNotDisturb": "አትረብሹ"
+    }
+  },
+  "documents": {
+    "documents": {
+      "title": "ሰነዶች",
+      "upload": "ሰነድ ጫን",
+      "uploadButton": "ጫን",
+      "uploadSuccess": "ሰነድ በተሳካ ሁኔታ ተጭኗል",
+      "detail": "የሰነድ ዝርዝር",
+      "updateSuccess": "የሰነድ መረጃ በተሳካ ሁኔታ ተዘምኗል"
+    },
+    "folders": {
+      "title": "አቃፊዎች",
+      "create": "አዲስ አቃፊ",
+      "createButton": "አዲስ አቃፊ",
+      "createSuccess": "አቃፊ በተሳካ ሁኔታ ተፈጥሯል",
+      "updateSuccess": "አቃፊ በተሳካ ሁኔታ ተዘምኗል",
+      "moveSuccess": "አቃፊ በተሳካ ሁኔታ ተዛውሯል",
+      "editButton": "አርትዕ",
+      "moveButton": "አዛውር"
+    },
+    "versions": {
+      "title": "ስሪቶች",
+      "upload": "አዲስ ስሪት ጫን",
+      "uploadButton": "ስሪት ጫን",
+      "uploadSuccess": "አዲስ ስሪት በተሳካ ሁኔታ ተጭኗል"
+    },
+    "comments": {
+      "title": "አስተያየቶች",
+      "add": "አስተያየት ጨምር",
+      "addButton": "አስተያየት ጨምር",
+      "addSuccess": "አስተያየት በተሳካ ሁኔታ ተጨምሯል",
+      "replyButton": "ምላሽ"
+    },
+    "fields": {
+      "fileName": "የፋይል ስም",
+      "displayName": "የማሳያ ስም",
+      "description": "ገለጻ",
+      "status": "ሁኔታ",
+      "category": "ምድብ",
+      "contentType": "የይዘት ዓይነት",
+      "fileSizeBytes": "የፋይል መጠን",
+      "currentVersion": "ስሪት",
+      "tags": "መለያዎች",
+      "linkedEntityId": "የተገናኘ አካል መታወቂያ",
+      "linkedEntityType": "የተገናኘ አካል ዓይነት",
+      "storageUrl": "የማከማቻ አድራሻ",
+      "changeNotes": "የለውጥ ማስታወሻ",
+      "uploadedByName": "የጫነው",
+      "versionNumber": "የስሪት ቁጥር",
+      "name": "የአቃፊ ስም",
+      "parentFolderId": "ዋና አቃፊ",
+      "projectId": "ፕሮጀክት",
+      "sortOrder": "ቅደም ተከተል",
+      "documentCount": "ሰነዶች",
+      "folderId": "አቃፊ",
+      "search": "ፍለጋ",
+      "content": "አስተያየት",
+      "authorName": "ደራሲ",
+      "parentCommentId": "ምላሽ ለ",
+      "createdAt": "የተፈጠረበት ቀን"
+    },
+    "tabs": {
+      "overview": "አጠቃላይ",
+      "versions": "ስሪቶች",
+      "comments": "አስተያየቶች"
+    },
+    "status": {
+      "draft": "ረቂቅ",
+      "published": "ታትሟል",
+      "archived": "ተመዝግቧል"
+    },
+    "category": {
+      "general": "አጠቃላይ",
+      "policy": "ፖሊሲ",
+      "report": "ሪፖርት",
+      "contract": "ውል",
+      "template": "አብነት",
+      "training": "ስልጠና",
+      "procurement": "ግዢ",
+      "financial": "ፋይናንስ",
+      "other": "ሌላ"
+    }
+  },
+  "feedback": {
+    "feedback": {
+      "title": "ግብረመልስ",
+      "submit": "ግብረመልስ አስገባ",
+      "submitButton": "አስገባ",
+      "submitSuccess": "ግብረመልስ በተሳካ ሁኔታ ቀርቧል",
+      "detail": "የግብረመልስ ዝርዝር"
+    },
+    "categories": {
+      "title": "የግብረመልስ ምድቦች",
+      "create": "አዲስ ምድብ",
+      "createButton": "አዲስ ምድብ",
+      "createSuccess": "ምድብ በተሳካ ሁኔታ ተፈጥሯል",
+      "updateSuccess": "ምድብ በተሳካ ሁኔታ ተዘምኗል",
+      "edit": "ምድብ አርትዕ",
+      "editButton": "አርትዕ"
+    },
+    "detail": {
+      "title": "የግብረመልስ ዝርዝር",
+      "overview": "አጠቃላይ",
+      "submitter": "የአቅራቢ መረጃ",
+      "assignment": "ምደባ እና ኤስኤልኤ",
+      "responses": "ምላሾች"
+    },
+    "dashboard": {
+      "title": "የግብረመልስ ዳሽቦርድ",
+      "totalCount": "ጠቅላላ ግብረመልስ",
+      "resolvedCount": "የተፈቱ",
+      "avgResolutionDays": "አማካይ የመፍቻ ቀናት",
+      "slaBreachedCount": "ኤስኤልኤ የጣሱ",
+      "byCategory": "በምድብ",
+      "byStatus": "በሁኔታ"
+    },
+    "responses": {
+      "title": "ምላሾች",
+      "add": "ምላሽ ጨምር",
+      "addButton": "ምላሽ ጨምር",
+      "addSuccess": "ምላሽ በተሳካ ሁኔታ ተጨምሯል"
+    },
+    "actions": {
+      "acknowledge": "እውቅና ስጥ",
+      "acknowledgeSuccess": "ግብረመልስ እውቅና ተሰጥቷል",
+      "assign": "መድብ",
+      "assignSuccess": "ግብረመልስ ተመድቧል",
+      "escalate": "አሳድግ",
+      "escalateSuccess": "ግብረመልስ ተሳድጓል",
+      "resolve": "ፍታ",
+      "resolveSuccess": "ግብረመልስ ተፈትቷል"
+    },
+    "fields": {
+      "referenceNumber": "ማጣቀሻ",
+      "type": "ዓይነት",
+      "status": "ሁኔታ",
+      "priority": "ቅድሚያ",
+      "channel": "ቻናል",
+      "description": "ገለጻ",
+      "submitterName": "የአቅራቢ ስም",
+      "submitterContact": "የአቅራቢ አድራሻ",
+      "isAnonymous": "ስም አልባ",
+      "isConfidential": "ሚስጥራዊ",
+      "location": "ቦታ",
+      "projectId": "ፕሮጀክት",
+      "feedbackCategoryId": "ምድብ",
+      "assignedToUserId": "የተመደበለት (መታወቂያ)",
+      "assignedToName": "የተመደበለት",
+      "reason": "ምክንያት",
+      "content": "ምላሽ",
+      "isInternal": "ውስጣዊ ብቻ",
+      "createdAt": "የተፈጠረበት ቀን",
+      "acknowledgedAt": "እውቅና የተሰጠበት",
+      "resolvedAt": "የተፈታበት ቀን",
+      "assignedTo": "የተመደበለት",
+      "category": "ምድብ",
+      "slaResponseDeadline": "የምላሽ የጊዜ ገደብ",
+      "slaResolutionDeadline": "የመፍቻ የጊዜ ገደብ",
+      "slaStatus": "የኤስኤልኤ ሁኔታ",
+      "responseCount": "ምላሾች",
+      "name": "የምድብ ስም",
+      "defaultType": "ነባሪ ዓይነት",
+      "slaResponseDays": "የኤስኤልኤ ምላሽ ቀናት",
+      "slaResolutionDays": "የኤስኤልኤ መፍቻ ቀናት",
+      "requiresEscalation": "ማሳደግ ያስፈልጋል",
+      "sortOrder": "ቅደም ተከተል",
+      "categoryName": "ምድብ",
+      "count": "ቁጥር",
+      "responderName": "ምላሽ ሰጪ"
+    },
+    "tabs": {
+      "overview": "አጠቃላይ",
+      "responses": "ምላሾች"
+    },
+    "feedbackType": {
+      "complaint": "ቅሬታ",
+      "suggestion": "ሀሳብ",
+      "positive": "አዎንታዊ",
+      "safeguarding": "ጥበቃ",
+      "query": "ጥያቄ"
+    },
+    "feedbackStatus": {
+      "new": "አዲስ",
+      "acknowledged": "እውቅና ተሰጥቷል",
+      "underReview": "በግምገማ ላይ",
+      "escalated": "ተሳድጓል",
+      "resolved": "ተፈትቷል",
+      "closed": "ተዘግቷል"
+    },
+    "feedbackPriority": {
+      "low": "ዝቅተኛ",
+      "normal": "መደበኛ",
+      "high": "ከፍተኛ",
+      "critical": "አስቸኳይ"
+    },
+    "feedbackChannel": {
+      "web": "ድር",
+      "mobile": "ሞባይል",
+      "inPerson": "በአካል",
+      "phone": "ስልክ",
+      "suggestionBox": "የሀሳብ ሳጥን",
+      "other": "ሌላ"
+    }
+  },
+  "validation": {
+    "required": "ይህ መስክ አስፈላጊ ነው",
+    "email": "እባክዎን ትክክለኛ የኢሜይል አድራሻ ያስገቡ",
+    "minLength": "ቢያንስ {{min}} ቁምፊዎች ምሆን አለበት",
+    "maxLength": "ከ {{max}} ቁምፊዎች መብለጥ የለበትም",
+    "passwordMismatch": "የሚስጥር ቁልፎች አይመሳሰሉም",
+    "invalidFormat": "ልክ ያልሆነ ቅርጽ",
+    "emailRequired": "ኢሜይል አስፈላጊ ነው",
+    "emailInvalid": "እባክዎን ትክክለኛ የኢሜይል አድራሻ ያስገቡ",
+    "passwordRequired": "የሚስጥር ቁልፍ አስፈላጊ ነው",
+    "confirmPasswordRequired": "እባክዎን የሚስጥር ቁልፍዎን ያረጋግጡ"
+  },
+  "actions": {
+    "confirmDelete": "ይህንን ምንዳ መሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?",
+    "deleteSuccess": "በተሳካ ሁኔታ ተሰርዟል",
+    "saveSuccess": "ለውጦች በተሳካ ሁኔታ ተቀምጠዋል",
+    "createSuccess": "በተሳካ ሁኔታ ተፈጥሯል"
+  },
+  "dashboards": {
+    "title": "ዳሽቦርዶች",
+    "list": "ሁሉም ዳሽቦርዶች",
+    "create": "ዳሽቦርድ ፍጠር",
+    "detail": "የዳሽቦርድ ዝርዝር",
+    "filters": "የተቀመጡ ማጣሪያዎች",
+    "createFilter": "ማጣሪያ ፍጠር",
+    "fields": {
+      "name": "ስም",
+      "dashboardType": "የዳሽቦርድ ዓይነት",
+      "description": "መግለጫ",
+      "isShared": "የተጋራ",
+      "isDefault": "ነባሪ",
+      "layoutJson": "የቅርጸት JSON",
+      "widgetCount": "ዊጀቶች",
+      "createdAt": "የተፈጠረበት",
+      "widgetType": "የዊጀት ዓይነት",
+      "title": "ርዕስ",
+      "dataSourceModule": "የውሂብ ምንጭ ሞጁል",
+      "queryDefinition": "የጥያቄ ትርጉም",
+      "displayConfig": "የማሳያ ውቅር",
+      "position": "ቦታ",
+      "width": "ስፋት",
+      "height": "ቁመት",
+      "refreshIntervalMinutes": "የዳግም ማደስ ጊዜ (ደቂቃ)",
+      "module": "ሞጁል",
+      "filterJson": "የማጣሪያ JSON"
+    },
+    "widgets": {
+      "title": "ዊጀቶች",
+      "add": "ዊጀት ጨምር",
+      "edit": "ዊጀት አርትዕ",
+      "remove": "ዊጀት አስወግድ"
+    },
+    "types": {
+      "Executive": "ሥራ አስፈጻሚ",
+      "ProjectPortfolio": "የፕሮጀክት ፖርትፎሊዮ",
+      "Finance": "ፋይናንስ",
+      "MEAL": "ኤም.ኢ.ኤ.ኤል",
+      "Participant": "ተሳታፊ",
+      "Risk": "ስጋት",
+      "Procurement": "ግዥ",
+      "Performance": "አፈጻጸም",
+      "Custom": "ብጁ"
+    },
+    "widgetTypes": {
+      "Chart": "ሰንጠረዥ",
+      "Table": "ሠንጠረዥ",
+      "KPI": "ኬ.ፒ.አይ",
+      "Map": "ካርታ",
+      "Timeline": "የጊዜ መስመር",
+      "Gauge": "ጌጅ",
+      "PieChart": "ፓይ ቻርት",
+      "BarChart": "የአሞሌ ቻርት",
+      "LineChart": "የመስመር ቻርት",
+      "HeatMap": "ሙቀት ካርታ"
+    },
+    "messages": {
+      "created": "ዳሽቦርድ በተሳካ ሁኔታ ተፈጥሯል",
+      "updated": "ዳሽቦርድ በተሳካ ሁኔታ ተዘምኗል",
+      "deleted": "ዳሽቦርድ በተሳካ ሁኔታ ተሰርዟል",
+      "widgetAdded": "ዊጀት በተሳካ ሁኔታ ተጨምሯል",
+      "widgetUpdated": "ዊጀት በተሳካ ሁኔታ ተዘምኗል",
+      "widgetRemoved": "ዊጀት በተሳካ ሁኔታ ተወግዷል",
+      "filterCreated": "ማጣሪያ በተሳካ ሁኔታ ተቀምጧል",
+      "filterDeleted": "ማጣሪያ በተሳካ ሁኔታ ተሰርዟል"
+    }
+  },
+  "settings": {
+    "title": "ቅንብሮች",
+    "system": {
+      "title": "የስርዓት ቅንብሮች",
+      "edit": "ቅንብር አርትዕ"
+    },
+    "org": {
+      "title": "የድርጅት ቅንብሮች",
+      "upsert": "ቅንብር ጨምር/አዘምን"
+    },
+    "approvals": {
+      "title": "የማጽደቅ ውቅረቶች",
+      "create": "የማጽደቅ ውቅር ፍጠር",
+      "edit": "የማጽደቅ ውቅር አርትዕ"
+    },
+    "alerts": {
+      "title": "የማንቂያ ገደቦች",
+      "create": "የማንቂያ ገደብ ፍጠር",
+      "edit": "የማንቂያ ገደብ አርትዕ"
+    },
+    "fields": {
+      "settingKey": "የቅንብር ቁልፍ",
+      "settingValue": "የቅንብር ዋጋ",
+      "dataType": "የውሂብ ዓይነት",
+      "category": "ምድብ",
+      "description": "መግለጫ",
+      "isReadOnly": "ለንባብ ብቻ",
+      "module": "ሞጁል",
+      "entityType": "የአካል ዓይነት",
+      "requiredApprovalLevels": "ያስፈልጋሉ የማጽደቅ ደረጃዎች",
+      "autoApproveBelow": "ከዚህ በታች ራስ-ሰር ያጽድቁ",
+      "isActive": "ንቁ",
+      "metricName": "የመለኪያ ስም",
+      "thresholdValue": "የገደብ ዋጋ",
+      "operator": "ኦፕሬተር",
+      "alertSeverity": "ክብደት"
+    },
+    "dataTypes": {
+      "String": "ሕብረቁምፊ",
+      "Integer": "ኢንቲጀር",
+      "Boolean": "ቡሊያን",
+      "Decimal": "ዴሲማል",
+      "Json": "JSON",
+      "DateTime": "ቀን ሰዓት"
+    },
+    "operators": {
+      "GreaterThan": "ከሚበልጥ (>)",
+      "LessThan": "ከሚያንስ (<)",
+      "GreaterThanOrEqual": "ከሚበልጥ ወይም እኩል (>=)",
+      "LessThanOrEqual": "ከሚያንስ ወይም እኩል (<=)",
+      "Equal": "እኩል (=)"
+    },
+    "severities": {
+      "Info": "መረጃ",
+      "Warning": "ማስጠንቀቂያ",
+      "Critical": "ወሳኝ"
+    },
+    "messages": {
+      "settingUpdated": "ቅንብር በተሳካ ሁኔታ ተዘምኗል",
+      "orgSettingUpserted": "የድርጅት ቅንብር በተሳካ ሁኔታ ተቀምጧል",
+      "approvalCreated": "የማጽደቅ ውቅር በተሳካ ሁኔታ ተፈጥሯል",
+      "approvalUpdated": "የማጽደቅ ውቅር በተሳካ ሁኔታ ተዘምኗል",
+      "alertCreated": "የማንቂያ ገደብ በተሳካ ሁኔታ ተፈጥሯል",
+      "alertUpdated": "የማንቂያ ገደብ በተሳካ ሁኔታ ተዘምኗል",
+      "alertDeleted": "የማንቂያ ገደብ በተሳካ ሁኔታ ተሰርዟል"
+    }
+  },
+  "knowledge": {
+    "title": "የዕውቀት መሰረት",
+    "categories": {
+      "title": "ምድቦች",
+      "create": "ምድብ ፍጠር",
+      "edit": "ምድብ አርትዕ"
+    },
+    "articles": {
+      "title": "ጽሑፎች",
+      "create": "ጽሑፍ ፍጠር",
+      "detail": "የጽሑፍ ዝርዝር",
+      "search": "ጽሑፎችን ፈልግ",
+      "publish": "አትም",
+      "archive": "ማህደር",
+      "featured": "ተለይቶ የቀረበ"
+    },
+    "comments": {
+      "title": "አስተያየቶች",
+      "add": "አስተያየት ጨምር",
+      "reply": "ምላሽ"
+    },
+    "fields": {
+      "name": "ስም",
+      "description": "መግለጫ",
+      "parentCategoryId": "ዋና ምድብ",
+      "sortOrder": "የደረጃ ቅደም ተከተል",
+      "isActive": "ንቁ",
+      "childCount": "ንዑስ ምድቦች",
+      "categoryId": "ምድብ",
+      "categoryName": "ምድብ",
+      "title": "ርዕስ",
+      "content": "ይዘት",
+      "summary": "ማጠቃለያ",
+      "authorId": "ደራሲ",
+      "tags": "መለያዎች",
+      "linkedProjectId": "የተገናኘ ፕሮጀክት",
+      "linkedEvaluationId": "የተገናኘ ግምገማ",
+      "articleType": "የጽሑፍ ዓይነት",
+      "status": "ሁኔታ",
+      "isFeatured": "ተለይቶ የቀረበ",
+      "viewCount": "ቅኝቶች",
+      "createdAt": "የተፈጠረበት"
+    },
+    "articleTypes": {
+      "LessonLearned": "የተማሩ ትምህርቶች",
+      "BestPractice": "ምርጥ ልምድ",
+      "EvaluationFinding": "የግምገማ ግኝት",
+      "CaseStudy": "የጉዳይ ጥናት",
+      "Guideline": "መመሪያ",
+      "Template": "ቅንብር"
+    },
+    "statuses": {
+      "Draft": "ረቂቅ",
+      "Published": "የታተመ",
+      "Archived": "የተመዘገበ"
+    },
+    "messages": {
+      "categoryCreated": "ምድብ በተሳካ ሁኔታ ተፈጥሯል",
+      "categoryUpdated": "ምድብ በተሳካ ሁኔታ ተዘምኗል",
+      "categoryDeleted": "ምድብ በተሳካ ሁኔታ ተሰርዟል",
+      "articleCreated": "ጽሑፍ በተሳካ ሁኔታ ተፈጥሯል",
+      "articleUpdated": "ጽሑፍ በተሳካ ሁኔታ ተዘምኗል",
+      "articlePublished": "ጽሑፍ በተሳካ ሁኔታ ታትሟል",
+      "articleArchived": "ጽሑፍ ወደ ማህደር ተወስዷል",
+      "articleDeleted": "ጽሑፍ በተሳካ ሁኔታ ተሰርዟል",
+      "commentAdded": "አስተያየት በተሳካ ሁኔታ ተጨምሯል"
+    }
+  },
+  "partnerships": {
+    "title": "አጋርነቶች",
+    "subGrantees": {
+      "title": "ንዑስ ተቀባዮች",
+      "register": "ንዑስ ተቀባይ ይመዝገቡ",
+      "detail": "የንዑስ ተቀባይ ዝርዝር",
+      "activate": "አንቃ",
+      "suspend": "አቁም",
+      "riskAssessment": "የስጋት ግምገማ"
+    },
+    "disbursements": {
+      "title": "ክፍያዎች",
+      "create": "ክፍያ ፍጠር",
+      "approve": "አጽድቅ",
+      "disburse": "ክፈል",
+      "reject": "ውድቅ አድርግ"
+    },
+    "reports": {
+      "title": "የአጋር ሪፖርቶች",
+      "create": "ሪፖርት ፍጠር",
+      "detail": "የሪፖርት ዝርዝር",
+      "submit": "ሪፖርት አስገባ",
+      "review": "ሪፖርት ገምግም"
+    },
+    "compliance": {
+      "title": "የተገዢነት ምርመራዎች",
+      "create": "ምርመራ ፍጠር",
+      "complete": "ምርመራ አጠናቅ",
+      "followUp": "ክትትል ጠይቅ"
+    },
+    "dashboard": {
+      "title": "የአጋርነት ዳሽቦርድ",
+      "totalPartners": "ጠቅላላ አጋሮች",
+      "activePartners": "ንቁ አጋሮች",
+      "totalDisbursed": "ጠቅላላ የተከፈለ",
+      "pendingReports": "በመጠባበቅ ላይ ያሉ ሪፖርቶች",
+      "overdueCompliance": "የተገዢነት ዘግይቷል",
+      "riskDistribution": "የስጋት ስርጭት"
+    },
+    "fields": {
+      "name": "ስም",
+      "registrationNumber": "የምዝገባ ቁጥር",
+      "contactPerson": "የግንኙነት ሰው",
+      "contactEmail": "ኢሜይል",
+      "contactPhone": "ስልክ",
+      "address": "አድራሻ",
+      "country": "ሀገር",
+      "partnerType": "የአጋር ዓይነት",
+      "status": "ሁኔታ",
+      "riskRating": "የስጋት ደረጃ",
+      "capacityScore": "የአቅም ውጤት",
+      "onboardingDate": "የመቀላቀል ቀን",
+      "notes": "ማስታወሻዎች",
+      "amount": "መጠን",
+      "currency": "ምንዛሬ",
+      "disbursementDate": "የክፍያ ቀን",
+      "referenceNumber": "የማጣቀሻ ቁጥር",
+      "purpose": "ዓላማ",
+      "reportType": "የሪፖርት ዓይነት",
+      "reportingPeriodStart": "የዘገባ ወቅት መጀመሪያ",
+      "reportingPeriodEnd": "የዘገባ ወቅት መጨረሻ",
+      "title": "ርዕስ",
+      "narrative": "ትረካ",
+      "financialSummaryJson": "የገንዘብ ማጠቃለያ",
+      "reviewComments": "የግምገማ አስተያየቶች",
+      "complianceType": "የተገዢነት ዓይነት",
+      "checkDate": "የምርመራ ቀን",
+      "assessorId": "ገምጋሚ",
+      "score": "ውጤት",
+      "findings": "ግኝቶች",
+      "recommendations": "ምክሮች",
+      "followUpDate": "የክትትል ቀን",
+      "createdAt": "የተፈጠረበት",
+      "subGranteeId": "ንዑስ ተቀባይ",
+      "grantId": "ግራንት"
+    },
+    "partnerTypes": {
+      "LocalNGO": "የሀገር ውስጥ ኤንጂኦ",
+      "InternationalNGO": "ዓለም አቀፍ ኤንጂኦ",
+      "CommunityOrg": "የማህበረሰብ ድርጅት",
+      "GovernmentBody": "የመንግስት አካል",
+      "AcademicInstitution": "የአካዳሚ ተቋም",
+      "PrivateSector": "የግል ዘርፍ"
+    },
+    "partnerStatuses": {
+      "Prospect": "ዕጩ",
+      "Active": "ንቁ",
+      "Suspended": "የታገደ",
+      "Inactive": "ንቁ ያልሆነ",
+      "Blacklisted": "ጥቁር ዝርዝር"
+    },
+    "riskRatings": {
+      "Low": "ዝቅተኛ",
+      "Medium": "መካከለኛ",
+      "High": "ከፍተኛ",
+      "Critical": "ወሳኝ"
+    },
+    "disbursementStatuses": {
+      "Pending": "በመጠባበቅ",
+      "Approved": "ፀድቋል",
+      "Disbursed": "ተከፍሏል",
+      "Rejected": "ተቀባይነት አላገኘም",
+      "Returned": "ተመልሷል"
+    },
+    "reportStatuses": {
+      "Draft": "ረቂቅ",
+      "Submitted": "ቀርቧል",
+      "UnderReview": "በግምገማ ላይ",
+      "Approved": "ፀድቋል",
+      "Rejected": "ተቀባይነት አላገኘም",
+      "RevisionRequested": "ክለሳ ተጠይቋል"
+    },
+    "complianceTypes": {
+      "FinancialAudit": "የፋይናንስ ኦዲት",
+      "ProgrammaticReview": "የፕሮግራም ግምገማ",
+      "SafeguardingCheck": "የጥበቃ ምርመራ",
+      "EnvironmentalCompliance": "የአካባቢ ተገዢነት",
+      "AntiCorruption": "ፀረ-ሙስና",
+      "CapacityAssessment": "የአቅም ግምገማ"
+    },
+    "complianceStatuses": {
+      "Scheduled": "የታቀደ",
+      "InProgress": "በሂደት ላይ",
+      "Completed": "ተጠናቅቋል",
+      "FollowUpRequired": "ክትትል ያስፈልጋል"
+    },
+    "messages": {
+      "registered": "ንዑስ ተቀባይ በተሳካ ሁኔታ ተመዝግቧል",
+      "updated": "ንዑስ ተቀባይ በተሳካ ሁኔታ ተዘምኗል",
+      "activated": "ንዑስ ተቀባይ በተሳካ ሁኔታ ነቅቷል",
+      "suspended": "ንዑስ ተቀባይ ታግዷል",
+      "riskAssessed": "የስጋት ግምገማ በተሳካ ሁኔታ ተቀምጧል",
+      "disbursementCreated": "ክፍያ በተሳካ ሁኔታ ተፈጥሯል",
+      "disbursementApproved": "ክፍያ ፀድቋል",
+      "disbursementDisbursed": "ገንዘብ ተከፍሏል",
+      "disbursementRejected": "ክፍያ ተቀባይነት አላገኘም",
+      "reportCreated": "ሪፖርት በተሳካ ሁኔታ ተፈጥሯል",
+      "reportSubmitted": "ሪፖርት ቀርቧል",
+      "reportReviewed": "ሪፖርት ተገምግሟል",
+      "complianceCreated": "የተገዢነት ምርመራ ተፈጥሯል",
+      "complianceCompleted": "የተገዢነት ምርመራ ተጠናቅቋል",
+      "followUpRequested": "ክትትል በተሳካ ሁኔታ ተጠይቋል"
+    }
+  },
+  "reports": {
+    "title": "የስርዓት ሪፖርቶች",
+    "templates": {
+      "title": "የሪፖርት ቅንብሮች",
+      "list": {
+        "title": "የሪፖርት ቅንብሮች",
+        "createButton": "ቅንብር ፍጠር"
+      },
+      "create": {
+        "title": "የሪፖርት ቅንብር ፍጠር"
+      },
+      "detail": {
+        "title": "የቅንብር ዝርዝር",
+        "overviewTab": "አጠቃላይ",
+        "generateButton": "ሪፖርት አመንጭ",
+        "editButton": "አርትዕ",
+        "deleteButton": "ቅንብር ሰርዝ"
+      },
+      "fields": {
+        "name": "ስም",
+        "description": "መግለጫ",
+        "module": "ሞጁል",
+        "reportFormat": "የሪፖርት ቅርጸት",
+        "queryDefinition": "የጥያቄ ትርጉም",
+        "templateContent": "የቅንብር ይዘት",
+        "isSystemTemplate": "የስርዓት ቅንብር",
+        "isActive": "ንቁ",
+        "createdAt": "የተፈጠረበት"
+      }
+    },
+    "schedules": {
+      "title": "የሪፖርት መርሃግብሮች",
+      "list": {
+        "title": "የሪፖርት መርሃግብሮች",
+        "createButton": "መርሃግብር ፍጠር"
+      },
+      "create": {
+        "title": "የሪፖርት መርሃግብር ፍጠር"
+      },
+      "edit": "መርሃግብር አርትዕ",
+      "fields": {
+        "name": "ስም",
+        "template": "የሪፖርት ቅንብር",
+        "cronExpression": "የCron ቀመር",
+        "recipients": "ተቀባዮች",
+        "parameters": "ግቤቶች",
+        "lastRunAt": "የመጨረሻ ማስኬጃ",
+        "nextRunAt": "ቀጣይ ማስኬጃ",
+        "status": "ሁኔታ",
+        "isActive": "ንቁ"
+      }
+    },
+    "generated": {
+      "title": "የተፈጠሩ ሪፖርቶች",
+      "list": {
+        "title": "የተፈጠሩ ሪፖርቶች",
+        "generateButton": "ሪፖርት አመንጭ"
+      },
+      "generate": "ሪፖርት አመንጭ",
+      "share": "ሪፖርት አጋራ",
+      "detail": "የሪፖርት ዝርዝር",
+      "filters": {
+        "template": "በቅንብር አጣራ",
+        "dateFrom": "ከቀን",
+        "dateTo": "እስከ ቀን"
+      },
+      "fields": {
+        "templateName": "የቅንብር ስም",
+        "generatedById": "ያመነጨው",
+        "generatedAt": "የተመነጨበት",
+        "reportFormat": "ቅርጸት",
+        "fileName": "የፋይል ስም",
+        "fileSize": "የፋይል መጠን",
+        "storagePath": "የማከማቻ ቦታ",
+        "expiresAt": "ያልቅበት"
+      }
+    },
+    "formats": {
+      "PDF": "PDF",
+      "Excel": "ኤክሴል",
+      "Word": "ወርድ",
+      "CSV": "CSV"
+    },
+    "scheduleStatuses": {
+      "Active": "ንቁ",
+      "Paused": "ቆሟል",
+      "Failed": "ተስናክሏል",
+      "Completed": "ተጠናቅቋል"
+    },
+    "messages": {
+      "templateCreated": "የሪፖርት ቅንብር በተሳካ ሁኔታ ተፈጥሯል",
+      "templateUpdated": "የሪፖርት ቅንብር በተሳካ ሁኔታ ተዘምኗል",
+      "templateDeleted": "የሪፖርት ቅንብር በተሳካ ሁኔታ ተሰርዟል",
+      "scheduleCreated": "የሪፖርት መርሃግብር በተሳካ ሁኔታ ተፈጥሯል",
+      "scheduleUpdated": "የሪፖርት መርሃግብር በተሳካ ሁኔታ ተዘምኗል",
+      "scheduleDeleted": "የሪፖርት መርሃግብር በተሳካ ሁኔታ ተሰርዟል",
+      "reportGenerated": "ሪፖርት በተሳካ ሁኔታ ተመንጭቷል",
+      "reportShared": "ሪፖርት በተሳካ ሁኔታ ተጋርቷል"
+    }
+  },
+  "importExport": {
+    "title": "ዝውውር",
+    "importTemplates": {
+      "title": "የማስገቢያ ቅንብሮች",
+      "create": "ቅንብር ፍጠር",
+      "edit": "ቅንብር አርትዕ"
+    },
+    "importJobs": {
+      "title": "የማስገቢያ ሥራዎች",
+      "start": "ማስገባት ጀምር",
+      "detail": "የማስገቢያ ዝርዝር",
+      "cancel": "ማስገባት ሰርዝ"
+    },
+    "exportJobs": {
+      "title": "የማውጫ ሥራዎች",
+      "start": "ማውጣት ጀምር"
+    },
+    "dataSync": {
+      "title": "የውሂብ ማመሳሰል",
+      "create": "የማመሳሰል ውቅር ፍጠር",
+      "edit": "የማመሳሰል ውቅር አርትዕ",
+      "trigger": "ማመሳሰል ጀምር"
+    },
+    "fields": {
+      "name": "ስም",
+      "module": "ሞጁል",
+      "entityType": "የአካል ዓይነት",
+      "fileFormat": "የፋይል ቅርጸት",
+      "columnMappings": "የአምድ ጥንድ",
+      "validationRules": "የማረጋገጫ ሕጎች",
+      "isSystemTemplate": "የስርዓት ቅንብር",
+      "isActive": "ንቁ",
+      "createdAt": "የተፈጠረበት",
+      "fileName": "የፋይል ስም",
+      "fileSize": "የፋይል መጠን",
+      "status": "ሁኔታ",
+      "totalRows": "ጠቅላላ ረድፎች",
+      "processedRows": "የተሰሩ ረድፎች",
+      "successRows": "ያለቁ ረድፎች",
+      "errorRows": "ስህተት ረድፎች",
+      "startedAt": "የጀመረበት",
+      "completedAt": "ያለቀበት",
+      "exportFormat": "የውጤት ቅርጸት",
+      "totalRecords": "ጠቅላላ መዛግብት",
+      "filterCriteria": "የማጣሪያ መስፈርት",
+      "sourceType": "የምንጭ ዓይነት",
+      "sourceUrl": "የምንጭ URL",
+      "formId": "የቅጽ መለያ",
+      "targetModule": "የዒላማ ሞጁል",
+      "targetEntityType": "የዒላማ አካል",
+      "mappingConfig": "የጥንድ ውቅር",
+      "syncFrequency": "የማመሳሰል ድግግሞሽ",
+      "lastSyncAt": "የመጨረሻ ማመሳሰል",
+      "fileStoragePath": "የፋይል ማከማቻ"
+    },
+    "importFormats": {
+      "CSV": "CSV",
+      "Excel": "ኤክሴል",
+      "JSON": "JSON",
+      "KoboToolbox": "KoboToolbox"
+    },
+    "importStatuses": {
+      "Pending": "በመጠባበቅ",
+      "Validating": "በማረጋገጥ",
+      "Validated": "ተረጋግጧል",
+      "Processing": "በማስኬድ",
+      "Completed": "ተጠናቅቋል",
+      "CompletedWithErrors": "ከስህተቶች ጋር ተጠናቅቋል",
+      "Failed": "ተስናክሏል",
+      "Cancelled": "ተሰርዟል"
+    },
+    "exportFormats": {
+      "CSV": "CSV",
+      "Excel": "ኤክሴል",
+      "JSON": "JSON",
+      "PDF": "PDF"
+    },
+    "exportStatuses": {
+      "Pending": "በመጠባበቅ",
+      "Processing": "በማስኬድ",
+      "Completed": "ተጠናቅቋል",
+      "Failed": "ተስናክሏል"
+    },
+    "sourceTypes": {
+      "KoboToolbox": "KoboToolbox",
+      "ODK": "ODK",
+      "CommCare": "CommCare",
+      "CustomApi": "ብጁ API"
+    },
+    "messages": {
+      "templateCreated": "የማስገቢያ ቅንብር በተሳካ ሁኔታ ተፈጥሯል",
+      "templateUpdated": "የማስገቢያ ቅንብር በተሳካ ሁኔታ ተዘምኗል",
+      "templateDeleted": "የማስገቢያ ቅንብር በተሳካ ሁኔታ ተሰርዟል",
+      "importStarted": "የማስገቢያ ሥራ በተሳካ ሁኔታ ተጀምሯል",
+      "importCancelled": "የማስገቢያ ሥራ ተሰርዟል",
+      "exportStarted": "የማውጫ ሥራ በተሳካ ሁኔታ ተጀምሯል",
+      "syncCreated": "የማመሳሰል ውቅር በተሳካ ሁኔታ ተፈጥሯል",
+      "syncUpdated": "የማመሳሰል ውቅር በተሳካ ሁኔታ ተዘምኗል",
+      "syncDeleted": "የማመሳሰል ውቅር በተሳካ ሁኔታ ተሰርዟል",
+      "syncTriggered": "ማመሳሰል በተሳካ ሁኔታ ተጀምሯል"
+    }
+  }
+}

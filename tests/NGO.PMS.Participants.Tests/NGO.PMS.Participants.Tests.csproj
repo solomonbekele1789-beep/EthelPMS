@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\Participants\NGO.PMS.Participants.Application\NGO.PMS.Participants.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Participants\NGO.PMS.Participants.Infrastructure\NGO.PMS.Participants.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

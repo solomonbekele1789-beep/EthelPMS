@@ -4,10 +4,9 @@
     <ProjectReference Include="..\NGO.PMS.Feedback.Application\NGO.PMS.Feedback.Application.csproj" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NpgsqlEFCoreVersion)" />
+  </ItemGroup>
 
 </Project>

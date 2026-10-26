@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.PlatformAdmin.Application;
-
-public class Class1
-{
-
-}
+﻿// Placeholder removed — module implemented.

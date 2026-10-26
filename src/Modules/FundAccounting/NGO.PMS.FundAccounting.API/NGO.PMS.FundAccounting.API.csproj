@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\NGO.PMS.FundAccounting.Application\NGO.PMS.FundAccounting.Application.csproj" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NGO.PMS.FundAccounting.Infrastructure\NGO.PMS.FundAccounting.Infrastructure.csproj" />
+    <ProjectReference Include="..\NGO.PMS.FundAccounting.Application\NGO.PMS.FundAccounting.Application.csproj" />
+  </ItemGroup>
 
 </Project>

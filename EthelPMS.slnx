@@ -112,6 +112,42 @@
     <Project Path="src/Modules/Training/NGO.PMS.Training.Domain/NGO.PMS.Training.Domain.csproj" />
     <Project Path="src/Modules/Training/NGO.PMS.Training.Infrastructure/NGO.PMS.Training.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Modules/Dashboards/">
+    <Project Path="src/Modules/Dashboards/NGO.PMS.Dashboards.API/NGO.PMS.Dashboards.API.csproj" />
+    <Project Path="src/Modules/Dashboards/NGO.PMS.Dashboards.Application/NGO.PMS.Dashboards.Application.csproj" />
+    <Project Path="src/Modules/Dashboards/NGO.PMS.Dashboards.Domain/NGO.PMS.Dashboards.Domain.csproj" />
+    <Project Path="src/Modules/Dashboards/NGO.PMS.Dashboards.Infrastructure/NGO.PMS.Dashboards.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Settings/">
+    <Project Path="src/Modules/Settings/NGO.PMS.Settings.API/NGO.PMS.Settings.API.csproj" />
+    <Project Path="src/Modules/Settings/NGO.PMS.Settings.Application/NGO.PMS.Settings.Application.csproj" />
+    <Project Path="src/Modules/Settings/NGO.PMS.Settings.Domain/NGO.PMS.Settings.Domain.csproj" />
+    <Project Path="src/Modules/Settings/NGO.PMS.Settings.Infrastructure/NGO.PMS.Settings.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/KnowledgeMgmt/">
+    <Project Path="src/Modules/KnowledgeMgmt/NGO.PMS.KnowledgeMgmt.API/NGO.PMS.KnowledgeMgmt.API.csproj" />
+    <Project Path="src/Modules/KnowledgeMgmt/NGO.PMS.KnowledgeMgmt.Application/NGO.PMS.KnowledgeMgmt.Application.csproj" />
+    <Project Path="src/Modules/KnowledgeMgmt/NGO.PMS.KnowledgeMgmt.Domain/NGO.PMS.KnowledgeMgmt.Domain.csproj" />
+    <Project Path="src/Modules/KnowledgeMgmt/NGO.PMS.KnowledgeMgmt.Infrastructure/NGO.PMS.KnowledgeMgmt.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Partnerships/">
+    <Project Path="src/Modules/Partnerships/NGO.PMS.Partnerships.API/NGO.PMS.Partnerships.API.csproj" />
+    <Project Path="src/Modules/Partnerships/NGO.PMS.Partnerships.Application/NGO.PMS.Partnerships.Application.csproj" />
+    <Project Path="src/Modules/Partnerships/NGO.PMS.Partnerships.Domain/NGO.PMS.Partnerships.Domain.csproj" />
+    <Project Path="src/Modules/Partnerships/NGO.PMS.Partnerships.Infrastructure/NGO.PMS.Partnerships.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/SystemReports/">
+    <Project Path="src/Modules/SystemReports/NGO.PMS.SystemReports.API/NGO.PMS.SystemReports.API.csproj" />
+    <Project Path="src/Modules/SystemReports/NGO.PMS.SystemReports.Application/NGO.PMS.SystemReports.Application.csproj" />
+    <Project Path="src/Modules/SystemReports/NGO.PMS.SystemReports.Domain/NGO.PMS.SystemReports.Domain.csproj" />
+    <Project Path="src/Modules/SystemReports/NGO.PMS.SystemReports.Infrastructure/NGO.PMS.SystemReports.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/ImportExport/">
+    <Project Path="src/Modules/ImportExport/NGO.PMS.ImportExport.API/NGO.PMS.ImportExport.API.csproj" />
+    <Project Path="src/Modules/ImportExport/NGO.PMS.ImportExport.Application/NGO.PMS.ImportExport.Application.csproj" />
+    <Project Path="src/Modules/ImportExport/NGO.PMS.ImportExport.Domain/NGO.PMS.ImportExport.Domain.csproj" />
+    <Project Path="src/Modules/ImportExport/NGO.PMS.ImportExport.Infrastructure/NGO.PMS.ImportExport.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Shared/">
     <Project Path="src/Shared/NGO.PMS.Contracts/NGO.PMS.Contracts.csproj" />
     <Project Path="src/Shared/NGO.PMS.SharedKernel/NGO.PMS.SharedKernel.csproj" />
@@ -120,5 +156,11 @@
     <Project Path="tests/NGO.PMS.API.Tests/NGO.PMS.API.Tests.csproj" />
     <Project Path="tests/NGO.PMS.Identity.Tests/NGO.PMS.Identity.Tests.csproj" />
     <Project Path="tests/NGO.PMS.PlatformAdmin.Tests/NGO.PMS.PlatformAdmin.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.SystemReports.Tests/NGO.PMS.SystemReports.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.ImportExport.Tests/NGO.PMS.ImportExport.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.KnowledgeMgmt.Tests/NGO.PMS.KnowledgeMgmt.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Partnerships.Tests/NGO.PMS.Partnerships.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Dashboards.Tests/NGO.PMS.Dashboards.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Settings.Tests/NGO.PMS.Settings.Tests.csproj" />
   </Folder>
 </Solution>

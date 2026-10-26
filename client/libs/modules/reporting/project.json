@@ -1,0 +1,12 @@
+{
+  "name": "modules-reporting",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/modules/reporting/src",
+  "prefix": "reporting",
+  "tags": ["scope:reporting", "type:feature"],
+  "targets": {
+    "lint": { "executor": "@nx/eslint:lint" },
+    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+  }
+}

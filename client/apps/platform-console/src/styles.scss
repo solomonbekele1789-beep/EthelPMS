@@ -1,0 +1,88 @@
+@use '@angular/material' as mat;
+
+:root, [data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-sidebar: #0f172a;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --accent-primary: #7c3aed;
+  --accent-success: #16a34a;
+  --accent-warning: #d97706;
+  --accent-danger: #dc2626;
+  --border-color: #e5e7eb;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1f2937;
+  --bg-secondary: #111827;
+  --bg-sidebar: #0f172a;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --accent-primary: #8b5cf6;
+  --accent-success: #22c55e;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
+  --border-color: #374151;
+}
+
+html {
+  height: 100%;
+
+  @include mat.theme((
+    color: (
+      primary: mat.$violet-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  margin: 0;
+  height: 100%;
+}
+
+[data-theme="dark"] body {
+  color-scheme: dark;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--text-secondary);
+  }
+}
+
+// Snackbar overrides
+.snackbar-error {
+  --mdc-snackbar-container-color: var(--accent-danger);
+  --mdc-snackbar-supporting-text-color: #ffffff;
+}
+
+.snackbar-warning {
+  --mdc-snackbar-container-color: var(--accent-warning);
+  --mdc-snackbar-supporting-text-color: #ffffff;
+}
+
+.snackbar-success {
+  --mdc-snackbar-container-color: var(--accent-success);
+  --mdc-snackbar-supporting-text-color: #ffffff;
+}

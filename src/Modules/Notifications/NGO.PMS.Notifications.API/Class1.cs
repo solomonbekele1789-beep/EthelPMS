@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Notifications.API;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. API types are in Controllers/ and NotificationsModuleExtensions.cs.

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Moq" />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\Risk\NGO.PMS.Risk.Domain\NGO.PMS.Risk.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Risk\NGO.PMS.Risk.Application\NGO.PMS.Risk.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Risk\NGO.PMS.Risk.Infrastructure\NGO.PMS.Risk.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

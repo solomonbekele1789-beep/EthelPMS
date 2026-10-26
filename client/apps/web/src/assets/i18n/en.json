@@ -1,0 +1,2753 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "search": "Search...",
+    "loading": "Loading...",
+    "noData": "No data found",
+    "create": "Create",
+    "edit": "Edit",
+    "back": "Back",
+    "actions": "Actions",
+    "yes": "Yes",
+    "no": "No",
+    "submit": "Submit",
+    "close": "Close",
+    "export": "Export",
+    "import": "Import",
+    "filter": "Filter",
+    "reset": "Reset",
+    "refresh": "Refresh",
+    "view": "View",
+    "download": "Download",
+    "upload": "Upload",
+    "select": "Select",
+    "selectAll": "Select All",
+    "required": "Required",
+    "optional": "Optional",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "all": "All",
+    "add": "Add",
+    "created": "Created",
+    "update": "Update",
+    "none": "None"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to EthelPMS",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Sign In",
+      "forgotPassword": "Forgot your password?",
+      "rememberMe": "Remember me",
+      "togglePassword": "Toggle password visibility"
+    },
+    "forgotPassword": {
+      "title": "Reset Password",
+      "email": "Email address",
+      "submit": "Send Reset Link",
+      "backToLogin": "Back to login",
+      "successMessage": "If an account exists with that email, a reset link has been sent.",
+      "description": "Enter your email address and we'll send you a link to reset your password."
+    },
+    "resetPassword": {
+      "title": "Set New Password",
+      "password": "New Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Reset Password",
+      "successMessage": "Your password has been reset successfully.",
+      "togglePassword": "Toggle password visibility",
+      "toggleConfirm": "Toggle password visibility",
+      "backToLogin": "Back to login",
+      "errorGeneric": "Failed to reset password. Please try again."
+    },
+    "setupPassword": {
+      "title": "Set Up Your Password",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Set Password",
+      "successMessage": "Your password has been set. You can now sign in.",
+      "description": "Create a password for your account.",
+      "togglePassword": "Toggle password visibility",
+      "toggleConfirm": "Toggle password visibility",
+      "backToLogin": "Back to login",
+      "errorGeneric": "Failed to set password. Please try again."
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "roles": "Roles",
+    "offices": "Offices",
+    "locations": "Locations",
+    "projects": "Projects",
+    "planning": "Planning",
+    "reporting": "Reporting",
+    "meal": "MEAL",
+    "participants": "Participants",
+    "procurement": "Procurement",
+    "finance": "Finance",
+    "assets": "Assets",
+    "training": "Training",
+    "tasks": "Tasks",
+    "risk": "Risk Register",
+    "donors": "Donors",
+    "chat": "Chat",
+    "notifications": "Notifications",
+    "documents": "Documents",
+    "feedback": "Feedback",
+    "settings": "Settings",
+    "knowledge": "Knowledge Base",
+    "partnerships": "Partnerships",
+    "reports": "Reports",
+    "importExport": "Import/Export",
+    "dashboards": "Dashboards",
+    "organizationSettings": "Organization Settings"
+  },
+  "dashboard": {
+    "welcome": "Welcome, {{name}}",
+    "title": "Dashboard"
+  },
+  "errors": {
+    "unauthorized": "Access Denied",
+    "unauthorizedMessage": "You don't have permission to view this page.",
+    "moduleNotAvailable": "Module Not Available",
+    "moduleNotAvailableMessage": "This module is not included in your subscription.",
+    "notFound": "Page Not Found",
+    "notFoundMessage": "The page you are looking for does not exist.",
+    "serverError": "Server Error",
+    "serverErrorMessage": "Something went wrong. Please try again later.",
+    "networkError": "Network Error",
+    "networkErrorMessage": "Unable to connect to the server. Please check your connection."
+  },
+  "users": {
+    "list": {
+      "title": "User Management",
+      "createButton": "New User"
+    },
+    "create": {
+      "title": "Create User",
+      "invitationNote": "An invitation email will be sent to the user to set up their password."
+    },
+    "detail": {
+      "title": "User Details",
+      "tabProfile": "Profile",
+      "tabRoles": "Roles",
+      "tabActivity": "Activity",
+      "assignedRoles": "Assigned Roles",
+      "addRole": "Add Role",
+      "assign": "Assign",
+      "activityComingSoon": "Activity log coming soon"
+    },
+    "actions": {
+      "deactivate": "Deactivate",
+      "activate": "Activate"
+    },
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "role": "Role",
+      "office": "Office",
+      "roles": "Roles",
+      "status": "Status",
+      "createdAt": "Created At",
+      "lastLogin": "Last Login"
+    }
+  },
+  "roles": {
+    "list": {
+      "title": "Role Management",
+      "createButton": "New Role"
+    },
+    "detail": {
+      "title": "Role Details",
+      "basicInfo": "Basic Information"
+    },
+    "fields": {
+      "name": "Role Name",
+      "description": "Description",
+      "permissions": "Permissions",
+      "userCount": "Users"
+    }
+  },
+  "offices": {
+    "list": {
+      "title": "Office Management",
+      "createButton": "New Office"
+    },
+    "detail": {
+      "locationComingSoon": "Location selection coming soon"
+    },
+    "fields": {
+      "name": "Office Name",
+      "code": "Office Code",
+      "type": "Office Type",
+      "location": "Location",
+      "parentOffice": "Parent Office"
+    }
+  },
+  "locations": {
+    "list": {
+      "title": "Location Management",
+      "createButton": "New Location"
+    },
+    "fields": {
+      "name": "Location Name",
+      "code": "Location Code",
+      "type": "Location Type",
+      "parentLocation": "Parent Location"
+    }
+  },
+  "organization": {
+    "settings": {
+      "title": "Organization Settings",
+      "general": "General",
+      "branding": "Branding",
+      "modules": "Modules",
+      "nameLabel": "Organization Name",
+      "timezoneLabel": "Timezone",
+      "calendarLabel": "Calendar System",
+      "logoLabel": "Logo",
+      "users": "Users",
+      "offices": "Offices"
+    }
+  },
+  "projects": {
+    "list": {
+      "title": "Projects",
+      "createButton": "New Project",
+      "noProjects": "No projects found",
+      "filterByStatus": "Filter by status"
+    },
+    "create": {
+      "title": "Create Project",
+      "basicInfo": "Basic Information",
+      "budgetInfo": "Budget & Funding",
+      "success": "Project created successfully"
+    },
+    "detail": {
+      "title": "Project Details",
+      "overview": "Overview",
+      "logframe": "Logframe",
+      "team": "Team",
+      "interventionAreas": "Intervention Areas",
+      "generalInfo": "General Information",
+      "beneficiaries": "Beneficiaries",
+      "narrative": "Narrative",
+      "directMale": "Direct Male",
+      "directFemale": "Direct Female",
+      "indirectMale": "Indirect Male",
+      "indirectFemale": "Indirect Female",
+      "pwd": "Persons with Disabilities",
+      "totalDirect": "Total Direct",
+      "totalIndirect": "Total Indirect"
+    },
+    "fields": {
+      "code": "Project Code",
+      "name": "Project Name",
+      "description": "Description",
+      "status": "Status",
+      "operationalStatus": "Operational Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "budget": "Total Budget",
+      "currency": "Currency",
+      "donor": "Donor",
+      "sector": "Sector",
+      "programPillar": "Program Pillar",
+      "office": "Office",
+      "projectManager": "Project Manager",
+      "scope": "Scope",
+      "assumptions": "Assumptions",
+      "risks": "Risks",
+      "meansOfVerification": "Means of Verification",
+      "beneficiaries": "Beneficiaries",
+      "createdAt": "Created At"
+    },
+    "status": {
+      "draft": "Draft",
+      "submitted": "Submitted",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "amendment": "Amendment"
+    },
+    "operationalStatus": {
+      "notStarted": "Not Started",
+      "inProgress": "In Progress",
+      "suspended": "Suspended",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "actions": {
+      "submit": "Submit for Approval",
+      "approve": "Approve",
+      "reject": "Reject",
+      "addTeamMember": "Add Team Member",
+      "removeTeamMember": "Remove",
+      "submitSuccess": "Project submitted successfully",
+      "approveSuccess": "Project approved successfully",
+      "rejectSuccess": "Project rejected successfully",
+      "updateSuccess": "Project updated successfully"
+    },
+    "logframe": {
+      "title": "Logical Framework",
+      "outcomes": "Outcomes",
+      "outputs": "Outputs",
+      "activities": "Activities",
+      "indicators": "Indicators",
+      "baseline": "Baseline",
+      "target": "Target",
+      "noLogframe": "No logframe data available. Add outcomes to build the results framework."
+    },
+    "interventionAreas": {
+      "title": "Intervention Areas",
+      "createButton": "New Intervention Area",
+      "allocate": "Allocate to Project",
+      "budgetAllocated": "Budget Allocated",
+      "budgetPercentage": "Budget %",
+      "noAreas": "No intervention areas defined"
+    },
+    "team": {
+      "title": "Team Members",
+      "addMember": "Add Member",
+      "role": "Role",
+      "noMembers": "No team members assigned"
+    }
+  },
+  "planning": {
+    "list": {
+      "title": "Plans",
+      "createButton": "Create Plan",
+      "searchPlaceholder": "Search plans...",
+      "viewHierarchy": "View Hierarchy",
+      "project": "Project"
+    },
+    "create": {
+      "title": "Create Plan",
+      "successMessage": "Plan created successfully"
+    },
+    "detail": {
+      "title": "Plan Details",
+      "overview": "Overview",
+      "activities": "Activities",
+      "indicators": "Indicator Allocations",
+      "addActivity": "Add Activity"
+    },
+    "hierarchy": {
+      "title": "Plan Hierarchy",
+      "noData": "No plan hierarchy found for this project."
+    },
+    "fields": {
+      "level": "Level",
+      "title": "Title",
+      "description": "Description",
+      "projectId": "Project",
+      "parentId": "Parent Plan",
+      "fiscalYear": "Fiscal Year",
+      "quarter": "Quarter",
+      "month": "Month",
+      "weekNumber": "Week",
+      "dayDate": "Day",
+      "plannedStartDate": "Planned Start",
+      "plannedEndDate": "Planned End",
+      "actualStartDate": "Actual Start",
+      "actualEndDate": "Actual End",
+      "plannedBudget": "Planned Budget",
+      "actualBudget": "Actual Budget",
+      "beneficiariesMale": "Male Beneficiaries",
+      "beneficiariesFemale": "Female Beneficiaries",
+      "totalBeneficiaries": "Total Beneficiaries",
+      "beneficiaries": "Beneficiaries",
+      "status": "Status",
+      "approvalStatus": "Approval Status",
+      "progressPercentage": "Progress",
+      "progress": "Progress"
+    },
+    "levels": {
+      "Annual": "Annual",
+      "Quarterly": "Quarterly",
+      "Monthly": "Monthly",
+      "Weekly": "Weekly",
+      "Daily": "Daily"
+    },
+    "status": {
+      "NotStarted": "Not Started",
+      "InProgress": "In Progress",
+      "Completed": "Completed",
+      "Delayed": "Delayed",
+      "Pending": "Pending",
+      "Cancelled": "Cancelled"
+    },
+    "approvalStatus": {
+      "Draft": "Draft",
+      "Submitted": "Submitted",
+      "Approved": "Approved",
+      "Rejected": "Rejected"
+    },
+    "actions": {
+      "submit": "Submit for Approval",
+      "approve": "Approve",
+      "reject": "Reject"
+    },
+    "dip": {
+      "title": "Detailed Implementation Plan",
+      "addItem": "Add DIP Item",
+      "addMilestone": "Add Milestone",
+      "milestones": "Milestones",
+      "fields": {
+        "title": "Title",
+        "description": "Description",
+        "plannedStartDate": "Start Date",
+        "plannedEndDate": "End Date",
+        "budgetAllocated": "Budget",
+        "responsibleUser": "Responsible",
+        "sortOrder": "Sort Order",
+        "status": "Status"
+      },
+      "milestone": {
+        "title": "Title",
+        "dueDate": "Due Date",
+        "completed": "Completed"
+      }
+    },
+    "config": {
+      "title": "Planning Configuration",
+      "planLevels": "Plan Levels",
+      "generalSettings": "General Settings",
+      "enableAnnual": "Enable Annual Planning",
+      "enableQuarterly": "Enable Quarterly Planning",
+      "enableMonthly": "Enable Monthly Planning",
+      "enableWeekly": "Enable Weekly Planning",
+      "enableDaily": "Enable Daily Planning",
+      "fiscalYearStartMonth": "Fiscal Year Start Month",
+      "defaultApprovalRequired": "Require Approval by Default",
+      "saved": "Planning configuration saved"
+    }
+  },
+  "reporting": {
+    "list": {
+      "title": "Reports",
+      "templates": "Report Templates",
+      "financialSummary": "Financial Summary"
+    },
+    "create": {
+      "title": "Create Report"
+    },
+    "detail": {
+      "title": "Report Details",
+      "overview": "Overview",
+      "sections": "Sections",
+      "comments": "Comments",
+      "approvalHistory": "Approval History",
+      "narrative": "Narrative",
+      "incident": "Incident Details",
+      "budget": "Budget & Financials"
+    },
+    "fields": {
+      "title": "Title",
+      "reportType": "Report Type",
+      "status": "Status",
+      "period": "Period",
+      "periodStart": "Period Start",
+      "periodEnd": "Period End",
+      "fiscalYear": "Fiscal Year",
+      "quarter": "Quarter",
+      "month": "Month",
+      "weekNumber": "Week Number",
+      "plannedBudget": "Planned Budget",
+      "actualSpent": "Actual Spent",
+      "variance": "Variance",
+      "utilizationRate": "Budget Utilization Rate",
+      "cumulativeYtd": "Cumulative YTD Spent",
+      "burnRate": "Burn Rate",
+      "deadline": "Submission Deadline",
+      "executiveSummary": "Executive Summary",
+      "challenges": "Challenges",
+      "lessonsLearned": "Lessons Learned",
+      "recommendations": "Recommendations",
+      "template": "Report Template",
+      "projectId": "Project",
+      "approvalLevel": "Approval Level",
+      "currentLevel": "Current Approval Level",
+      "requiredLevels": "Required Approval Levels",
+      "incidentDate": "Incident Date",
+      "incidentLocation": "Incident Location",
+      "incidentType": "Incident Type",
+      "peopleInvolved": "People Involved",
+      "injuries": "Injuries Description",
+      "impact": "Impact Description"
+    },
+    "reportType": {
+      "Activity": "Activity Report",
+      "Weekly": "Weekly Report",
+      "Monthly": "Monthly Report",
+      "Quarterly": "Quarterly Report",
+      "BiAnnual": "Bi-Annual Report",
+      "Annual": "Annual Report",
+      "Incident": "Incident Report"
+    },
+    "status": {
+      "Draft": "Draft",
+      "Submitted": "Submitted",
+      "UnderReview": "Under Review",
+      "Approved": "Approved",
+      "Rejected": "Rejected"
+    },
+    "sectionType": {
+      "Narrative": "Narrative",
+      "Financial": "Financial",
+      "Indicator": "Indicator",
+      "Beneficiary": "Beneficiary",
+      "Risk": "Risk",
+      "Challenge": "Challenge",
+      "Custom": "Custom"
+    },
+    "actions": {
+      "submit": "Submit Report",
+      "approve": "Approve Report",
+      "reject": "Reject Report"
+    },
+    "templates": {
+      "title": "Report Templates",
+      "create": "Create Template",
+      "name": "Template Name",
+      "description": "Description",
+      "approvalLevels": "Required Approval Levels",
+      "deadlineDays": "Submission Deadline (Days)",
+      "active": "Active",
+      "sections": "Template Sections",
+      "addSection": "Add Section",
+      "sectionType": "Section Type",
+      "sortOrder": "Sort Order",
+      "required": "Required",
+      "instructions": "Instructions"
+    },
+    "financialSummary": {
+      "title": "Financial Summary",
+      "totalPlanned": "Total Planned Budget",
+      "totalSpent": "Total Actual Spent",
+      "variance": "Variance",
+      "utilizationRate": "Budget Utilization Rate",
+      "ytdSpent": "Cumulative YTD Spent",
+      "burnRate": "Burn Rate",
+      "reportCount": "Report Count",
+      "load": "Load Summary"
+    },
+    "comments": {
+      "add": "Add Comment",
+      "reply": "Reply",
+      "placeholder": "Write a comment..."
+    }
+  },
+  "meal": {
+    "plans": {
+      "title": "MEAL Plans",
+      "create": "Create MEAL Plan",
+      "overall": "Overall Completeness",
+      "sections": "Plan Sections",
+      "section1": "Results & Indicators",
+      "section2": "Data Quality",
+      "section3": "Indicator Progress Plans",
+      "section4": "Learning Plan",
+      "section5": "M&EL Activities",
+      "section6": "M&EL Budget",
+      "section7": "Reporting Plan",
+      "section8": "Communication Plan",
+      "completeness": "Completeness",
+      "overview": "Overview"
+    },
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "projectId": "Project",
+      "status": "Status",
+      "overallCompleteness": "Overall Completeness",
+      "completeness": "Completeness"
+    },
+    "planStatus": {
+      "Draft": "Draft",
+      "Submitted": "Submitted",
+      "Approved": "Approved",
+      "Rejected": "Rejected"
+    },
+    "actions": {
+      "submit": "Submit Plan",
+      "approve": "Approve Plan",
+      "reject": "Reject Plan"
+    },
+    "indicators": {
+      "title": "Indicators",
+      "add": "Add Indicator",
+      "name": "Indicator Name",
+      "level": "Level",
+      "baseline": "Baseline Value",
+      "target": "Target Value",
+      "frequency": "Collection Frequency"
+    },
+    "measurements": {
+      "title": "Measurements",
+      "record": "Record Measurement",
+      "period": "Period",
+      "value": "Value",
+      "date": "Measurement Date",
+      "male": "Male",
+      "female": "Female"
+    },
+    "evaluations": {
+      "title": "Evaluations",
+      "create": "Create Evaluation",
+      "type": "Evaluation Type",
+      "status": "Status",
+      "dacCriteria": "DAC Criteria",
+      "dates": "Dates",
+      "budget": "Budget",
+      "methodology": "Methodology",
+      "scope": "Scope",
+      "keyQuestions": "Key Questions",
+      "complete": "Complete Evaluation",
+      "overview": "Overview"
+    },
+    "evalType": {
+      "Monitoring": "Monitoring",
+      "Evaluation": "Evaluation",
+      "Learning": "Learning"
+    },
+    "evalStatus": {
+      "Planned": "Planned",
+      "InProgress": "In Progress",
+      "Completed": "Completed",
+      "Cancelled": "Cancelled"
+    },
+    "dacCriteria": {
+      "Relevance": "Relevance",
+      "Coherence": "Coherence",
+      "Effectiveness": "Effectiveness",
+      "Efficiency": "Efficiency",
+      "Impact": "Impact",
+      "Sustainability": "Sustainability"
+    },
+    "findings": {
+      "title": "Findings",
+      "add": "Add Finding",
+      "finding": "Finding",
+      "recommendation": "Recommendation",
+      "respond": "Respond",
+      "verify": "Verify",
+      "response": "Management Response",
+      "status": "Status"
+    },
+    "findingStatus": {
+      "Open": "Open",
+      "ResponseProvided": "Response Provided",
+      "Verified": "Verified",
+      "Closed": "Closed"
+    },
+    "gesi": {
+      "title": "GESI Assessments",
+      "add": "Add Assessment",
+      "score": "Gender Marker Score",
+      "analysis": "GESI Analysis",
+      "justification": "Justification",
+      "findings": "Key Findings",
+      "recommendations": "Recommendations",
+      "date": "Assessment Date"
+    },
+    "lessons": {
+      "title": "Lessons Learned",
+      "add": "Add Lesson",
+      "category": "Category",
+      "context": "Context",
+      "actionTaken": "Action Taken",
+      "impact": "Impact",
+      "recommendedAction": "Recommended Action"
+    },
+    "history": {
+      "title": "History",
+      "submittedBy": "Submitted By",
+      "submittedAt": "Submitted At",
+      "approvedBy": "Approved By",
+      "approvedAt": "Approved At",
+      "rejectionReason": "Rejection Reason"
+    }
+  },
+  "participants": {
+    "title": "Participants",
+    "register": "Register Participant",
+    "detail": {
+      "title": "Participant Detail",
+      "profile": "Profile",
+      "address": "Address",
+      "enrollments": "Enrollments",
+      "services": "Services",
+      "household": "Household"
+    },
+    "fields": {
+      "firstName": "First Name",
+      "middleName": "Middle Name",
+      "lastName": "Last Name",
+      "fullName": "Full Name",
+      "code": "Participant Code",
+      "gender": "Gender",
+      "dateOfBirth": "Date of Birth",
+      "idNumber": "ID Number",
+      "phone": "Phone",
+      "email": "Email",
+      "status": "Status",
+      "registrationDate": "Registration Date",
+      "vulnerabilityScore": "Vulnerability Score",
+      "woreda": "Woreda",
+      "kebele": "Kebele",
+      "region": "Region",
+      "zone": "Zone",
+      "address": "Address",
+      "projectId": "Project",
+      "participantId": "Participant",
+      "enrollmentDate": "Enrollment Date",
+      "exitDate": "Exit Date",
+      "exitReason": "Exit Reason",
+      "cohortName": "Cohort Name",
+      "serviceName": "Service Name",
+      "serviceDate": "Service Date",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "description": "Description",
+      "notes": "Notes",
+      "householdCode": "Household Code",
+      "relationship": "Relationship to Head",
+      "headOfHousehold": "Head of Household",
+      "householdSize": "Household Size"
+    },
+    "actions": {
+      "editProfile": "Edit Profile",
+      "editAddress": "Edit Address",
+      "exitEnrollment": "Exit Enrollment",
+      "confirmExit": "Confirm Exit",
+      "enroll": "Enroll",
+      "recordService": "Record Service",
+      "addMember": "Add Member"
+    },
+    "status": {
+      "Active": "Active",
+      "Inactive": "Inactive",
+      "Graduated": "Graduated",
+      "Exited": "Exited"
+    },
+    "genderOptions": {
+      "Male": "Male",
+      "Female": "Female",
+      "Other": "Other"
+    },
+    "profile": "Profile",
+    "editProfile": "Edit Profile",
+    "editAddress": "Edit Address",
+    "enrollments": {
+      "title": "Enrollments",
+      "enroll": "Enroll",
+      "exit": "Exit Enrollment",
+      "projectId": "Project",
+      "cohortName": "Cohort Name",
+      "enrollmentDate": "Enrollment Date",
+      "exitDate": "Exit Date",
+      "exitReason": "Exit Reason",
+      "status": "Status",
+      "enrollmentStatus": {
+        "Enrolled": "Enrolled",
+        "Completed": "Completed",
+        "Exited": "Exited",
+        "Graduated": "Graduated"
+      }
+    },
+    "services": {
+      "title": "Services",
+      "record": "Record Service",
+      "serviceName": "Service Name",
+      "serviceDate": "Service Date",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "description": "Description",
+      "notes": "Notes"
+    },
+    "household": {
+      "title": "Household",
+      "add": "Add Member",
+      "householdCode": "Household Code",
+      "isHead": "Head of Household",
+      "relationship": "Relationship to Head",
+      "householdSize": "Household Size",
+      "members": "Household Members"
+    },
+    "graduation": {
+      "title": "Graduation",
+      "benchmarks": "Graduation Benchmarks",
+      "pipeline": "Graduation Pipeline",
+      "decisions": "Graduation Decisions",
+      "addBenchmark": "Add Benchmark",
+      "editBenchmark": "Edit Benchmark",
+      "name": "Name",
+      "domain": "Domain",
+      "description": "Description",
+      "thresholdP2": "P2 Threshold",
+      "thresholdP3": "P3 Threshold",
+      "thresholdP4": "P4 Threshold",
+      "weight": "Weight",
+      "requiredForGraduation": "Required",
+      "isActive": "Active",
+      "totalParticipants": "Total Participants",
+      "graduationRate": "Graduation Rate",
+      "graduated": "Graduated",
+      "confirmReject": "Confirm Rejection",
+      "stages": {
+        "P1": "P1 - Entry",
+        "P2": "P2 - Building",
+        "P3": "P3 - Developing",
+        "P4": "P4 - Ready",
+        "Graduated": "Graduated"
+      },
+      "fields": {
+        "name": "Name",
+        "domain": "Domain",
+        "weight": "Weight",
+        "required": "Required",
+        "requiredMet": "Required Met %",
+        "readyToGraduate": "Ready to Graduate",
+        "decisionDate": "Decision Date",
+        "rejectionReason": "Rejection Reason"
+      },
+      "createDecision": "Create Decision",
+      "participantId": "Participant",
+      "projectId": "Project",
+      "notes": "Notes",
+      "requiredMetPercentage": "Required Met %",
+      "isReadyToGraduate": "Ready to Graduate",
+      "decisionDate": "Decision Date",
+      "rejectionReason": "Rejection Reason",
+      "approve": "Approve",
+      "reject": "Reject",
+      "decisionStatus": {
+        "Pending": "Pending",
+        "Approved": "Approved",
+        "Rejected": "Rejected"
+      }
+    }
+  },
+  "procurement": {
+    "title": "Procurement",
+    "suppliers": {
+      "title": "Suppliers",
+      "create": "Add Supplier",
+      "detail": "Supplier Detail",
+      "name": "Name",
+      "contactPerson": "Contact Person",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "taxId": "Tax ID Number",
+      "status": "Status",
+      "rating": "Rating",
+      "rate": "Rate Supplier",
+      "blacklist": "Blacklist Supplier",
+      "edit": "Edit Supplier",
+      "score": "Score",
+      "blacklistReason": "Blacklist Reason",
+      "supplierStatus": {
+        "Active": "Active",
+        "Inactive": "Inactive",
+        "Blacklisted": "Blacklisted"
+      }
+    },
+    "plans": {
+      "title": "Procurement Plans",
+      "detail": "Plan Detail",
+      "referenceNumber": "Reference Number",
+      "projectId": "Project",
+      "fiscalYear": "Fiscal Year",
+      "description": "Description",
+      "totalEstimatedValue": "Total Estimated Value",
+      "items": "Plan Items",
+      "addItem": "Add Item",
+      "estimatedCost": "Estimated Cost",
+      "method": "Procurement Method",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "plannedQuarter": "Planned Quarter",
+      "submit": "Submit Plan",
+      "approve": "Approve Plan"
+    },
+    "requests": {
+      "title": "Purchase Requests",
+      "create": "Create Request",
+      "detail": "Request Detail",
+      "referenceNumber": "Reference Number",
+      "projectId": "Project",
+      "justification": "Justification",
+      "totalAmount": "Total Amount",
+      "method": "Method",
+      "items": "Items",
+      "addItem": "Add Item",
+      "description": "Description",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "estimatedUnitCost": "Estimated Unit Cost",
+      "specification": "Specification",
+      "submit": "Submit Request",
+      "approve": "Approve Request",
+      "procurementPlanItemId": "Plan Item ID"
+    },
+    "rfq": {
+      "title": "Request for Quotation",
+      "create": "Create RFQ",
+      "referenceNumber": "Reference Number",
+      "deadline": "Deadline",
+      "termsAndConditions": "Terms & Conditions",
+      "minimumResponses": "Minimum Responses",
+      "submitResponse": "Submit Response",
+      "supplierId": "Supplier",
+      "totalQuotedAmount": "Quoted Amount",
+      "deliveryDays": "Delivery Days",
+      "notes": "Notes",
+      "evaluateBid": "Evaluate Bid",
+      "technicalScore": "Technical Score",
+      "financialScore": "Financial Score",
+      "technicalWeight": "Technical Weight",
+      "financialWeight": "Financial Weight"
+    },
+    "orders": {
+      "title": "Purchase Orders",
+      "create": "Create Order",
+      "detail": "Order Detail",
+      "referenceNumber": "Reference Number",
+      "supplierId": "Supplier",
+      "status": "Status",
+      "totalAmount": "Total Amount",
+      "expectedDelivery": "Expected Delivery",
+      "items": "Items",
+      "issue": "Issue Order",
+      "unitPrice": "Unit Price",
+      "receivedQuantity": "Received Qty",
+      "purchaseOrderStatus": {
+        "Draft": "Draft",
+        "Issued": "Issued",
+        "PartiallyReceived": "Partially Received",
+        "FullyReceived": "Fully Received",
+        "Closed": "Closed",
+        "Cancelled": "Cancelled"
+      }
+    },
+    "grn": {
+      "title": "Goods Receipt",
+      "create": "Create GRN",
+      "referenceNumber": "Reference Number",
+      "receivedDate": "Received Date",
+      "receivedBy": "Received By",
+      "deliveryNoteNumber": "Delivery Note #",
+      "remarks": "Remarks"
+    },
+    "invoices": {
+      "title": "Invoices",
+      "create": "Create Invoice",
+      "invoiceNumber": "Invoice Number",
+      "invoiceAmount": "Invoice Amount",
+      "invoiceDate": "Invoice Date",
+      "dueDate": "Due Date",
+      "grnId": "GRN Reference"
+    },
+    "payments": {
+      "title": "Payments",
+      "create": "Create Payment",
+      "referenceNumber": "Reference Number",
+      "amount": "Amount",
+      "paymentMethod": "Payment Method",
+      "bankDetails": "Bank Details"
+    },
+    "invoicePayment": {
+      "title": "Invoice & Payment",
+      "createInvoice": "Create Invoice",
+      "createPayment": "Create Payment"
+    },
+    "fields": {
+      "referenceNumber": "Reference Number",
+      "projectId": "Project",
+      "method": "Method",
+      "procurementPlanItemId": "Plan Item",
+      "justification": "Justification",
+      "purchaseRequestId": "Purchase Request",
+      "supplierId": "Supplier",
+      "totalAmount": "Total Amount",
+      "expectedDeliveryDate": "Expected Delivery Date",
+      "description": "Description",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "unitPrice": "Unit Price",
+      "receivedQuantity": "Received Quantity",
+      "receivedDate": "Received Date",
+      "receivedBy": "Received By",
+      "deliveryNoteNumber": "Delivery Note Number",
+      "remarks": "Remarks",
+      "invoiceNumber": "Invoice Number",
+      "invoiceAmount": "Invoice Amount",
+      "invoiceDate": "Invoice Date",
+      "dueDate": "Due Date",
+      "grnId": "GRN Reference",
+      "amount": "Amount",
+      "paymentMethod": "Payment Method",
+      "bankDetails": "Bank Details",
+      "title": "Title",
+      "fiscalYear": "Fiscal Year",
+      "totalEstimatedValue": "Total Estimated Value",
+      "estimatedCost": "Estimated Cost",
+      "plannedQuarter": "Planned Quarter",
+      "estimatedUnitCost": "Estimated Unit Cost",
+      "specification": "Specification",
+      "approvedBy": "Approved By",
+      "approvalDate": "Approval Date",
+      "deadline": "Deadline",
+      "termsAndConditions": "Terms & Conditions",
+      "minimumResponses": "Minimum Responses",
+      "totalQuotedAmount": "Total Quoted Amount",
+      "deliveryDays": "Delivery Days",
+      "notes": "Notes",
+      "rfqResponseId": "RFQ Response",
+      "technicalScore": "Technical Score",
+      "financialScore": "Financial Score",
+      "technicalWeight": "Technical Weight",
+      "financialWeight": "Financial Weight",
+      "name": "Name",
+      "contactPerson": "Contact Person",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "taxIdNumber": "Tax ID Number",
+      "rating": "Rating",
+      "score": "Score"
+    },
+    "actions": {
+      "submit": "Submit",
+      "approve": "Approve"
+    },
+    "procurementStatus": {
+      "Draft": "Draft",
+      "Submitted": "Submitted",
+      "UnderReview": "Under Review",
+      "Approved": "Approved",
+      "Rejected": "Rejected",
+      "Cancelled": "Cancelled"
+    },
+    "procurementMethod": {
+      "DirectPurchase": "Direct Purchase",
+      "RequestForQuotation": "Request for Quotation",
+      "OpenBidding": "Open Bidding",
+      "RestrictedBidding": "Restricted Bidding",
+      "SingleSource": "Single Source"
+    }
+  },
+  "finance": {
+    "title": "Fund Accounting",
+    "accounts": {
+      "title": "Chart of Accounts",
+      "create": "Create Account",
+      "edit": "Edit Account"
+    },
+    "fundCodes": {
+      "title": "Fund Codes",
+      "create": "Create Fund Code",
+      "edit": "Edit Fund Code",
+      "restrictions": "Fund Restrictions",
+      "addRestriction": "Add Restriction",
+      "releaseRestriction": "Release Restriction"
+    },
+    "journals": {
+      "title": "Journal Entries",
+      "create": "Create Journal Entry",
+      "post": "Post Entry",
+      "detail": "Journal Entry Detail",
+      "header": "Journal Entry Header",
+      "lines": "Journal Lines",
+      "addLine": "Add Line",
+      "unbalanced": "Entry is not balanced"
+    },
+    "restrictions": {
+      "title": "Fund Restrictions",
+      "none": "No restrictions found",
+      "release": "Release",
+      "add": "Add Restriction"
+    },
+    "budgets": {
+      "title": "Budgets",
+      "create": "Create Budget",
+      "detail": "Budget Detail",
+      "addLine": "Add Budget Line",
+      "submit": "Submit Budget",
+      "approve": "Approve Budget",
+      "lookupTitle": "Look Up Budget",
+      "lookupDescription": "Enter a budget ID to look up an existing budget.",
+      "lookup": "Look Up",
+      "viewDetail": "View Detail",
+      "lines": "Budget Lines",
+      "noLines": "No budget lines added yet."
+    },
+    "fields": {
+      "accountCode": "Account Code",
+      "accountName": "Account Name",
+      "accountType": "Account Type",
+      "categoryName": "Category",
+      "description": "Description",
+      "isActive": "Active",
+      "isSystemAccount": "System Account",
+      "code": "Code",
+      "name": "Name",
+      "fundType": "Fund Type",
+      "donorGrantId": "Donor Grant",
+      "originalAmount": "Original Amount",
+      "releasedAmount": "Released Amount",
+      "remainingAmount": "Remaining Amount",
+      "conditionDescription": "Condition",
+      "expiryDate": "Expiry Date",
+      "status": "Status",
+      "referenceNumber": "Reference Number",
+      "transactionDate": "Transaction Date",
+      "totalDebit": "Total Debit",
+      "totalCredit": "Total Credit",
+      "projectId": "Project",
+      "fundCodeId": "Fund Code",
+      "memo": "Memo",
+      "accountId": "Account",
+      "debitAmount": "Debit",
+      "creditAmount": "Credit",
+      "title": "Title",
+      "fiscalYear": "Fiscal Year",
+      "currencyCode": "Currency",
+      "exchangeRate": "Exchange Rate",
+      "totalAmount": "Total Amount",
+      "version": "Version",
+      "q1Amount": "Q1 Amount",
+      "q2Amount": "Q2 Amount",
+      "q3Amount": "Q3 Amount",
+      "q4Amount": "Q4 Amount",
+      "annualAmount": "Annual Amount",
+      "actualAmount": "Actual Amount",
+      "variance": "Variance",
+      "utilizationRate": "Utilization Rate",
+      "category": "Category",
+      "condition": "Condition",
+      "fundCode": "Fund Code",
+      "account": "Account",
+      "debit": "Debit",
+      "credit": "Credit",
+      "currency": "Currency",
+      "annual": "Annual",
+      "actual": "Actual",
+      "utilization": "Utilization",
+      "releaseAmount": "Release Amount",
+      "totals": "Totals",
+      "difference": "Difference",
+      "budgetId": "Budget ID",
+      "amount": "Amount"
+    },
+    "actions": {
+      "create": "Create",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "post": "Post",
+      "submit": "Submit",
+      "approve": "Approve",
+      "addLine": "Add Line",
+      "addRestriction": "Add Restriction",
+      "release": "Release"
+    },
+    "types": {
+      "asset": "Asset",
+      "liability": "Liability",
+      "netAssets": "Net Assets",
+      "revenue": "Revenue",
+      "expense": "Expense",
+      "unrestricted": "Unrestricted",
+      "temporarilyRestricted": "Temporarily Restricted",
+      "permanentlyRestricted": "Permanently Restricted",
+      "draft": "Draft",
+      "posted": "Posted",
+      "reversed": "Reversed",
+      "submitted": "Submitted",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "revised": "Revised"
+    },
+    "messages": {
+      "accountCreated": "Account created successfully",
+      "accountUpdated": "Account updated successfully",
+      "fundCodeCreated": "Fund code created successfully",
+      "fundCodeUpdated": "Fund code updated successfully",
+      "restrictionCreated": "Restriction created successfully",
+      "restrictionReleased": "Restriction released successfully",
+      "journalCreated": "Journal entry created successfully",
+      "journalPosted": "Journal entry posted successfully",
+      "budgetCreated": "Budget created successfully",
+      "budgetLineAdded": "Budget line added successfully",
+      "budgetSubmitted": "Budget submitted successfully",
+      "budgetApproved": "Budget approved successfully",
+      "debitsCreditsUnbalanced": "Total debits must equal total credits"
+    }
+  },
+  "assets": {
+    "title": "Asset Management",
+    "categories": {
+      "title": "Asset Categories",
+      "create": "Create Category",
+      "edit": "Edit Category"
+    },
+    "register": {
+      "title": "Register Asset",
+      "list": "Assets"
+    },
+    "detail": {
+      "title": "Asset Detail",
+      "overview": "Overview",
+      "transfers": "Transfers",
+      "assignments": "Assignments",
+      "depreciation": "Depreciation"
+    },
+    "disposals": {
+      "title": "Disposals",
+      "initiate": "Initiate Disposal",
+      "complete": "Complete Disposal"
+    },
+    "maintenance": {
+      "title": "Maintenance",
+      "schedule": "Schedule Maintenance",
+      "complete": "Complete Maintenance"
+    },
+    "stock": {
+      "title": "Stock Items",
+      "create": "Create Stock Item",
+      "detail": "Stock Item Detail",
+      "recordMovement": "Record Movement"
+    },
+    "fields": {
+      "assetCode": "Asset Code",
+      "name": "Name",
+      "description": "Description",
+      "code": "Code",
+      "category": "Category",
+      "categoryName": "Category",
+      "serialNumber": "Serial Number",
+      "modelNumber": "Model Number",
+      "location": "Location",
+      "donorGrantId": "Donor Grant",
+      "projectId": "Project",
+      "purchaseDate": "Purchase Date",
+      "purchaseCost": "Purchase Cost",
+      "currentBookValue": "Current Book Value",
+      "depreciationMethod": "Depreciation Method",
+      "usefulLifeYears": "Useful Life (Years)",
+      "residualValue": "Residual Value",
+      "annualDepreciation": "Annual Depreciation",
+      "accumulatedDepreciation": "Accumulated Depreciation",
+      "status": "Status",
+      "condition": "Condition",
+      "assignedToName": "Assigned To",
+      "assignedToUserId": "Assign To User",
+      "assignmentDate": "Assignment Date",
+      "returnDate": "Return Date",
+      "notes": "Notes",
+      "fromLocation": "From Location",
+      "toLocation": "To Location",
+      "transferDate": "Transfer Date",
+      "reason": "Reason",
+      "approvedBy": "Approved By",
+      "disposalMethod": "Disposal Method",
+      "disposalValue": "Disposal Value",
+      "bookValueAtDisposal": "Book Value at Disposal",
+      "disposalDate": "Disposal Date",
+      "requiresDonorApproval": "Requires Donor Approval",
+      "donorApprovalReference": "Donor Approval Reference",
+      "scheduledDate": "Scheduled Date",
+      "completedDate": "Completed Date",
+      "cost": "Cost",
+      "performedBy": "Performed By",
+      "nextScheduledDate": "Next Scheduled Date",
+      "isCompleted": "Completed",
+      "itemCode": "Item Code",
+      "unit": "Unit",
+      "quantityOnHand": "Quantity on Hand",
+      "reorderLevel": "Reorder Level",
+      "unitCost": "Unit Cost",
+      "storageLocation": "Storage Location",
+      "movementType": "Movement Type",
+      "quantity": "Quantity",
+      "movementDate": "Movement Date",
+      "referenceNumber": "Reference Number",
+      "asOfDate": "As of Date",
+      "defaultDepreciationMethod": "Default Depreciation Method",
+      "defaultUsefulLifeYears": "Default Useful Life (Years)",
+      "defaultResidualValuePercent": "Default Residual Value %",
+      "isActive": "Active",
+      "purchaseOrderId": "Purchase Order"
+    },
+    "actions": {
+      "register": "Register",
+      "update": "Update",
+      "transfer": "Transfer",
+      "assign": "Assign",
+      "calculate": "Calculate",
+      "initiate": "Initiate",
+      "complete": "Complete",
+      "schedule": "Schedule",
+      "record": "Record",
+      "create": "Create"
+    },
+    "types": {
+      "straightLine": "Straight Line",
+      "reducingBalance": "Reducing Balance",
+      "active": "Active",
+      "inMaintenance": "In Maintenance",
+      "disposed": "Disposed",
+      "lost": "Lost",
+      "transferred": "Transferred",
+      "new": "New",
+      "good": "Good",
+      "fair": "Fair",
+      "poor": "Poor",
+      "damaged": "Damaged",
+      "pending": "Pending",
+      "donorApprovalRequested": "Donor Approval Requested",
+      "donorApproved": "Donor Approved",
+      "donorRejected": "Donor Rejected",
+      "receipt": "Receipt",
+      "issue": "Issue",
+      "return": "Return",
+      "adjustment": "Adjustment"
+    },
+    "messages": {
+      "categoryCreated": "Category created successfully",
+      "categoryUpdated": "Category updated successfully",
+      "assetRegistered": "Asset registered successfully",
+      "assetUpdated": "Asset updated successfully",
+      "assetTransferred": "Asset transferred successfully",
+      "assetAssigned": "Asset assigned successfully",
+      "depreciationCalculated": "Depreciation calculated successfully",
+      "disposalInitiated": "Disposal initiated successfully",
+      "disposalCompleted": "Disposal completed successfully",
+      "maintenanceScheduled": "Maintenance scheduled successfully",
+      "maintenanceCompleted": "Maintenance completed successfully",
+      "stockCreated": "Stock item created successfully",
+      "movementRecorded": "Stock movement recorded successfully",
+      "lowStock": "Low stock warning"
+    }
+  },
+  "training": {
+    "title": "Training Management",
+    "programs": {
+      "title": "Training Programs",
+      "create": "Create Program",
+      "detail": "Program Detail",
+      "edit": "Edit Program",
+      "sessions": "Sessions",
+      "materials": "Materials",
+      "createButton": "New Program",
+      "info": "Program Info"
+    },
+    "sessions": {
+      "title": "Training Sessions",
+      "create": "Create Session",
+      "detail": "Session Detail",
+      "complete": "Complete Session",
+      "participants": "Participants",
+      "registerParticipant": "Register Participant",
+      "recordAttendance": "Record Attendance",
+      "createButton": "New Session",
+      "info": "Session Info"
+    },
+    "trainers": {
+      "title": "Trainers",
+      "create": "Create Trainer",
+      "createButton": "New Trainer"
+    },
+    "materials": {
+      "title": "Training Materials",
+      "add": "Add Material"
+    },
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "category": "Category",
+      "projectId": "Project",
+      "totalSessions": "Total Sessions",
+      "isActive": "Active",
+      "venue": "Venue",
+      "scheduledDate": "Scheduled Date",
+      "endDate": "End Date",
+      "status": "Status",
+      "maxParticipants": "Max Participants",
+      "notes": "Notes",
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "specialization": "Specialization",
+      "organization": "Organization",
+      "isInternal": "Internal",
+      "participantId": "Participant ID",
+      "attendanceStatus": "Attendance Status",
+      "preTestScore": "Pre-Test Score",
+      "postTestScore": "Post-Test Score",
+      "certificateNumber": "Certificate Number",
+      "materialType": "Material Type",
+      "fileUrl": "File URL",
+      "programId": "Program",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "trainingProgramId": "Training Program",
+      "createdAt": "Created At",
+      "participantCount": "Participant Count"
+    },
+    "actions": {
+      "create": "Create",
+      "update": "Update",
+      "complete": "Complete",
+      "register": "Register",
+      "record": "Record",
+      "add": "Add"
+    },
+    "types": {
+      "technical": "Technical",
+      "lifeSkills": "Life Skills",
+      "financial": "Financial",
+      "health": "Health",
+      "agriculture": "Agriculture",
+      "other": "Other"
+    },
+    "status": {
+      "draft": "Draft",
+      "scheduled": "Scheduled",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "attendance": {
+      "registered": "Registered",
+      "attended": "Attended",
+      "absent": "Absent",
+      "walkIn": "Walk-In"
+    },
+    "messages": {
+      "programCreated": "Training program created successfully",
+      "programUpdated": "Training program updated successfully",
+      "sessionCreated": "Training session created successfully",
+      "sessionCompleted": "Training session completed successfully",
+      "participantRegistered": "Participant registered successfully",
+      "attendanceRecorded": "Attendance recorded successfully",
+      "trainerCreated": "Trainer created successfully",
+      "materialAdded": "Training material added successfully"
+    }
+  },
+  "tasks": {
+    "title": "Task Management",
+    "boards": {
+      "title": "Task Boards",
+      "create": "Create Board",
+      "detail": "Board Detail",
+      "lookup": "View Board",
+      "addList": "Add List",
+      "createButton": "New Board",
+      "lookupLabel": "Board ID",
+      "viewBoard": "View Board",
+      "default": "Default",
+      "lists": "Lists"
+    },
+    "lists": {
+      "title": "Task Lists",
+      "create": "Create List",
+      "add": "Add List",
+      "empty": "No tasks in this list"
+    },
+    "tabs": {
+      "info": "Task Info",
+      "statusProgress": "Status & Progress",
+      "assignments": "Assignments",
+      "commentsApproval": "Comments & Approval"
+    },
+    "tasks": {
+      "title": "Tasks",
+      "create": "Create Task",
+      "detail": "Task Detail",
+      "edit": "Edit Task",
+      "createButton": "New Task"
+    },
+    "comments": {
+      "title": "Comments",
+      "add": "Add Comment",
+      "noComments": "No comments yet",
+      "reply": "Reply",
+      "replyingTo": "Replying to comment"
+    },
+    "approvals": {
+      "title": "Approval",
+      "submit": "Submit for Approval",
+      "approve": "Approve",
+      "reject": "Reject",
+      "history": "Approval History",
+      "comments": "Comments"
+    },
+    "fields": {
+      "name": "Name",
+      "title": "Title",
+      "description": "Description",
+      "projectId": "Project",
+      "isDefault": "Default Board",
+      "sortOrder": "Sort Order",
+      "color": "Color",
+      "taskCount": "Task Count",
+      "status": "Status",
+      "priority": "Priority",
+      "dueDate": "Due Date",
+      "progress": "Progress",
+      "progressPercentage": "Progress",
+      "assignedToUserId": "Assigned To (User ID)",
+      "assignedToName": "Assigned To",
+      "parentTaskId": "Parent Task",
+      "taskListId": "Task List",
+      "boardId": "Board",
+      "role": "Role",
+      "assignedDate": "Assigned Date",
+      "content": "Content",
+      "authorName": "Author",
+      "approvalLevel": "Approval Level",
+      "approverName": "Approver",
+      "action": "Action",
+      "commentsCount": "Comments",
+      "createdAt": "Created At",
+      "createdBy": "Created By",
+      "targetListId": "Target List",
+      "search": "Search"
+    },
+    "actions": {
+      "create": "Create",
+      "update": "Update",
+      "assign": "Assign",
+      "move": "Move",
+      "submit": "Submit",
+      "approve": "Approve",
+      "reject": "Reject",
+      "addComment": "Add Comment",
+      "updateStatus": "Update Status",
+      "updateProgress": "Update Progress",
+      "moveTask": "Move Task"
+    },
+    "status": {
+      "toDo": "To Do",
+      "inProgress": "In Progress",
+      "inReview": "In Review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "done": "Done"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "critical": "Critical"
+    },
+    "approvalAction": {
+      "submitted": "Submitted",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "returnedForRevision": "Returned for Revision"
+    },
+    "messages": {
+      "boardCreated": "Task board created successfully",
+      "listCreated": "Task list created successfully",
+      "taskCreated": "Task created successfully",
+      "taskUpdated": "Task updated successfully",
+      "statusUpdated": "Task status updated successfully",
+      "progressUpdated": "Task progress updated successfully",
+      "taskAssigned": "Task assigned successfully",
+      "taskMoved": "Task moved successfully",
+      "commentAdded": "Comment added successfully",
+      "submittedForApproval": "Task submitted for approval",
+      "taskApproved": "Task approved successfully",
+      "taskRejected": "Task rejected"
+    }
+  },
+  "risk": {
+    "title": "Risk Management",
+    "categories": {
+      "title": "Risk Categories",
+      "create": "Create Category",
+      "createButton": "New Category"
+    },
+    "risks": {
+      "title": "Risk Register",
+      "create": "Create Risk",
+      "detail": "Risk Detail",
+      "createButton": "New Risk"
+    },
+    "matrix": {
+      "title": "Risk Matrix",
+      "loadButton": "Load Matrix",
+      "projectRequired": "Project ID is required"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "mitigations": "Mitigations",
+      "assessments": "Assessments"
+    },
+    "mitigations": {
+      "title": "Mitigations",
+      "add": "Add Mitigation",
+      "complete": "Complete"
+    },
+    "assessments": {
+      "title": "Assessments",
+      "record": "Record Assessment",
+      "latest": "Latest Assessment"
+    },
+    "fields": {
+      "name": "Name",
+      "title": "Title",
+      "description": "Description",
+      "color": "Color",
+      "sortOrder": "Sort Order",
+      "projectId": "Project",
+      "likelihood": "Likelihood",
+      "impact": "Impact",
+      "riskScore": "Risk Score",
+      "status": "Status",
+      "owner": "Owner",
+      "ownerUserId": "Owner User ID",
+      "location": "Location",
+      "identifiedDate": "Identified Date",
+      "resolvedDate": "Resolved Date",
+      "residualRiskNotes": "Residual Risk Notes",
+      "riskCategoryId": "Category",
+      "action": "Action",
+      "responsiblePerson": "Responsible Person",
+      "responsibleUserId": "Responsible User ID",
+      "plannedDate": "Planned Date",
+      "completedDate": "Completed Date",
+      "estimatedCost": "Estimated Cost",
+      "notes": "Notes",
+      "assessedBy": "Assessed By",
+      "assessmentDate": "Assessment Date",
+      "source": "Source",
+      "createdAt": "Created At"
+    },
+    "actions": {
+      "reassess": "Reassess",
+      "resolve": "Resolve",
+      "addMitigation": "Add Mitigation",
+      "completeMitigation": "Complete Mitigation",
+      "recordAssessment": "Record Assessment",
+      "viewMatrix": "Risk Matrix",
+      "viewCategories": "Categories"
+    },
+    "likelihood": {
+      "veryLow": "Very Low",
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "veryHigh": "Very High"
+    },
+    "impact": {
+      "negligible": "Negligible",
+      "minor": "Minor",
+      "moderate": "Moderate",
+      "major": "Major",
+      "catastrophic": "Catastrophic"
+    },
+    "riskStatus": {
+      "identified": "Identified",
+      "assessed": "Assessed",
+      "mitigating": "Mitigating",
+      "resolved": "Resolved",
+      "accepted": "Accepted",
+      "closed": "Closed"
+    },
+    "mitigationStatus": {
+      "planned": "Planned",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "overdue": "Overdue"
+    },
+    "messages": {
+      "categoryCreated": "Risk category created successfully",
+      "riskCreated": "Risk created successfully",
+      "riskReassessed": "Risk reassessed successfully",
+      "riskResolved": "Risk resolved successfully",
+      "mitigationCreated": "Mitigation created successfully",
+      "mitigationCompleted": "Mitigation completed successfully",
+      "assessmentRecorded": "Assessment recorded successfully"
+    }
+  },
+  "donors": {
+    "donors": {
+      "title": "Donors",
+      "create": "New Donor",
+      "createButton": "New Donor",
+      "detail": "Donor Detail",
+      "editButton": "Edit Donor",
+      "updateSuccess": "Donor updated successfully",
+      "createSuccess": "Donor created successfully"
+    },
+    "grants": {
+      "title": "Grants",
+      "create": "New Grant",
+      "createButton": "New Grant",
+      "detail": "Grant Detail",
+      "createSuccess": "Grant created successfully",
+      "activate": "Activate Grant",
+      "activateSuccess": "Grant activated successfully",
+      "activateButton": "Activate Grant"
+    },
+    "contacts": {
+      "title": "Contacts",
+      "add": "Add Contact",
+      "addButton": "Add Contact",
+      "addSuccess": "Contact added successfully"
+    },
+    "communications": {
+      "title": "Communications",
+      "record": "Record Communication",
+      "recordButton": "Record Communication",
+      "recordSuccess": "Communication recorded successfully"
+    },
+    "compliance": {
+      "title": "Compliance Dashboard",
+      "overdueConditions": "Overdue Conditions",
+      "nextDueDate": "Next Due Date"
+    },
+    "conditions": {
+      "title": "Conditions",
+      "add": "Add Condition",
+      "addButton": "Add Condition",
+      "addSuccess": "Condition added successfully",
+      "markMet": "Mark Met",
+      "markMetButton": "Mark Met",
+      "markMetSuccess": "Condition marked as met"
+    },
+    "reports": {
+      "title": "Reports",
+      "submit": "Submit Report",
+      "submitButton": "Submit Report",
+      "submitSuccess": "Report submitted successfully"
+    },
+    "fields": {
+      "name": "Name",
+      "acronym": "Acronym",
+      "country": "Country",
+      "website": "Website",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "notes": "Notes",
+      "isActive": "Active",
+      "defaultProcurementThreshold": "Default Procurement Threshold",
+      "grantCount": "Grants",
+      "fullName": "Full Name",
+      "title": "Title",
+      "isPrimary": "Primary Contact",
+      "grantNumber": "Grant Number",
+      "grantTitle": "Grant Title",
+      "status": "Status",
+      "totalAmount": "Total Amount",
+      "currencyCode": "Currency",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "complianceStatus": "Compliance",
+      "description": "Description",
+      "projectId": "Project",
+      "coFinancingAmount": "Co-financing Amount",
+      "coFinancingPartner": "Co-financing Partner",
+      "donorId": "Donor",
+      "dueDate": "Due Date",
+      "completionNotes": "Completion Notes",
+      "completedDate": "Completed Date",
+      "reportType": "Report Type",
+      "submittedDate": "Submitted Date",
+      "isSubmitted": "Submitted",
+      "fileUrl": "File URL",
+      "type": "Type",
+      "subject": "Subject",
+      "content": "Content",
+      "communicationDate": "Date",
+      "contactedBy": "Contacted By",
+      "outcome": "Outcome",
+      "donorName": "Donor Name",
+      "grantId": "Grant"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "contacts": "Contacts",
+      "grants": "Grants",
+      "communications": "Communications",
+      "conditions": "Conditions",
+      "reports": "Reports"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "draft": "Draft",
+      "activated": "Active",
+      "suspended": "Suspended",
+      "completed": "Completed",
+      "terminated": "Terminated"
+    },
+    "complianceStatus": {
+      "green": "Green",
+      "amber": "Amber",
+      "red": "Red"
+    },
+    "conditionStatus": {
+      "pending": "Pending",
+      "met": "Met",
+      "overdue": "Overdue",
+      "waived": "Waived"
+    },
+    "communicationType": {
+      "email": "Email",
+      "meeting": "Meeting",
+      "phoneCall": "Phone Call",
+      "letter": "Letter",
+      "report": "Report",
+      "other": "Other"
+    }
+  },
+  "notifications": {
+    "notifications": {
+      "title": "Notifications",
+      "markAllRead": "Mark All Read",
+      "markAllReadSuccess": "All notifications marked as read",
+      "markReadSuccess": "Notification marked as read",
+      "unreadCount": "Unread",
+      "unread": "unread",
+      "statusFilter": "Status",
+      "eventTypeFilter": "Event Type"
+    },
+    "templates": {
+      "title": "Notification Templates",
+      "create": "New Template",
+      "createButton": "New Template",
+      "createSuccess": "Template created successfully",
+      "updateSuccess": "Template updated successfully",
+      "editButton": "Edit Template",
+      "edit": "Edit Template",
+      "activeFilter": "Status",
+      "fields": {
+        "eventType": "Event Type",
+        "defaultChannel": "Default Channel",
+        "titleTemplateEn": "Title (English)",
+        "bodyTemplateEn": "Body (English)",
+        "titleTemplateAm": "Title (Amharic)",
+        "bodyTemplateAm": "Body (Amharic)"
+      }
+    },
+    "preferences": {
+      "title": "Notification Preferences",
+      "updateSuccess": "Preference updated successfully",
+      "eventType": "Event Type",
+      "inApp": "In-App",
+      "email": "Email",
+      "push": "Push",
+      "sms": "SMS"
+    },
+    "fields": {
+      "eventType": "Event Type",
+      "titleText": "Title",
+      "body": "Body",
+      "priority": "Priority",
+      "status": "Status",
+      "channel": "Channel",
+      "actionUrl": "Action URL",
+      "entityId": "Entity ID",
+      "entityType": "Entity Type",
+      "readAt": "Read At",
+      "sentAt": "Sent At",
+      "titleTemplateEn": "Title (English)",
+      "bodyTemplateEn": "Body (English)",
+      "titleTemplateAm": "Title (Amharic)",
+      "bodyTemplateAm": "Body (Amharic)",
+      "defaultChannel": "Default Channel",
+      "isActive": "Active",
+      "inAppEnabled": "In-App",
+      "emailEnabled": "Email",
+      "pushEnabled": "Push",
+      "smsEnabled": "SMS"
+    },
+    "priority": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "status": {
+      "pending": "Pending",
+      "sent": "Sent",
+      "read": "Read",
+      "failed": "Failed",
+      "archived": "Archived"
+    },
+    "channel": {
+      "inApp": "In-App",
+      "email": "Email",
+      "push": "Push",
+      "sms": "SMS"
+    }
+  },
+  "chat": {
+    "rooms": {
+      "title": "Chat Rooms",
+      "create": "New Room",
+      "createButton": "New Room",
+      "createSuccess": "Chat room created successfully",
+      "detail": "Chat Room"
+    },
+    "messages": {
+      "title": "Messages",
+      "send": "Send",
+      "sendPlaceholder": "Type a message...",
+      "sendSuccess": "Message sent",
+      "edit": "Edit",
+      "editSuccess": "Message edited",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this message?",
+      "deleteSuccess": "Message deleted",
+      "deleted": "Message deleted",
+      "edited": "edited",
+      "react": "React",
+      "reactSuccess": "Reaction added",
+      "noMessages": "No messages yet",
+      "startConversation": "Start the conversation by sending a message."
+    },
+    "participants": {
+      "title": "Participants",
+      "add": "Add Participant",
+      "addButton": "Add Participant",
+      "addSuccess": "Participant added successfully",
+      "remove": "Remove",
+      "removeConfirm": "Remove this participant?",
+      "removeSuccess": "Participant removed successfully"
+    },
+    "thread": {
+      "title": "Thread",
+      "replies": "replies",
+      "replyPlaceholder": "Reply to thread...",
+      "backToRoom": "Back to Room"
+    },
+    "fields": {
+      "name": "Room Name",
+      "type": "Type",
+      "description": "Description",
+      "avatarUrl": "Avatar URL",
+      "participantUserIds": "Participant User IDs",
+      "participantCount": "Participants",
+      "lastMessagePreview": "Last Message",
+      "userId": "User ID",
+      "displayName": "Display Name",
+      "isAdmin": "Admin",
+      "content": "Message",
+      "parentMessageId": "Parent Message",
+      "attachmentUrl": "Attachment URL",
+      "attachmentName": "Attachment Name",
+      "emoji": "Emoji",
+      "presence": "Status",
+      "threadReplyCount": "Replies"
+    },
+    "tabs": {
+      "messages": "Messages",
+      "participants": "Participants"
+    },
+    "roomType": {
+      "direct": "Direct",
+      "group": "Group",
+      "channel": "Channel"
+    },
+    "messageStatus": {
+      "sent": "Sent",
+      "delivered": "Delivered",
+      "read": "Read",
+      "deleted": "Deleted"
+    },
+    "presence": {
+      "online": "Online",
+      "away": "Away",
+      "offline": "Offline",
+      "doNotDisturb": "Do Not Disturb"
+    }
+  },
+  "documents": {
+    "documents": {
+      "title": "Documents",
+      "upload": "Upload Document",
+      "uploadButton": "Upload",
+      "uploadSuccess": "Document uploaded successfully",
+      "detail": "Document Detail",
+      "updateSuccess": "Document metadata updated successfully"
+    },
+    "folders": {
+      "title": "Folders",
+      "create": "New Folder",
+      "createButton": "New Folder",
+      "createSuccess": "Folder created successfully",
+      "updateSuccess": "Folder updated successfully",
+      "moveSuccess": "Folder moved successfully",
+      "editButton": "Edit",
+      "moveButton": "Move"
+    },
+    "versions": {
+      "title": "Versions",
+      "upload": "Upload New Version",
+      "uploadButton": "Upload Version",
+      "uploadSuccess": "New version uploaded successfully"
+    },
+    "comments": {
+      "title": "Comments",
+      "add": "Add Comment",
+      "addButton": "Add Comment",
+      "addSuccess": "Comment added successfully",
+      "replyButton": "Reply"
+    },
+    "fields": {
+      "fileName": "File Name",
+      "displayName": "Display Name",
+      "description": "Description",
+      "status": "Status",
+      "category": "Category",
+      "contentType": "Content Type",
+      "fileSizeBytes": "File Size",
+      "currentVersion": "Version",
+      "tags": "Tags",
+      "linkedEntityId": "Linked Entity ID",
+      "linkedEntityType": "Linked Entity Type",
+      "storageUrl": "Storage URL",
+      "changeNotes": "Change Notes",
+      "uploadedByName": "Uploaded By",
+      "versionNumber": "Version Number",
+      "name": "Folder Name",
+      "parentFolderId": "Parent Folder",
+      "projectId": "Project",
+      "sortOrder": "Sort Order",
+      "documentCount": "Documents",
+      "folderId": "Folder",
+      "search": "Search",
+      "content": "Comment",
+      "authorName": "Author",
+      "parentCommentId": "Reply To",
+      "createdAt": "Created Date"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "versions": "Versions",
+      "comments": "Comments"
+    },
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "archived": "Archived"
+    },
+    "category": {
+      "general": "General",
+      "policy": "Policy",
+      "report": "Report",
+      "contract": "Contract",
+      "template": "Template",
+      "training": "Training",
+      "procurement": "Procurement",
+      "financial": "Financial",
+      "other": "Other"
+    }
+  },
+  "feedback": {
+    "feedback": {
+      "title": "Feedback",
+      "submit": "Submit Feedback",
+      "submitButton": "Submit",
+      "submitSuccess": "Feedback submitted successfully",
+      "detail": "Feedback Detail"
+    },
+    "categories": {
+      "title": "Feedback Categories",
+      "create": "New Category",
+      "createButton": "New Category",
+      "createSuccess": "Category created successfully",
+      "updateSuccess": "Category updated successfully",
+      "edit": "Edit Category",
+      "editButton": "Edit"
+    },
+    "detail": {
+      "title": "Feedback Detail",
+      "overview": "Overview",
+      "submitter": "Submitter Information",
+      "assignment": "Assignment & SLA",
+      "responses": "Responses"
+    },
+    "dashboard": {
+      "title": "Feedback Dashboard",
+      "totalCount": "Total Feedback",
+      "resolvedCount": "Resolved",
+      "avgResolutionDays": "Avg. Resolution (Days)",
+      "slaBreachedCount": "SLA Breached",
+      "byCategory": "By Category",
+      "byStatus": "By Status"
+    },
+    "responses": {
+      "title": "Responses",
+      "add": "Add Response",
+      "addButton": "Add Response",
+      "addSuccess": "Response added successfully"
+    },
+    "actions": {
+      "acknowledge": "Acknowledge",
+      "acknowledgeSuccess": "Feedback acknowledged",
+      "assign": "Assign",
+      "assignSuccess": "Feedback assigned",
+      "escalate": "Escalate",
+      "escalateSuccess": "Feedback escalated",
+      "resolve": "Resolve",
+      "resolveSuccess": "Feedback resolved"
+    },
+    "fields": {
+      "referenceNumber": "Reference",
+      "type": "Type",
+      "status": "Status",
+      "priority": "Priority",
+      "channel": "Channel",
+      "description": "Description",
+      "submitterName": "Submitter Name",
+      "submitterContact": "Submitter Contact",
+      "isAnonymous": "Anonymous",
+      "isConfidential": "Confidential",
+      "location": "Location",
+      "projectId": "Project",
+      "feedbackCategoryId": "Category",
+      "assignedToUserId": "Assigned To (User ID)",
+      "assignedToName": "Assigned To",
+      "reason": "Reason",
+      "content": "Response",
+      "isInternal": "Internal Only",
+      "createdAt": "Created At",
+      "acknowledgedAt": "Acknowledged At",
+      "resolvedAt": "Resolved At",
+      "assignedTo": "Assigned To",
+      "category": "Category",
+      "slaResponseDeadline": "Response Deadline",
+      "slaResolutionDeadline": "Resolution Deadline",
+      "slaStatus": "SLA Status",
+      "responseCount": "Responses",
+      "name": "Category Name",
+      "defaultType": "Default Type",
+      "slaResponseDays": "SLA Response Days",
+      "slaResolutionDays": "SLA Resolution Days",
+      "requiresEscalation": "Requires Escalation",
+      "sortOrder": "Sort Order",
+      "categoryName": "Category",
+      "count": "Count",
+      "responderName": "Responder"
+    },
+    "tabs": {
+      "overview": "Overview",
+      "responses": "Responses"
+    },
+    "feedbackType": {
+      "complaint": "Complaint",
+      "suggestion": "Suggestion",
+      "positive": "Positive",
+      "safeguarding": "Safeguarding",
+      "query": "Query"
+    },
+    "feedbackStatus": {
+      "new": "New",
+      "acknowledged": "Acknowledged",
+      "underReview": "Under Review",
+      "escalated": "Escalated",
+      "resolved": "Resolved",
+      "closed": "Closed"
+    },
+    "feedbackPriority": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High",
+      "critical": "Critical"
+    },
+    "feedbackChannel": {
+      "web": "Web",
+      "mobile": "Mobile",
+      "inPerson": "In Person",
+      "phone": "Phone",
+      "suggestionBox": "Suggestion Box",
+      "other": "Other"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "minLength": "Must be at least {{min}} characters",
+    "maxLength": "Must be at most {{max}} characters",
+    "passwordMismatch": "Passwords do not match",
+    "invalidFormat": "Invalid format",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email address",
+    "passwordRequired": "Password is required",
+    "confirmPasswordRequired": "Please confirm your password"
+  },
+  "actions": {
+    "confirmDelete": "Are you sure you want to delete this item?",
+    "deleteSuccess": "Item deleted successfully",
+    "saveSuccess": "Changes saved successfully",
+    "createSuccess": "Created successfully"
+  },
+  "dashboards": {
+    "title": "Dashboards",
+    "list": "All Dashboards",
+    "create": "Create Dashboard",
+    "detail": "Dashboard Detail",
+    "filters": "Saved Filters",
+    "createFilter": "Create Filter",
+    "fields": {
+      "name": "Name",
+      "dashboardType": "Dashboard Type",
+      "description": "Description",
+      "isShared": "Shared",
+      "isDefault": "Default",
+      "layoutJson": "Layout JSON",
+      "widgetCount": "Widgets",
+      "createdAt": "Created At",
+      "widgetType": "Widget Type",
+      "title": "Title",
+      "dataSourceModule": "Data Source Module",
+      "queryDefinition": "Query Definition",
+      "displayConfig": "Display Config",
+      "position": "Position",
+      "width": "Width",
+      "height": "Height",
+      "refreshIntervalMinutes": "Refresh Interval (min)",
+      "module": "Module",
+      "filterJson": "Filter JSON"
+    },
+    "widgets": {
+      "title": "Widgets",
+      "add": "Add Widget",
+      "edit": "Edit Widget",
+      "remove": "Remove Widget"
+    },
+    "types": {
+      "Executive": "Executive",
+      "ProjectPortfolio": "Project Portfolio",
+      "Finance": "Finance",
+      "MEAL": "MEAL",
+      "Participant": "Participant",
+      "Risk": "Risk",
+      "Procurement": "Procurement",
+      "Performance": "Performance",
+      "Custom": "Custom"
+    },
+    "widgetTypes": {
+      "Chart": "Chart",
+      "Table": "Table",
+      "KPI": "KPI",
+      "Map": "Map",
+      "Timeline": "Timeline",
+      "Gauge": "Gauge",
+      "PieChart": "Pie Chart",
+      "BarChart": "Bar Chart",
+      "LineChart": "Line Chart",
+      "HeatMap": "Heat Map"
+    },
+    "messages": {
+      "created": "Dashboard created successfully",
+      "updated": "Dashboard updated successfully",
+      "deleted": "Dashboard deleted successfully",
+      "widgetAdded": "Widget added successfully",
+      "widgetUpdated": "Widget updated successfully",
+      "widgetRemoved": "Widget removed successfully",
+      "filterCreated": "Filter saved successfully",
+      "filterDeleted": "Filter deleted successfully"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "system": {
+      "title": "System Settings",
+      "edit": "Edit Setting"
+    },
+    "org": {
+      "title": "Organization Settings",
+      "upsert": "Add/Update Setting"
+    },
+    "approvals": {
+      "title": "Approval Configurations",
+      "create": "Create Approval Config",
+      "edit": "Edit Approval Config"
+    },
+    "alerts": {
+      "title": "Alert Thresholds",
+      "create": "Create Alert Threshold",
+      "edit": "Edit Alert Threshold"
+    },
+    "fields": {
+      "settingKey": "Setting Key",
+      "settingValue": "Setting Value",
+      "dataType": "Data Type",
+      "category": "Category",
+      "description": "Description",
+      "isReadOnly": "Read Only",
+      "module": "Module",
+      "entityType": "Entity Type",
+      "requiredApprovalLevels": "Required Approval Levels",
+      "autoApproveBelow": "Auto-Approve Below",
+      "isActive": "Active",
+      "metricName": "Metric Name",
+      "thresholdValue": "Threshold Value",
+      "operator": "Operator",
+      "alertSeverity": "Severity"
+    },
+    "dataTypes": {
+      "String": "String",
+      "Integer": "Integer",
+      "Boolean": "Boolean",
+      "Decimal": "Decimal",
+      "Json": "JSON",
+      "DateTime": "DateTime"
+    },
+    "operators": {
+      "GreaterThan": "Greater Than (>)",
+      "LessThan": "Less Than (<)",
+      "GreaterThanOrEqual": "Greater Than or Equal (>=)",
+      "LessThanOrEqual": "Less Than or Equal (<=)",
+      "Equal": "Equal (=)"
+    },
+    "severities": {
+      "Info": "Info",
+      "Warning": "Warning",
+      "Critical": "Critical"
+    },
+    "messages": {
+      "settingUpdated": "Setting updated successfully",
+      "orgSettingUpserted": "Organization setting saved successfully",
+      "approvalCreated": "Approval config created successfully",
+      "approvalUpdated": "Approval config updated successfully",
+      "alertCreated": "Alert threshold created successfully",
+      "alertUpdated": "Alert threshold updated successfully",
+      "alertDeleted": "Alert threshold deleted successfully"
+    }
+  },
+  "knowledge": {
+    "title": "Knowledge Base",
+    "categories": {
+      "title": "Categories",
+      "create": "Create Category",
+      "edit": "Edit Category"
+    },
+    "articles": {
+      "title": "Articles",
+      "create": "Create Article",
+      "detail": "Article Detail",
+      "search": "Search Articles",
+      "publish": "Publish",
+      "archive": "Archive",
+      "featured": "Featured"
+    },
+    "comments": {
+      "title": "Comments",
+      "add": "Add Comment",
+      "reply": "Reply"
+    },
+    "fields": {
+      "name": "Name",
+      "description": "Description",
+      "parentCategoryId": "Parent Category",
+      "sortOrder": "Sort Order",
+      "isActive": "Active",
+      "childCount": "Sub-categories",
+      "categoryId": "Category",
+      "categoryName": "Category",
+      "title": "Title",
+      "content": "Content",
+      "summary": "Summary",
+      "authorId": "Author",
+      "tags": "Tags",
+      "linkedProjectId": "Linked Project",
+      "linkedEvaluationId": "Linked Evaluation",
+      "articleType": "Article Type",
+      "status": "Status",
+      "isFeatured": "Featured",
+      "viewCount": "Views",
+      "createdAt": "Created At"
+    },
+    "articleTypes": {
+      "LessonLearned": "Lesson Learned",
+      "BestPractice": "Best Practice",
+      "EvaluationFinding": "Evaluation Finding",
+      "CaseStudy": "Case Study",
+      "Guideline": "Guideline",
+      "Template": "Template"
+    },
+    "statuses": {
+      "Draft": "Draft",
+      "Published": "Published",
+      "Archived": "Archived"
+    },
+    "messages": {
+      "categoryCreated": "Category created successfully",
+      "categoryUpdated": "Category updated successfully",
+      "categoryDeleted": "Category deleted successfully",
+      "articleCreated": "Article created successfully",
+      "articleUpdated": "Article updated successfully",
+      "articlePublished": "Article published successfully",
+      "articleArchived": "Article archived successfully",
+      "articleDeleted": "Article deleted successfully",
+      "commentAdded": "Comment added successfully"
+    }
+  },
+  "partnerships": {
+    "title": "Partnerships",
+    "subGrantees": {
+      "title": "Sub-Grantees",
+      "register": "Register Sub-Grantee",
+      "detail": "Sub-Grantee Detail",
+      "activate": "Activate",
+      "suspend": "Suspend",
+      "riskAssessment": "Risk Assessment"
+    },
+    "disbursements": {
+      "title": "Disbursements",
+      "create": "Create Disbursement",
+      "approve": "Approve",
+      "disburse": "Disburse",
+      "reject": "Reject"
+    },
+    "reports": {
+      "title": "Partner Reports",
+      "create": "Create Report",
+      "detail": "Report Detail",
+      "submit": "Submit Report",
+      "review": "Review Report"
+    },
+    "compliance": {
+      "title": "Compliance Checks",
+      "create": "Create Check",
+      "complete": "Complete Check",
+      "followUp": "Request Follow-Up"
+    },
+    "dashboard": {
+      "title": "Partnership Dashboard",
+      "totalPartners": "Total Partners",
+      "activePartners": "Active Partners",
+      "totalDisbursed": "Total Disbursed",
+      "pendingReports": "Pending Reports",
+      "overdueCompliance": "Overdue Compliance",
+      "riskDistribution": "Risk Distribution"
+    },
+    "fields": {
+      "name": "Name",
+      "registrationNumber": "Registration Number",
+      "contactPerson": "Contact Person",
+      "contactEmail": "Contact Email",
+      "contactPhone": "Contact Phone",
+      "address": "Address",
+      "country": "Country",
+      "partnerType": "Partner Type",
+      "status": "Status",
+      "riskRating": "Risk Rating",
+      "capacityScore": "Capacity Score",
+      "onboardingDate": "Onboarding Date",
+      "notes": "Notes",
+      "amount": "Amount",
+      "currency": "Currency",
+      "disbursementDate": "Disbursement Date",
+      "referenceNumber": "Reference Number",
+      "purpose": "Purpose",
+      "reportType": "Report Type",
+      "reportingPeriodStart": "Period Start",
+      "reportingPeriodEnd": "Period End",
+      "title": "Title",
+      "narrative": "Narrative",
+      "financialSummaryJson": "Financial Summary",
+      "reviewComments": "Review Comments",
+      "complianceType": "Compliance Type",
+      "checkDate": "Check Date",
+      "assessorId": "Assessor",
+      "score": "Score",
+      "findings": "Findings",
+      "recommendations": "Recommendations",
+      "followUpDate": "Follow-Up Date",
+      "createdAt": "Created At",
+      "subGranteeId": "Sub-Grantee",
+      "grantId": "Grant"
+    },
+    "partnerTypes": {
+      "LocalNGO": "Local NGO",
+      "InternationalNGO": "International NGO",
+      "CommunityOrg": "Community Organization",
+      "GovernmentBody": "Government Body",
+      "AcademicInstitution": "Academic Institution",
+      "PrivateSector": "Private Sector"
+    },
+    "partnerStatuses": {
+      "Prospect": "Prospect",
+      "Active": "Active",
+      "Suspended": "Suspended",
+      "Inactive": "Inactive",
+      "Blacklisted": "Blacklisted"
+    },
+    "riskRatings": {
+      "Low": "Low",
+      "Medium": "Medium",
+      "High": "High",
+      "Critical": "Critical"
+    },
+    "disbursementStatuses": {
+      "Pending": "Pending",
+      "Approved": "Approved",
+      "Disbursed": "Disbursed",
+      "Rejected": "Rejected",
+      "Returned": "Returned"
+    },
+    "reportStatuses": {
+      "Draft": "Draft",
+      "Submitted": "Submitted",
+      "UnderReview": "Under Review",
+      "Approved": "Approved",
+      "Rejected": "Rejected",
+      "RevisionRequested": "Revision Requested"
+    },
+    "complianceTypes": {
+      "FinancialAudit": "Financial Audit",
+      "ProgrammaticReview": "Programmatic Review",
+      "SafeguardingCheck": "Safeguarding Check",
+      "EnvironmentalCompliance": "Environmental Compliance",
+      "AntiCorruption": "Anti-Corruption",
+      "CapacityAssessment": "Capacity Assessment"
+    },
+    "complianceStatuses": {
+      "Scheduled": "Scheduled",
+      "InProgress": "In Progress",
+      "Completed": "Completed",
+      "FollowUpRequired": "Follow-Up Required"
+    },
+    "messages": {
+      "registered": "Sub-grantee registered successfully",
+      "updated": "Sub-grantee updated successfully",
+      "activated": "Sub-grantee activated successfully",
+      "suspended": "Sub-grantee suspended successfully",
+      "riskAssessed": "Risk assessment saved successfully",
+      "disbursementCreated": "Disbursement created successfully",
+      "disbursementApproved": "Disbursement approved successfully",
+      "disbursementDisbursed": "Funds disbursed successfully",
+      "disbursementRejected": "Disbursement rejected",
+      "reportCreated": "Report created successfully",
+      "reportSubmitted": "Report submitted successfully",
+      "reportReviewed": "Report reviewed successfully",
+      "complianceCreated": "Compliance check created successfully",
+      "complianceCompleted": "Compliance check completed successfully",
+      "followUpRequested": "Follow-up requested successfully"
+    }
+  },
+  "reports": {
+    "title": "System Reports",
+    "templates": {
+      "title": "Report Templates",
+      "list": {
+        "title": "Report Templates",
+        "createButton": "Create Template"
+      },
+      "create": {
+        "title": "Create Report Template"
+      },
+      "detail": {
+        "title": "Template Detail",
+        "overviewTab": "Overview",
+        "generateButton": "Generate Report",
+        "editButton": "Edit",
+        "deleteButton": "Delete Template"
+      },
+      "fields": {
+        "name": "Name",
+        "description": "Description",
+        "module": "Module",
+        "reportFormat": "Report Format",
+        "queryDefinition": "Query Definition",
+        "templateContent": "Template Content",
+        "isSystemTemplate": "System Template",
+        "isActive": "Active",
+        "createdAt": "Created At"
+      }
+    },
+    "schedules": {
+      "title": "Report Schedules",
+      "list": {
+        "title": "Report Schedules",
+        "createButton": "Create Schedule"
+      },
+      "create": {
+        "title": "Create Report Schedule"
+      },
+      "edit": "Edit Schedule",
+      "fields": {
+        "name": "Name",
+        "template": "Report Template",
+        "cronExpression": "Cron Expression",
+        "recipients": "Recipients",
+        "parameters": "Parameters",
+        "lastRunAt": "Last Run",
+        "nextRunAt": "Next Run",
+        "status": "Status",
+        "isActive": "Active"
+      }
+    },
+    "generated": {
+      "title": "Generated Reports",
+      "list": {
+        "title": "Generated Reports",
+        "generateButton": "Generate Report"
+      },
+      "generate": "Generate Report",
+      "share": "Share Report",
+      "detail": "Report Detail",
+      "filters": {
+        "template": "Filter by Template",
+        "dateFrom": "Date From",
+        "dateTo": "Date To"
+      },
+      "fields": {
+        "templateName": "Template Name",
+        "generatedById": "Generated By",
+        "generatedAt": "Generated At",
+        "reportFormat": "Format",
+        "fileName": "File Name",
+        "fileSize": "File Size",
+        "storagePath": "Storage Path",
+        "expiresAt": "Expires At"
+      }
+    },
+    "formats": {
+      "PDF": "PDF",
+      "Excel": "Excel",
+      "Word": "Word",
+      "CSV": "CSV"
+    },
+    "scheduleStatuses": {
+      "Active": "Active",
+      "Paused": "Paused",
+      "Failed": "Failed",
+      "Completed": "Completed"
+    },
+    "messages": {
+      "templateCreated": "Report template created successfully",
+      "templateUpdated": "Report template updated successfully",
+      "templateDeleted": "Report template deleted successfully",
+      "scheduleCreated": "Report schedule created successfully",
+      "scheduleUpdated": "Report schedule updated successfully",
+      "scheduleDeleted": "Report schedule deleted successfully",
+      "reportGenerated": "Report generated successfully",
+      "reportShared": "Report shared successfully"
+    }
+  },
+  "importExport": {
+    "title": "Import/Export",
+    "importTemplates": {
+      "title": "Import Templates",
+      "create": "Create Template",
+      "edit": "Edit Template"
+    },
+    "importJobs": {
+      "title": "Import Jobs",
+      "start": "Start Import",
+      "detail": "Import Job Detail",
+      "cancel": "Cancel Import"
+    },
+    "exportJobs": {
+      "title": "Export Jobs",
+      "start": "Start Export"
+    },
+    "dataSync": {
+      "title": "Data Sync",
+      "create": "Create Sync Config",
+      "edit": "Edit Sync Config",
+      "trigger": "Trigger Sync"
+    },
+    "fields": {
+      "name": "Name",
+      "module": "Module",
+      "entityType": "Entity Type",
+      "fileFormat": "File Format",
+      "columnMappings": "Column Mappings",
+      "validationRules": "Validation Rules",
+      "isSystemTemplate": "System Template",
+      "isActive": "Active",
+      "createdAt": "Created At",
+      "fileName": "File Name",
+      "fileSize": "File Size",
+      "status": "Status",
+      "totalRows": "Total Rows",
+      "processedRows": "Processed Rows",
+      "successRows": "Success Rows",
+      "errorRows": "Error Rows",
+      "startedAt": "Started At",
+      "completedAt": "Completed At",
+      "exportFormat": "Export Format",
+      "totalRecords": "Total Records",
+      "filterCriteria": "Filter Criteria",
+      "sourceType": "Source Type",
+      "sourceUrl": "Source URL",
+      "formId": "Form ID",
+      "targetModule": "Target Module",
+      "targetEntityType": "Target Entity Type",
+      "mappingConfig": "Mapping Config",
+      "syncFrequency": "Sync Frequency",
+      "lastSyncAt": "Last Sync",
+      "fileStoragePath": "File Storage Path"
+    },
+    "importFormats": {
+      "CSV": "CSV",
+      "Excel": "Excel",
+      "JSON": "JSON",
+      "KoboToolbox": "KoboToolbox"
+    },
+    "importStatuses": {
+      "Pending": "Pending",
+      "Validating": "Validating",
+      "Validated": "Validated",
+      "Processing": "Processing",
+      "Completed": "Completed",
+      "CompletedWithErrors": "Completed with Errors",
+      "Failed": "Failed",
+      "Cancelled": "Cancelled"
+    },
+    "exportFormats": {
+      "CSV": "CSV",
+      "Excel": "Excel",
+      "JSON": "JSON",
+      "PDF": "PDF"
+    },
+    "exportStatuses": {
+      "Pending": "Pending",
+      "Processing": "Processing",
+      "Completed": "Completed",
+      "Failed": "Failed"
+    },
+    "sourceTypes": {
+      "KoboToolbox": "KoboToolbox",
+      "ODK": "ODK",
+      "CommCare": "CommCare",
+      "CustomApi": "Custom API"
+    },
+    "messages": {
+      "templateCreated": "Import template created successfully",
+      "templateUpdated": "Import template updated successfully",
+      "templateDeleted": "Import template deleted successfully",
+      "importStarted": "Import job started successfully",
+      "importCancelled": "Import job cancelled",
+      "exportStarted": "Export job started successfully",
+      "syncCreated": "Data sync config created successfully",
+      "syncUpdated": "Data sync config updated successfully",
+      "syncDeleted": "Data sync config deleted successfully",
+      "syncTriggered": "Data sync triggered successfully"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "modules-feedback",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/modules/feedback/src",
+  "prefix": "feedback",
+  "tags": ["scope:feedback", "type:feature"],
+  "targets": {
+    "lint": { "executor": "@nx/eslint:lint" },
+    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+  }
+}

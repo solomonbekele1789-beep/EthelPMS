@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Risk.Domain;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. All domain types are in their respective folders.
