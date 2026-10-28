@@ -1,3 +1,6 @@
+> **⚠ SUPERSEDED** — Replaced by `docs/plans/00-TECH-STACK.md`. This file references Angular 18 (outdated).
+> The authoritative version reference is `docs/plans/00-TECH-STACK.md` (Angular 22).
+
 # SECTION 2: FRONTEND TECHNOLOGIES (Angular)
 
 ---

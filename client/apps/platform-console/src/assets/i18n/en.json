@@ -1,0 +1,123 @@
+{
+  "app": {
+    "title": "EthelPMS Platform Console",
+    "logout": "Sign Out"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "tenants": "Tenants",
+    "packages": "Packages"
+  },
+  "login": {
+    "title": "Platform Console",
+    "subtitle": "Sign in to manage the EthelPMS platform",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email",
+      "passwordRequired": "Password is required"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Platform overview and system health",
+    "totalTenants": "Total Tenants",
+    "activeSubscriptions": "Active Subscriptions",
+    "systemHealth": "System Health",
+    "packages": "Packages",
+    "quickActions": "Quick Actions",
+    "provisionTenant": "Provision Tenant",
+    "managePackages": "Manage Packages",
+    "viewAllTenants": "View All Tenants",
+    "recentActivity": "Recent Activity",
+    "activityPlaceholder": "Activity log will appear here once the platform is in use."
+  },
+  "tenants": {
+    "title": "Tenants",
+    "subtitle": "Manage all tenant organizations on the platform",
+    "search": "Search tenants",
+    "newTenant": "New Tenant",
+    "columns": {
+      "name": "Name",
+      "identifier": "Identifier",
+      "status": "Status",
+      "package": "Package",
+      "created": "Created"
+    },
+    "actions": {
+      "viewDetails": "View Details",
+      "edit": "Edit",
+      "suspend": "Suspend",
+      "reactivate": "Reactivate"
+    },
+    "empty": "No tenants found. Create a new tenant to get started.",
+    "create": {
+      "title": "Provision New Tenant",
+      "subtitle": "Set up a new tenant organization on the platform",
+      "step1": "Organization Info",
+      "step2": "Package Selection",
+      "step3": "Confirm",
+      "orgName": "Organization Name",
+      "identifier": "Identifier",
+      "identifierHint": "URL-safe slug used for tenant routing",
+      "adminFirstName": "Admin First Name",
+      "adminLastName": "Admin Last Name",
+      "adminEmail": "Admin Email",
+      "selectPackage": "Select Subscription Package",
+      "reviewConfirm": "Review & Confirm",
+      "provision": "Provision Tenant",
+      "success": "Tenant provisioned successfully!"
+    },
+    "detail": {
+      "overview": "Overview",
+      "modules": "Modules",
+      "users": "Users",
+      "settings": "Settings",
+      "orgInfo": "Organization Info",
+      "subscription": "Subscription",
+      "enabledModules": "Enabled Modules",
+      "noModules": "No modules enabled for this tenant.",
+      "tenantSettings": "Tenant Settings",
+      "settingsPlaceholder": "Tenant-level configuration settings will be available here."
+    },
+    "statuses": {
+      "Active": "Active",
+      "Suspended": "Suspended",
+      "PendingSetup": "Pending Setup"
+    }
+  },
+  "packages": {
+    "title": "Subscription Packages",
+    "subtitle": "Manage subscription tiers and feature sets",
+    "newPackage": "New Package",
+    "createTitle": "Create New Package",
+    "name": "Package Name",
+    "description": "Description",
+    "maxUsers": "Max Users",
+    "pricePerMonth": "Price / Month (USD)",
+    "enabledModules": "Enabled Modules",
+    "create": "Create Package",
+    "success": "Package created successfully!",
+    "empty": {
+      "title": "No Subscription Packages",
+      "message": "Create your first subscription package to start provisioning tenants."
+    }
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "next": "Next",
+    "loading": "Loading...",
+    "noData": "No data available",
+    "confirm": "Confirm",
+    "all": "All",
+    "active": "Active",
+    "inactive": "Inactive"
+  }
+}

@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Feedback.Application;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. Application types are in Commands/, Queries/, DTOs/, Mappings/, and Abstractions/.

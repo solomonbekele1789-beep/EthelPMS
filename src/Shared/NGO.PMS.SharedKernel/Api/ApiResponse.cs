@@ -25,6 +25,7 @@ public class ApiResponse<T>
 /// </summary>
 public class PagedResponse<T> : ApiResponse<IReadOnlyList<T>>
 {
+    public IReadOnlyList<T>? Items => Data;
     public int Page { get; init; }
     public int PageSize { get; init; }
     public int TotalCount { get; init; }

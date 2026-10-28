@@ -1,0 +1,12 @@
+{
+  "name": "modules-participants",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/modules/participants/src",
+  "prefix": "participants",
+  "tags": ["scope:participants", "type:feature"],
+  "targets": {
+    "lint": { "executor": "@nx/eslint:lint" },
+    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+  }
+}

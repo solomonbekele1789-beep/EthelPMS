@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Documents.Application;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. See Abstractions/, Commands/, Queries/, DTOs/, Mappings/ folders.

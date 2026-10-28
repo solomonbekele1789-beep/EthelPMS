@@ -1,6 +1,9 @@
+> **⚠ SUPERSEDED** — Replaced by `docs/plans/00-TECH-STACK.md` which has pinned, verified versions.
+> This file contains speculative "verify on Day 1" ranges that are now outdated.
+
 # EthelPMS — Recommended Technology Versions
 **Date:** 2026-10-13
-**Rule:** Verify ALL package compatibility on Day 1 of Phase 0 before locking versions.
+**Rule:** ~~Verify ALL package compatibility on Day 1 of Phase 0 before locking versions.~~ See `docs/plans/00-TECH-STACK.md` for locked versions.
 
 ---
 

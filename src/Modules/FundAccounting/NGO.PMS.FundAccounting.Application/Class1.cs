@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.FundAccounting.Application;
-
-public class Class1
-{
-
-}
+﻿// Placeholder removed — module implemented.

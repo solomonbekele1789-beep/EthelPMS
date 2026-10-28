@@ -1,0 +1,123 @@
+{
+  "app": {
+    "title": "EthelPMS የመድረክ ኮንሶል",
+    "logout": "ውጣ"
+  },
+  "nav": {
+    "dashboard": "ዳሽቦርድ",
+    "tenants": "ተከራዮች",
+    "packages": "ጥቅሎች"
+  },
+  "login": {
+    "title": "የመድረክ ኮንሶል",
+    "subtitle": "የ EthelPMS መድረክን ለማስተዳደር ይግቡ",
+    "email": "ኢሜይል",
+    "password": "የይለፍ ቃል",
+    "signIn": "ግባ",
+    "errors": {
+      "emailRequired": "ኢሜይል ያስፈልጋል",
+      "emailInvalid": "እባክዎ ትክክለኛ ኢሜይል ያስገቡ",
+      "passwordRequired": "የይለፍ ቃል ያስፈልጋል"
+    }
+  },
+  "dashboard": {
+    "title": "ዳሽቦርድ",
+    "subtitle": "የመድረክ አጠቃላይ እይታ እና የስርዓት ጤና",
+    "totalTenants": "ጠቅላላ ተከራዮች",
+    "activeSubscriptions": "ንቁ ምዝገባዎች",
+    "systemHealth": "የስርዓት ጤና",
+    "packages": "ጥቅሎች",
+    "quickActions": "ፈጣን ድርጊቶች",
+    "provisionTenant": "ተከራይ አቅርብ",
+    "managePackages": "ጥቅሎችን አስተዳድር",
+    "viewAllTenants": "ሁሉንም ተከራዮች ይመልከቱ",
+    "recentActivity": "የቅርብ ጊዜ እንቅስቃሴ",
+    "activityPlaceholder": "መድረኩ ጥቅም ላይ ሲውል የእንቅስቃሴ ምዝግብ ማስታወሻ እዚህ ይታያል።"
+  },
+  "tenants": {
+    "title": "ተከራዮች",
+    "subtitle": "በመድረኩ ላይ ያሉ ሁሉንም የተከራይ ድርጅቶች ያስተዳድሩ",
+    "search": "ተከራዮችን ይፈልጉ",
+    "newTenant": "አዲስ ተከራይ",
+    "columns": {
+      "name": "ስም",
+      "identifier": "መለያ",
+      "status": "ሁኔታ",
+      "package": "ጥቅል",
+      "created": "የተፈጠረ"
+    },
+    "actions": {
+      "viewDetails": "ዝርዝሮችን ይመልከቱ",
+      "edit": "አርትዕ",
+      "suspend": "አግድ",
+      "reactivate": "እንደገና አንቃ"
+    },
+    "empty": "ምንም ተከራዮች አልተገኙም። ለመጀመር አዲስ ተከራይ ይፍጠሩ።",
+    "create": {
+      "title": "አዲስ ተከራይ አቅርብ",
+      "subtitle": "በመድረኩ ላይ አዲስ የተከራይ ድርጅት ያዘጋጁ",
+      "step1": "የድርጅት መረጃ",
+      "step2": "የጥቅል ምርጫ",
+      "step3": "አረጋግጥ",
+      "orgName": "የድርጅት ስም",
+      "identifier": "መለያ",
+      "identifierHint": "ለተከራይ ማዞሪያ የሚያገለግል URL-safe slug",
+      "adminFirstName": "የአስተዳዳሪ መጀመሪያ ስም",
+      "adminLastName": "የአስተዳዳሪ የአባት ስም",
+      "adminEmail": "የአስተዳዳሪ ኢሜይል",
+      "selectPackage": "የምዝገባ ጥቅል ይምረጡ",
+      "reviewConfirm": "ገምግሙ እና አረጋግጡ",
+      "provision": "ተከራይ አቅርብ",
+      "success": "ተከራይ በተሳካ ሁኔታ ቀረበ!"
+    },
+    "detail": {
+      "overview": "አጠቃላይ እይታ",
+      "modules": "ሞጁሎች",
+      "users": "ተጠቃሚዎች",
+      "settings": "ቅንብሮች",
+      "orgInfo": "የድርጅት መረጃ",
+      "subscription": "ምዝገባ",
+      "enabledModules": "የነቁ ሞጁሎች",
+      "noModules": "ለዚህ ተከራይ ምንም ሞጁሎች አልነቁም።",
+      "tenantSettings": "የተከራይ ቅንብሮች",
+      "settingsPlaceholder": "የተከራይ-ደረጃ ውቅር ቅንብሮች እዚህ ይገኛሉ።"
+    },
+    "statuses": {
+      "Active": "ንቁ",
+      "Suspended": "ታግዷል",
+      "PendingSetup": "ማዋቀር በመጠባበቅ ላይ"
+    }
+  },
+  "packages": {
+    "title": "የምዝገባ ጥቅሎች",
+    "subtitle": "የምዝገባ ደረጃዎችን እና የባህሪ ስብስቦችን ያስተዳድሩ",
+    "newPackage": "አዲስ ጥቅል",
+    "createTitle": "አዲስ ጥቅል ይፍጠሩ",
+    "name": "የጥቅል ስም",
+    "description": "መግለጫ",
+    "maxUsers": "ከፍተኛ ተጠቃሚዎች",
+    "pricePerMonth": "ዋጋ / ወር (USD)",
+    "enabledModules": "የነቁ ሞጁሎች",
+    "create": "ጥቅል ፍጠር",
+    "success": "ጥቅል በተሳካ ሁኔታ ተፈጠረ!",
+    "empty": {
+      "title": "ምንም የምዝገባ ጥቅሎች የሉም",
+      "message": "ተከራዮችን ማቅረብ ለመጀመር የመጀመሪያ የምዝገባ ጥቅልዎን ይፍጠሩ።"
+    }
+  },
+  "common": {
+    "save": "አስቀምጥ",
+    "cancel": "ሰርዝ",
+    "delete": "ሰርዝ",
+    "edit": "አርትዕ",
+    "create": "ፍጠር",
+    "back": "ተመለስ",
+    "next": "ቀጣይ",
+    "loading": "በመጫን ላይ...",
+    "noData": "ምንም ውሂብ የለም",
+    "confirm": "አረጋግጥ",
+    "all": "ሁሉም",
+    "active": "ንቁ",
+    "inactive": "ንቁ ያልሆነ"
+  }
+}

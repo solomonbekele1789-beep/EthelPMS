@@ -1,0 +1,96 @@
+name: CI
+
+on:
+  push:
+    branches: [main, ethel-sol-branch]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_VERSION: '10.0.x'
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  NODE_VERSION: '22'
+
+jobs:
+  backend:
+    name: Backend Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-quality: 'preview'
+
+      - name: Restore
+        run: dotnet restore EthelPMS.slnx
+
+      - name: Build
+        run: dotnet build EthelPMS.slnx --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test EthelPMS.slnx --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-results
+          path: '**/test-results.trx'
+
+  frontend-web:
+    name: Frontend Web Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: src/Frontend/ngo-pms-frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: src/Frontend/ngo-pms-frontend
+        run: npm ci
+
+      - name: Lint
+        working-directory: src/Frontend/ngo-pms-frontend
+        run: npx nx lint web
+
+      - name: Build
+        working-directory: src/Frontend/ngo-pms-frontend
+        run: npx nx build web --configuration=production
+
+  frontend-platform:
+    name: Frontend Platform Console Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: src/Frontend/ngo-pms-frontend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: src/Frontend/ngo-pms-frontend
+        run: npm ci
+
+      - name: Lint
+        working-directory: src/Frontend/ngo-pms-frontend
+        run: npx nx lint platform-console
+
+      - name: Build
+        working-directory: src/Frontend/ngo-pms-frontend
+        run: npx nx build platform-console --configuration=production

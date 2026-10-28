@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Notifications.Infrastructure;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. Infrastructure types are in Persistence/.

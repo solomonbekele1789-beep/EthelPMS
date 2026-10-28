@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Reporting.Infrastructure;
-
-public class Class1
-{
-
-}
+﻿// Placeholder removed — module implemented.

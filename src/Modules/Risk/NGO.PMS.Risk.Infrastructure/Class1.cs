@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Risk.Infrastructure;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. All infrastructure types are in their respective folders.

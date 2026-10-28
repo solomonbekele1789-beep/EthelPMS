@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.SharedKernel;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally empty. Delete it when convenient.

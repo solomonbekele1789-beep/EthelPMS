@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\NGO.PMS.Dashboards.Infrastructure\NGO.PMS.Dashboards.Infrastructure.csproj" />
+    <ProjectReference Include="..\NGO.PMS.Dashboards.Application\NGO.PMS.Dashboards.Application.csproj" />
+  </ItemGroup>
+
+</Project>

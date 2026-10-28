@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.Documents.API;
-
-public class Class1
-{
-
-}
+﻿// This file is intentionally left empty. See Controllers/ folder and DocumentsModuleExtensions.cs.

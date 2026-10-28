@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\NGO.PMS.KnowledgeMgmt.Domain\NGO.PMS.KnowledgeMgmt.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\NGO.PMS.Contracts\NGO.PMS.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="$(AutoMapperVersion)" />
+    <PackageReference Include="FluentValidation" Version="$(FluentValidationVersion)" />
+    <PackageReference Include="MediatR" Version="$(MediatRVersion)" />
+  </ItemGroup>
+</Project>

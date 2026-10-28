@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NGO.PMS.ImportExport.Infrastructure\NGO.PMS.ImportExport.Infrastructure.csproj" />
+    <ProjectReference Include="..\NGO.PMS.ImportExport.Application\NGO.PMS.ImportExport.Application.csproj" />
+  </ItemGroup>
+</Project>

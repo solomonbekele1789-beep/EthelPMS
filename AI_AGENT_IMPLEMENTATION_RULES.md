@@ -1,6 +1,11 @@
+> **⚠ SUPERSEDED** — Unique rules from this file have been merged into `docs/plans/00-CODING-STANDARDS.md` (sections 11-23).
+> Do NOT use this document for implementation. It references .NET 8 + Angular 18 (outdated).
+> The authoritative coding rules are now in `docs/plans/00-CODING-STANDARDS.md`.
+> Kept for historical reference only.
+
 # EthelPMS — AI Agent Implementation Rules
 
-> **MANDATORY INSTRUCTION**: All AI coding agents, engineers, models, and subagents working on this codebase MUST strictly adhere to every rule in this document without exception. These rules are specifically designed for the EthelPMS unified NGO Project Management System and supersede any default agent behaviors.
+> ~~**MANDATORY INSTRUCTION**~~: Rules merged into `docs/plans/00-CODING-STANDARDS.md`. See that file instead.
 
 **Stack:** ASP.NET Core 8 + Angular 18 (Nx) + Supabase PostgreSQL
 **Architecture:** Modular Monolith — schema-per-module, Clean Architecture per module, Transactional Outbox

@@ -1,6 +1,1 @@
-﻿namespace NGO.PMS.MEAL.Infrastructure;
-
-public class Class1
-{
-
-}
+﻿// Placeholder removed — module implemented.

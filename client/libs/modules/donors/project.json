@@ -1,0 +1,12 @@
+{
+  "name": "modules-donors",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/modules/donors/src",
+  "prefix": "donors",
+  "tags": ["scope:donors", "type:feature"],
+  "targets": {
+    "lint": { "executor": "@nx/eslint:lint" },
+    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+  }
+}

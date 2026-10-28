@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\NGO.PMS.SharedKernel\NGO.PMS.SharedKernel.csproj" />
+  </ItemGroup>
+</Project>

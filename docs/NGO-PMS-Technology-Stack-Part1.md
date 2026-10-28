@@ -1,3 +1,6 @@
+> **⚠ SUPERSEDED** — Replaced by `docs/plans/00-TECH-STACK.md`. This file references .NET 8 / Angular 18 (outdated).
+> The authoritative version reference is `docs/plans/00-TECH-STACK.md` (.NET 10 / Angular 22).
+
 # Unified NGO PMS — Complete Technology Stack & Dependency Plan
 
 **Date:** October 12, 2026
