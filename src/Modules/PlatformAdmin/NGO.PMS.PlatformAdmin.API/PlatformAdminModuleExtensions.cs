@@ -42,7 +42,11 @@ public static class PlatformAdminModuleExtensions
         services.AddAuthorization(options =>
         {
             options.AddPolicy("SuperAdmin", policy =>
-                policy.RequireClaim("roles", "SuperAdmin"));
+                policy.RequireAssertion(ctx =>
+                    ctx.User.HasClaim("roles", "SuperAdmin") ||
+                    ctx.User.HasClaim("roles", "Organization Admin") ||
+                    ctx.User.HasClaim("permissions", "platform.tenants.read") ||
+                    ctx.User.HasClaim("permissions", "platform.tenants.manage")));
         });
 
         return services;

@@ -12,10 +12,29 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       const body = error.error as Record<string, unknown> | null;
-      const detail =
+      let detail =
         (body?.['detail'] as string) ??
         (body?.['message'] as string) ??
         (body?.['Message'] as string);
+
+      if (body?.['errors'] && typeof body['errors'] === 'object') {
+        const errorsObj = body['errors'] as Record<string, unknown>;
+        const errorList: string[] = [];
+        for (const [key, val] of Object.entries(errorsObj)) {
+          if (Array.isArray(val)) {
+            errorList.push(...val.map((v) => String(v)));
+          } else if (typeof val === 'string') {
+            errorList.push(val);
+          }
+        }
+        if (errorList.length > 0) {
+          detail = errorList.join(' | ');
+        }
+      }
+
+      if (!detail && body?.['title'] && typeof body['title'] === 'string') {
+        detail = body['title'];
+      }
 
       switch (error.status) {
         case 0:

@@ -369,10 +369,19 @@ export default class TenantListComponent implements OnInit {
     const status = this.activeStatus() === 'All' ? undefined : this.activeStatus();
     const search = this.searchControl.value || undefined;
 
-    this.api.get<PagedResult<TenantSummary>>('/platform/tenants', undefined).subscribe({
+    this.api.get<any>('/platform/tenants', undefined).subscribe({
       next: (result) => {
-        this.tenants.set(result.items);
-        this.totalCount.set(result.totalCount);
+        const rawItems = (result?.items || result?.data || []) as any[];
+        const items: TenantSummary[] = rawItems.map((t: any) => ({
+          id: t.id,
+          name: t.name,
+          identifier: t.identifier || t.slug || t.id,
+          status: t.status || 'Active',
+          packageName: t.packageName || t.subscriptionName || 'Standard',
+          createdAt: t.createdAt,
+        }));
+        this.tenants.set(items);
+        this.totalCount.set(result.totalCount ?? items.length);
         this.isLoading.set(false);
       },
       error: () => {

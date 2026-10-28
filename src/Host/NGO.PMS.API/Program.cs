@@ -57,7 +57,12 @@ builder.Host.UseSerilog((context, config) => config
     .WriteTo.File("logs/ethelpms-.log", rollingInterval: RollingInterval.Day));
 
 // ── Controllers & Swagger ────────────────────────────────
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new NGO.PMS.SharedKernel.Api.FlexibleGuidJsonConverter());
+        options.JsonSerializerOptions.Converters.Add(new NGO.PMS.SharedKernel.Api.NullableGuidJsonConverter());
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {

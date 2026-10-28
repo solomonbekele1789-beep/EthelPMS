@@ -1,7 +1,9 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,10 +12,43 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ApiService, PagedResult } from '@ethelpms/shared/core';
 import { PageHeaderComponent } from '@ethelpms/shared/ui';
 import { ProjectActions } from '../../store/project.actions';
 import { selectProjectsLoading } from '../../store/project.selectors';
 import { CreateProjectRequest } from '../../models/project.model';
+
+export interface DropdownItem {
+  id: string;
+  name: string;
+}
+
+export const CURRENCIES: DropdownItem[] = [
+  { id: '11111111-1111-1111-1111-111111111111', name: 'ETB - Ethiopian Birr' },
+  { id: '22222222-2222-2222-2222-222222222222', name: 'USD - US Dollar' },
+  { id: '33333333-3333-3333-3333-333333333333', name: 'EUR - Euro' },
+  { id: '44444444-4444-4444-4444-444444444444', name: 'GBP - British Pound' },
+  { id: '55555555-5555-5555-5555-555555555555', name: 'KES - Kenyan Shilling' },
+];
+
+function toIsoDate(val: unknown): string {
+  if (!val) return '';
+  if (val instanceof Date) return val.toISOString();
+  return new Date(val as string | number).toISOString();
+}
+
+function dateRangeValidator(control: AbstractControl): ValidationErrors | null {
+  const start = control.get('startDate')?.value;
+  const end = control.get('endDate')?.value;
+  if (start && end) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    if (endDate <= startDate) {
+      return { dateRangeInvalid: true };
+    }
+  }
+  return null;
+}
 
 @Component({
   selector: 'ethel-project-create',
@@ -74,6 +109,8 @@ import { CreateProjectRequest } from '../../models/project.model';
             <mat-datepicker #endPicker></mat-datepicker>
             @if (form.controls.endDate.hasError('required')) {
               <mat-error>End date is required</mat-error>
+            } @else if (form.hasError('dateRangeInvalid')) {
+              <mat-error>End date must be after start date</mat-error>
             }
           </mat-form-field>
 
@@ -89,7 +126,14 @@ import { CreateProjectRequest } from '../../models/project.model';
 
           <mat-form-field appearance="outline">
             <mat-label>Currency</mat-label>
-            <input matInput formControlName="currencyId" />
+            <mat-select formControlName="currencyId">
+              @for (c of currencies; track c.id) {
+                <mat-option [value]="c.id">{{ c.name }}</mat-option>
+              }
+            </mat-select>
+            @if (form.controls.currencyId.hasError('required')) {
+              <mat-error>Currency is required</mat-error>
+            }
           </mat-form-field>
 
           <mat-form-field appearance="outline">
@@ -109,12 +153,22 @@ import { CreateProjectRequest } from '../../models/project.model';
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'projects.fields.office' | translate }}</mat-label>
-            <input matInput formControlName="officeId" />
+            <mat-select formControlName="officeId">
+              <mat-option value="">None</mat-option>
+              @for (off of offices(); track off.id) {
+                <mat-option [value]="off.id">{{ off.name }}</mat-option>
+              }
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'projects.fields.projectManager' | translate }}</mat-label>
-            <input matInput formControlName="projectManagerId" />
+            <mat-select formControlName="projectManagerId">
+              <mat-option value="">None</mat-option>
+              @for (pm of projectManagers(); track pm.id) {
+                <mat-option [value]="pm.id">{{ pm.name }}</mat-option>
+              }
+            </mat-select>
           </mat-form-field>
         </div>
 
@@ -154,44 +208,68 @@ export default class ProjectCreateComponent implements OnInit {
   private readonly store = inject(Store);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
+  private readonly api = inject(ApiService);
 
   readonly loading = this.store.selectSignal(selectProjectsLoading);
+  readonly currencies = CURRENCIES;
+  readonly offices = signal<DropdownItem[]>([]);
+  readonly projectManagers = signal<DropdownItem[]>([]);
 
-  readonly form = this.fb.nonNullable.group({
+  readonly form = this.fb.group({
     code: ['', [Validators.required]],
     name: ['', [Validators.required]],
     description: [''],
     startDate: ['', [Validators.required]],
     endDate: ['', [Validators.required]],
     totalBudget: [0, [Validators.required, Validators.min(0)]],
-    currencyId: [''],
+    currencyId: ['11111111-1111-1111-1111-111111111111', [Validators.required]],
     donorName: [''],
     sector: [''],
     programPillar: [''],
     officeId: [''],
     projectManagerId: [''],
-  });
+  }, { validators: [dateRangeValidator] });
 
   ngOnInit(): void {
-    // Lookup data could be loaded here for office/currency dropdowns
+    this.api.get<PagedResult<{ id: string; name: string }>>('/offices').pipe(
+      catchError(() => of({ items: [] } as unknown as PagedResult<{ id: string; name: string }>))
+    ).subscribe((res) => {
+      if (res?.items) {
+        this.offices.set(res.items);
+      }
+    });
+
+    this.api.get<PagedResult<{ id: string; fullName?: string; email: string }>>('/users').pipe(
+      catchError(() => of({ items: [] } as unknown as PagedResult<{ id: string; fullName?: string; email: string }>))
+    ).subscribe((res) => {
+      if (res?.items) {
+        this.projectManagers.set(
+          res.items.map((u) => ({ id: u.id, name: u.fullName || u.email }))
+        );
+      }
+    });
   }
 
   onSubmit(): void {
     if (this.form.invalid) return;
     const value = this.form.getRawValue();
+
+    const start = toIsoDate(value.startDate);
+    const end = toIsoDate(value.endDate);
+
     const request: CreateProjectRequest = {
-      code: value.code,
-      name: value.name,
-      description: value.description || undefined,
-      startDate: value.startDate,
-      endDate: value.endDate,
-      totalBudget: value.totalBudget,
-      currencyId: value.currencyId || '',
-      donorName: value.donorName || undefined,
-      sector: value.sector || undefined,
-      programPillar: value.programPillar || undefined,
-      officeId: value.officeId || undefined,
-      projectManagerId: value.projectManagerId || undefined,
+      code: (value.code || '').trim(),
+      name: (value.name || '').trim(),
+      description: value.description?.trim() || undefined,
+      startDate: start,
+      endDate: end,
+      totalBudget: Number(value.totalBudget),
+      currencyId: value.currencyId || '11111111-1111-1111-1111-111111111111',
+      donorName: value.donorName?.trim() || undefined,
+      sector: value.sector?.trim() || undefined,
+      programPillar: value.programPillar?.trim() || undefined,
+      officeId: value.officeId && value.officeId.length > 0 ? value.officeId : undefined,
+      projectManagerId: value.projectManagerId && value.projectManagerId.length > 0 ? value.projectManagerId : undefined,
     };
     this.store.dispatch(ProjectActions.createProject({ request }));
   }
