@@ -8,8 +8,22 @@ public class User : AuditableEntity, ISoftDeletable
     public string Email { get; private set; } = string.Empty;
     public string PasswordHash { get; private set; } = string.Empty;
     public string FirstName { get; private set; } = string.Empty;
+    public string? MiddleName { get; private set; }
     public string LastName { get; private set; } = string.Empty;
     public string? Phone { get; private set; }
+    public DateTime? DateOfBirth { get; private set; }
+    public string? Gender { get; private set; }
+    public string? Address { get; private set; }
+    public string? EmployeeId { get; private set; }
+    public DateTime? EmploymentDate { get; private set; }
+    public string? LevelOfEducation { get; private set; }
+    public string? Qualification { get; private set; }
+    public decimal? BasicSalary { get; private set; }
+    public Guid? ManagerId { get; private set; }
+    public string? ProfilePhotoUrl { get; private set; }
+    public string? Region { get; private set; }
+    public string? OfficeLevel { get; private set; }
+
     public bool IsActive { get; private set; } = true;
     public bool EmailConfirmed { get; private set; }
     public int FailedLoginAttempts { get; private set; }
@@ -23,8 +37,11 @@ public class User : AuditableEntity, ISoftDeletable
     // Navigation
     public ICollection<UserRole> UserRoles { get; private set; } = [];
     public Office? Office { get; private set; }
+    public User? Manager { get; private set; }
 
-    public string FullName => $"{FirstName} {LastName}";
+    public string FullName => string.IsNullOrWhiteSpace(MiddleName)
+        ? $"{FirstName} {LastName}"
+        : $"{FirstName} {MiddleName} {LastName}";
 
     public static User Create(string email, string firstName, string lastName, Guid orgId)
     {
@@ -79,5 +96,35 @@ public class User : AuditableEntity, ISoftDeletable
         LastName = lastName.Trim();
         Phone = phone;
         OfficeId = officeId;
+    }
+
+    public void UpdateEmploymentDetails(
+        string? middleName,
+        DateTime? dateOfBirth,
+        string? gender,
+        string? address,
+        string? employeeId,
+        DateTime? employmentDate,
+        string? levelOfEducation,
+        string? qualification,
+        decimal? basicSalary,
+        Guid? managerId,
+        string? profilePhotoUrl,
+        string? region,
+        string? officeLevel)
+    {
+        MiddleName = middleName?.Trim();
+        DateOfBirth = dateOfBirth;
+        Gender = gender?.Trim();
+        Address = address?.Trim();
+        EmployeeId = employeeId?.Trim();
+        EmploymentDate = employmentDate;
+        LevelOfEducation = levelOfEducation?.Trim();
+        Qualification = qualification?.Trim();
+        BasicSalary = basicSalary;
+        ManagerId = managerId;
+        ProfilePhotoUrl = profilePhotoUrl?.Trim();
+        Region = region?.Trim();
+        OfficeLevel = officeLevel?.Trim();
     }
 }

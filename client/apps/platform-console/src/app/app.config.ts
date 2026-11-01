@@ -7,6 +7,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { firstValueFrom, of, catchError, map } from 'rxjs';
 
 import {
   CORE_CONFIG,
@@ -16,6 +17,7 @@ import {
   uiReducer,
   AuthActions,
   authEffects,
+  AuthService,
 } from '@ethelpms/shared/core';
 
 import { routes } from './app.routes';
@@ -39,10 +41,25 @@ export const appConfig: ApplicationConfig = {
     }),
     {
       provide: APP_INITIALIZER,
-      useFactory: (store: Store) => () => {
-        store.dispatch(AuthActions.restoreSession());
+      useFactory: (store: Store, authService: AuthService) => () => {
+        const token = authService.getAccessToken();
+        if (!token || authService.isTokenExpired(token)) {
+          store.dispatch(AuthActions.restoreSessionFailure());
+          return Promise.resolve();
+        }
+        return firstValueFrom(
+          authService.getProfile().pipe(
+            map((user) => {
+              store.dispatch(AuthActions.restoreSessionSuccess({ user }));
+            }),
+            catchError(() => {
+              store.dispatch(AuthActions.restoreSessionFailure());
+              return of(undefined);
+            })
+          )
+        );
       },
-      deps: [Store],
+      deps: [Store, AuthService],
       multi: true
     }
   ]

@@ -17,10 +17,13 @@ import { ApiService } from '@ethelpms/shared/core';
 interface SubscriptionPackage {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   maxUsers: number;
+  maxProjects?: number;
+  includedModules?: string[];
   enabledModules: string[];
   pricePerMonth: number;
+  priceMonthlyUsd?: number;
   isActive: boolean;
   tenantCount: number;
 }
@@ -434,9 +437,22 @@ export default class PackageListComponent implements OnInit {
 
   private loadPackages(): void {
     this.isLoading.set(true);
-    this.api.get<SubscriptionPackage[]>('/platform/packages').subscribe({
+    this.api.get<any[]>('/platform/packages').subscribe({
       next: (data) => {
-        this.packages.set(data);
+        const mapped: SubscriptionPackage[] = (data || []).map((p) => ({
+          id: p.id,
+          name: p.name,
+          description: p.description || `${p.maxProjects ?? 0} projects, ${p.maxUsers ?? 0} users`,
+          maxUsers: p.maxUsers,
+          maxProjects: p.maxProjects ?? 0,
+          includedModules: p.includedModules || p.enabledModules || [],
+          enabledModules: p.includedModules || p.enabledModules || [],
+          pricePerMonth: p.priceMonthlyUsd ?? p.pricePerMonth ?? 0,
+          priceMonthlyUsd: p.priceMonthlyUsd ?? p.pricePerMonth ?? 0,
+          isActive: p.isActive ?? true,
+          tenantCount: p.tenantCount ?? 0,
+        }));
+        this.packages.set(mapped);
         this.isLoading.set(false);
       },
       error: () => {

@@ -87,6 +87,16 @@ interface NavItem {
           </div>
 
           <div class="main-layout__topbar-right">
+            <a
+              href="http://localhost:4201"
+              target="_blank"
+              class="platform-console-btn"
+              title="Open Platform Console (SuperAdmin) to manage tenants and packages"
+            >
+              <span class="icon">admin_panel_settings</span>
+              <span>Platform Console</span>
+            </a>
+
             <app-language-toggle />
 
             @if (user(); as u) {
@@ -257,6 +267,26 @@ interface NavItem {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+    }
+
+    .platform-console-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      background: rgba(37, 99, 235, 0.08);
+      color: #2563eb;
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: 6px;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #2563eb;
+        color: #ffffff;
+      }
     }
 
     .main-layout__user-name {

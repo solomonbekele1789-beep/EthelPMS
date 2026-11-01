@@ -16,7 +16,8 @@
         "tsConfig": "apps/platform-console/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [{ "glob": "**/*", "input": "apps/platform-console/public" }],
-        "styles": ["apps/platform-console/src/styles.scss"]
+        "styles": ["apps/platform-console/src/styles.scss"],
+        "polyfills": ["zone.js"]
       },
       "configurations": {
         "production": {

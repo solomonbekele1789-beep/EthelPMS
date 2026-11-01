@@ -9,7 +9,7 @@ import { BreadcrumbNavComponent } from '../breadcrumb-nav/breadcrumb-nav.compone
     <div class="page-header">
       <app-breadcrumb-nav></app-breadcrumb-nav>
       <div class="header-row">
-        <div>
+        <div class="header-title-wrapper">
           <h1>{{ title }}</h1>
           @if (subtitle) { <p class="subtitle">{{ subtitle }}</p> }
         </div>
@@ -20,11 +20,46 @@ import { BreadcrumbNavComponent } from '../breadcrumb-nav/breadcrumb-nav.compone
     </div>
   `,
   styles: [`
-    .page-header { padding: 16px 0; }
-    .header-row { display: flex; justify-content: space-between; align-items: flex-start; }
-    h1 { margin: 8px 0 4px; font-size: 24px; font-weight: 600; }
-    .subtitle { color: #6b7280; margin: 0; }
-    .actions { display: flex; gap: 8px; }
+    :host {
+      display: block;
+      width: 100%;
+    }
+    .page-header {
+      width: 100%;
+      padding: 1rem 0;
+      box-sizing: border-box;
+    }
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+    }
+    .header-title-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    h1 {
+      margin: 4px 0 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+    .subtitle {
+      color: #64748b;
+      margin: 0.25rem 0 0;
+      font-size: 0.875rem;
+    }
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      margin-left: auto;
+    }
   `]
 })
 export class PageHeaderComponent {

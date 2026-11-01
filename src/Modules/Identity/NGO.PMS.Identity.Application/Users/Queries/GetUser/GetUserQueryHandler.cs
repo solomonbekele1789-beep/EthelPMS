@@ -21,6 +21,7 @@ public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserDto>
     {
         var user = await _db.Users
             .Include(u => u.Office)
+            .Include(u => u.Manager)
             .Include(u => u.UserRoles).ThenInclude(ur => ur.Role)
             .FirstOrDefaultAsync(u => u.Id == request.Id, cancellationToken)
             ?? throw new NotFoundException("User", request.Id);

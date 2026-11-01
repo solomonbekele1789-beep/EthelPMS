@@ -12,12 +12,18 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
     private readonly IIdentityDbContext _db;
     private readonly ICurrentUserService _currentUser;
     private readonly IEmailService _emailService;
+    private readonly IPasswordHasher _passwordHasher;
 
-    public CreateUserCommandHandler(IIdentityDbContext db, ICurrentUserService currentUser, IEmailService emailService)
+    public CreateUserCommandHandler(
+        IIdentityDbContext db, 
+        ICurrentUserService currentUser, 
+        IEmailService emailService,
+        IPasswordHasher passwordHasher)
     {
         _db = db;
         _currentUser = currentUser;
         _emailService = emailService;
+        _passwordHasher = passwordHasher;
     }
 
     public async Task<Guid> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -30,7 +36,21 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
             throw new BusinessRuleException($"A user with email '{request.Email}' already exists in this organization.");
 
         var user = User.Create(request.Email, request.FirstName, request.LastName, _currentUser.OrganizationId);
-        if (request.Phone is not null) user.UpdateProfile(request.FirstName, request.LastName, request.Phone, request.OfficeId);
+        user.UpdateProfile(request.FirstName, request.LastName, request.Phone, request.OfficeId);
+        user.UpdateEmploymentDetails(
+            request.MiddleName,
+            request.DateOfBirth,
+            request.Gender,
+            request.Address,
+            request.EmployeeId,
+            request.EmploymentDate,
+            request.LevelOfEducation,
+            request.Qualification,
+            request.BasicSalary,
+            request.ManagerId,
+            request.ProfilePhotoUrl,
+            request.Region,
+            request.OfficeLevel);
 
         // Assign roles
         foreach (var roleId in request.RoleIds)
@@ -46,23 +66,29 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Guid>
             });
         }
 
-        // Generate setup password token
-        var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
-        var tokenHash = Convert.ToBase64String(
-            System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(token)));
-
-        var setupToken = new PasswordResetToken
+        if (!string.IsNullOrWhiteSpace(request.Password))
         {
-            UserId = user.Id,
-            TokenHash = tokenHash,
-            ExpiresAt = DateTimeOffset.UtcNow.AddHours(48)
-        };
+            user.SetPassword(_passwordHasher.Hash(request.Password));
+        }
+        else
+        {
+            // Generate setup password token
+            var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+            var tokenHash = Convert.ToBase64String(
+                System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(token)));
+
+            var setupToken = new PasswordResetToken
+            {
+                UserId = user.Id,
+                TokenHash = tokenHash,
+                ExpiresAt = DateTimeOffset.UtcNow.AddHours(48)
+            };
+            await _db.PasswordResetTokens.AddAsync(setupToken, cancellationToken);
+            await _emailService.SendPasswordSetupEmailAsync(user.Email, user.FirstName, token, cancellationToken);
+        }
 
         _db.Users.Add(user);
-        await _db.PasswordResetTokens.AddAsync(setupToken, cancellationToken);
         await _db.SaveChangesAsync(cancellationToken);
-
-        await _emailService.SendPasswordSetupEmailAsync(user.Email, user.FirstName, token, cancellationToken);
 
         return user.Id;
     }
