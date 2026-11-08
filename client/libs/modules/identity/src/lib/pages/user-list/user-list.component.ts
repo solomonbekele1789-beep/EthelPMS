@@ -7,7 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
-  PageHeaderComponent,
+  BreadcrumbNavComponent,
   DataTableComponent,
   TableColumn,
   SearchInputComponent,
@@ -26,23 +26,47 @@ import { selectUsers, selectUserTotalCount, selectUsersLoading } from '../../sto
     MatChipsModule,
     DatePipe,
     TranslatePipe,
-    PageHeaderComponent,
+    BreadcrumbNavComponent,
     DataTableComponent,
     SearchInputComponent,
     StatusBadgeComponent,
     HasPermissionDirective,
   ],
   template: `
-    <app-page-header title="User Management">
-      <button mat-flat-button color="primary" *appHasPermission="'identity.users.create'" (click)="onCreateUser()">
-        <mat-icon>add</mat-icon>
-        {{ 'users.list.createButton' | translate }}
-      </button>
-    </app-page-header>
+    <div class="user-list-header">
+      <app-breadcrumb-nav></app-breadcrumb-nav>
+
+      <div class="header-row">
+        <!-- Left: User Management -->
+        <div class="header-left">
+          <h1 class="page-title">{{ 'users.list.title' | translate }}</h1>
+        </div>
+
+        <!-- Center: Search Input -->
+        <div class="header-center">
+          <app-search-input
+            placeholder="Search users by name, email..."
+            (search)="onSearch($event)">
+          </app-search-input>
+        </div>
+
+        <!-- Right: New User Button -->
+        <div class="header-right">
+          <button
+            mat-flat-button
+            color="primary"
+            class="create-user-btn"
+            *appHasPermission="'identity.users.create'"
+            (click)="onCreateUser()"
+          >
+            <mat-icon>add</mat-icon>
+            <span>{{ 'users.list.createButton' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="list-container">
-      <app-search-input placeholder="Search users..." (search)="onSearch($event)"></app-search-input>
-
       <app-data-table
         [columns]="columns()"
         [data]="users()"
@@ -75,8 +99,75 @@ import { selectUsers, selectUserTotalCount, selectUsersLoading } from '../../sto
     </ng-template>
   `,
   styles: `
-    :host { display: block; }
-    .list-container { display: flex; flex-direction: column; gap: 1rem; }
+    :host {
+      display: block;
+      width: 100%;
+    }
+    .user-list-header {
+      width: 100%;
+      padding: 0.75rem 0 1rem;
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .header-left {
+      flex: 0 0 auto;
+    }
+    .page-title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .header-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 480px;
+    }
+    .header-right {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+    }
+    .create-user-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 1.25rem;
+      height: 40px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .create-user-btn mat-icon {
+      margin-right: 4px;
+    }
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    @media (max-width: 800px) {
+      .header-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+      }
+      .header-center {
+        max-width: 100%;
+      }
+      .header-right {
+        justify-content: flex-end;
+      }
+    }
   `,
 })
 export default class UserListComponent implements OnInit {

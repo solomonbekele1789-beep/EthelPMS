@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PageHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent } from '@ethelpms/shared/ui';
 import { HasPermissionDirective } from '@ethelpms/shared/core';
+import { SettingsNavComponent } from '../../components/settings-nav/settings-nav.component';
 import { SettingsActions } from '../../store/settings.actions';
 import { selectAlertThresholds, selectSettingsLoading } from '../../store/settings.selectors';
 import {
@@ -44,6 +45,7 @@ import {
     LoadingSpinnerComponent,
     EmptyStateComponent,
     HasPermissionDirective,
+    SettingsNavComponent,
   ],
   template: `
     <app-page-header [title]="'settings.alerts.title' | translate">
@@ -52,6 +54,8 @@ import {
         {{ (showForm() ? 'common.cancel' : 'settings.alerts.addButton') | translate }}
       </button>
     </app-page-header>
+
+    <ethel-settings-nav></ethel-settings-nav>
 
     @if (showForm()) {
       <mat-card class="form-card">

@@ -310,7 +310,11 @@ export default class ReportTemplateDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(ReportActions.loadTemplates({}));
+    if (!this.isCreateMode()) {
+      this.store.dispatch(ReportActions.loadTemplate({ id: this.id() }));
+    } else {
+      this.store.dispatch(ReportActions.loadTemplates({}));
+    }
   }
 
   onSave(): void {

@@ -13,10 +13,22 @@ public class UpdateInterventionAreaCommandHandler : IRequestHandler<UpdateInterv
     public async Task Handle(UpdateInterventionAreaCommand request, CancellationToken ct)
     {
         var interventionArea = await _db.InterventionAreas
-            .FirstOrDefaultAsync(ia => ia.Id == request.InterventionAreaId, ct)
+            .FirstOrDefaultAsync(ia => ia.Id == request.InterventionAreaId && !ia.IsDeleted, ct)
             ?? throw new NotFoundException("InterventionArea", request.InterventionAreaId);
 
-        interventionArea.Update(request.Name, request.Description, request.SortOrder);
+        interventionArea.Update(
+            name: request.Name,
+            description: request.Description,
+            sortOrder: request.SortOrder,
+            areaType: request.AreaType,
+            latitude: request.Latitude,
+            longitude: request.Longitude,
+            altitude: request.Altitude,
+            accuracy: request.Accuracy,
+            gpsSource: request.GpsSource,
+            landmarkOrAddress: request.LandmarkOrAddress,
+            isActive: request.IsActive
+        );
 
         await _db.SaveChangesAsync(ct);
     }

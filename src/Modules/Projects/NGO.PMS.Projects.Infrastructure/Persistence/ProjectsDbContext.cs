@@ -13,6 +13,7 @@ public class ProjectsDbContext : MultiTenantDbContext, IProjectsDbContext
     public DbSet<ProjectPhase> ProjectPhases => Set<ProjectPhase>();
     public DbSet<ProjectRevision> ProjectRevisions => Set<ProjectRevision>();
     public DbSet<ProjectTeamMember> ProjectTeamMembers => Set<ProjectTeamMember>();
+    public DbSet<ProjectUserView> ProjectUsers => Set<ProjectUserView>();
     public DbSet<Outcome> Outcomes => Set<Outcome>();
     public DbSet<Output> Outputs => Set<Output>();
     public DbSet<Activity> Activities => Set<Activity>();

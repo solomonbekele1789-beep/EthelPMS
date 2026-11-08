@@ -10,6 +10,7 @@ public class UserMappingProfile : Profile
     {
         CreateMap<User, UserDto>()
             .ForMember(d => d.OfficeName, opt => opt.MapFrom(s => s.Office != null ? s.Office.Name : null))
+            .ForMember(d => d.ManagerName, opt => opt.MapFrom(s => s.Manager != null ? s.Manager.FullName : null))
             .ForMember(d => d.Roles, opt => opt.MapFrom(s =>
                 s.UserRoles.Select(ur => ur.Role.Name).ToList()));
 

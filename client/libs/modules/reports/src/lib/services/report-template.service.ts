@@ -15,22 +15,22 @@ export class ReportTemplateService {
   list(module?: string): Observable<ReportTemplateDto[]> {
     let params = new HttpParams();
     if (module) params = params.set('module', module);
-    return this.api.get<ReportTemplateDto[]>('/report-templates', params);
+    return this.api.get<ReportTemplateDto[]>('/system-report-templates', params);
   }
 
   getById(id: string): Observable<ReportTemplateDto> {
-    return this.api.get<ReportTemplateDto>(`/report-templates/${id}`);
+    return this.api.get<ReportTemplateDto>(`/system-report-templates/${id}`);
   }
 
   create(request: CreateReportTemplateRequest): Observable<{ id: string }> {
-    return this.api.post<{ id: string }>('/report-templates', request);
+    return this.api.post<{ id: string }>('/system-report-templates', request);
   }
 
   update(id: string, request: UpdateReportTemplateRequest): Observable<void> {
-    return this.api.put<void>(`/report-templates/${id}`, request);
+    return this.api.put<void>(`/system-report-templates/${id}`, request);
   }
 
   delete(id: string): Observable<void> {
-    return this.api.delete<void>(`/report-templates/${id}`);
+    return this.api.delete<void>(`/system-report-templates/${id}`);
   }
 }

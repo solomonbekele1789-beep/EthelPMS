@@ -38,6 +38,9 @@ public class CreatePlanEntryCommandHandler : IRequestHandler<CreatePlanEntryComm
 
         plan.SetPeriodDesignators(request.FiscalYear, request.Quarter, request.Month, request.WeekNumber, request.DayDate);
 
+        if (request.BeneficiariesMale > 0 || request.BeneficiariesFemale > 0)
+            plan.UpdateBeneficiaries(request.BeneficiariesMale, request.BeneficiariesFemale);
+
         if (request.Description is not null)
             plan.Update(request.Title, request.Description, request.PlannedStartDate, request.PlannedEndDate, request.PlannedBudget);
 

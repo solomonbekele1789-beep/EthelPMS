@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NGO.PMS.Projects.Application.InterventionAreas.Commands.AllocateInterventionArea;
 using NGO.PMS.Projects.Application.InterventionAreas.Commands.CreateInterventionArea;
+using NGO.PMS.Projects.Application.InterventionAreas.Commands.DeallocateInterventionArea;
+using NGO.PMS.Projects.Application.InterventionAreas.Commands.DeleteInterventionArea;
 using NGO.PMS.Projects.Application.InterventionAreas.Commands.UpdateInterventionArea;
 using NGO.PMS.Projects.Application.InterventionAreas.Queries.ListInterventionAreas;
 using NGO.PMS.SharedKernel.Authorization;
@@ -19,8 +21,8 @@ public class InterventionAreasController : ControllerBase
 
     [HttpGet]
     [RequirePermission("projects.interventionareas.read")]
-    public async Task<IActionResult> List()
-        => Ok(await _sender.Send(new ListInterventionAreasQuery()));
+    public async Task<IActionResult> List([FromQuery] bool flat = false)
+        => Ok(await _sender.Send(new ListInterventionAreasQuery(flat)));
 
     [HttpPost]
     [RequirePermission("projects.interventionareas.create")]
@@ -34,8 +36,17 @@ public class InterventionAreasController : ControllerBase
     [RequirePermission("projects.interventionareas.update")]
     public async Task<IActionResult> Update(Guid id, UpdateInterventionAreaCommand command)
     {
-        if (id != command.InterventionAreaId) return BadRequest();
+        if (id != command.InterventionAreaId)
+            command = command with { InterventionAreaId = id };
         await _sender.Send(command);
+        return NoContent();
+    }
+
+    [HttpDelete("{id:guid}")]
+    [RequirePermission("projects.interventionareas.delete")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _sender.Send(new DeleteInterventionAreaCommand(id));
         return NoContent();
     }
 
@@ -45,5 +56,13 @@ public class InterventionAreasController : ControllerBase
     {
         var id = await _sender.Send(command);
         return Created($"api/v1/intervention-areas/allocations/{id}", new { id });
+    }
+
+    [HttpDelete("allocations/{id:guid}")]
+    [RequirePermission("projects.interventionareas.manage")]
+    public async Task<IActionResult> Deallocate(Guid id, [FromQuery] Guid projectId)
+    {
+        await _sender.Send(new DeallocateInterventionAreaCommand(projectId, id));
+        return NoContent();
     }
 }

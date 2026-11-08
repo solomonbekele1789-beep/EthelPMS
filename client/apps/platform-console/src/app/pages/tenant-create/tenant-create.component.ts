@@ -17,15 +17,19 @@ import { ApiService } from '@ethelpms/shared/core';
 interface SubscriptionPackage {
   id: string;
   name: string;
-  description: string;
+  description?: string;
   maxUsers: number;
-  enabledModules: string[];
-  pricePerMonth: number;
+  maxProjects?: number;
+  includedModules?: string[];
+  enabledModules?: string[];
+  pricePerMonth?: number;
+  priceMonthlyUsd?: number;
 }
 
 interface CreateTenantRequest {
   name: string;
-  identifier: string;
+  slug: string;
+  identifier?: string;
   adminEmail: string;
   adminFirstName: string;
   adminLastName: string;
@@ -147,10 +151,12 @@ interface CreateTenantRequest {
                       <mat-radio-button [value]="pkg.id">
                         <div class="package-info">
                           <strong class="package-name">{{ pkg.name }}</strong>
-                          <p class="package-desc">{{ pkg.description }}</p>
+                          @if (pkg.description) {
+                            <p class="package-desc">{{ pkg.description }}</p>
+                          }
                           <div class="package-meta">
                             <span>Up to {{ pkg.maxUsers }} users</span>
-                            <span>{{ pkg.enabledModules.length }} modules</span>
+                            <span>{{ (pkg.enabledModules?.length || pkg.includedModules?.length || 0) }} modules</span>
                           </div>
                         </div>
                       </mat-radio-button>
@@ -402,6 +408,18 @@ export default class TenantCreateComponent {
 
   constructor() {
     this.loadPackages();
+
+    this.orgForm.controls.name.valueChanges.subscribe((name) => {
+      const identifierControl = this.orgForm.controls.identifier;
+      if (identifierControl.pristine || !identifierControl.value) {
+        const slug = name
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        identifierControl.setValue(slug);
+      }
+    });
   }
 
   selectedPackageName(): string {
@@ -426,6 +444,7 @@ export default class TenantCreateComponent {
 
     const request: CreateTenantRequest = {
       ...orgValues,
+      slug: orgValues.identifier || orgValues.name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-'),
       subscriptionPackageId: pkgValues.subscriptionPackageId,
     };
 
@@ -447,8 +466,20 @@ export default class TenantCreateComponent {
   }
 
   private loadPackages(): void {
-    this.api.get<SubscriptionPackage[]>('/platform/packages').subscribe({
-      next: (pkgs) => this.packages.set(pkgs),
+    this.api.get<any[]>('/platform/packages').subscribe({
+      next: (pkgs) => {
+        const mapped: SubscriptionPackage[] = (pkgs || []).map((p) => ({
+          id: p.id,
+          name: p.name,
+          description: p.description || `${p.maxProjects ?? 0} projects, ${p.maxUsers ?? 0} users`,
+          maxUsers: p.maxUsers,
+          maxProjects: p.maxProjects ?? 0,
+          includedModules: p.includedModules || p.enabledModules || [],
+          enabledModules: p.includedModules || p.enabledModules || [],
+          priceMonthlyUsd: p.priceMonthlyUsd ?? p.pricePerMonth ?? 0,
+        }));
+        this.packages.set(mapped);
+      },
     });
   }
 }

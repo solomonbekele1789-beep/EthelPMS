@@ -10,6 +10,7 @@ import {
   CreateProjectRequest,
   UpdateProjectRequest,
   AddTeamMemberRequest,
+  ProjectTeamMemberDto,
   RejectProjectRequest,
 } from '../models/project.model';
 
@@ -55,6 +56,10 @@ export class ProjectService {
 
   rejectProject(id: string, request: RejectProjectRequest): Observable<void> {
     return this.api.post<void>(`/projects/${id}/reject`, request);
+  }
+
+  getTeamMembers(projectId: string): Observable<ProjectTeamMemberDto[]> {
+    return this.api.get<ProjectTeamMemberDto[]>(`/projects/${projectId}/team`);
   }
 
   addTeamMember(id: string, request: AddTeamMemberRequest): Observable<{ id: string }> {

@@ -33,6 +33,10 @@ export class ResultsFrameworkService {
     return this.api.put<void>(`/projects/${projectId}/outcomes/${outcomeId}`, request);
   }
 
+  deleteOutcome(projectId: string, outcomeId: string): Observable<void> {
+    return this.api.delete<void>(`/projects/${projectId}/outcomes/${outcomeId}`);
+  }
+
   // --- Outputs ---
 
   createOutput(outcomeId: string, request: CreateOutputRequest): Observable<{ id: string }> {
@@ -41,6 +45,10 @@ export class ResultsFrameworkService {
 
   updateOutput(outcomeId: string, outputId: string, request: UpdateOutputRequest): Observable<void> {
     return this.api.put<void>(`/outcomes/${outcomeId}/outputs/${outputId}`, request);
+  }
+
+  deleteOutput(outcomeId: string, outputId: string): Observable<void> {
+    return this.api.delete<void>(`/outcomes/${outcomeId}/outputs/${outputId}`);
   }
 
   // --- Activities ---
@@ -53,6 +61,10 @@ export class ResultsFrameworkService {
     return this.api.put<void>(`/outputs/${outputId}/activities/${activityId}`, request);
   }
 
+  deleteActivity(outputId: string, activityId: string): Observable<void> {
+    return this.api.delete<void>(`/outputs/${outputId}/activities/${activityId}`);
+  }
+
   // --- Indicators ---
 
   createIndicator(projectId: string, request: CreateIndicatorRequest): Observable<{ id: string }> {
@@ -61,5 +73,9 @@ export class ResultsFrameworkService {
 
   updateIndicator(projectId: string, indicatorId: string, request: UpdateIndicatorRequest): Observable<void> {
     return this.api.put<void>(`/projects/${projectId}/indicators/${indicatorId}`, request);
+  }
+
+  deleteIndicator(projectId: string, indicatorId: string): Observable<void> {
+    return this.api.delete<void>(`/projects/${projectId}/indicators/${indicatorId}`);
   }
 }

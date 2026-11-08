@@ -16,4 +16,6 @@ public record CreatePlanEntryCommand(
     int? Quarter,
     int? Month,
     int? WeekNumber,
-    DateTimeOffset? DayDate) : IRequest<Guid>;
+    DateTimeOffset? DayDate,
+    int BeneficiariesMale = 0,
+    int BeneficiariesFemale = 0) : IRequest<Guid>;

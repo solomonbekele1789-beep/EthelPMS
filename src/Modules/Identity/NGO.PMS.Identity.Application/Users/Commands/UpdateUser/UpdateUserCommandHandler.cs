@@ -16,6 +16,20 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
             ?? throw new NotFoundException("User", request.Id);
 
         user.UpdateProfile(request.FirstName, request.LastName, request.Phone, request.OfficeId);
+        user.UpdateEmploymentDetails(
+            request.MiddleName,
+            request.DateOfBirth,
+            request.Gender,
+            request.Address,
+            request.EmployeeId,
+            request.EmploymentDate,
+            request.LevelOfEducation,
+            request.Qualification,
+            request.BasicSalary,
+            request.ManagerId,
+            request.ProfilePhotoUrl,
+            request.Region,
+            request.OfficeLevel);
         await _db.SaveChangesAsync(cancellationToken);
     }
 }

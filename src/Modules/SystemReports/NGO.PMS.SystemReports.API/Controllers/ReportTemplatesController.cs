@@ -11,7 +11,7 @@ using NGO.PMS.SharedKernel.Authorization;
 namespace NGO.PMS.SystemReports.API.Controllers;
 
 [ApiController]
-[Route("api/v1/report-templates")]
+[Route("api/v1/system-report-templates")]
 [Authorize]
 public class ReportTemplatesController : ControllerBase
 {

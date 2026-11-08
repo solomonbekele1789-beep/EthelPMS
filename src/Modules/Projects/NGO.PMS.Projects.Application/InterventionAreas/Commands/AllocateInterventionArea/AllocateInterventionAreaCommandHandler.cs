@@ -30,6 +30,12 @@ public class AllocateInterventionAreaCommandHandler : IRequestHandler<AllocateIn
         if (existing is not null)
         {
             existing.UpdateBudget(request.BudgetAllocated, request.BudgetPercentage);
+            existing.UpdateBeneficiaries(
+                request.DirectBeneficiariesMale,
+                request.DirectBeneficiariesFemale,
+                request.IndirectBeneficiariesMale,
+                request.IndirectBeneficiariesFemale
+            );
             await _db.SaveChangesAsync(ct);
             return existing.Id;
         }
@@ -37,6 +43,13 @@ public class AllocateInterventionAreaCommandHandler : IRequestHandler<AllocateIn
         var allocation = ProjectInterventionArea.Create(
             request.ProjectId, request.InterventionAreaId,
             request.BudgetAllocated, request.BudgetPercentage);
+
+        allocation.UpdateBeneficiaries(
+            request.DirectBeneficiariesMale,
+            request.DirectBeneficiariesFemale,
+            request.IndirectBeneficiariesMale,
+            request.IndirectBeneficiariesFemale
+        );
 
         _db.ProjectInterventionAreas.Add(allocation);
         await _db.SaveChangesAsync(ct);

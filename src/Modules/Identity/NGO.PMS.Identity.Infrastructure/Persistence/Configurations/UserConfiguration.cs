@@ -14,8 +14,20 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Email).HasMaxLength(256).IsRequired();
         builder.Property(u => u.PasswordHash).HasMaxLength(512);
         builder.Property(u => u.FirstName).HasMaxLength(100).IsRequired();
+        builder.Property(u => u.MiddleName).HasMaxLength(100);
         builder.Property(u => u.LastName).HasMaxLength(100).IsRequired();
         builder.Property(u => u.Phone).HasMaxLength(20);
+        builder.Property(u => u.DateOfBirth).HasColumnType("date");
+        builder.Property(u => u.Gender).HasMaxLength(20);
+        builder.Property(u => u.Address).HasMaxLength(500);
+        builder.Property(u => u.EmployeeId).HasMaxLength(50);
+        builder.Property(u => u.EmploymentDate).HasColumnType("date");
+        builder.Property(u => u.LevelOfEducation).HasMaxLength(100);
+        builder.Property(u => u.Qualification).HasMaxLength(200);
+        builder.Property(u => u.BasicSalary).HasPrecision(18, 2);
+        builder.Property(u => u.ProfilePhotoUrl).HasColumnType("text");
+        builder.Property(u => u.Region).HasMaxLength(100);
+        builder.Property(u => u.OfficeLevel).HasMaxLength(50);
         builder.Property(u => u.OrganizationId).IsRequired();
 
         builder.HasIndex(u => new { u.Email, u.OrganizationId }).IsUnique();
@@ -24,6 +36,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasOne(u => u.Office)
             .WithMany()
             .HasForeignKey(u => u.OfficeId)
+            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasOne(u => u.Manager)
+            .WithMany()
+            .HasForeignKey(u => u.ManagerId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasMany(u => u.UserRoles)

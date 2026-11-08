@@ -69,7 +69,24 @@ import { PermissionDto } from '../../models/role.model';
           </div>
 
           <div class="form-section">
-            <h3>{{ 'roles.fields.permissions' | translate }}</h3>
+            <div class="permissions-header">
+              <div class="permissions-header-left">
+                <h3 class="permissions-title">{{ 'roles.fields.permissions' | translate }}</h3>
+                <mat-checkbox
+                  class="select-all-checkbox"
+                  [checked]="isAllSelected()"
+                  [indeterminate]="isPartiallySelected()"
+                  [disabled]="(isEditMode() && role()?.isSystemRole) || allPermissions().length === 0"
+                  (change)="toggleAll()">
+                  <strong>{{ 'common.selectAll' | translate }}</strong>
+                </mat-checkbox>
+              </div>
+              @if (allPermissions().length > 0) {
+                <span class="selection-count">
+                  {{ selectedPermissionIds().size }} / {{ allPermissions().length }} selected
+                </span>
+              }
+            </div>
             <div class="permission-tree">
               @for (entry of permissionsByModule() | keyvalue; track entry.key) {
                 <div class="module-group">
@@ -149,6 +166,37 @@ import { PermissionDto } from '../../models/role.model';
       gap: 0.5rem;
       margin-top: 1.5rem;
     }
+    .permissions-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-color, #e0e0e0);
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .permissions-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .permissions-title {
+      margin: 0 !important;
+      padding-bottom: 0 !important;
+      border-bottom: none !important;
+    }
+    .select-all-checkbox {
+      font-weight: 500;
+    }
+    .selection-count {
+      font-size: 0.8125rem;
+      color: var(--text-secondary, #64748b);
+      background: #f1f5f9;
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
     .system-badge { color: var(--text-secondary, #666); }
     .system-label { color: var(--text-secondary, #666); font-size: 0.875rem; margin-left: 0.25rem; }
   `,
@@ -165,6 +213,7 @@ export default class RoleDetailComponent implements OnInit {
   readonly role = this.store.selectSignal(selectSelectedRole);
   readonly loading = this.store.selectSignal(selectRolesLoading);
   readonly permissionsByModule = this.store.selectSignal(selectPermissionsByModule);
+  readonly allPermissions = this.store.selectSignal(selectAllPermissions);
 
   readonly selectedPermissionIds = signal<Set<string>>(new Set());
 
@@ -222,6 +271,7 @@ export default class RoleDetailComponent implements OnInit {
   }
 
   toggleModule(permissions: PermissionDto[]): void {
+    if (this.isEditMode() && this.role()?.isSystemRole) return;
     const current = new Set(this.selectedPermissionIds());
     if (this.isModuleAllSelected(permissions)) {
       permissions.forEach(p => current.delete(p.id));
@@ -229,6 +279,29 @@ export default class RoleDetailComponent implements OnInit {
       permissions.forEach(p => current.add(p.id));
     }
     this.selectedPermissionIds.set(current);
+  }
+
+  isAllSelected(): boolean {
+    const all = this.allPermissions();
+    return all.length > 0 && all.every(p => this.selectedPermissionIds().has(p.id));
+  }
+
+  isPartiallySelected(): boolean {
+    const all = this.allPermissions();
+    if (!all.length) return false;
+    const selectedCount = all.filter(p => this.selectedPermissionIds().has(p.id)).length;
+    return selectedCount > 0 && selectedCount < all.length;
+  }
+
+  toggleAll(): void {
+    if (this.isEditMode() && this.role()?.isSystemRole) return;
+    const all = this.allPermissions();
+    if (!all.length) return;
+    if (this.isAllSelected()) {
+      this.selectedPermissionIds.set(new Set());
+    } else {
+      this.selectedPermissionIds.set(new Set(all.map(p => p.id)));
+    }
   }
 
   onSave(): void {

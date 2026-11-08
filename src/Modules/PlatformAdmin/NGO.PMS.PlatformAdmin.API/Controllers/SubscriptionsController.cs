@@ -7,6 +7,7 @@ namespace NGO.PMS.PlatformAdmin.API.Controllers;
 
 [ApiController]
 [Route("api/v1/platform/subscriptions")]
+[Route("api/v1/platform/packages")]
 [Authorize(Policy = "SuperAdmin")]
 public class SubscriptionsController : ControllerBase
 {

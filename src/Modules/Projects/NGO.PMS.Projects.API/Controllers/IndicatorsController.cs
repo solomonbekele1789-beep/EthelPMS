@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NGO.PMS.Projects.Application.ResultsFramework.Commands.CreateIndicator;
+using NGO.PMS.Projects.Application.ResultsFramework.Commands.DeleteIndicator;
 using NGO.PMS.Projects.Application.ResultsFramework.Commands.UpdateIndicator;
 using NGO.PMS.SharedKernel.Authorization;
 
@@ -19,7 +20,7 @@ public class IndicatorsController : ControllerBase
     [RequirePermission("projects.indicators.create")]
     public async Task<IActionResult> Create(Guid projectId, CreateIndicatorCommand command)
     {
-        var id = await _sender.Send(command);
+        var id = await _sender.Send(command with { ProjectId = projectId });
         return Created($"api/v1/projects/{projectId}/indicators/{id}", new { id });
     }
 
@@ -29,6 +30,14 @@ public class IndicatorsController : ControllerBase
     {
         if (id != command.IndicatorId) return BadRequest();
         await _sender.Send(command);
+        return NoContent();
+    }
+
+    [HttpDelete("{id:guid}")]
+    [RequirePermission("projects.indicators.update")]
+    public async Task<IActionResult> Delete(Guid projectId, Guid id)
+    {
+        await _sender.Send(new DeleteIndicatorCommand(id));
         return NoContent();
     }
 }

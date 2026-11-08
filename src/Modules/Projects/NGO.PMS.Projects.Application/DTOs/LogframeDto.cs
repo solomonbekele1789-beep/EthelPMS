@@ -17,6 +17,8 @@ public record LogframeOutcomeDto
     public Guid Id { get; init; }
     public string Code { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
+    public decimal? BaselineValue { get; init; }
+    public decimal? TargetValue { get; init; }
     public string? Assumptions { get; init; }
     public List<IndicatorDto> Indicators { get; init; } = [];
     public List<LogframeOutputDto> Outputs { get; init; } = [];
@@ -27,6 +29,8 @@ public record LogframeOutputDto
     public Guid Id { get; init; }
     public string Code { get; init; } = string.Empty;
     public string Description { get; init; } = string.Empty;
+    public decimal? BaselineValue { get; init; }
+    public decimal? TargetValue { get; init; }
     public string? Assumptions { get; init; }
     public List<IndicatorDto> Indicators { get; init; } = [];
     public List<LogframeActivityDto> Activities { get; init; } = [];
@@ -37,6 +41,7 @@ public record LogframeActivityDto
     public Guid Id { get; init; }
     public string Code { get; init; } = string.Empty;
     public string Name { get; init; } = string.Empty;
+    public string? Description { get; init; }
     public string? Unit { get; init; }
     public decimal? LifetimeTarget { get; init; }
     public decimal? BudgetAllocated { get; init; }

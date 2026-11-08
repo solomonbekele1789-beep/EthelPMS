@@ -24,9 +24,10 @@ public class OfficesController : ControllerBase
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 50,
         [FromQuery] string? search = null,
+        [FromQuery] string? officeType = null,
         CancellationToken ct = default)
     {
-        var result = await _mediator.Send(new ListOfficesQuery(page, pageSize, search), ct);
+        var result = await _mediator.Send(new ListOfficesQuery(page, pageSize, search, officeType), ct);
         return Ok(result);
     }
 

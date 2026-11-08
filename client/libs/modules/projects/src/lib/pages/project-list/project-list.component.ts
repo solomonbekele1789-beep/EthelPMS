@@ -7,7 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
-  PageHeaderComponent,
+  BreadcrumbNavComponent,
   DataTableComponent,
   TableColumn,
   SearchInputComponent,
@@ -29,23 +29,47 @@ import { ProjectStatus } from '../../models/project.model';
     CurrencyPipe,
     DecimalPipe,
     TranslatePipe,
-    PageHeaderComponent,
+    BreadcrumbNavComponent,
     DataTableComponent,
     SearchInputComponent,
     StatusBadgeComponent,
     HasPermissionDirective,
   ],
   template: `
-    <app-page-header [title]="'projects.list.title' | translate">
-      <button mat-flat-button color="primary" *appHasPermission="'projects.projects.create'" (click)="onCreateProject()">
-        <mat-icon>add</mat-icon>
-        {{ 'projects.list.createButton' | translate }}
-      </button>
-    </app-page-header>
+    <div class="project-list-header">
+      <app-breadcrumb-nav></app-breadcrumb-nav>
+
+      <div class="header-row">
+        <!-- Left: Project Management -->
+        <div class="header-left">
+          <h1 class="page-title">{{ 'projects.list.title' | translate }}</h1>
+        </div>
+
+        <!-- Center: Search Input -->
+        <div class="header-center">
+          <app-search-input
+            placeholder="Search projects..."
+            (search)="onSearch($event)">
+          </app-search-input>
+        </div>
+
+        <!-- Right: New Project Button -->
+        <div class="header-right">
+          <button
+            mat-flat-button
+            color="primary"
+            class="create-project-btn"
+            *appHasPermission="'projects.projects.create'"
+            (click)="onCreateProject()"
+          >
+            <mat-icon>add</mat-icon>
+            <span>{{ 'projects.list.createButton' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="list-container">
-      <app-search-input placeholder="Search projects..." (search)="onSearch($event)"></app-search-input>
-
       <div class="filter-chips">
         <mat-chip-set>
           <mat-chip
@@ -99,9 +123,80 @@ import { ProjectStatus } from '../../models/project.model';
     </ng-template>
   `,
   styles: `
-    :host { display: block; }
-    .list-container { display: flex; flex-direction: column; gap: 1rem; }
-    .filter-chips { display: flex; align-items: center; gap: 0.5rem; }
+    :host {
+      display: block;
+      width: 100%;
+    }
+    .project-list-header {
+      width: 100%;
+      padding: 0.75rem 0 1rem;
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .header-left {
+      flex: 0 0 auto;
+    }
+    .page-title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .header-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 480px;
+    }
+    .header-right {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+    }
+    .create-project-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 1.25rem;
+      height: 40px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .create-project-btn mat-icon {
+      margin-right: 4px;
+    }
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .filter-chips {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    @media (max-width: 800px) {
+      .header-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+      }
+      .header-center {
+        max-width: 100%;
+      }
+      .header-right {
+        justify-content: flex-end;
+      }
+    }
   `,
 })
 export default class ProjectListComponent implements OnInit {

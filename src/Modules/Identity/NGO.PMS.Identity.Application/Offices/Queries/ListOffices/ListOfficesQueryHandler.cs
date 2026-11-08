@@ -13,9 +13,21 @@ public class ListOfficesQueryHandler : IRequestHandler<ListOfficesQuery, PagedRe
     public async Task<PagedResponse<OfficeListItemDto>> Handle(ListOfficesQuery request, CancellationToken cancellationToken)
     {
         var query = _db.Offices.Include(o => o.ParentOffice).AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(request.OfficeType))
+        {
+            var targetType = request.OfficeType.Trim();
+            query = query.Where(o => o.OfficeType == targetType);
+        }
+
         if (!string.IsNullOrWhiteSpace(request.Search))
-            query = query.Where(o => o.Name.ToLower().Contains(request.Search.ToLower())
-                                  || o.Code.ToLower().Contains(request.Search.ToLower()));
+        {
+            var search = request.Search.Trim().ToLower();
+            query = query.Where(o => o.Name.ToLower().Contains(search)
+                                  || o.Code.ToLower().Contains(search)
+                                  || (o.LocationAddress != null && o.LocationAddress.ToLower().Contains(search))
+                                  || (o.Description != null && o.Description.ToLower().Contains(search)));
+        }
 
         var total = await query.CountAsync(cancellationToken);
         var offices = await query.OrderBy(o => o.Name)
@@ -31,9 +43,20 @@ public class ListOfficesQueryHandler : IRequestHandler<ListOfficesQuery, PagedRe
             .ToDictionaryAsync(x => x.OfficeId, x => x.Count, cancellationToken);
 
         var items = offices.Select(o => new OfficeListItemDto(
-            o.Id, o.Name, o.Code,
+            o.Id,
+            o.Name,
+            o.Code,
+            o.OfficeType,
+            o.Description,
+            o.LocationAddress,
+            o.Latitude,
+            o.Longitude,
+            o.IsActive,
+            o.ParentOfficeId,
             o.ParentOffice?.Name,
-            userCounts.GetValueOrDefault(o.Id, 0))).ToList();
+            o.ParentOffice?.Code,
+            userCounts.GetValueOrDefault(o.Id, 0),
+            o.CreatedAt)).ToList();
 
         return PagedResponse<OfficeListItemDto>.Ok(items, request.Page, request.PageSize, total);
     }

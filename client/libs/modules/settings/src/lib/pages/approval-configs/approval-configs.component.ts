@@ -12,6 +12,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PageHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent } from '@ethelpms/shared/ui';
 import { HasPermissionDirective } from '@ethelpms/shared/core';
+import { SettingsNavComponent } from '../../components/settings-nav/settings-nav.component';
 import { SettingsActions } from '../../store/settings.actions';
 import { selectApprovalConfigs, selectSettingsLoading } from '../../store/settings.selectors';
 import {
@@ -38,6 +39,7 @@ import {
     LoadingSpinnerComponent,
     EmptyStateComponent,
     HasPermissionDirective,
+    SettingsNavComponent,
   ],
   template: `
     <app-page-header [title]="'settings.approvals.title' | translate">
@@ -46,6 +48,8 @@ import {
         {{ (showForm() ? 'common.cancel' : 'settings.approvals.addButton') | translate }}
       </button>
     </app-page-header>
+
+    <ethel-settings-nav></ethel-settings-nav>
 
     @if (showForm()) {
       <mat-card class="form-card">

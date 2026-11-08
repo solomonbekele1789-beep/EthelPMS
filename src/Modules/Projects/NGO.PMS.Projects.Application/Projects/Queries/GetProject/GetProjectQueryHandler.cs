@@ -21,6 +21,7 @@ public class GetProjectQueryHandler : IRequestHandler<GetProjectQuery, ProjectDt
             .Include(p => p.TeamMembers)
             .Include(p => p.InterventionAreas)
                 .ThenInclude(pia => pia.InterventionArea)
+                    .ThenInclude(ia => ia.Parent)
             .FirstOrDefaultAsync(p => p.Id == request.ProjectId, ct)
             ?? throw new NotFoundException("Project", request.ProjectId);
 

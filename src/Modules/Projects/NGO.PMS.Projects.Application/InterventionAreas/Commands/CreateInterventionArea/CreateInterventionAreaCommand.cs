@@ -5,5 +5,12 @@ namespace NGO.PMS.Projects.Application.InterventionAreas.Commands.CreateInterven
 public record CreateInterventionAreaCommand(
     string Name,
     string Code,
-    string? Description,
-    Guid? ParentId) : IRequest<Guid>;
+    string? Description = null,
+    Guid? ParentId = null,
+    string? AreaType = "Region",
+    double? Latitude = null,
+    double? Longitude = null,
+    double? Altitude = null,
+    double? Accuracy = null,
+    string? GpsSource = null,
+    string? LandmarkOrAddress = null) : IRequest<Guid>;

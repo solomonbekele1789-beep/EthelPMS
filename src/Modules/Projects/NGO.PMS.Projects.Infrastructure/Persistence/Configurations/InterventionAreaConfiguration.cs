@@ -12,7 +12,10 @@ public class InterventionAreaConfiguration : IEntityTypeConfiguration<Interventi
         builder.HasKey(e => e.Id);
         builder.Property(e => e.Name).IsRequired().HasMaxLength(200);
         builder.Property(e => e.Code).IsRequired().HasMaxLength(50);
+        builder.Property(e => e.AreaType).IsRequired().HasMaxLength(50).HasDefaultValue("Region");
         builder.Property(e => e.Description).HasMaxLength(2000);
+        builder.Property(e => e.LandmarkOrAddress).HasMaxLength(500);
+        builder.Property(e => e.GpsSource).HasMaxLength(50);
         builder.Property(e => e.DeletedBy).HasMaxLength(200);
 
         builder.HasIndex(e => e.OrganizationId).HasDatabaseName("ix_intervention_areas_org");

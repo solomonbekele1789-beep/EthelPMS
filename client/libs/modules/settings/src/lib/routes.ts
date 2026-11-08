@@ -31,6 +31,10 @@ export const settingsRoutes: Routes = [
         data: { permission: 'settings.org.manage' },
       },
       {
+        path: 'intervention-areas',
+        loadComponent: () => import('./pages/intervention-areas/intervention-areas.component'),
+      },
+      {
         path: 'approvals',
         loadComponent: () => import('./pages/approval-configs/approval-configs.component'),
         canActivate: [permissionGuard],

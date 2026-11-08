@@ -58,7 +58,8 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Create([FromBody] CreateUserCommand command, CancellationToken ct)
     {
         var id = await _mediator.Send(command, ct);
-        return CreatedAtAction(nameof(Get), new { id }, new { id });
+        var user = await _mediator.Send(new GetUserQuery(id), ct);
+        return CreatedAtAction(nameof(Get), new { id }, user);
     }
 
     [HttpPut("{id:guid}")]

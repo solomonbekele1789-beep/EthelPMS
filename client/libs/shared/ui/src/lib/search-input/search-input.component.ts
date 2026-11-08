@@ -10,7 +10,7 @@ import { Subject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs'
   standalone: true,
   imports: [FormsModule, MatInputModule, MatIconModule, MatButtonModule],
   template: `
-    <mat-form-field appearance="outline" class="search-field">
+    <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
       <mat-icon matPrefix>search</mat-icon>
       <input matInput [placeholder]="placeholder" [(ngModel)]="value"
              (ngModelChange)="onInput($event)">
@@ -21,7 +21,16 @@ import { Subject, debounceTime, distinctUntilChanged, Subscription } from 'rxjs'
       }
     </mat-form-field>
   `,
-  styles: [`.search-field { width: 100%; max-width: 400px; }`]
+  styles: [`
+    :host {
+      display: inline-block;
+      width: 100%;
+      max-width: 440px;
+    }
+    .search-field {
+      width: 100%;
+    }
+  `]
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
   @Input() placeholder = 'Search...';
