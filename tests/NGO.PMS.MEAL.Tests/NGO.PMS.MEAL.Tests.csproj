@@ -12,7 +12,7 @@
     <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
     <PackageReference Include="NSubstitute" Version="$(NSubstituteVersion)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(EFCoreVersion)" />
-    <PackageReference Include="FluentValidation.TestHelper" Version="$(FluentValidationVersion)" />
+    <PackageReference Include="FluentValidation" Version="$(FluentValidationVersion)" />
   </ItemGroup>
 
 </Project>

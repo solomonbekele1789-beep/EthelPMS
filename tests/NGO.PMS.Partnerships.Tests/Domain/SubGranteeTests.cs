@@ -1,8 +1,8 @@
-using Finbuckle.MultiTenant.Abstractions;
 using FluentAssertions;
 using NGO.PMS.Partnerships.Domain.Entities;
 using NGO.PMS.Partnerships.Domain.Enums;
 using NGO.PMS.Partnerships.Domain.Events;
+using NGO.PMS.SharedKernel.Domain;
 
 namespace NGO.PMS.Partnerships.Tests.Domain;
 
@@ -92,9 +92,10 @@ public class SubGranteeTests
     public void Should_Implement_IMultiTenant()
     {
         var subGrantee = CreateValidSubGrantee();
+        var tenantId = Guid.NewGuid();
 
         subGrantee.Should().BeAssignableTo<IMultiTenant>();
-        subGrantee.TenantId = "tenant-001";
-        subGrantee.TenantId.Should().Be("tenant-001");
+        subGrantee.TenantId = tenantId;
+        subGrantee.TenantId.Should().Be(tenantId);
     }
 }

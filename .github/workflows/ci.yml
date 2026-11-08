@@ -56,18 +56,18 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: src/Frontend/ngo-pms-frontend/package-lock.json
+          cache-dependency-path: client/package-lock.json
 
       - name: Install dependencies
-        working-directory: src/Frontend/ngo-pms-frontend
+        working-directory: client
         run: npm ci
 
       - name: Lint
-        working-directory: src/Frontend/ngo-pms-frontend
+        working-directory: client
         run: npx nx lint web
 
       - name: Build
-        working-directory: src/Frontend/ngo-pms-frontend
+        working-directory: client
         run: npx nx build web --configuration=production
 
   frontend-platform:
@@ -81,16 +81,16 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: src/Frontend/ngo-pms-frontend/package-lock.json
+          cache-dependency-path: client/package-lock.json
 
       - name: Install dependencies
-        working-directory: src/Frontend/ngo-pms-frontend
+        working-directory: client
         run: npm ci
 
       - name: Lint
-        working-directory: src/Frontend/ngo-pms-frontend
+        working-directory: client
         run: npx nx lint platform-console
 
       - name: Build
-        working-directory: src/Frontend/ngo-pms-frontend
+        working-directory: client
         run: npx nx build platform-console --configuration=production

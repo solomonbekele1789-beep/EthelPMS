@@ -20,13 +20,14 @@ public class CreateUserTests
         var currentUser = IdentityTestFixture.CreateMockCurrentUser(userId, orgId);
         var db = IdentityTestFixture.CreateInMemoryDbContext(orgId);
         var emailService = Substitute.For<IEmailService>();
+        var passwordHasher = Substitute.For<IPasswordHasher>();
 
         // Seed a role
         var role = Role.Create("TestRole", "Test", orgId);
         db.Roles.Add(role);
         await db.SaveChangesAsync();
 
-        var handler = new CreateUserCommandHandler(db, currentUser, emailService);
+        var handler = new CreateUserCommandHandler(db, currentUser, emailService, passwordHasher);
         var command = new CreateUserCommand(
             "new.user@example.com", "New", "User", null, null, [role.Id]);
 

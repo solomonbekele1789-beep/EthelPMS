@@ -44,7 +44,7 @@ public class SystemSettingTests
 
         var act = () => intSetting.Update("not-a-number");
 
-        act.Should().Throw<FormatException>();
+        act.Should().Throw<ArgumentException>();
 
         var boolSetting = SystemSetting.Create(
             "app.enable-logging", "true", SettingDataType.Boolean,
@@ -52,7 +52,7 @@ public class SystemSettingTests
 
         var actBool = () => boolSetting.Update("not-a-bool");
 
-        actBool.Should().Throw<FormatException>();
+        actBool.Should().Throw<ArgumentException>();
     }
 
     [Fact]
