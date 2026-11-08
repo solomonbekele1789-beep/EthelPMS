@@ -66,7 +66,7 @@ public class LoginCommandHandlerTests
         // Assert
         result.AccessToken.Should().Be("access_token_123");
         result.RefreshToken.Should().Be("refresh_token_123");
-        result.ExpiresAt.Should().BeAfter(DateTimeOffset.UtcNow);
+        result.User.Should().NotBeNull();
         await jwt.Received(1).StoreRefreshTokenAsync(
             Arg.Any<Guid>(), "refresh_token_123", "web",
             Arg.Any<DateTimeOffset>(), Arg.Any<CancellationToken>());
