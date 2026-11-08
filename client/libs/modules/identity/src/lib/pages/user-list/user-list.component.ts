@@ -39,7 +39,7 @@ import { selectUsers, selectUserTotalCount, selectUsersLoading } from '../../sto
       <div class="header-row">
         <!-- Left: User Management -->
         <div class="header-left">
-          <h1 class="page-title">User Management</h1>
+          <h1 class="page-title">{{ 'users.list.title' | translate }}</h1>
         </div>
 
         <!-- Center: Search Input -->

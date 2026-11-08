@@ -222,7 +222,7 @@
   },
   "projects": {
     "list": {
-      "title": "Projects",
+      "title": "Project Management",
       "createButton": "New Project",
       "noProjects": "No projects found",
       "filterByStatus": "Filter by status"

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using NGO.PMS.Reporting.Application.Templates.Commands.AddTemplateSection;
 using NGO.PMS.Reporting.Application.Templates.Commands.CreateReportTemplate;
 using NGO.PMS.Reporting.Application.Templates.Commands.UpdateReportTemplate;
+using NGO.PMS.Reporting.Application.Templates.Queries.GetReportTemplate;
 using NGO.PMS.Reporting.Application.Templates.Queries.ListReportTemplates;
 using NGO.PMS.Reporting.Domain.Enums;
 using NGO.PMS.SharedKernel.Authorization;
@@ -19,12 +20,17 @@ public class ReportTemplatesController : ControllerBase
     public ReportTemplatesController(ISender sender) => _sender = sender;
 
     [HttpGet]
-    [RequirePermission("reporting.reports.read")]
+    [RequirePermission("reporting.templates.read")]
     public async Task<IActionResult> List([FromQuery] ReportType? reportType)
         => Ok(await _sender.Send(new ListReportTemplatesQuery(reportType)));
 
+    [HttpGet("{id:guid}")]
+    [RequirePermission("reporting.templates.read")]
+    public async Task<IActionResult> Get(Guid id)
+        => Ok(await _sender.Send(new GetReportTemplateQuery(id)));
+
     [HttpPost]
-    [RequirePermission("reporting.reports.create")]
+    [RequirePermission("reporting.templates.create")]
     public async Task<IActionResult> Create(CreateReportTemplateCommand command)
     {
         var id = await _sender.Send(command);
@@ -32,7 +38,7 @@ public class ReportTemplatesController : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    [RequirePermission("reporting.reports.update")]
+    [RequirePermission("reporting.templates.update")]
     public async Task<IActionResult> Update(Guid id, UpdateReportTemplateCommand command)
     {
         if (id != command.TemplateId) return BadRequest();
@@ -41,7 +47,7 @@ public class ReportTemplatesController : ControllerBase
     }
 
     [HttpPost("{id:guid}/sections")]
-    [RequirePermission("reporting.reports.update")]
+    [RequirePermission("reporting.templates.update")]
     public async Task<IActionResult> AddSection(Guid id, AddTemplateSectionCommand command)
     {
         if (id != command.ReportTemplateId) return BadRequest();

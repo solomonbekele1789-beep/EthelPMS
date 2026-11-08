@@ -26,7 +26,7 @@ public class PlansController : ControllerBase
     [HttpGet]
     [RequirePermission("planning.annual.read")]
     public async Task<IActionResult> List(
-        [FromQuery] Guid projectId,
+        [FromQuery] Guid? projectId = null,
         [FromQuery] PlanLevel? level = null,
         [FromQuery] Guid? parentId = null,
         [FromQuery] int page = 1,

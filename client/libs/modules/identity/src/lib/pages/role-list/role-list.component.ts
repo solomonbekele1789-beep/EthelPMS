@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslatePipe } from '@ngx-translate/core';
 import {
-  PageHeaderComponent,
+  BreadcrumbNavComponent,
   DataTableComponent,
   TableColumn,
   SearchInputComponent,
@@ -23,22 +23,46 @@ import { selectRoles, selectRoleTotalCount, selectRolesLoading } from '../../sto
     MatIconModule,
     MatTooltipModule,
     TranslatePipe,
-    PageHeaderComponent,
+    BreadcrumbNavComponent,
     DataTableComponent,
     SearchInputComponent,
     HasPermissionDirective,
   ],
   template: `
-    <app-page-header title="Role Management">
-      <button mat-flat-button color="primary" *appHasPermission="'identity.roles.create'" (click)="onCreateRole()">
-        <mat-icon>add</mat-icon>
-        {{ 'roles.list.createButton' | translate }}
-      </button>
-    </app-page-header>
+    <div class="role-list-header">
+      <app-breadcrumb-nav></app-breadcrumb-nav>
+
+      <div class="header-row">
+        <!-- Left: Role Management -->
+        <div class="header-left">
+          <h1 class="page-title">{{ 'roles.list.title' | translate }}</h1>
+        </div>
+
+        <!-- Center: Search Input -->
+        <div class="header-center">
+          <app-search-input
+            placeholder="Search roles..."
+            (search)="onSearch($event)">
+          </app-search-input>
+        </div>
+
+        <!-- Right: New Role Button -->
+        <div class="header-right">
+          <button
+            mat-flat-button
+            color="primary"
+            class="create-role-btn"
+            *appHasPermission="'identity.roles.create'"
+            (click)="onCreateRole()"
+          >
+            <mat-icon>add</mat-icon>
+            <span>{{ 'roles.list.createButton' | translate }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="list-container">
-      <app-search-input placeholder="Search roles..." (search)="onSearch($event)"></app-search-input>
-
       <app-data-table
         [columns]="columns()"
         [data]="roles()"
@@ -61,9 +85,79 @@ import { selectRoles, selectRoleTotalCount, selectRolesLoading } from '../../sto
     </ng-template>
   `,
   styles: `
-    :host { display: block; }
-    .list-container { display: flex; flex-direction: column; gap: 1rem; }
-    .system-icon { color: var(--text-secondary, #666); font-size: 20px; }
+    :host {
+      display: block;
+      width: 100%;
+    }
+    .role-list-header {
+      width: 100%;
+      padding: 0.75rem 0 1rem;
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+    .header-left {
+      flex: 0 0 auto;
+    }
+    .page-title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0f172a;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+    .header-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: 480px;
+    }
+    .header-right {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+    }
+    .create-role-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0 1.25rem;
+      height: 40px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .create-role-btn mat-icon {
+      margin-right: 4px;
+    }
+    .list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .system-icon {
+      color: var(--text-secondary, #666);
+      font-size: 20px;
+    }
+    @media (max-width: 800px) {
+      .header-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+      }
+      .header-center {
+        max-width: 100%;
+      }
+      .header-right {
+        justify-content: flex-end;
+      }
+    }
   `,
 })
 export default class RoleListComponent implements OnInit {

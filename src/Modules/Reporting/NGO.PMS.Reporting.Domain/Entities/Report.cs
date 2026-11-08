@@ -94,8 +94,8 @@ public class Report : AuditableEntity, ISoftDeletable
             Title = title.Trim(),
             ReportType = reportType,
             ProjectId = projectId,
-            PeriodStart = periodStart,
-            PeriodEnd = periodEnd,
+            PeriodStart = periodStart.ToUniversalTime(),
+            PeriodEnd = periodEnd.ToUniversalTime(),
             ReportTemplateId = templateId,
             RequiredApprovalLevels = requiredApprovalLevels,
             OrganizationId = orgId,
@@ -131,7 +131,7 @@ public class Report : AuditableEntity, ISoftDeletable
     {
         if (ReportType != ReportType.Incident)
             throw new InvalidOperationException("Incident details only apply to Incident reports.");
-        IncidentDate = incidentDate;
+        IncidentDate = incidentDate.ToUniversalTime();
         IncidentLocation = location;
         IncidentType = type;
         PeopleInvolved = peopleInvolved;
@@ -149,7 +149,7 @@ public class Report : AuditableEntity, ISoftDeletable
 
     public void SetDeadline(DateTimeOffset deadline, Guid? assignedTo = null)
     {
-        SubmissionDeadline = deadline;
+        SubmissionDeadline = deadline.ToUniversalTime();
         AssignedToUserId = assignedTo;
     }
 
@@ -189,7 +189,7 @@ public class Report : AuditableEntity, ISoftDeletable
             throw new InvalidOperationException("Only Submitted or UnderReview reports can be approved.");
 
         var approval = ReportApproval.Create(Id, approverUserId, approvalLevel,
-            ApprovalAction.Approved, comments);
+            ApprovalAction.Approved, comments, OrganizationId);
         Approvals.Add(approval);
         CurrentApprovalLevel = approvalLevel;
 
@@ -215,7 +215,7 @@ public class Report : AuditableEntity, ISoftDeletable
             throw new ArgumentException("Rejection reason is required.", nameof(reason));
 
         var approval = ReportApproval.Create(Id, rejectorUserId, approvalLevel,
-            ApprovalAction.Rejected, reason);
+            ApprovalAction.Rejected, reason, OrganizationId);
         Approvals.Add(approval);
 
         Status = ReportStatus.Rejected;

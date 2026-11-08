@@ -12,6 +12,7 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PageHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent } from '@ethelpms/shared/ui';
 import { HasPermissionDirective } from '@ethelpms/shared/core';
+import { SettingsNavComponent } from '../../components/settings-nav/settings-nav.component';
 import { SettingsActions } from '../../store/settings.actions';
 import { selectOrgSettings, selectSettingsLoading } from '../../store/settings.selectors';
 import { OrgSettingDto, UpsertOrgSettingRequest } from '../../models/org-setting.model';
@@ -35,6 +36,7 @@ import { SettingDataType } from '../../models/system-setting.model';
     LoadingSpinnerComponent,
     EmptyStateComponent,
     HasPermissionDirective,
+    SettingsNavComponent,
   ],
   template: `
     <app-page-header [title]="'settings.org.title' | translate">
@@ -43,6 +45,8 @@ import { SettingDataType } from '../../models/system-setting.model';
         {{ (showForm() ? 'common.cancel' : 'settings.org.addButton') | translate }}
       </button>
     </app-page-header>
+
+    <ethel-settings-nav></ethel-settings-nav>
 
     @if (showForm()) {
       <mat-card class="form-card">

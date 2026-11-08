@@ -59,6 +59,10 @@ export const ReportActions = createActionGroup({
     'Load Templates Success': props<{ templates: ReportTemplateDto[] }>(),
     'Load Templates Failure': props<{ error: string }>(),
 
+    'Load Template': props<{ id: string }>(),
+    'Load Template Success': props<{ template: ReportTemplateDto }>(),
+    'Load Template Failure': props<{ error: string }>(),
+
     'Create Template': props<{ request: CreateReportTemplateRequest }>(),
     'Create Template Success': props<{ id: string }>(),
     'Create Template Failure': props<{ error: string }>(),

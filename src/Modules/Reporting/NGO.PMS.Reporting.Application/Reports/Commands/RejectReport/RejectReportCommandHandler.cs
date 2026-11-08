@@ -17,10 +17,14 @@ public class RejectReportCommandHandler : IRequestHandler<RejectReportCommand>
     public async Task Handle(RejectReportCommand request, CancellationToken ct)
     {
         var report = await _db.Reports
+            .Include(r => r.Approvals)
             .FirstOrDefaultAsync(r => r.Id == request.ReportId, ct)
             ?? throw new NotFoundException("Report", request.ReportId);
 
         report.Reject(_currentUser.UserId, request.ApprovalLevel, request.Reason);
+
+        var latestApproval = report.Approvals.Last();
+        _db.ReportApprovals.Add(latestApproval);
 
         await _db.SaveChangesAsync(ct);
     }

@@ -75,12 +75,16 @@ public class ProjectsController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet("{id:guid}/team")]
+    [RequirePermission("projects.projects.read")]
+    public async Task<IActionResult> ListTeamMembers(Guid id)
+        => Ok(await _sender.Send(new NGO.PMS.Projects.Application.Projects.Queries.ListTeamMembers.ListProjectTeamMembersQuery(id)));
+
     [HttpPost("{id:guid}/team")]
     [RequirePermission("projects.projects.manage")]
     public async Task<IActionResult> AddTeamMember(Guid id, AddTeamMemberCommand command)
     {
-        if (id != command.ProjectId) return BadRequest();
-        var memberId = await _sender.Send(command);
+        var memberId = await _sender.Send(command with { ProjectId = id });
         return Created($"api/v1/projects/{id}/team/{memberId}", new { id = memberId });
     }
 
@@ -89,6 +93,19 @@ public class ProjectsController : ControllerBase
     public async Task<IActionResult> RemoveTeamMember(Guid id, Guid memberId)
     {
         await _sender.Send(new RemoveTeamMemberCommand(id, memberId));
+        return NoContent();
+    }
+
+    [HttpGet("{id:guid}/intervention-areas")]
+    [RequirePermission("projects.projects.read")]
+    public async Task<IActionResult> ListInterventionAreas(Guid id)
+        => Ok(await _sender.Send(new NGO.PMS.Projects.Application.Projects.Queries.ListInterventionAreas.ListProjectInterventionAreasQuery(id)));
+
+    [HttpDelete("{id:guid}/intervention-areas/{allocationId:guid}")]
+    [RequirePermission("projects.projects.manage")]
+    public async Task<IActionResult> RemoveInterventionArea(Guid id, Guid allocationId)
+    {
+        await _sender.Send(new NGO.PMS.Projects.Application.InterventionAreas.Commands.DeallocateInterventionArea.DeallocateInterventionAreaCommand(id, allocationId));
         return NoContent();
     }
 }

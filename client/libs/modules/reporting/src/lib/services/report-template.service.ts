@@ -23,6 +23,10 @@ export class ReportTemplateService {
     return this.api.get<ReportTemplateDto[]>('/report-templates', params);
   }
 
+  getTemplate(id: string): Observable<ReportTemplateDto> {
+    return this.api.get<ReportTemplateDto>(`/report-templates/${id}`);
+  }
+
   createTemplate(request: CreateReportTemplateRequest): Observable<{ id: string }> {
     return this.api.post<{ id: string }>('/report-templates', request);
   }

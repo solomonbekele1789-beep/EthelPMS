@@ -13,7 +13,7 @@ import { PlanningConfigurationDto } from '../models/planning-config.model';
 export const PlanActions = createActionGroup({
   source: 'Planning',
   events: {
-    'Load Plans': props<{ page: number; pageSize: number; projectId: string; level?: PlanLevel; parentId?: string }>(),
+    'Load Plans': props<{ page: number; pageSize: number; projectId?: string; level?: PlanLevel; parentId?: string }>(),
     'Load Plans Success': props<{ plans: PlanEntryListItemDto[]; totalCount: number }>(),
     'Load Plans Failure': props<{ error: string }>(),
     'Load Plan': props<{ id: string }>(),

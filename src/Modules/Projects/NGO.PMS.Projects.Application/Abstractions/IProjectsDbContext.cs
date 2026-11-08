@@ -10,6 +10,7 @@ public interface IProjectsDbContext
     DbSet<ProjectPhase> ProjectPhases { get; }
     DbSet<ProjectRevision> ProjectRevisions { get; }
     DbSet<ProjectTeamMember> ProjectTeamMembers { get; }
+    DbSet<ProjectUserView> ProjectUsers { get; }
     DbSet<Outcome> Outcomes { get; }
     DbSet<Output> Outputs { get; }
     DbSet<Activity> Activities { get; }

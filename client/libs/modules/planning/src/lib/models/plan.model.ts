@@ -35,13 +35,20 @@ export interface PlanEntryDto {
 
 export interface PlanEntryListItemDto {
   id: string;
+  projectId?: string;
   level: PlanLevel;
   title: string;
   fiscalYear?: number;
   quarter?: number;
+  month?: number;
+  weekNumber?: number;
   plannedStartDate: string;
   plannedEndDate: string;
   plannedBudget: number;
+  actualBudget?: number;
+  beneficiariesMale?: number;
+  beneficiariesFemale?: number;
+  totalBeneficiaries?: number;
   status: PlanStatus;
   approvalStatus: ApprovalStatus;
   progressPercentage: number;
@@ -90,6 +97,8 @@ export interface CreatePlanEntryRequest {
   month?: number;
   weekNumber?: number;
   dayDate?: string;
+  beneficiariesMale?: number;
+  beneficiariesFemale?: number;
 }
 
 export interface UpdatePlanEntryRequest {

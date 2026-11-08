@@ -32,4 +32,5 @@ public record ProjectDto
     public DateTimeOffset? ApprovedAt { get; init; }
     public string? RejectionReason { get; init; }
     public DateTimeOffset CreatedAt { get; init; }
+    public List<ProjectInterventionAreaDto> InterventionAreas { get; init; } = [];
 }

@@ -222,7 +222,7 @@
   },
   "projects": {
     "list": {
-      "title": "ፕሮጀክቶች",
+      "title": "የፕሮጀክት አስተዳደር",
       "createButton": "አዲስ ፕሮጀክት",
       "noProjects": "ፕሮጀክቶች አልተገኙም",
       "filterByStatus": "በሁኔታ አጣራ"

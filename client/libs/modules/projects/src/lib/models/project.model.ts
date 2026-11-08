@@ -1,3 +1,5 @@
+import { ProjectInterventionAreaDto } from './intervention-area.model';
+
 export interface ProjectDto {
   id: string;
   code: string;
@@ -29,6 +31,7 @@ export interface ProjectDto {
   approvedAt?: string;
   rejectionReason?: string;
   createdAt: string;
+  interventionAreas?: ProjectInterventionAreaDto[];
 }
 
 export interface ProjectListItemDto {
@@ -76,6 +79,18 @@ export interface AddTeamMemberRequest {
   projectId: string;
   userId: string;
   role: string;
+}
+
+export interface ProjectTeamMemberDto {
+  id: string;
+  projectId: string;
+  userId: string;
+  role: string;
+  fullName: string;
+  email: string;
+  officeName?: string;
+  assignedAt: string;
+  isActive: boolean;
 }
 
 export interface RejectProjectRequest {

@@ -12,6 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PageHeaderComponent, LoadingSpinnerComponent, EmptyStateComponent } from '@ethelpms/shared/ui';
+import { SettingsNavComponent } from '../../components/settings-nav/settings-nav.component';
 import { SettingsActions } from '../../store/settings.actions';
 import {
   selectSystemSettings,
@@ -38,9 +39,12 @@ import { SystemSettingDto, UpdateSystemSettingRequest } from '../../models/syste
     PageHeaderComponent,
     LoadingSpinnerComponent,
     EmptyStateComponent,
+    SettingsNavComponent,
   ],
   template: `
     <app-page-header [title]="'settings.system.title' | translate"></app-page-header>
+
+    <ethel-settings-nav></ethel-settings-nav>
 
     @if (loading()) {
       <app-loading-spinner></app-loading-spinner>

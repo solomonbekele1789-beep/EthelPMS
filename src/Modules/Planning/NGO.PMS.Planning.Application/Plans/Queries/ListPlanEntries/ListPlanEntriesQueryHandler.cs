@@ -4,30 +4,39 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NGO.PMS.Planning.Application.Common;
 using NGO.PMS.Planning.Application.DTOs;
+using NGO.PMS.SharedKernel.Domain;
 
 namespace NGO.PMS.Planning.Application.Plans.Queries.ListPlanEntries;
 
 public class ListPlanEntriesQueryHandler : IRequestHandler<ListPlanEntriesQuery, PagedResult<PlanEntryListItemDto>>
 {
     private readonly IPlanningDbContext _db;
+    private readonly ICurrentUserService _currentUser;
     private readonly IMapper _mapper;
 
-    public ListPlanEntriesQueryHandler(IPlanningDbContext db, IMapper mapper)
-    { _db = db; _mapper = mapper; }
+    public ListPlanEntriesQueryHandler(IPlanningDbContext db, ICurrentUserService currentUser, IMapper mapper)
+    {
+        _db = db;
+        _currentUser = currentUser;
+        _mapper = mapper;
+    }
 
     public async Task<PagedResult<PlanEntryListItemDto>> Handle(ListPlanEntriesQuery request, CancellationToken ct)
     {
         var query = _db.PlanEntries
+            .AsNoTracking()
             .Include(p => p.Children)
-            .Where(p => p.ProjectId == request.ProjectId)
+            .Where(p => p.OrganizationId == _currentUser.OrganizationId && !p.IsDeleted)
             .AsQueryable();
+
+        if (request.ProjectId.HasValue && request.ProjectId.Value != Guid.Empty)
+            query = query.Where(p => p.ProjectId == request.ProjectId.Value);
 
         if (request.Level.HasValue)
             query = query.Where(p => p.Level == request.Level.Value);
+
         if (request.ParentId.HasValue)
             query = query.Where(p => p.ParentId == request.ParentId.Value);
-        else if (!request.Level.HasValue)
-            query = query.Where(p => p.ParentId == null); // top-level only
 
         var totalCount = await query.CountAsync(ct);
         var items = await query

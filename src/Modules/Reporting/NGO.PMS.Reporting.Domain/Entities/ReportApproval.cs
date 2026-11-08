@@ -23,7 +23,7 @@ public class ReportApproval : BaseEntity
 
     public static ReportApproval Create(
         Guid reportId, Guid userId, int approvalLevel,
-        ApprovalAction action, string? comments = null)
+        ApprovalAction action, string? comments = null, Guid organizationId = default)
     {
         return new ReportApproval
         {
@@ -32,7 +32,8 @@ public class ReportApproval : BaseEntity
             ApprovalLevel = approvalLevel,
             Action = action,
             Comments = comments,
-            ActionDate = DateTimeOffset.UtcNow
+            ActionDate = DateTimeOffset.UtcNow,
+            OrganizationId = organizationId
         };
     }
 }

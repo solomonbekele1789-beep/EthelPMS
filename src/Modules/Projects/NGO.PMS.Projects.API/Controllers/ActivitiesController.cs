@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NGO.PMS.Projects.Application.ResultsFramework.Commands.CreateActivity;
+using NGO.PMS.Projects.Application.ResultsFramework.Commands.DeleteActivity;
 using NGO.PMS.Projects.Application.ResultsFramework.Commands.UpdateActivity;
 using NGO.PMS.SharedKernel.Authorization;
 
@@ -19,7 +20,7 @@ public class ActivitiesController : ControllerBase
     [RequirePermission("projects.activities.create")]
     public async Task<IActionResult> Create(Guid outputId, CreateActivityCommand command)
     {
-        var id = await _sender.Send(command);
+        var id = await _sender.Send(command with { OutputId = outputId });
         return Created($"api/v1/outputs/{outputId}/activities/{id}", new { id });
     }
 
@@ -29,6 +30,14 @@ public class ActivitiesController : ControllerBase
     {
         if (id != command.ActivityId) return BadRequest();
         await _sender.Send(command);
+        return NoContent();
+    }
+
+    [HttpDelete("{id:guid}")]
+    [RequirePermission("projects.activities.update")]
+    public async Task<IActionResult> Delete(Guid outputId, Guid id)
+    {
+        await _sender.Send(new DeleteActivityCommand(id));
         return NoContent();
     }
 }

@@ -153,6 +153,16 @@ export class ReportEffects {
     )
   ));
 
+  loadTemplate$ = createEffect(() => this.actions$.pipe(
+    ofType(ReportActions.loadTemplate),
+    switchMap(({ id }) =>
+      this.reportTemplateService.getTemplate(id).pipe(
+        map((template) => ReportActions.loadTemplateSuccess({ template })),
+        catchError((error) => of(ReportActions.loadTemplateFailure({ error: error?.error?.detail ?? 'Failed to load template' })))
+      )
+    )
+  ));
+
   createTemplate$ = createEffect(() => this.actions$.pipe(
     ofType(ReportActions.createTemplate),
     exhaustMap(({ request }) =>

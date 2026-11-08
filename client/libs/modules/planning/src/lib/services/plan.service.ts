@@ -20,17 +20,17 @@ export class PlanService {
   private readonly api = inject(ApiService);
 
   listPlans(params: {
-    projectId: string;
+    projectId?: string;
     page: number;
     pageSize: number;
     level?: string;
     parentId?: string;
   }): Observable<PagedResult<PlanEntryListItemDto>> {
     let httpParams = new HttpParams()
-      .set('projectId', params.projectId)
       .set('page', params.page.toString())
       .set('pageSize', params.pageSize.toString());
 
+    if (params.projectId) httpParams = httpParams.set('projectId', params.projectId);
     if (params.level) httpParams = httpParams.set('level', params.level);
     if (params.parentId) httpParams = httpParams.set('parentId', params.parentId);
 

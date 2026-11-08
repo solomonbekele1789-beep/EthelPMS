@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NGO.PMS.Projects.Application.ResultsFramework.Commands.CreateOutput;
+using NGO.PMS.Projects.Application.ResultsFramework.Commands.DeleteOutput;
 using NGO.PMS.Projects.Application.ResultsFramework.Commands.UpdateOutput;
 using NGO.PMS.SharedKernel.Authorization;
 
@@ -19,7 +20,7 @@ public class OutputsController : ControllerBase
     [RequirePermission("projects.outputs.create")]
     public async Task<IActionResult> Create(Guid outcomeId, CreateOutputCommand command)
     {
-        var id = await _sender.Send(command);
+        var id = await _sender.Send(command with { OutcomeId = outcomeId });
         return Created($"api/v1/outcomes/{outcomeId}/outputs/{id}", new { id });
     }
 
@@ -29,6 +30,14 @@ public class OutputsController : ControllerBase
     {
         if (id != command.OutputId) return BadRequest();
         await _sender.Send(command);
+        return NoContent();
+    }
+
+    [HttpDelete("{id:guid}")]
+    [RequirePermission("projects.outputs.update")]
+    public async Task<IActionResult> Delete(Guid outcomeId, Guid id)
+    {
+        await _sender.Send(new DeleteOutputCommand(id));
         return NoContent();
     }
 }

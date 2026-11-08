@@ -60,6 +60,7 @@ builder.Host.UseSerilog((context, config) => config
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
+        options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
         options.JsonSerializerOptions.Converters.Add(new NGO.PMS.SharedKernel.Api.FlexibleGuidJsonConverter());
         options.JsonSerializerOptions.Converters.Add(new NGO.PMS.SharedKernel.Api.NullableGuidJsonConverter());
     });

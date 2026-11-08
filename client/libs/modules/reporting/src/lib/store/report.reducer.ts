@@ -193,6 +193,27 @@ export const reportingReducer = createReducer(
     loading: false,
   })),
 
+  on(ReportActions.loadTemplate, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(ReportActions.loadTemplateSuccess, (state, { template }) => {
+    const existingIndex = state.templates.findIndex(t => t.id === template.id);
+    const updated = existingIndex >= 0
+      ? state.templates.map(t => t.id === template.id ? template : t)
+      : [...state.templates, template];
+    return {
+      ...state,
+      templates: updated,
+      loading: false,
+    };
+  }),
+  on(ReportActions.loadTemplateFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
+
   on(ReportActions.createTemplate, (state) => ({
     ...state,
     loading: true,
