@@ -60,7 +60,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: client
-        run: npm ci
+        run: npm install --prefer-offline --no-audit
 
       - name: Lint
         working-directory: client
@@ -85,7 +85,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: client
-        run: npm ci
+        run: npm install --prefer-offline --no-audit
 
       - name: Lint
         working-directory: client
