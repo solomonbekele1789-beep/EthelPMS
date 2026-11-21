@@ -19,20 +19,19 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, L
     public async Task<LoginResponse> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
         var existingToken = await _jwtService.ValidateRefreshTokenAsync(request.RefreshToken, cancellationToken)
-            ?? throw new BusinessRuleException("Invalid or expired refresh token.");
+            ?? throw new UnauthorizedAccessException("Invalid or expired refresh token.");
 
         var user = await _db.Users
+            .Include(u => u.Organization)
             .Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ThenInclude(r => r.RolePermissions).ThenInclude(rp => rp.Permission)
             .FirstOrDefaultAsync(u => u.Id == existingToken.UserId, cancellationToken)
             ?? throw new NotFoundException(nameof(Domain.Entities.User), existingToken.UserId);
 
         if (!user.IsActive)
-            throw new BusinessRuleException("Account is deactivated.");
+            throw new ForbiddenException("Account is deactivated.");
 
-        // Revoke old token
         await _jwtService.RevokeRefreshTokenAsync(request.RefreshToken, cancellationToken);
 
-        // Generate new pair
         var permissions = user.UserRoles
             .SelectMany(ur => ur.Role.RolePermissions)
             .Select(rp => rp.Permission.Code)
@@ -41,7 +40,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, L
 
         var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
 
-        var org = await _db.Organizations.FirstOrDefaultAsync(o => o.Id == user.OrganizationId, cancellationToken);
+        var org = user.Organization ?? await _db.Organizations.FirstOrDefaultAsync(o => o.Id == user.OrganizationId, cancellationToken);
         var office = user.OfficeId.HasValue
             ? await _db.Offices.FirstOrDefaultAsync(o => o.Id == user.OfficeId, cancellationToken)
             : null;
@@ -50,7 +49,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, L
         var newRefreshToken = _jwtService.GenerateRefreshToken();
         var expiresAt = DateTimeOffset.UtcNow.AddDays(7);
 
-        await _jwtService.StoreRefreshTokenAsync(user.Id, newRefreshToken, "refreshed", expiresAt, cancellationToken);
+        await _jwtService.StoreRefreshTokenAsync(user.Id, newRefreshToken, existingToken.DeviceInfo ?? "refreshed", expiresAt, cancellationToken);
         await _db.SaveChangesAsync(cancellationToken);
 
         var profile = new LoginUserProfile(
@@ -59,6 +58,6 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, L
             user.OfficeId, office?.Name,
             roles, permissions);
 
-        return new LoginResponse(accessToken, newRefreshToken, profile);
+        return new LoginResponse(accessToken, newRefreshToken, profile, ExpiresIn: 21600);
     }
 }

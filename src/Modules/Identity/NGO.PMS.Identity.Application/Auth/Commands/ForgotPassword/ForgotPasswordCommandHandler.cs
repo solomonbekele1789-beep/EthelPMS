@@ -21,8 +21,16 @@ public class ForgotPasswordCommandHandler : IRequestHandler<ForgotPasswordComman
         var user = await _db.Users
             .FirstOrDefaultAsync(u => u.Email == request.Email.ToLowerInvariant().Trim(), cancellationToken);
 
-        // Always succeed (don't reveal if email exists)
-        if (user is null) return;
+        // Always succeed silently (do not reveal whether email exists or is active)
+        if (user is null || !user.IsActive) return;
+
+        // Invalidate any prior unused password reset tokens for this user
+        var priorTokens = await _db.PasswordResetTokens
+            .Where(t => t.UserId == user.Id && t.UsedAt == null && t.Purpose == "password_reset")
+            .ToListAsync(cancellationToken);
+
+        foreach (var prior in priorTokens)
+            prior.UsedAt = DateTimeOffset.UtcNow;
 
         var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
         var tokenHash = Convert.ToBase64String(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(token)));
@@ -31,7 +39,8 @@ public class ForgotPasswordCommandHandler : IRequestHandler<ForgotPasswordComman
         {
             UserId = user.Id,
             TokenHash = tokenHash,
-            ExpiresAt = DateTimeOffset.UtcNow.AddHours(2)
+            Purpose = "password_reset",
+            ExpiresAt = DateTimeOffset.UtcNow.AddHours(1)
         };
 
         await _db.PasswordResetTokens.AddAsync(resetToken, cancellationToken);

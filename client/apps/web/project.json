@@ -4,11 +4,16 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/web/src",
-  "tags": ["scope:app"],
+  "tags": [
+    "scope:app",
+    "type:app"
+  ],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/web",
@@ -26,8 +31,12 @@
             "output": "assets"
           }
         ],
-        "styles": ["apps/web/src/styles.scss"],
-        "polyfills": ["zone.js"]
+        "styles": [
+          "apps/web/src/styles.scss"
+        ],
+        "polyfills": [
+          "zone.js"
+        ]
       },
       "configurations": {
         "production": {
@@ -43,12 +52,26 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "apps/web/src/environments/environment.ts",
+              "with": "apps/web/src/environments/environment.prod.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
+        },
+        "staging": {
+          "fileReplacements": [
+            {
+              "replace": "apps/web/src/environments/environment.ts",
+              "with": "apps/web/src/environments/environment.staging.ts"
+            }
+          ]
         }
       }
     },

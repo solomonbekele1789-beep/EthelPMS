@@ -6,8 +6,7 @@ using Npgsql;
 namespace NGO.PMS.Identity.Infrastructure.Services;
 
 /// <summary>
-/// Dapper-based permission service for fast authorization reads.
-/// Bypasses EF Core for performance — direct SQL against the identity schema.
+/// Dapper-based permission service for fast RBAC + ABAC authorization reads.
 /// </summary>
 public class PermissionService : IPermissionService
 {
@@ -67,37 +66,62 @@ public class PermissionService : IPermissionService
         Dictionary<string, object> context, CancellationToken ct = default)
     {
         await using var conn = new NpgsqlConnection(_connectionString);
+        var userInfo = await conn.QueryFirstOrDefaultAsync<UserAttributeRow>(
+            "SELECT id, organization_id, office_id FROM identity.users WHERE id = @UserId",
+            new { UserId = userId });
+
+        if (userInfo is null) return false;
+
         var sql = """
             SELECT ar.attribute_name, ar.operator, ar.attribute_value
             FROM identity.attribute_rules ar
             JOIN identity.permissions p ON p.id = ar.permission_id
-            WHERE p.code = @Code AND ar.organization_id = (
-                SELECT organization_id FROM identity.users WHERE id = @UserId
-            )
+            WHERE p.code = @Code AND ar.organization_id = @OrgId
             """;
         var rules = await conn.QueryAsync<AttributeRuleRow>(sql,
-            new { Code = permissionCode, UserId = userId });
+            new { Code = permissionCode, OrgId = userInfo.OrganizationId });
 
         foreach (var rule in rules)
         {
-            if (!EvaluateRule(rule, context)) return false;
+            var expected = ResolveDynamicValue(rule.AttributeValue, userInfo);
+            if (!EvaluateRule(rule.AttributeName, rule.Operator, expected, context))
+                return false;
         }
         return true;
     }
 
-    private static bool EvaluateRule(AttributeRuleRow rule, Dictionary<string, object> context)
-    {
-        if (!context.TryGetValue(rule.AttributeName, out var value)) return false;
-        return rule.Operator switch
+    internal static string ResolveDynamicValue(string rawValue, UserAttributeRow user) =>
+        rawValue switch
         {
-            "equals"       => value.ToString() == rule.AttributeValue,
-            "not_equals"   => value.ToString() != rule.AttributeValue,
-            "in"           => rule.AttributeValue.Split(',').Contains(value.ToString()),
-            "less_than"    => Convert.ToDecimal(value) < Convert.ToDecimal(rule.AttributeValue),
-            "greater_than" => Convert.ToDecimal(value) > Convert.ToDecimal(rule.AttributeValue),
+            "{{user.id}}" => user.Id.ToString(),
+            "{{user.office_id}}" => user.OfficeId?.ToString() ?? string.Empty,
+            "{{user.organization_id}}" => user.OrganizationId.ToString(),
+            _ => rawValue
+        };
+
+    internal static bool EvaluateRule(
+        string attributeName,
+        string op,
+        string expectedValue,
+        Dictionary<string, object> context)
+    {
+        if (!context.TryGetValue(attributeName, out var value) || value is null) return false;
+        var actual = value.ToString() ?? string.Empty;
+
+        return op.ToLowerInvariant() switch
+        {
+            "eq" or "equals" => string.Equals(actual, expectedValue, StringComparison.OrdinalIgnoreCase),
+            "neq" or "not_equals" => !string.Equals(actual, expectedValue, StringComparison.OrdinalIgnoreCase),
+            "in" => expectedValue.Split(',', StringSplitOptions.TrimEntries)
+                .Contains(actual, StringComparer.OrdinalIgnoreCase),
+            "lt" or "less_than" => decimal.TryParse(actual, out var a1) && decimal.TryParse(expectedValue, out var e1) && a1 < e1,
+            "lte" or "less_than_or_equal" => decimal.TryParse(actual, out var a2) && decimal.TryParse(expectedValue, out var e2) && a2 <= e2,
+            "gt" or "greater_than" => decimal.TryParse(actual, out var a3) && decimal.TryParse(expectedValue, out var e3) && a3 > e3,
+            "gte" or "greater_than_or_equal" => decimal.TryParse(actual, out var a4) && decimal.TryParse(expectedValue, out var e4) && a4 >= e4,
             _ => false
         };
     }
 
+    internal record UserAttributeRow(Guid Id, Guid OrganizationId, Guid? OfficeId);
     private record AttributeRuleRow(string AttributeName, string Operator, string AttributeValue);
 }

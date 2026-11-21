@@ -92,11 +92,19 @@ export const userReducer = createReducer(
     users: state.users.map((u) =>
       u.id === id ? { ...u, isActive: false } : u
     ),
+    selectedUser:
+      state.selectedUser && state.selectedUser.id === id
+        ? { ...state.selectedUser, isActive: false }
+        : state.selectedUser,
   })),
   on(UserActions.activateUserSuccess, (state, { id }) => ({
     ...state,
     users: state.users.map((u) =>
       u.id === id ? { ...u, isActive: true } : u
     ),
+    selectedUser:
+      state.selectedUser && state.selectedUser.id === id
+        ? { ...state.selectedUser, isActive: true }
+        : state.selectedUser,
   })),
 );

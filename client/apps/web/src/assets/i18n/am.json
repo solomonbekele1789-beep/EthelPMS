@@ -36,7 +36,8 @@
     "add": "ጨምር",
     "created": "የተፈጠረ",
     "update": "አዘምን",
-    "none": "ምንም"
+    "none": "ምንም",
+    "createdAt": "የተፈጠረበት ቀን"
   },
   "auth": {
     "login": {
@@ -78,7 +79,8 @@
       "toggleConfirm": "የሚስጥር ቁልፍ ታይነት ቀይር",
       "backToLogin": "ወደ መግቢያ ተመለስ",
       "errorGeneric": "የሚስጥር ቁልፍ ማስቀመጥ አልተሳካም። እባክዎን እንደገና ይሞክሩ።"
-    }
+    },
+    "logout": "ውጣ"
   },
   "nav": {
     "dashboard": "ዳሽቦርድ",
@@ -108,7 +110,8 @@
     "reports": "ሪፖርቶች",
     "importExport": "አስገባ/ላክ",
     "dashboards": "ዳሽቦርዶች",
-    "organizationSettings": "የድርጅት ቀይሮች"
+    "organizationSettings": "የድርጅት ቀይሮች",
+    "orgSettings": "የድርጅት ቅንብሮች"
   },
   "dashboard": {
     "welcome": "እንቡአን ደህና መጡ, {{name}}",

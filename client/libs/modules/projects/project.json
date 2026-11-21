@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/projects/src",
   "prefix": "projects",
-  "tags": ["scope:projects", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:projects",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

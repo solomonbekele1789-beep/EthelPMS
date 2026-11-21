@@ -17,6 +17,7 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
         builder.Property(o => o.Timezone).HasMaxLength(50).HasDefaultValue("Africa/Addis_Ababa");
         builder.Property(o => o.CalendarPreference).HasConversion<string>().HasMaxLength(20);
 
+        builder.Property(o => o.Settings).HasColumnType("jsonb").HasDefaultValue("{}");
         builder.HasIndex(o => o.Slug).IsUnique();
 
         builder.Ignore(o => o.DomainEvents);

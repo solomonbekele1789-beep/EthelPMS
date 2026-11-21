@@ -4,33 +4,74 @@
   "projectType": "application",
   "prefix": "admin",
   "sourceRoot": "apps/platform-console/src",
-  "tags": ["scope:app"],
+  "tags": [
+    "scope:app",
+    "type:app"
+  ],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/platform-console",
         "browser": "apps/platform-console/src/main.ts",
         "tsConfig": "apps/platform-console/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [{ "glob": "**/*", "input": "apps/platform-console/public" }],
-        "styles": ["apps/platform-console/src/styles.scss"],
-        "polyfills": ["zone.js"]
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/platform-console/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/platform-console/src/assets",
+            "output": "/assets"
+          }
+        ],
+        "styles": [
+          "apps/platform-console/src/styles.scss"
+        ],
+        "polyfills": [
+          "zone.js"
+        ]
       },
       "configurations": {
         "production": {
           "budgets": [
-            { "type": "initial", "maximumWarning": "500kb", "maximumError": "1mb" },
-            { "type": "anyComponentStyle", "maximumWarning": "4kb", "maximumError": "8kb" }
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "apps/platform-console/src/environments/environment.ts",
+              "with": "apps/platform-console/src/environments/environment.prod.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
+        },
+        "staging": {
+          "fileReplacements": [
+            {
+              "replace": "apps/platform-console/src/environments/environment.ts",
+              "with": "apps/platform-console/src/environments/environment.staging.ts"
+            }
+          ]
         }
       }
     },
@@ -38,13 +79,26 @@
       "continuous": true,
       "executor": "@angular/build:dev-server",
       "defaultConfiguration": "development",
-      "options": { "port": 4201 },
+      "options": {
+        "port": 4201
+      },
       "configurations": {
-        "production": { "buildTarget": "platform-console:build:production" },
-        "development": { "buildTarget": "platform-console:build:development" }
+        "production": {
+          "buildTarget": "platform-console:build:production"
+        },
+        "development": {
+          "buildTarget": "platform-console:build:development"
+        }
       }
     },
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

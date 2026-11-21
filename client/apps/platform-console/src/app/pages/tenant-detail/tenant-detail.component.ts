@@ -1,465 +1,314 @@
-import { Component, inject, input, signal, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatCardModule } from '@angular/material/card';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatListModule } from '@angular/material/list';
-import { MatTableModule } from '@angular/material/table';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { DatePipe } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ApiService } from '@ethelpms/shared/core';
-
-interface TenantDetail {
-  id: string;
-  name: string;
-  identifier: string;
-  status: string;
-  packageName: string;
-  packageId: string;
-  maxUsers: number;
-  currentUserCount: number;
-  enabledModules: string[];
-  createdAt: string;
-  adminEmail: string;
-}
-
-interface TenantUser {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  role: string;
-  isActive: boolean;
-}
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NotificationService } from '@ethelpms/shared/ui';
+import { PlatformTenantService } from '../../services/tenant.service';
+import {
+  AccessKeyDto,
+  ProvisioningLogDto,
+  TenantDetailDto,
+  TenantModuleDto,
+  TenantUsageDto,
+} from '../../models/tenant.model';
 
 @Component({
   selector: 'admin-tenant-detail',
   standalone: true,
   imports: [
-    MatCardModule,
+    CommonModule,
+    FormsModule,
+    RouterLink,
     MatTabsModule,
+    MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatChipsModule,
-    MatListModule,
-    MatTableModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule,
-    DatePipe,
-    TranslatePipe,
+    MatSlideToggleModule,
+    MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   template: `
     <div class="tenant-detail">
-      <div class="page-header">
-        <button mat-icon-button (click)="goBack()">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-        <div class="header-info">
-          @if (isLoading()) {
-            <mat-spinner diameter="24"></mat-spinner>
-          } @else {
-            <h1>{{ tenant()?.name ?? 'Tenant Detail' }}</h1>
-            <div class="header-meta">
-              <code>{{ tenant()?.identifier }}</code>
-              <span class="status-chip" [class]="'status-' + (tenant()?.status?.toLowerCase() ?? '')">
-                {{ tenant()?.status }}
-              </span>
-            </div>
-          }
+      <div class="header">
+        <div>
+          <a routerLink="/tenants" class="back-link">&larr; Back to Tenants</a>
+          <h1>{{ tenant()?.name || 'Tenant Details' }}</h1>
+          <span class="subtitle">{{ tenant()?.slug }} &middot; {{ tenant()?.status }}</span>
         </div>
-        <div class="header-actions">
-          <button mat-stroked-button color="warn" (click)="toggleSuspend()">
-            <mat-icon>{{ tenant()?.status === 'Suspended' ? 'play_arrow' : 'pause' }}</mat-icon>
-            {{ tenant()?.status === 'Suspended' ? 'Reactivate' : 'Suspend' }}
-          </button>
+        <div class="actions">
+          @if (tenant()?.status === 'Pending') {
+            <button mat-flat-button color="primary" (click)="triggerProvisioning()">Provision</button>
+          }
+          @if (tenant()?.status === 'Active') {
+            <button mat-stroked-button color="warn" (click)="suspendTenant()">Suspend</button>
+          }
+          @if (tenant()?.status === 'Suspended') {
+            <button mat-flat-button color="primary" (click)="reactivateTenant()">Reactivate</button>
+          }
         </div>
       </div>
 
-      @if (!isLoading()) {
-        <mat-tab-group animationDuration="200ms">
-          <!-- Overview Tab -->
-          <mat-tab label="Overview">
-            <div class="tab-content">
-              <div class="overview-grid">
-                <mat-card class="info-card">
-                  <mat-card-content>
-                    <h3>Organization Info</h3>
-                    <div class="info-list">
-                      <div class="info-row">
-                        <span class="info-label">Name</span>
-                        <span class="info-value">{{ tenant()?.name }}</span>
-                      </div>
-                      <div class="info-row">
-                        <span class="info-label">Identifier</span>
-                        <code class="info-value">{{ tenant()?.identifier }}</code>
-                      </div>
-                      <div class="info-row">
-                        <span class="info-label">Admin Email</span>
-                        <span class="info-value">{{ tenant()?.adminEmail }}</span>
-                      </div>
-                      <div class="info-row">
-                        <span class="info-label">Created</span>
-                        <span class="info-value">{{ tenant()?.createdAt | date:'medium' }}</span>
-                      </div>
-                    </div>
-                  </mat-card-content>
-                </mat-card>
+      <mat-tab-group>
+        <!-- Tab 1: Overview & Usage & Branding -->
+        <mat-tab label="Overview">
+          <div class="tab-content grid-2">
+            <mat-card class="panel">
+              <h3>Usage & Limits</h3>
+              @if (usage(); as u) {
+                <div class="usage-row">
+                  <span>Users: {{ u.currentUsers }} / {{ u.maxUsers }}</span>
+                  <mat-progress-bar mode="determinate" [value]="u.maxUsers ? (u.currentUsers / u.maxUsers) * 100 : 0" />
+                </div>
+                <div class="usage-row">
+                  <span>Projects: {{ u.currentProjects }} / {{ u.maxProjects }}</span>
+                  <mat-progress-bar mode="determinate" [value]="u.maxProjects ? (u.currentProjects / u.maxProjects) * 100 : 0" />
+                </div>
+                <div class="usage-row">
+                  <span>Storage Used: {{ (u.storageUsedBytes / 1048576) | number:'1.1-2' }} MB</span>
+                </div>
+              }
+            </mat-card>
 
-                <mat-card class="info-card">
-                  <mat-card-content>
-                    <h3>Subscription</h3>
-                    <div class="info-list">
-                      <div class="info-row">
-                        <span class="info-label">Package</span>
-                        <span class="info-value">{{ tenant()?.packageName }}</span>
-                      </div>
-                      <div class="info-row">
-                        <span class="info-label">Users</span>
-                        <span class="info-value">{{ tenant()?.currentUserCount }} / {{ tenant()?.maxUsers }}</span>
-                      </div>
-                      <div class="info-row">
-                        <span class="info-label">Status</span>
-                        <span class="status-chip" [class]="'status-' + (tenant()?.status?.toLowerCase() ?? '')">
-                          {{ tenant()?.status }}
-                        </span>
-                      </div>
-                    </div>
-                  </mat-card-content>
-                </mat-card>
+            <mat-card class="panel">
+              <h3>Branding</h3>
+              <mat-form-field appearance="outline" class="full">
+                <mat-label>Logo URL</mat-label>
+                <input matInput [(ngModel)]="brandingLogoUrl" />
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="full">
+                <mat-label>Primary Color (Hex)</mat-label>
+                <input matInput [(ngModel)]="brandingPrimaryColor" placeholder="#1976d2" />
+              </mat-form-field>
+              <button mat-flat-button color="primary" (click)="saveBranding()">Save Branding</button>
+            </mat-card>
+          </div>
+        </mat-tab>
+
+        <!-- Tab 2: Interactive Module Toggles -->
+        <mat-tab label="Modules">
+          <div class="tab-content">
+            <mat-card class="panel">
+              <h3>Enabled Modules</h3>
+              <div class="module-list">
+                @for (mod of modules(); track mod.moduleName) {
+                  <div class="module-row">
+                    <span class="module-name">{{ mod.moduleName }}</span>
+                    <mat-slide-toggle
+                      [checked]="mod.isEnabled"
+                      (change)="onToggleModule(mod.moduleName, $event.checked)">
+                      {{ mod.isEnabled ? 'Enabled' : 'Disabled' }}
+                    </mat-slide-toggle>
+                  </div>
+                }
               </div>
-            </div>
-          </mat-tab>
+            </mat-card>
+          </div>
+        </mat-tab>
 
-          <!-- Modules Tab -->
-          <mat-tab label="Modules">
-            <div class="tab-content">
-              <mat-card>
-                <mat-card-content>
-                  <h3>Enabled Modules</h3>
-                  <div class="modules-grid">
-                    @for (mod of tenant()?.enabledModules ?? []; track mod) {
-                      <div class="module-chip">
-                        <span class="material-symbols-outlined">check_circle</span>
-                        {{ mod }}
+        <!-- Tab 3: Access Keys -->
+        <mat-tab label="Access Keys">
+          <div class="tab-content">
+            <mat-card class="panel">
+              <h3>API Access Keys</h3>
+              <div class="key-create-row">
+                <mat-form-field appearance="outline">
+                  <mat-label>New Key Label</mat-label>
+                  <input matInput [(ngModel)]="newKeyLabel" placeholder="e.g. KoboToolbox Sync" />
+                </mat-form-field>
+                <button mat-flat-button color="primary" (click)="createAccessKey()" [disabled]="!newKeyLabel.trim()">
+                  Generate Key
+                </button>
+              </div>
+
+              @if (createdRawKey()) {
+                <div class="raw-key-banner">
+                  <strong>Copy this key now (shown once):</strong>
+                  <code>{{ createdRawKey() }}</code>
+                </div>
+              }
+
+              <div class="key-list">
+                @for (k of accessKeys(); track k.id) {
+                  <div class="key-row">
+                    <div>
+                      <strong>{{ k.label }}</strong>
+                      <span class="muted"> ({{ k.maskedKey }})</span>
+                    </div>
+                    <button mat-stroked-button color="warn" [disabled]="k.isRevoked" (click)="revokeAccessKey(k.id)">
+                      {{ k.isRevoked ? 'Revoked' : 'Revoke' }}
+                    </button>
+                  </div>
+                }
+              </div>
+            </mat-card>
+          </div>
+        </mat-tab>
+
+        <!-- Tab 4: Provisioning Log -->
+        <mat-tab label="Provisioning Log">
+          <div class="tab-content">
+            <mat-card class="panel">
+              <div class="panel-header">
+                <h3>Provisioning Pipeline</h3>
+                <button mat-stroked-button color="primary" (click)="triggerProvisioning()">Retry Provisioning</button>
+              </div>
+              @if (provisioningLogs().length === 0) {
+                <p class="muted">No provisioning logs recorded yet.</p>
+              } @else {
+                <div class="log-list">
+                  @for (log of provisioningLogs(); track log.id) {
+                    <div class="log-row">
+                      <div>
+                        <strong>{{ log.step }}</strong>
+                        @if (log.message) {
+                          <div class="error-msg">{{ log.message }}</div>
+                        }
                       </div>
-                    }
-                    @if ((tenant()?.enabledModules ?? []).length === 0) {
-                      <p class="no-modules">No modules enabled for this tenant.</p>
-                    }
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </mat-tab>
-
-          <!-- Users Tab -->
-          <mat-tab label="Users">
-            <div class="tab-content">
-              <mat-card>
-                @if (usersLoading()) {
-                  <div class="loading-center">
-                    <mat-spinner diameter="32"></mat-spinner>
-                  </div>
-                } @else {
-                  <table mat-table [dataSource]="users()" class="full-width">
-                    <ng-container matColumnDef="name">
-                      <th mat-header-cell *matHeaderCellDef>Name</th>
-                      <td mat-cell *matCellDef="let user">{{ user.firstName }} {{ user.lastName }}</td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="email">
-                      <th mat-header-cell *matHeaderCellDef>Email</th>
-                      <td mat-cell *matCellDef="let user">{{ user.email }}</td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="role">
-                      <th mat-header-cell *matHeaderCellDef>Role</th>
-                      <td mat-cell *matCellDef="let user">{{ user.role }}</td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="isActive">
-                      <th mat-header-cell *matHeaderCellDef>Status</th>
-                      <td mat-cell *matCellDef="let user">
-                        <span class="status-chip" [class]="user.isActive ? 'status-active' : 'status-suspended'">
-                          {{ user.isActive ? 'Active' : 'Inactive' }}
-                        </span>
-                      </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="userColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: userColumns"></tr>
-                  </table>
-
-                  @if (users().length === 0) {
-                    <div class="empty-state">
-                      <span class="material-symbols-outlined">group_off</span>
-                      <p>No users found for this tenant.</p>
+                      <span class="status-tag">{{ log.status }}</span>
                     </div>
                   }
-                }
-              </mat-card>
-            </div>
-          </mat-tab>
-
-          <!-- Settings Tab -->
-          <mat-tab label="Settings">
-            <div class="tab-content">
-              <mat-card>
-                <mat-card-content>
-                  <h3>Tenant Settings</h3>
-                  <p class="placeholder-text">
-                    Tenant-level configuration settings will be available here.
-                    This includes database connection strings, feature flags, and tenant-specific overrides.
-                  </p>
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
-      }
+                </div>
+              }
+            </mat-card>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   `,
   styles: [`
-    .tenant-detail {
-      max-width: 1200px;
-    }
-
-    .page-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-
-      .header-info {
-        flex: 1;
-
-        h1 {
-          margin: 0;
-          font-size: 28px;
-          font-weight: 500;
-          color: var(--text-primary);
-        }
-
-        .header-meta {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-top: 4px;
-
-          code {
-            font-size: 13px;
-            color: var(--text-secondary);
-          }
-        }
-      }
-
-      .header-actions {
-        display: flex;
-        gap: 8px;
-      }
-    }
-
-    .tab-content {
-      padding: 24px 0;
-    }
-
-    .overview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 20px;
-    }
-
-    .info-card {
-      border-radius: 12px;
-
-      h3 {
-        margin: 0 0 16px;
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--text-primary);
-      }
-    }
-
-    .info-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-color);
-
-      &:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
-
-      .info-label {
-        font-size: 14px;
-        color: var(--text-secondary);
-      }
-
-      .info-value {
-        font-size: 14px;
-        color: var(--text-primary);
-        font-weight: 500;
-      }
-    }
-
-    .modules-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .module-chip {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      background: rgba(124, 58, 237, 0.08);
-      color: var(--accent-primary);
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 500;
-
-      .material-symbols-outlined {
-        font-size: 18px;
-      }
-    }
-
-    .no-modules {
-      color: var(--text-secondary);
-      font-style: italic;
-    }
-
-    .full-width {
-      width: 100%;
-    }
-
-    .status-chip {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 16px;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .status-active {
-      background: rgba(22, 163, 74, 0.1);
-      color: var(--accent-success);
-    }
-
-    .status-suspended {
-      background: rgba(220, 38, 38, 0.1);
-      color: var(--accent-danger);
-    }
-
-    .status-pendingsetup {
-      background: rgba(217, 119, 6, 0.1);
-      color: var(--accent-warning);
-    }
-
-    .loading-center {
-      display: flex;
-      justify-content: center;
-      padding: 32px;
-    }
-
-    .empty-state {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 48px 16px;
-      color: var(--text-secondary);
-
-      .material-symbols-outlined {
-        font-size: 48px;
-        opacity: 0.4;
-        margin-bottom: 12px;
-      }
-
-      p { margin: 0; font-size: 14px; }
-    }
-
-    .placeholder-text {
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.6;
-    }
+    .tenant-detail { padding: 24px; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+    .back-link { text-decoration: none; font-size: 13px; color: #1976d2; }
+    .subtitle { color: #666; font-size: 14px; }
+    .actions { display: flex; gap: 8px; }
+    .tab-content { padding: 16px 0; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .panel { padding: 20px; }
+    .panel-header { display: flex; justify-content: space-between; align-items: center; }
+    .full { width: 100%; }
+    .usage-row { margin: 12px 0; display: flex; flex-direction: column; gap: 6px; }
+    .module-list, .key-list, .log-list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .module-row, .key-row, .log-row { display: flex; justify-content: space-between; align-items: center; padding: 10px; border: 1px solid #e0e0e0; border-radius: 6px; }
+    .key-create-row { display: flex; gap: 12px; align-items: center; }
+    .raw-key-banner { background: #fff3e0; border: 1px solid #ffb74d; padding: 12px; border-radius: 6px; margin: 12px 0; display: flex; flex-direction: column; gap: 4px; }
+    .muted { color: #666; font-size: 13px; }
+    .error-msg { color: #d32f2f; font-size: 12px; }
   `],
 })
 export default class TenantDetailComponent implements OnInit {
-  private readonly router = inject(Router);
-  private readonly api = inject(ApiService);
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly route = inject(ActivatedRoute);
+  private readonly tenantService = inject(PlatformTenantService);
+  private readonly notification = inject(NotificationService);
 
-  /** Route param bound via withComponentInputBinding() */
-  readonly id = input.required<string>();
+  private tenantId = '';
+  readonly tenant = signal<TenantDetailDto | null>(null);
+  readonly usage = signal<TenantUsageDto | null>(null);
+  readonly modules = signal<TenantModuleDto[]>([]);
+  readonly accessKeys = signal<AccessKeyDto[]>([]);
+  readonly provisioningLogs = signal<ProvisioningLogDto[]>([]);
+  readonly createdRawKey = signal<string | null>(null);
 
-  readonly tenant = signal<TenantDetail | null>(null);
-  readonly users = signal<TenantUser[]>([]);
-  readonly isLoading = signal(true);
-  readonly usersLoading = signal(false);
-
-  readonly userColumns = ['name', 'email', 'role', 'isActive'];
+  brandingLogoUrl = '';
+  brandingPrimaryColor = '';
+  newKeyLabel = '';
 
   ngOnInit(): void {
-    this.loadTenant();
-    this.loadUsers();
+    this.tenantId = this.route.snapshot.paramMap.get('id') ?? '';
+    if (this.tenantId) {
+      this.loadAll();
+    }
   }
 
-  goBack(): void {
-    this.router.navigate(['/tenants']);
+  loadAll(): void {
+    this.tenantService.getTenant(this.tenantId).subscribe((t) => {
+      this.tenant.set(t);
+      this.brandingLogoUrl = t.logoUrl ?? '';
+      this.brandingPrimaryColor = t.primaryColor ?? '';
+    });
+    this.tenantService.getTenantUsage(this.tenantId).subscribe((u) => this.usage.set(u));
+    this.tenantService.listModules(this.tenantId).subscribe((m) => this.modules.set(m ?? []));
+    this.tenantService.listAccessKeys(this.tenantId).subscribe((k) => this.accessKeys.set(k ?? []));
+    this.tenantService.getProvisioningStatus(this.tenantId).subscribe((l) => this.provisioningLogs.set(l ?? []));
   }
 
-  toggleSuspend(): void {
-    const tenantId = this.id();
-    const currentStatus = this.tenant()?.status;
-    const action = currentStatus === 'Suspended' ? 'reactivate' : 'suspend';
-
-    this.api.post(`/platform/tenants/${tenantId}/${action}`).subscribe({
+  onToggleModule(moduleName: string, enabled: boolean): void {
+    this.tenantService.toggleModule(this.tenantId, moduleName, enabled).subscribe({
       next: () => {
-        this.snackBar.open(
-          `Tenant ${action === 'suspend' ? 'suspended' : 'reactivated'} successfully.`,
-          'Close',
-          { duration: 3000, panelClass: 'snackbar-success' }
+        this.modules.update((list) =>
+          list.map((m) => (m.moduleName === moduleName ? { ...m, isEnabled: enabled } : m))
         );
-        this.loadTenant();
+        this.notification.success(`Module '${moduleName}' ${enabled ? 'enabled' : 'disabled'}.`);
       },
     });
   }
 
-  private loadTenant(): void {
-    this.isLoading.set(true);
-    this.api.get<TenantDetail>(`/platform/tenants/${this.id()}`).subscribe({
-      next: (data) => {
-        this.tenant.set(data);
-        this.isLoading.set(false);
-      },
-      error: () => {
-        this.isLoading.set(false);
+  saveBranding(): void {
+    this.tenantService
+      .updateBranding(this.tenantId, {
+        logoUrl: this.brandingLogoUrl || null,
+        primaryColor: this.brandingPrimaryColor || null,
+      })
+      .subscribe({
+        next: () => this.notification.success('Branding updated.'),
+      });
+  }
+
+  triggerProvisioning(): void {
+    this.tenantService.provisionTenant(this.tenantId).subscribe({
+      next: () => {
+        this.notification.success('Provisioning triggered.');
+        this.loadAll();
       },
     });
   }
 
-  private loadUsers(): void {
-    this.usersLoading.set(true);
-    this.api.get<TenantUser[]>(`/platform/tenants/${this.id()}/users`).subscribe({
-      next: (data) => {
-        this.users.set(data);
-        this.usersLoading.set(false);
+  suspendTenant(): void {
+    const reason = window.prompt('Enter suspension reason:');
+    if (!reason?.trim()) return;
+    this.tenantService.suspendTenant(this.tenantId, reason.trim()).subscribe({
+      next: () => {
+        this.notification.success('Tenant suspended.');
+        this.loadAll();
       },
-      error: () => {
-        this.usersLoading.set(false);
+    });
+  }
+
+  reactivateTenant(): void {
+    this.tenantService.reactivateTenant(this.tenantId).subscribe({
+      next: () => {
+        this.notification.success('Tenant reactivated.');
+        this.loadAll();
+      },
+    });
+  }
+
+  createAccessKey(): void {
+    if (!this.newKeyLabel.trim()) return;
+    this.tenantService
+      .createAccessKey(this.tenantId, { label: this.newKeyLabel.trim(), scopes: ['read', 'write'] })
+      .subscribe({
+        next: (res) => {
+          this.createdRawKey.set(res.key);
+          this.newKeyLabel = '';
+          this.tenantService.listAccessKeys(this.tenantId).subscribe((k) => this.accessKeys.set(k ?? []));
+        },
+      });
+  }
+
+  revokeAccessKey(keyId: string): void {
+    this.tenantService.revokeAccessKey(this.tenantId, keyId).subscribe({
+      next: () => {
+        this.notification.success('Access key revoked.');
+        this.tenantService.listAccessKeys(this.tenantId).subscribe((k) => this.accessKeys.set(k ?? []));
       },
     });
   }

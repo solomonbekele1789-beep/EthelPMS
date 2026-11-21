@@ -13,6 +13,7 @@ namespace NGO.PMS.Identity.Infrastructure.Services;
 
 public class JwtTokenService : IJwtTokenService
 {
+    private const int MaxEmbeddedPermissions = 20;
     private readonly IIdentityDbContext _db;
     private readonly IConfiguration _config;
     private readonly ILogger<JwtTokenService> _logger;
@@ -36,15 +37,26 @@ public class JwtTokenService : IJwtTokenService
             new("email", user.Email),
             new("name", $"{user.FirstName} {user.LastName}"),
             new("tenant_id", user.OrganizationId.ToString()),
+            new("org_id", user.OrganizationId.ToString()),
+            new("org_name", user.Organization?.Name ?? string.Empty),
         };
 
         foreach (var role in roles)
             claims.Add(new Claim("roles", role));
 
-        foreach (var perm in permissions)
-            claims.Add(new Claim("permissions", perm));
+        if (permissions.Count <= MaxEmbeddedPermissions)
+        {
+            foreach (var perm in permissions)
+                claims.Add(new Claim("permissions", perm));
+        }
+        else
+        {
+            var sortedJoined = string.Join('|', permissions.OrderBy(p => p, StringComparer.Ordinal));
+            var permHash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(sortedJoined)));
+            claims.Add(new Claim("perm_hash", permHash));
+        }
 
-        var expMinutes = int.TryParse(_config["JwtSettings:AccessTokenExpirationMinutes"], out var m) ? m : 15;
+        var expMinutes = int.TryParse(_config["JwtSettings:AccessTokenExpirationMinutes"], out var m) ? m : 360;
 
         var token = new JwtSecurityToken(
             issuer: _config["JwtSettings:Issuer"],
@@ -68,7 +80,20 @@ public class JwtTokenService : IJwtTokenService
             .Include(t => t.User)
             .FirstOrDefaultAsync(t => t.TokenHash == tokenHash, ct);
 
-        if (refreshToken is null || !refreshToken.IsActive)
+        if (refreshToken is null)
+            return null;
+
+        // Reuse detection: if an already-revoked refresh token is replayed, revoke ALL user tokens
+        if (refreshToken.RevokedAt.HasValue)
+        {
+            _logger.LogWarning(
+                "Refresh token reuse detected for user {UserId}. Revoking all active refresh tokens.",
+                refreshToken.UserId);
+            await RevokeAllUserTokensAsync(refreshToken.UserId, ct);
+            return null;
+        }
+
+        if (!refreshToken.IsActive)
             return null;
 
         return refreshToken;
@@ -76,6 +101,14 @@ public class JwtTokenService : IJwtTokenService
 
     public async Task StoreRefreshTokenAsync(Guid userId, string token, string deviceInfo, DateTimeOffset expiresAt, CancellationToken ct = default)
     {
+        // Revoke previous active token(s) for the same user & device
+        var existingDeviceTokens = await _db.RefreshTokens
+            .Where(t => t.UserId == userId && t.DeviceInfo == deviceInfo && t.RevokedAt == null)
+            .ToListAsync(ct);
+
+        foreach (var existing in existingDeviceTokens)
+            existing.RevokedAt = DateTimeOffset.UtcNow;
+
         var refreshToken = new RefreshToken
         {
             UserId = userId,

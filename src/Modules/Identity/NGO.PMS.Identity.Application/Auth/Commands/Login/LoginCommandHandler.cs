@@ -21,21 +21,24 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
     public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         var user = await _db.Users
+            .Include(u => u.Organization)
             .Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ThenInclude(r => r.RolePermissions).ThenInclude(rp => rp.Permission)
             .FirstOrDefaultAsync(u => u.Email == request.Email.ToLowerInvariant().Trim(), cancellationToken)
-            ?? throw new BusinessRuleException("Invalid email or password.");
+            ?? throw new UnauthorizedAccessException("Invalid email or password.");
 
         if (!user.IsActive)
-            throw new BusinessRuleException("Account is deactivated. Contact your administrator.");
+            throw new ForbiddenException("Account is deactivated. Contact your administrator.");
 
         if (user.IsLockedOut)
-            throw new BusinessRuleException("Account is temporarily locked. Try again later.");
+            throw new AccountLockedException("Account is temporarily locked. Try again later.", user.LockoutEnd?.UtcDateTime);
 
-        if (!_passwordHasher.Verify(request.Password, user.PasswordHash))
+        if (string.IsNullOrEmpty(user.PasswordHash) || !_passwordHasher.Verify(request.Password, user.PasswordHash))
         {
             user.RecordFailedLogin();
             await _db.SaveChangesAsync(cancellationToken);
-            throw new BusinessRuleException("Invalid email or password.");
+            if (user.IsLockedOut)
+                throw new AccountLockedException("Account locked due to too many failed attempts. Try again in 15 minutes.", user.LockoutEnd?.UtcDateTime);
+            throw new UnauthorizedAccessException("Invalid email or password.");
         }
 
         user.RecordSuccessfulLogin();
@@ -48,7 +51,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
 
         var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
 
-        var org = await _db.Organizations.FirstOrDefaultAsync(o => o.Id == user.OrganizationId, cancellationToken);
+        var org = user.Organization ?? await _db.Organizations.FirstOrDefaultAsync(o => o.Id == user.OrganizationId, cancellationToken);
         var office = user.OfficeId.HasValue
             ? await _db.Offices.FirstOrDefaultAsync(o => o.Id == user.OfficeId, cancellationToken)
             : null;
@@ -66,6 +69,6 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
             user.OfficeId, office?.Name,
             roles, permissions);
 
-        return new LoginResponse(accessToken, refreshToken, profile);
+        return new LoginResponse(accessToken, refreshToken, profile, ExpiresIn: 21600);
     }
 }

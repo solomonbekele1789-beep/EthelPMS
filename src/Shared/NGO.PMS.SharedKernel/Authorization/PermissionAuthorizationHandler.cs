@@ -4,8 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 namespace NGO.PMS.SharedKernel.Authorization;
 
 /// <summary>
-/// Handles PermissionRequirement by first checking JWT claims (fast path),
-/// then falling back to database lookup via IPermissionService (for mid-session permission changes).
+/// Handles PermissionRequirement using Hybrid RBAC + ABAC:
+/// 1. SuperAdmin role has platform-wide access.
+/// 2. Checks JWT 'permissions' claims (fast path).
+/// 3. Falls back to database lookup via IPermissionService (handles perm_hash & mid-session changes).
+/// 4. Evaluates ABAC attribute rules when resource context is supplied.
+/// Note: Organization Admin does NOT bypass RBAC or gain platform.* access.
 /// </summary>
 public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionRequirement>
 {
@@ -21,29 +25,45 @@ public class PermissionAuthorizationHandler : AuthorizationHandler<PermissionReq
         var userId = context.User.FindFirstValue("sub");
         if (userId is null) return;
 
-        // 0. Super admin bypass — Organization Admin role has full access
-        var roles = context.User.FindAll("roles").Select(c => c.Value);
-        if (roles.Contains("Organization Admin"))
+        var roles = context.User.FindAll("roles").Select(c => c.Value).ToList();
+
+        // Only platform-level SuperAdmin bypasses granular checks
+        if (roles.Contains("SuperAdmin", StringComparer.Ordinal))
         {
             context.Succeed(requirement);
             return;
         }
 
-        // 1. Check JWT claims first (fast path — permissions embedded in token)
+        // Non-SuperAdmin users can never access platform.* permissions
+        if (requirement.Permission.StartsWith("platform.", StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        // 1. Check JWT claims first (fast path — when <= 20 permissions are embedded)
         var permissionClaims = context.User.FindAll("permissions")
             .Select(c => c.Value).ToList();
 
-        if (permissionClaims.Count > 0 && permissionClaims.Contains(requirement.Permission))
+        var hasRbacPermission = permissionClaims.Count > 0 &&
+                                permissionClaims.Contains(requirement.Permission, StringComparer.Ordinal);
+
+        // 2. Fallback to DB check (handles perm_hash or mid-session permission changes)
+        if (!hasRbacPermission && Guid.TryParse(userId, out var uidForCheck))
         {
-            context.Succeed(requirement);
-            return;
+            hasRbacPermission = await _permissionService.HasPermissionAsync(uidForCheck, requirement.Permission);
         }
 
-        // 2. Fallback to DB check (handles permission changes mid-session)
-        if (Guid.TryParse(userId, out var uid) &&
-            await _permissionService.HasPermissionAsync(uid, requirement.Permission))
+        if (!hasRbacPermission) return;
+
+        // 3. ABAC attribute rule check (when resource context dictionary is provided)
+        if (context.Resource is Dictionary<string, object> abacContext &&
+            Guid.TryParse(userId, out var uidForAbac))
         {
-            context.Succeed(requirement);
+            var abacPassed = await _permissionService.EvaluateAttributeRulesAsync(
+                uidForAbac, requirement.Permission, abacContext);
+            if (!abacPassed) return;
         }
+
+        context.Succeed(requirement);
     }
 }

@@ -10,6 +10,7 @@ export * from './lib/services/auth.service';
 export * from './lib/services/tenant.service';
 export * from './lib/services/permission.service';
 export * from './lib/services/theme.service';
+export * from './lib/services/calendar.service';
 
 // Interceptors
 export { authInterceptor } from './lib/interceptors/auth.interceptor';

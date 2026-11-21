@@ -1,3 +1,5 @@
+using NGO.PMS.PlatformAdmin.Application.Abstractions;
+using NGO.PMS.SharedKernel.Audit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,24 +31,22 @@ public static class PlatformAdminModuleExtensions
             options.AddInterceptors(
                 sp.GetRequiredService<AuditableEntityInterceptor>(),
                 sp.GetRequiredService<SoftDeleteInterceptor>(),
-                sp.GetRequiredService<TenantConnectionInterceptor>(),
                 sp.GetRequiredService<DomainEventDispatchInterceptor>());
+            var auditInterceptor = sp.GetService<IAuditInterceptor>();
+            if (auditInterceptor is not null) options.AddInterceptors(auditInterceptor);
         });
 
         services.AddScoped<IPlatformDbContext>(sp => sp.GetRequiredService<PlatformDbContext>());
 
         // Services
         services.AddScoped<ITenantProvisioningService, TenantProvisioningService>();
+        services.AddScoped<ITenantUsageReader, TenantUsageReader>();
 
-        // Authorization policy for SuperAdmin
+        // Authorization policy for SuperAdmin — strictly platform-level SuperAdmin only
         services.AddAuthorization(options =>
         {
             options.AddPolicy("SuperAdmin", policy =>
-                policy.RequireAssertion(ctx =>
-                    ctx.User.HasClaim("roles", "SuperAdmin") ||
-                    ctx.User.HasClaim("roles", "Organization Admin") ||
-                    ctx.User.HasClaim("permissions", "platform.tenants.read") ||
-                    ctx.User.HasClaim("permissions", "platform.tenants.manage")));
+                policy.RequireClaim("roles", "SuperAdmin"));
         });
 
         return services;

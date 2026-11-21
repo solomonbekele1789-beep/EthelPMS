@@ -20,4 +20,5 @@ public record UpdateUserCommand(
     Guid? ManagerId = null,
     string? ProfilePhotoUrl = null,
     string? Region = null,
-    string? OfficeLevel = null) : IRequest;
+    string? OfficeLevel = null,
+    bool? IsActive = null) : IRequest;

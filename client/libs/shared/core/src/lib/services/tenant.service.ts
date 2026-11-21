@@ -1,27 +1,49 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-const TENANT_STORAGE_KEY = 'ethelpms_tenant_id';
+export interface TenantInfo {
+  id: string;
+  name: string;
+  slug?: string;
+  enabledModules: string[];
+}
+
+const TENANT_ID_KEY = 'ethelpms_tenant_id';
 
 @Injectable({ providedIn: 'root' })
 export class TenantService {
-  private readonly _currentTenantId = signal<string | null>(
-    localStorage.getItem(TENANT_STORAGE_KEY)
-  );
-
-  readonly currentTenantId = this._currentTenantId.asReadonly();
-  readonly hasTenant = computed(() => this._currentTenantId() !== null);
-
-  setTenant(tenantId: string): void {
-    localStorage.setItem(TENANT_STORAGE_KEY, tenantId);
-    this._currentTenantId.set(tenantId);
-  }
-
-  clearTenant(): void {
-    localStorage.removeItem(TENANT_STORAGE_KEY);
-    this._currentTenantId.set(null);
-  }
+  private readonly currentTenantSubject = new BehaviorSubject<TenantInfo | null>(null);
+  readonly currentTenant$: Observable<TenantInfo | null> = this.currentTenantSubject.asObservable();
 
   getTenantId(): string | null {
-    return this._currentTenantId();
+    return this.currentTenantSubject.value?.id ?? localStorage.getItem(TENANT_ID_KEY);
+  }
+
+  setTenantId(tenantId: string): void {
+    localStorage.setItem(TENANT_ID_KEY, tenantId);
+  }
+
+  setTenant(tenant: TenantInfo | null): void {
+    this.currentTenantSubject.next(tenant);
+    if (tenant?.id) {
+      localStorage.setItem(TENANT_ID_KEY, tenant.id);
+    } else {
+      localStorage.removeItem(TENANT_ID_KEY);
+    }
+  }
+
+  clearTenantId(): void {
+    this.currentTenantSubject.next(null);
+    localStorage.removeItem(TENANT_ID_KEY);
+  }
+
+  isModuleEnabled(moduleName: string): boolean {
+    const tenant = this.currentTenantSubject.value;
+    if (!tenant || !tenant.enabledModules || tenant.enabledModules.length === 0) {
+      return true;
+    }
+    return tenant.enabledModules.some(
+      (m) => m.toLowerCase() === moduleName.toLowerCase()
+    );
   }
 }

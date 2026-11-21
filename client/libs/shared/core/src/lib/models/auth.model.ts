@@ -20,6 +20,7 @@ export interface UserProfile {
   officeName: string | null;
   roles: string[];
   permissions: string[];
+  tenant?: { id: string; name: string; slug?: string; modules: string[] } | null;
 }
 
 export interface TenantInfo {

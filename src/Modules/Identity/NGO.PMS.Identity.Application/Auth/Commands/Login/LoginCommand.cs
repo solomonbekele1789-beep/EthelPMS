@@ -4,7 +4,11 @@ namespace NGO.PMS.Identity.Application.Auth.Commands.Login;
 
 public record LoginCommand(string Email, string Password, string? DeviceInfo) : IRequest<LoginResponse>;
 
-public record LoginResponse(string AccessToken, string RefreshToken, LoginUserProfile User);
+public record LoginResponse(
+    string AccessToken,
+    string RefreshToken,
+    LoginUserProfile User,
+    int ExpiresIn = 21600);
 
 public record LoginUserProfile(
     Guid Id,

@@ -12,6 +12,7 @@ export class ThemeService {
 
   private readonly _theme = signal<Theme>(this.loadInitialTheme());
   readonly theme = this._theme.asReadonly();
+  readonly currentTheme = this._theme.asReadonly();
 
   constructor() {
     effect(() => {
@@ -22,6 +23,10 @@ export class ThemeService {
         document.documentElement.classList.toggle('dark', current === 'dark');
       }
     });
+  }
+
+  toggle(): void {
+    this.toggleTheme();
   }
 
   toggleTheme(): void {

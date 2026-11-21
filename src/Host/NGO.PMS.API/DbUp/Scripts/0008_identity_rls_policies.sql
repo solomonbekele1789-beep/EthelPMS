@@ -68,7 +68,3 @@ CREATE TRIGGER trg_organizations_updated_at
     BEFORE UPDATE ON identity.organizations
     FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
-DROP TRIGGER IF EXISTS trg_locations_updated_at ON identity.locations;
-CREATE TRIGGER trg_locations_updated_at
-    BEFORE UPDATE ON identity.locations
-    FOR EACH ROW EXECUTE FUNCTION set_updated_at();

@@ -19,6 +19,7 @@ public class PlatformTenant : AuditableEntity
     public int MaxUsers { get; private set; } = 10;
     public int MaxProjects { get; private set; } = 5;
     public string Timezone { get; private set; } = "Africa/Addis_Ababa";
+    public string? ConnectionString { get; private set; }
 
     // Navigation
     public SubscriptionPackage SubscriptionPackage { get; private set; } = null!;

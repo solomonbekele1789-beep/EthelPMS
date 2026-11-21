@@ -6,11 +6,16 @@ namespace NGO.PMS.SharedKernel.Outbox;
 /// </summary>
 public class OutboxMessage
 {
+    public const int MaxRetries = 3;
+
     public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid OrganizationId { get; set; }
     public string EventType { get; set; } = string.Empty;
     public string Payload { get; set; } = string.Empty;
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     public DateTimeOffset? ProcessedAt { get; set; }
     public string? Error { get; set; }
     public int RetryCount { get; set; }
+
+    public bool IsDeadLetter => ProcessedAt == null && RetryCount >= MaxRetries;
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NGO.PMS.Identity.Application.Users.DTOs;
 using NGO.PMS.SharedKernel.Domain;
 using NGO.PMS.SharedKernel.Exceptions;
+using NGO.PMS.SharedKernel.MultiTenancy;
 
 namespace NGO.PMS.Identity.Application.Users.Queries.GetCurrentUser;
 
@@ -10,11 +11,16 @@ public class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, C
 {
     private readonly IIdentityDbContext _db;
     private readonly ICurrentUserService _currentUser;
+    private readonly ITenantContextAccessor? _tenantAccessor;
 
-    public GetCurrentUserQueryHandler(IIdentityDbContext db, ICurrentUserService currentUser)
+    public GetCurrentUserQueryHandler(
+        IIdentityDbContext db,
+        ICurrentUserService currentUser,
+        ITenantContextAccessor? tenantAccessor = null)
     {
         _db = db;
         _currentUser = currentUser;
+        _tenantAccessor = tenantAccessor;
     }
 
     public async Task<CurrentUserDto> Handle(GetCurrentUserQuery request, CancellationToken cancellationToken)
@@ -35,8 +41,15 @@ public class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, C
 
         var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
 
+        var tenant = _tenantAccessor?.CurrentTenant;
+        var tenantDto = new TenantInfoDto(
+            _currentUser.OrganizationId,
+            tenant?.Name ?? org?.Name ?? string.Empty,
+            tenant?.Identifier ?? org?.Slug ?? string.Empty,
+            tenant?.EnabledModules ?? []);
+
         return new CurrentUserDto(
             user.Id, user.Email, user.FirstName, user.LastName,
-            _currentUser.OrganizationId, org?.Name ?? "", permissions, roles);
+            _currentUser.OrganizationId, org?.Name ?? "", permissions, roles, tenantDto);
     }
 }

@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/knowledge/src",
   "prefix": "knowledge",
-  "tags": ["scope:knowledge", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:knowledge",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

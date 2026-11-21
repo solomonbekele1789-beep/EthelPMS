@@ -21,3 +21,5 @@ export class NotificationService {
   warning(message: string): void { this.show(message, 'warning', 5000); }
   info(message: string): void { this.show(message, 'info'); }
 }
+
+export { NotificationService as NotificationToastService };

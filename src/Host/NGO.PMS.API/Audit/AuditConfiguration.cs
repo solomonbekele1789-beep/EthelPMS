@@ -12,7 +12,7 @@ namespace NGO.PMS.API.Audit;
 /// This is a lightweight custom implementation since Audit.NET's EF Core provider
 /// requires a compatible version; we use direct EF Core change tracking instead.
 /// </summary>
-public sealed class AuditSaveChangesInterceptor : Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor
+public sealed class AuditSaveChangesInterceptor : Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor, IAuditInterceptor
 {
     private readonly IServiceProvider _serviceProvider;
     private List<AuditEntry>? _auditEntries;
@@ -152,10 +152,10 @@ public sealed class AuditSaveChangesInterceptor : Microsoft.EntityFrameworkCore.
 
             await auditDb.SaveChangesAsync(ct);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // Audit failures should not break the main operation.
-            // In production, this would be logged via Serilog.
+            var logger = _serviceProvider.GetService<ILogger<AuditSaveChangesInterceptor>>();
+            logger?.LogError(ex, "Failed to persist {Count} audit log entries.", entries.Count);
         }
     }
 

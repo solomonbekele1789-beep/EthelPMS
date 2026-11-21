@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/training/src",
   "prefix": "training",
-  "tags": ["scope:training", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:training",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

@@ -3,22 +3,32 @@ using Hangfire;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NGO.PMS.SharedKernel.Outbox;
+using NGO.PMS.SharedKernel.Persistence;
 
 namespace NGO.PMS.API.Jobs;
 
 /// <summary>
 /// Hangfire recurring job that polls all module outbox tables for unprocessed messages
 /// and dispatches them as MediatR notifications to registered consumers.
-/// Runs every 10 seconds.
+/// Runs every 10 seconds per docs/plans/shared/CROSS-MODULE-EVENTS.md.
 /// </summary>
 public sealed class OutboxRelayJob(
     IServiceScopeFactory scopeFactory,
     ILogger<OutboxRelayJob> logger)
 {
-    /// <summary>
-    /// Maximum messages to process per DbContext per run.
-    /// </summary>
     private const int BatchSize = 50;
+
+    private static readonly Lazy<Type[]> DiscoveredDbContexts = new(() =>
+        AppDomain.CurrentDomain.GetAssemblies()
+            .Where(a => a.FullName?.StartsWith("NGO.PMS.", StringComparison.Ordinal) == true)
+            .SelectMany(a =>
+            {
+                try { return a.GetTypes(); }
+                catch { return Array.Empty<Type>(); }
+            })
+            .Where(t => !t.IsAbstract && t.IsClass && typeof(MultiTenantDbContext).IsAssignableFrom(t))
+            .Distinct()
+            .ToArray());
 
     [AutomaticRetry(Attempts = 3)]
     public async Task ProcessOutboxAsync()
@@ -26,15 +36,16 @@ public sealed class OutboxRelayJob(
         using var scope = scopeFactory.CreateScope();
         var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
 
-        // Get all registered DbContext types that have outbox tables.
-        // Currently Identity and PlatformAdmin are active; others added as they're implemented.
-        var dbContextTypes = GetActiveDbContextTypes();
-
-        foreach (var dbContextType in dbContextTypes)
+        foreach (var dbContextType in DiscoveredDbContexts.Value)
         {
             try
             {
-                var dbContext = (DbContext)scope.ServiceProvider.GetRequiredService(dbContextType);
+                if (scope.ServiceProvider.GetService(dbContextType) is not DbContext dbContext)
+                    continue;
+
+                if (dbContext.Model.FindEntityType(typeof(OutboxMessage)) is null)
+                    continue;
+
                 await ProcessDbContextOutbox(dbContext, mediator);
             }
             catch (Exception ex)
@@ -47,7 +58,7 @@ public sealed class OutboxRelayJob(
     private async Task ProcessDbContextOutbox(DbContext dbContext, IMediator mediator)
     {
         var messages = await dbContext.Set<OutboxMessage>()
-            .Where(m => m.ProcessedAt == null)
+            .Where(m => m.ProcessedAt == null && m.RetryCount < OutboxMessage.MaxRetries)
             .OrderBy(m => m.CreatedAt)
             .Take(BatchSize)
             .ToListAsync();
@@ -65,60 +76,36 @@ public sealed class OutboxRelayJob(
                 var eventType = Type.GetType(message.EventType);
                 if (eventType is null)
                 {
-                    logger.LogWarning(
-                        "Unknown event type '{Type}' for outbox message {Id}",
+                    logger.LogWarning("Unknown event type '{Type}' for outbox message {Id}",
                         message.EventType, message.Id);
                     message.Error = $"Unknown type: {message.EventType}";
-                    message.ProcessedAt = DateTimeOffset.UtcNow;
+                    message.RetryCount = OutboxMessage.MaxRetries;
                     continue;
                 }
 
                 var @event = JsonSerializer.Deserialize(message.Payload, eventType);
                 if (@event is null)
                 {
-                    logger.LogWarning(
-                        "Failed to deserialize outbox message {Id}", message.Id);
+                    logger.LogWarning("Failed to deserialize outbox message {Id}", message.Id);
                     message.Error = "Deserialization returned null";
-                    message.ProcessedAt = DateTimeOffset.UtcNow;
+                    message.RetryCount = OutboxMessage.MaxRetries;
                     continue;
                 }
 
-                // Dispatch via MediatR — all registered INotificationHandlers receive it
                 await mediator.Publish(@event);
 
                 message.ProcessedAt = DateTimeOffset.UtcNow;
                 message.Error = null;
-
-                logger.LogDebug(
-                    "Successfully relayed outbox message {Id} ({Type})",
-                    message.Id, eventType.Name);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex,
-                    "Failed to process outbox message {Id}", message.Id);
+                logger.LogError(ex, "Failed to process outbox message {Id} (attempt {Attempt})",
+                    message.Id, message.RetryCount + 1);
                 message.Error = ex.Message;
                 message.RetryCount++;
-                // Will be retried on next poll
             }
         }
 
         await dbContext.SaveChangesAsync();
-    }
-
-    /// <summary>
-    /// Returns the DbContext types that currently have outbox tables configured.
-    /// Add new module DbContexts here as they are implemented.
-    /// </summary>
-    private static Type[] GetActiveDbContextTypes()
-    {
-        return
-        [
-            typeof(NGO.PMS.Identity.Infrastructure.Persistence.IdentityDbContext),
-            // PlatformAdmin doesn't publish integration events (SuperAdmin-only)
-            // Add as modules are implemented:
-            // typeof(NGO.PMS.Projects.Infrastructure.Persistence.ProjectsDbContext),
-            // typeof(NGO.PMS.Planning.Infrastructure.Persistence.PlanningDbContext),
-        ];
     }
 }

@@ -8,3 +8,19 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Helper function for RLS policies to safely read the current tenant UUID
+CREATE OR REPLACE FUNCTION public.current_tenant_id()
+RETURNS UUID AS $$
+DECLARE
+    val TEXT;
+BEGIN
+    val := current_setting('app.current_org_id', true);
+    IF val IS NULL OR val = '' THEN
+        RETURN NULL;
+    END IF;
+    RETURN val::UUID;
+EXCEPTION WHEN invalid_text_representation THEN
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql STABLE;

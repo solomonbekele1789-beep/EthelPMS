@@ -16,13 +16,24 @@ public class OutboxWriter : IOutboxWriter
     public async Task WriteAsync<TEvent>(TEvent integrationEvent, CancellationToken ct = default)
         where TEvent : class
     {
+        var runtimeType = integrationEvent.GetType();
+        var integration = integrationEvent as IIntegrationEvent;
+
         var message = new OutboxMessage
         {
-            EventType = typeof(TEvent).AssemblyQualifiedName ?? typeof(TEvent).FullName ?? typeof(TEvent).Name,
-            Payload = JsonSerializer.Serialize(integrationEvent),
-            CreatedAt = DateTimeOffset.UtcNow
+            Id = integration?.EventId ?? Guid.NewGuid(),
+            OrganizationId = integration?.OrganizationId ?? Guid.Empty,
+            EventType = runtimeType.AssemblyQualifiedName ?? runtimeType.FullName ?? runtimeType.Name,
+            Payload = JsonSerializer.Serialize(integrationEvent, runtimeType),
+            CreatedAt = integration?.OccurredOn ?? DateTimeOffset.UtcNow
         };
 
         await _dbContext.Set<OutboxMessage>().AddAsync(message, ct);
     }
 }
+
+/// <summary>
+/// Typed outbox writer for clean per-module DI registration.
+/// </summary>
+public sealed class OutboxWriter<TDbContext>(TDbContext dbContext) : OutboxWriter(dbContext)
+    where TDbContext : DbContext;

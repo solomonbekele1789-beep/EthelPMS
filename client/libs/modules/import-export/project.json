@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/import-export/src",
   "prefix": "import-export",
-  "tags": ["scope:import-export", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:import-export",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

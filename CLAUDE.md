@@ -39,7 +39,7 @@ Module-level plans:
 dotnet build EthelPMS.slnx
 dotnet test EthelPMS.slnx
 
-# Frontend (from src/Frontend/ngo-pms-frontend/)
+# Frontend (from client/)
 npx nx build web
 npx nx build platform-console
 npx nx lint web

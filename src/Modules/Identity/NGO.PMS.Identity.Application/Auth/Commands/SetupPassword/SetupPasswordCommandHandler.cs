@@ -25,8 +25,16 @@ public class SetupPasswordCommandHandler : IRequestHandler<SetupPasswordCommand>
             .FirstOrDefaultAsync(t => t.TokenHash == tokenHash, cancellationToken)
             ?? throw new BusinessRuleException("Invalid or expired setup token.");
 
-        if (!resetToken.IsValid)
+        if (!resetToken.IsValid ||
+            (!string.IsNullOrEmpty(resetToken.Purpose) && resetToken.Purpose != "password_setup"))
+        {
             throw new BusinessRuleException("This setup link has expired or already been used.");
+        }
+
+        if (!string.IsNullOrEmpty(resetToken.User.PasswordHash))
+        {
+            throw new BusinessRuleException("Password has already been configured for this account.");
+        }
 
         resetToken.UsedAt = DateTimeOffset.UtcNow;
         resetToken.User.SetPassword(_passwordHasher.Hash(request.Password));

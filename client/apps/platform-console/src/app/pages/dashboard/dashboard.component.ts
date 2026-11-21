@@ -1,268 +1,100 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { TranslatePipe } from '@ngx-translate/core';
-
-interface StatCard {
-  label: string;
-  value: string;
-  icon: string;
-  color: string;
-  route: string;
-}
+import { PlatformTenantService } from '../../services/tenant.service';
+import { TenantListItemDto } from '../../models/tenant.model';
 
 @Component({
   selector: 'admin-dashboard',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatButtonModule, TranslatePipe],
+  imports: [CommonModule, RouterLink, MatCardModule, MatIconModule, MatButtonModule],
   template: `
     <div class="dashboard">
-      <div class="page-header">
-        <h1>{{ 'dashboard.title' | translate }}</h1>
-        <p class="subtitle">{{ 'dashboard.subtitle' | translate }}</p>
+      <div class="header">
+        <h1>Platform Overview</h1>
+        <a mat-flat-button color="primary" routerLink="/tenants/create">
+          <mat-icon>add</mat-icon> New Tenant
+        </a>
       </div>
 
-      <!-- Stats cards -->
-      <div class="stats-grid">
-        @for (card of statCards; track card.label) {
-          <mat-card class="stat-card" (click)="navigateTo(card.route)">
-            <mat-card-content>
-              <div class="stat-content">
-                <div class="stat-info">
-                  <span class="stat-label">{{ card.label }}</span>
-                  <span class="stat-value">{{ card.value }}</span>
-                </div>
-                <div class="stat-icon" [style.background]="card.color + '1a'" [style.color]="card.color">
-                  <span class="material-symbols-outlined">{{ card.icon }}</span>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        }
-      </div>
-
-      <!-- Quick actions -->
-      <div class="section">
-        <h2>Quick Actions</h2>
-        <div class="actions-grid">
-          <mat-card class="action-card" (click)="navigateTo('/tenants/create')">
-            <mat-card-content>
-              <mat-icon>add_business</mat-icon>
-              <span>Provision Tenant</span>
-            </mat-card-content>
-          </mat-card>
-          <mat-card class="action-card" (click)="navigateTo('/packages')">
-            <mat-card-content>
-              <mat-icon>inventory_2</mat-icon>
-              <span>Manage Packages</span>
-            </mat-card-content>
-          </mat-card>
-          <mat-card class="action-card" (click)="navigateTo('/tenants')">
-            <mat-card-content>
-              <mat-icon>list_alt</mat-icon>
-              <span>View All Tenants</span>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-
-      <!-- Recent activity placeholder -->
-      <div class="section">
-        <h2>Recent Activity</h2>
-        <mat-card class="activity-card">
-          <mat-card-content>
-            <div class="empty-state">
-              <span class="material-symbols-outlined empty-icon">history</span>
-              <p>Activity log will appear here once the platform is in use.</p>
-            </div>
-          </mat-card-content>
+      <div class="kpi-grid">
+        <mat-card class="kpi-card">
+          <span class="kpi-label">Total Tenants</span>
+          <span class="kpi-value">{{ totalCount() }}</span>
+        </mat-card>
+        <mat-card class="kpi-card">
+          <span class="kpi-label">Active</span>
+          <span class="kpi-value active">{{ activeCount() }}</span>
+        </mat-card>
+        <mat-card class="kpi-card">
+          <span class="kpi-label">Pending / Provisioning</span>
+          <span class="kpi-value pending">{{ pendingCount() }}</span>
+        </mat-card>
+        <mat-card class="kpi-card">
+          <span class="kpi-label">Suspended</span>
+          <span class="kpi-value suspended">{{ suspendedCount() }}</span>
         </mat-card>
       </div>
+
+      <mat-card class="recent-card">
+        <h2>Recent Tenants</h2>
+        @if (tenants().length === 0) {
+          <p class="empty">No tenants registered yet.</p>
+        } @else {
+          <div class="tenant-rows">
+            @for (t of tenants().slice(0, 5); track t.id) {
+              <a class="tenant-row" [routerLink]="['/tenants', t.id]">
+                <div>
+                  <strong>{{ t.name }}</strong>
+                  <span class="slug">({{ t.slug }})</span>
+                </div>
+                <span class="status-pill">{{ t.status }}</span>
+              </a>
+            }
+          </div>
+        }
+      </mat-card>
     </div>
   `,
   styles: [`
-    .dashboard {
-      max-width: 1200px;
-    }
-
-    .page-header {
-      margin-bottom: 28px;
-
-      h1 {
-        margin: 0 0 4px;
-        font-size: 28px;
-        font-weight: 500;
-        color: var(--text-primary);
-      }
-
-      .subtitle {
-        margin: 0;
-        font-size: 14px;
-        color: var(--text-secondary);
-      }
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-      margin-bottom: 32px;
-    }
-
-    .stat-card {
-      cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-      border-radius: 12px;
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-    }
-
-    .stat-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 0;
-    }
-
-    .stat-info {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .stat-label {
-      font-size: 14px;
-      color: var(--text-secondary);
-    }
-
-    .stat-value {
-      font-size: 32px;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-
-    .stat-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .material-symbols-outlined {
-        font-size: 28px;
-      }
-    }
-
-    .section {
-      margin-bottom: 32px;
-
-      h2 {
-        font-size: 18px;
-        font-weight: 500;
-        color: var(--text-primary);
-        margin: 0 0 16px;
-      }
-    }
-
-    .actions-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-
-    .action-card {
-      cursor: pointer;
-      border-radius: 12px;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-
-      mat-card-content {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 8px 0;
-        color: var(--text-primary);
-
-        mat-icon {
-          color: var(--accent-primary);
-        }
-
-        span {
-          font-size: 14px;
-          font-weight: 500;
-        }
-      }
-    }
-
-    .activity-card {
-      border-radius: 12px;
-    }
-
-    .empty-state {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 16px;
-      color: var(--text-secondary);
-
-      .empty-icon {
-        font-size: 48px;
-        margin-bottom: 12px;
-        opacity: 0.4;
-      }
-
-      p {
-        margin: 0;
-        font-size: 14px;
-      }
-    }
+    .dashboard { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .header { display: flex; justify-content: space-between; align-items: center; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .kpi-card { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .kpi-label { font-size: 13px; color: #666; }
+    .kpi-value { font-size: 32px; font-weight: 700; }
+    .kpi-value.active { color: #2e7d32; }
+    .kpi-value.pending { color: #ed6c02; }
+    .kpi-value.suspended { color: #d32f2f; }
+    .recent-card { padding: 20px; }
+    .tenant-rows { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .tenant-row { display: flex; justify-content: space-between; padding: 10px 12px; border: 1px solid #e0e0e0; border-radius: 6px; text-decoration: none; color: inherit; }
+    .slug { margin-left: 8px; color: #666; font-size: 13px; }
+    .status-pill { font-size: 12px; font-weight: 600; }
   `],
 })
-export default class DashboardComponent {
-  private readonly router = inject(Router);
+export default class DashboardComponent implements OnInit {
+  private readonly tenantService = inject(PlatformTenantService);
 
-  readonly statCards: StatCard[] = [
-    {
-      label: 'Total Tenants',
-      value: '--',
-      icon: 'business',
-      color: '#7c3aed',
-      route: '/tenants',
-    },
-    {
-      label: 'Active Subscriptions',
-      value: '--',
-      icon: 'credit_card',
-      color: '#16a34a',
-      route: '/tenants',
-    },
-    {
-      label: 'System Health',
-      value: 'OK',
-      icon: 'monitor_heart',
-      color: '#0891b2',
-      route: '/dashboard',
-    },
-    {
-      label: 'Packages',
-      value: '--',
-      icon: 'inventory_2',
-      color: '#d97706',
-      route: '/packages',
-    },
-  ];
+  readonly tenants = signal<TenantListItemDto[]>([]);
+  readonly totalCount = signal(0);
 
-  navigateTo(route: string): void {
-    this.router.navigate([route]);
+  readonly activeCount = computed(() => this.tenants().filter((t) => t.status === 'Active').length);
+  readonly pendingCount = computed(() =>
+    this.tenants().filter((t) => t.status === 'Pending' || t.status === 'Provisioning').length
+  );
+  readonly suspendedCount = computed(() => this.tenants().filter((t) => t.status === 'Suspended').length);
+
+  ngOnInit(): void {
+    this.tenantService.listTenants({ page: 1, pageSize: 50 }).subscribe({
+      next: (res) => {
+        const list = res.items ?? res.data ?? [];
+        this.tenants.set(list);
+        this.totalCount.set(res.totalCount ?? list.length);
+      },
+    });
   }
 }

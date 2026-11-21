@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/tasks/src",
   "prefix": "tasks",
-  "tags": ["scope:tasks", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:tasks",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

@@ -84,6 +84,28 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           });
           break;
 
+        case 423:
+          snackBar.open(
+            detail ?? 'Your account is temporarily locked due to too many failed attempts.',
+            'Dismiss',
+            {
+              duration: 6000,
+              panelClass: 'snackbar-error',
+            }
+          );
+          break;
+
+        case 429:
+          snackBar.open(
+            detail ?? 'Too many requests. Please wait a moment and try again.',
+            'Dismiss',
+            {
+              duration: 5000,
+              panelClass: 'snackbar-warning',
+            }
+          );
+          break;
+
         default:
           snackBar.open('An unexpected server error occurred. Please try again later.', 'Dismiss', {
             duration: 5000,

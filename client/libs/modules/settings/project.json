@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/settings/src",
   "prefix": "settings",
-  "tags": ["scope:settings", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:settings",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

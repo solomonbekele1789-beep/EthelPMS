@@ -162,5 +162,22 @@
     <Project Path="tests/NGO.PMS.Partnerships.Tests/NGO.PMS.Partnerships.Tests.csproj" />
     <Project Path="tests/NGO.PMS.Dashboards.Tests/NGO.PMS.Dashboards.Tests.csproj" />
     <Project Path="tests/NGO.PMS.Settings.Tests/NGO.PMS.Settings.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Architecture.Tests/NGO.PMS.Architecture.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Assets.Tests/NGO.PMS.Assets.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Chat.Tests/NGO.PMS.Chat.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Documents.Tests/NGO.PMS.Documents.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Donors.Tests/NGO.PMS.Donors.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Feedback.Tests/NGO.PMS.Feedback.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.FundAccounting.Tests/NGO.PMS.FundAccounting.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.MEAL.Tests/NGO.PMS.MEAL.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Notifications.Tests/NGO.PMS.Notifications.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Participants.Tests/NGO.PMS.Participants.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Planning.Tests/NGO.PMS.Planning.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Procurement.Tests/NGO.PMS.Procurement.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Projects.Tests/NGO.PMS.Projects.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Reporting.Tests/NGO.PMS.Reporting.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Risk.Tests/NGO.PMS.Risk.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Tasks.Tests/NGO.PMS.Tasks.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.Training.Tests/NGO.PMS.Training.Tests.csproj" />
   </Folder>
 </Solution>

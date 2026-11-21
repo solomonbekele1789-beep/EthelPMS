@@ -6,6 +6,7 @@ public class PasswordResetToken : BaseEntity
 {
     public Guid UserId { get; set; }
     public string TokenHash { get; set; } = string.Empty;
+    public string Purpose { get; set; } = "password_reset";
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     public DateTimeOffset ExpiresAt { get; set; }
     public DateTimeOffset? UsedAt { get; set; }

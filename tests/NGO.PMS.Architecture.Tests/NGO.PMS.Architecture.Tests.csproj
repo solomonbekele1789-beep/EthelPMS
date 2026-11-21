@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(XunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitRunnerVersion)" />
+    <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
+    <PackageReference Include="TngTech.ArchUnitNET.xUnit" Version="$(ArchUnitNetVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Host\NGO.PMS.API\NGO.PMS.API.csproj" />
+    <ProjectReference Include="..\..\src\Shared\NGO.PMS.SharedKernel\NGO.PMS.SharedKernel.csproj" />
+    <ProjectReference Include="..\..\src\Shared\NGO.PMS.Contracts\NGO.PMS.Contracts.csproj" />
+  </ItemGroup>
+</Project>

@@ -2,7 +2,7 @@ using NGO.PMS.SharedKernel.Domain;
 
 namespace NGO.PMS.Identity.Domain.Entities;
 
-public class Office : AuditableEntity, ISoftDeletable
+public class Office : AuditableEntity, ISoftDeletable, IMultiTenant
 {
     public string Name { get; private set; } = string.Empty;
     public string Code { get; private set; } = string.Empty;

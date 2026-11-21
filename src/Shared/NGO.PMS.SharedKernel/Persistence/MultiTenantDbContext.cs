@@ -1,16 +1,23 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using NGO.PMS.SharedKernel.Domain;
+using NGO.PMS.SharedKernel.Outbox;
 
 namespace NGO.PMS.SharedKernel.Persistence;
 
 /// <summary>
 /// Base DbContext for all tenant-scoped modules.
-/// Applies global query filters for multi-tenancy and soft-delete.
-/// Each module overrides OnModelCreating to set its own schema.
+/// Enforces global query filters for multi-tenancy (IMultiTenant) and soft-delete (ISoftDeletable),
+/// maps outbox.inbox_messages, and auto-sets/protects OrganizationId on SaveChangesAsync.
 /// </summary>
 public abstract class MultiTenantDbContext : DbContext
 {
     private readonly ICurrentUserService _currentUser;
+
+    /// <summary>
+    /// Exposed for EF Core parameterized global query filter evaluation per-request.
+    /// </summary>
+    protected Guid CurrentOrganizationId => _currentUser.OrganizationId;
 
     protected MultiTenantDbContext(
         DbContextOptions options,
@@ -24,30 +31,68 @@ public abstract class MultiTenantDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Apply global query filters for soft-delete on all ISoftDeletable entities
+        modelBuilder.Entity<InboxMessage>(b =>
+        {
+            b.ToTable("inbox_messages", "outbox");
+            b.HasKey(x => new { x.EventId, x.HandlerName });
+        });
+
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
-            if (typeof(ISoftDeletable).IsAssignableFrom(entityType.ClrType))
+            var clrType = entityType.ClrType;
+            var isSoftDeletable = typeof(ISoftDeletable).IsAssignableFrom(clrType);
+            var isMultiTenant = typeof(IMultiTenant).IsAssignableFrom(clrType);
+
+            if (!isSoftDeletable && !isMultiTenant)
+                continue;
+
+            var parameter = Expression.Parameter(clrType, "e");
+            Expression? combined = null;
+
+            if (isSoftDeletable)
             {
-                modelBuilder.Entity(entityType.ClrType)
-                    .HasQueryFilter(
-                        ExpressionHelper.BuildSoftDeleteFilter(entityType.ClrType));
+                var isDeletedProp = Expression.Property(parameter, nameof(ISoftDeletable.IsDeleted));
+                combined = Expression.Equal(isDeletedProp, Expression.Constant(false));
+            }
+
+            if (isMultiTenant)
+            {
+                var orgIdProp = Expression.Property(parameter, nameof(IMultiTenant.OrganizationId));
+                var currentOrgExpr = Expression.Property(Expression.Constant(this), nameof(CurrentOrganizationId));
+                var emptyGuid = Expression.Constant(Guid.Empty);
+                // Enforce tenant filter whenever an authenticated organization context is present
+                var tenantCondition = Expression.OrElse(
+                    Expression.Equal(currentOrgExpr, emptyGuid),
+                    Expression.Equal(orgIdProp, currentOrgExpr));
+
+                combined = combined is null ? tenantCondition : Expression.AndAlso(combined, tenantCondition);
+            }
+
+            if (combined is not null)
+            {
+                modelBuilder.Entity(clrType).HasQueryFilter(Expression.Lambda(combined, parameter));
             }
         }
     }
-}
 
-/// <summary>
-/// Helper to build generic lambda expressions for query filters.
-/// </summary>
-internal static class ExpressionHelper
-{
-    public static System.Linq.Expressions.LambdaExpression BuildSoftDeleteFilter(Type entityType)
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var parameter = System.Linq.Expressions.Expression.Parameter(entityType, "e");
-        var property = System.Linq.Expressions.Expression.Property(parameter, nameof(ISoftDeletable.IsDeleted));
-        var falseConstant = System.Linq.Expressions.Expression.Constant(false);
-        var body = System.Linq.Expressions.Expression.Equal(property, falseConstant);
-        return System.Linq.Expressions.Expression.Lambda(body, parameter);
+        var currentOrgId = _currentUser.OrganizationId;
+
+        foreach (var entry in ChangeTracker.Entries<IMultiTenant>())
+        {
+            if (entry.State == EntityState.Added &&
+                entry.Entity.OrganizationId == Guid.Empty &&
+                currentOrgId != Guid.Empty)
+            {
+                entry.Entity.OrganizationId = currentOrgId;
+            }
+            else if (entry.State == EntityState.Modified)
+            {
+                entry.Property(nameof(IMultiTenant.OrganizationId)).IsModified = false;
+            }
+        }
+
+        return base.SaveChangesAsync(cancellationToken);
     }
 }

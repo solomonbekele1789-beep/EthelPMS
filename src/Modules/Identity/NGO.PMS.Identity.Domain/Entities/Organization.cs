@@ -10,6 +10,7 @@ public class Organization : AuditableEntity
     public string? LogoUrl { get; private set; }
     public string Timezone { get; private set; } = "Africa/Addis_Ababa";
     public CalendarPreference CalendarPreference { get; private set; } = CalendarPreference.Ethiopian;
+    public string Settings { get; private set; } = "{}";
 
     // Navigation
     public ICollection<Office> Offices { get; private set; } = [];
@@ -20,11 +21,12 @@ public class Organization : AuditableEntity
         return new Organization { Name = name.Trim(), Slug = slug.ToLowerInvariant().Trim() };
     }
 
-    public void Update(string name, string? logoUrl, string? timezone, CalendarPreference? calendarPreference)
+    public void Update(string name, string? logoUrl, string? timezone, CalendarPreference? calendarPreference, string? settings = null)
     {
         Name = name.Trim();
         if (logoUrl is not null) LogoUrl = logoUrl;
         if (timezone is not null) Timezone = timezone;
         if (calendarPreference.HasValue) CalendarPreference = calendarPreference.Value;
+        if (settings is not null) Settings = settings;
     }
 }

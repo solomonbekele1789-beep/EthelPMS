@@ -8,7 +8,7 @@ public interface IDbUpRunner
     /// <summary>Run infrastructure scripts (schemas, roles, extensions, functions) — scripts 0001-0007.</summary>
     Task RunInfrastructureAsync();
 
-    /// <summary>Run post-migration scripts (RLS policies, seed data) — scripts 0008+ and SeedData.</summary>
+    /// <summary>Run post-migration scripts (RLS policies, post-table alters, seed data) — scripts 0008+ and SeedData.</summary>
     Task RunPostMigrationAsync();
 
     /// <summary>Run all scripts in order (legacy convenience method).</summary>
@@ -23,21 +23,25 @@ public sealed class DbUpRunner(
         configuration.GetConnectionString("DefaultConnection")
             ?? throw new InvalidOperationException("DefaultConnection not configured.");
 
+    private static int GetScriptPrefixNumber(string filePath)
+    {
+        var name = Path.GetFileName(filePath);
+        var prefix = name.Split('_').FirstOrDefault();
+        return int.TryParse(prefix, out var num) ? num : int.MaxValue;
+    }
+
     public Task RunInfrastructureAsync()
     {
         var connectionString = GetConnectionString();
 
-        // Infrastructure-only scripts: schemas, roles, extensions, functions (0001-0007)
-        // These must run BEFORE EF Core creates tables.
-        // NullJournal = always run; safe because every script is idempotent
-        // (IF NOT EXISTS / CREATE OR REPLACE).
+        // Phase 1: Only scripts 0001-0007 (schemas, roles, extensions, reference tables, audit/outbox schemas, functions)
         var infraResult = DeployChanges.To
             .PostgresqlDatabase(connectionString)
             .WithScriptsFromFileSystem(
                 Path.Combine(AppContext.BaseDirectory, "DbUp", "Scripts"),
                 new global::DbUp.ScriptProviders.FileSystemScriptOptions
                 {
-                    Filter = path => !Path.GetFileName(path).Contains("_rls_policies")
+                    Filter = path => GetScriptPrefixNumber(path) <= 7
                 })
             .JournalTo(new NullJournal())
             .WithTransactionPerScript()
@@ -50,7 +54,7 @@ public sealed class DbUpRunner(
                 $"DbUp infrastructure scripts failed: {infraResult.Error}",
                 infraResult.Error);
 
-        logger.LogInformation("DbUp infrastructure scripts applied successfully");
+        logger.LogInformation("DbUp infrastructure scripts (0001-0007) applied successfully");
         return Task.CompletedTask;
     }
 
@@ -58,26 +62,26 @@ public sealed class DbUpRunner(
     {
         var connectionString = GetConnectionString();
 
-        // RLS policy scripts (0008-0030) — tables must exist first
-        var rlsResult = DeployChanges.To
+        // Phase 3a: Scripts 0008+ (RLS policies and post-table schema alterations) — tables now exist
+        var postResult = DeployChanges.To
             .PostgresqlDatabase(connectionString)
             .WithScriptsFromFileSystem(
                 Path.Combine(AppContext.BaseDirectory, "DbUp", "Scripts"),
                 new global::DbUp.ScriptProviders.FileSystemScriptOptions
                 {
-                    Filter = path => Path.GetFileName(path).Contains("_rls_policies")
+                    Filter = path => GetScriptPrefixNumber(path) >= 8
                 })
             .WithTransactionPerScript()
             .LogTo(new SerilogDbUpLog(logger))
             .Build()
             .PerformUpgrade();
 
-        if (!rlsResult.Successful)
+        if (!postResult.Successful)
             throw new InvalidOperationException(
-                $"DbUp RLS policy scripts failed: {rlsResult.Error}",
-                rlsResult.Error);
+                $"DbUp post-migration scripts failed: {postResult.Error}",
+                postResult.Error);
 
-        // Seed data scripts
+        // Phase 3b: Seed data scripts
         var seedResult = DeployChanges.To
             .PostgresqlDatabase(connectionString)
             .WithScriptsFromFileSystem(
@@ -92,7 +96,7 @@ public sealed class DbUpRunner(
                 $"DbUp seed data scripts failed: {seedResult.Error}",
                 seedResult.Error);
 
-        logger.LogInformation("DbUp post-migration scripts applied successfully");
+        logger.LogInformation("DbUp post-migration and seed data scripts applied successfully");
         return Task.CompletedTask;
     }
 
@@ -103,26 +107,12 @@ public sealed class DbUpRunner(
     }
 }
 
-/// <summary>
-/// Bridges DbUp logging to Serilog via ILogger.
-/// </summary>
 internal sealed class SerilogDbUpLog(ILogger logger) : global::DbUp.Engine.Output.IUpgradeLog
 {
-    public void LogTrace(string format, params object[] args)
-        => logger.LogTrace(format, args);
-
-    public void LogDebug(string format, params object[] args)
-        => logger.LogDebug(format, args);
-
-    public void LogInformation(string format, params object[] args)
-        => logger.LogInformation(format, args);
-
-    public void LogWarning(string format, params object[] args)
-        => logger.LogWarning(format, args);
-
-    public void LogError(string format, params object[] args)
-        => logger.LogError(format, args);
-
-    public void LogError(Exception ex, string format, params object[] args)
-        => logger.LogError(ex, format, args);
+    public void LogTrace(string format, params object[] args) => logger.LogTrace(format, args);
+    public void LogDebug(string format, params object[] args) => logger.LogDebug(format, args);
+    public void LogInformation(string format, params object[] args) => logger.LogInformation(format, args);
+    public void LogWarning(string format, params object[] args) => logger.LogWarning(format, args);
+    public void LogError(string format, params object[] args) => logger.LogError(format, args);
+    public void LogError(Exception ex, string format, params object[] args) => logger.LogError(ex, format, args);
 }

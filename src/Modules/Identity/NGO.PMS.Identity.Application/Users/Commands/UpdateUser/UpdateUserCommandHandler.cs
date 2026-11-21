@@ -30,6 +30,11 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
             request.ProfilePhotoUrl,
             request.Region,
             request.OfficeLevel);
+        if (request.IsActive.HasValue)
+        {
+            if (request.IsActive.Value) user.Activate();
+            else user.Deactivate();
+        }
         await _db.SaveChangesAsync(cancellationToken);
     }
 }

@@ -1,5 +1,10 @@
 import { Routes } from '@angular/router';
+import { provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 import { authGuard } from '@ethelpms/shared/core';
+import { superAdminGuard } from './guards/super-admin.guard';
+import { TENANTS_FEATURE_KEY, tenantReducer } from './store/tenant.reducer';
+import { TenantEffects } from './store/tenant.effects';
 
 export const routes: Routes = [
   {
@@ -14,7 +19,11 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./layouts/admin-layout/admin-layout.component'),
-    canActivate: [authGuard],
+    canActivate: [authGuard, superAdminGuard],
+    providers: [
+      provideState(TENANTS_FEATURE_KEY, tenantReducer),
+      provideEffects([TenantEffects]),
+    ],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
@@ -34,8 +43,13 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/tenant-detail/tenant-detail.component'),
       },
       {
-        path: 'packages',
+        path: 'subscriptions',
         loadComponent: () => import('./pages/package-list/package-list.component'),
+      },
+      {
+        path: 'packages',
+        redirectTo: 'subscriptions',
+        pathMatch: 'full',
       },
     ],
   },

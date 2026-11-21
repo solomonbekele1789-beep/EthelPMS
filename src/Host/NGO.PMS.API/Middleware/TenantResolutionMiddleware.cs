@@ -1,74 +1,102 @@
+using Dapper;
+using Microsoft.Extensions.Caching.Memory;
 using NGO.PMS.SharedKernel.MultiTenancy;
+using Npgsql;
 
 namespace NGO.PMS.API.Middleware;
 
 /// <summary>
-/// Resolves the current tenant from JWT claims and populates the ITenantContextAccessor.
-/// Replaces Finbuckle's UseMultiTenant() middleware with a simpler, custom implementation.
-/// Must run after UseAuthentication() so that User.Claims are populated.
+/// Resolves the current tenant from JWT 'tenant_id' (or 'org_id') claim by querying
+/// platform.tenants and platform.tenant_modules (cached in IMemoryCache for 2 minutes).
 /// </summary>
 public sealed class TenantResolutionMiddleware(RequestDelegate next)
 {
+    private static readonly TimeSpan CacheTtl = TimeSpan.FromMinutes(2);
+
     public async Task InvokeAsync(HttpContext context)
     {
         var tenantAccessor = context.RequestServices.GetRequiredService<ITenantContextAccessor>();
+        var tenantClaim = context.User.FindFirst("tenant_id") ?? context.User.FindFirst("org_id");
 
-        // Extract tenant ID from JWT claim
-        var tenantClaim = context.User.FindFirst("tenant_id");
-
-        if (tenantClaim?.Value is not null)
+        if (tenantClaim?.Value is not null && Guid.TryParse(tenantClaim.Value, out var tenantId))
         {
-            // Look up tenant info from configuration
-            var configuration = context.RequestServices.GetRequiredService<IConfiguration>();
-            var tenantsSection = configuration.GetSection("MultiTenancy:Tenants");
+            var cache = context.RequestServices.GetRequiredService<IMemoryCache>();
+            var config = context.RequestServices.GetRequiredService<IConfiguration>();
+            var env = context.RequestServices.GetRequiredService<IHostEnvironment>();
+            var logger = context.RequestServices.GetRequiredService<ILogger<TenantResolutionMiddleware>>();
 
-            foreach (var tenantSection in tenantsSection.GetChildren())
+            var cacheKey = $"tenant:info:{tenantId}";
+            var tenantInfo = await cache.GetOrCreateAsync(cacheKey, async entry =>
             {
-                var tenantId = tenantSection["Id"];
-                var tenantIdentifier = tenantSection["Identifier"];
-
-                // Match by Id or Identifier
-                if (tenantId == tenantClaim.Value || tenantIdentifier == tenantClaim.Value)
+                entry.AbsoluteExpirationRelativeToNow = CacheTtl;
+                var connStr = config.GetConnectionString("DefaultConnection");
+                if (!string.IsNullOrWhiteSpace(connStr))
                 {
-                    tenantAccessor.CurrentTenant = new EthelTenantInfo
+                    try
                     {
-                        Id = tenantId ?? tenantClaim.Value,
-                        Identifier = tenantIdentifier ?? string.Empty,
-                        Name = tenantSection["Name"],
-                        ConnectionString = tenantSection["ConnectionString"],
-                        IsActive = bool.TryParse(tenantSection["IsActive"], out var isActive) && isActive,
-                        SubscriptionTier = tenantSection["SubscriptionTier"] ?? "free",
-                        MaxUsers = int.TryParse(tenantSection["MaxUsers"], out var mu) ? mu : 0,
-                        MaxProjects = int.TryParse(tenantSection["MaxProjects"], out var mp) ? mp : 0,
-                        MaxStorageMb = int.TryParse(tenantSection["MaxStorageMb"], out var ms) ? ms : 0,
-                        EnabledModules = tenantSection.GetSection("EnabledModules")
-                            .GetChildren()
-                            .Select(c => c.Value!)
-                            .Where(v => v is not null)
-                            .ToList()
-                    };
-                    break;
-                }
-            }
+                        await using var conn = new NpgsqlConnection(connStr);
+                        var row = await conn.QueryFirstOrDefaultAsync<TenantRow>(
+                            """
+                            SELECT id, slug, name, status, connection_string, max_users, max_projects
+                            FROM platform.tenants
+                            WHERE id = @Id AND is_deleted = false
+                            """,
+                            new { Id = tenantId });
 
-            // If no config match, still set basic tenant info from the claim.
-            // In Development, enable all modules so unconfigured tenants can work.
-            if (tenantAccessor.CurrentTenant is null)
-            {
-                var env = context.RequestServices.GetRequiredService<IHostEnvironment>();
-                tenantAccessor.CurrentTenant = new EthelTenantInfo
+                        if (row is not null)
+                        {
+                            var modules = (await conn.QueryAsync<string>(
+                                """
+                                SELECT module_name
+                                FROM platform.tenant_modules
+                                WHERE tenant_id = @Id AND is_enabled = true
+                                """,
+                                new { Id = tenantId })).ToList();
+
+                            return new EthelTenantInfo
+                            {
+                                Id = row.Id.ToString(),
+                                Identifier = row.Slug,
+                                Name = row.Name,
+                                ConnectionString = row.ConnectionString,
+                                IsActive = string.Equals(row.Status, "Active", StringComparison.OrdinalIgnoreCase),
+                                MaxUsers = row.MaxUsers,
+                                MaxProjects = row.MaxProjects,
+                                EnabledModules = modules
+                            };
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogWarning(ex, "DB tenant resolution failed for {TenantId}; using fallback.", tenantId);
+                    }
+                }
+
+                // Fallback for development seeded org not yet in platform.tenants
+                return new EthelTenantInfo
                 {
-                    Id = tenantClaim.Value,
-                    Identifier = tenantClaim.Value,
+                    Id = tenantId.ToString(),
+                    Identifier = tenantId.ToString(),
                     IsActive = true,
                     SubscriptionTier = env.IsDevelopment() ? "enterprise" : "free",
                     EnabledModules = env.IsDevelopment()
                         ? [.. ModuleAccessMiddleware.AllModuleNames]
-                        : []
+                        : ["identity", "projects", "reporting"]
                 };
-            }
+            });
+
+            tenantAccessor.CurrentTenant = tenantInfo;
         }
 
         await next(context);
     }
+
+    private sealed record TenantRow(
+        Guid Id,
+        string Slug,
+        string Name,
+        string Status,
+        string? ConnectionString,
+        int MaxUsers,
+        int MaxProjects);
 }

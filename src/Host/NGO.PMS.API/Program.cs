@@ -1,3 +1,8 @@
+using NGO.PMS.API.Services;
+using NGO.PMS.SharedKernel.Audit;
+using NGO.PMS.SharedKernel.Services;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.RateLimiting;
 using System.Text;
 using FluentValidation;
 using Hangfire;
@@ -133,6 +138,60 @@ builder.Services.AddDbContext<AuditDbContext>(options =>
         npgsql.MigrationsHistoryTable("__EFMigrationsHistory_Audit", "audit"))
     .UseSnakeCaseNamingConvention());
 builder.Services.AddScoped<AuditSaveChangesInterceptor>();
+builder.Services.AddScoped<IAuditInterceptor>(sp => sp.GetRequiredService<AuditSaveChangesInterceptor>());
+builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IReferenceDataService, ReferenceDataService>();
+
+
+// ── Rate Limiting (Global 100 req/min, Auth 10 req/min per IP) ──
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.OnRejected = async (context, cancellationToken) =>
+    {
+        context.HttpContext.Response.Headers["Retry-After"] = "60";
+        context.HttpContext.Response.Headers["X-RateLimit-Remaining"] = "0";
+        await context.HttpContext.Response.WriteAsJsonAsync(new
+        {
+            success = false,
+            code = "RATE_LIMITED",
+            message = "Too many requests. Please try again later.",
+            detail = "Too many requests. Please try again later."
+        }, cancellationToken);
+    };
+
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 100,
+                Window = TimeSpan.FromMinutes(1),
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0
+            }));
+
+    options.AddPolicy("auth", httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 10,
+                Window = TimeSpan.FromMinutes(1),
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0
+            }));
+});
+
+// ── Antiforgery (XSRF token for HttpOnly cookie auth) ───
+builder.Services.AddAntiforgery(options =>
+{
+    options.HeaderName = "X-XSRF-TOKEN";
+    options.Cookie.Name = "XSRF-TOKEN";
+    options.Cookie.HttpOnly = false;
+    options.Cookie.SameSite = SameSiteMode.Strict;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+});
 
 // ── Global Services ──────────────────────────────────────
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -159,10 +218,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!)),
+            ValidAlgorithms = [SecurityAlgorithms.HmacSha256],
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero,
             RoleClaimType = "roles",
             NameClaimType = "name",
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                if (string.IsNullOrEmpty(context.Token) &&
+                    context.Request.Cookies.TryGetValue("__Host-access-token", out var cookieToken))
+                {
+                    context.Token = cookieToken;
+                }
+                return Task.CompletedTask;
+            }
         };
     });
 
@@ -317,11 +390,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("default");
+app.UseRateLimiter();
 app.UseAuthentication();
-app.UseMiddleware<TenantResolutionMiddleware>();   // Resolves tenant from JWT claim + config
+app.UseMiddleware<TenantResolutionMiddleware>();   // Resolves tenant from JWT claim + DB
 app.UseMiddleware<TenantContextMiddleware>();      // Sets PostgreSQL RLS session variable
+app.UseMiddleware<ModuleAccessMiddleware>();       // Checks tenant module access before authorization
 app.UseAuthorization();
-app.UseMiddleware<ModuleAccessMiddleware>();       // Checks tenant module access
 
 // ── Hangfire Dashboard ───────────────────────────────────
 app.UseHangfireDashboard(
@@ -331,13 +405,28 @@ app.UseHangfireDashboard(
         Authorization = [new HangfireAuthFilter()]
     });
 
-// Register recurring outbox relay job — every 10 minutes
+// Register recurring outbox relay (every 10 seconds) and daily cleanup jobs
 try
 {
     RecurringJob.AddOrUpdate<OutboxRelayJob>(
         "outbox-relay",
         job => job.ProcessOutboxAsync(),
-        "*/10 * * * *");
+        "*/10 * * * * *");
+
+    RecurringJob.AddOrUpdate<OutboxCleanupJob>(
+        "outbox-cleanup",
+        job => job.CleanupAsync(),
+        Cron.Daily(2));
+
+    RecurringJob.AddOrUpdate<DatabaseMaintenanceJob>(
+        "db-purge-expired-tokens",
+        job => job.PurgeExpiredTokensAsync(),
+        Cron.Daily(3));
+
+    RecurringJob.AddOrUpdate<DatabaseMaintenanceJob>(
+        "db-weekly-analyze",
+        job => job.RunAnalyzeAsync(),
+        Cron.Weekly(DayOfWeek.Sunday, 4));
 }
 catch (Hangfire.PostgreSql.PostgreSqlDistributedLockException ex)
 {

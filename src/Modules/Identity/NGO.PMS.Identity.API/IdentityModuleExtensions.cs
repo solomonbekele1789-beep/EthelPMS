@@ -1,3 +1,5 @@
+using NGO.PMS.SharedKernel.Outbox;
+using NGO.PMS.SharedKernel.Audit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,9 +35,12 @@ public static class IdentityModuleExtensions
                 sp.GetRequiredService<SoftDeleteInterceptor>(),
                 sp.GetRequiredService<TenantConnectionInterceptor>(),
                 sp.GetRequiredService<DomainEventDispatchInterceptor>());
+            var auditInterceptor = sp.GetService<IAuditInterceptor>();
+            if (auditInterceptor is not null) options.AddInterceptors(auditInterceptor);
         });
 
         services.AddScoped<IIdentityDbContext>(sp => sp.GetRequiredService<IdentityDbContext>());
+        services.AddScoped<IOutboxWriter, OutboxWriter<IdentityDbContext>>();
 
         // Services
         services.AddScoped<IJwtTokenService, JwtTokenService>();

@@ -6,27 +6,39 @@ import { AuthService } from '../services/auth.service';
 let isRefreshing = false;
 const refreshTokenSubject = new BehaviorSubject<string | null>(null);
 
-const SKIP_AUTH_URLS = ['/auth/login', '/auth/refresh', '/auth/forgot-password'];
+const SKIP_AUTH_URLS = ['/auth/login', '/auth/refresh', '/auth/forgot-password', '/auth/reset-password', '/auth/setup-password'];
+
+function generateCorrelationId(): string {
+  return typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+    ? crypto.randomUUID()
+    : `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+}
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const authService = inject(AuthService);
 
+  const headers: Record<string, string> = {
+    'X-Correlation-ID': generateCorrelationId(),
+    'X-Client-Type': 'web',
+  };
+
   if (SKIP_AUTH_URLS.some((url) => req.url.includes(url))) {
-    return next(req);
+    return next(req.clone({ withCredentials: true, setHeaders: headers }));
   }
 
   const token = authService.getAccessToken();
-  let authReq = req;
-
   if (token) {
-    authReq = req.clone({
-      setHeaders: { Authorization: `Bearer ${token}` },
-    });
+    headers['Authorization'] = `Bearer ${token}`;
   }
+
+  const authReq = req.clone({
+    withCredentials: true,
+    setHeaders: headers,
+  });
 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      if (error.status === 401 && token) {
+      if (error.status === 401) {
         return handleTokenRefresh(authReq, next, authService);
       }
       return throwError(() => error);
@@ -43,20 +55,18 @@ function handleTokenRefresh(
     isRefreshing = true;
     refreshTokenSubject.next(null);
 
-    const refreshToken = authService.getRefreshToken();
-    if (!refreshToken) {
-      isRefreshing = false;
-      return throwError(() => new HttpErrorResponse({ status: 401 }));
-    }
-
-    return authService.refreshToken(refreshToken).pipe(
+    return authService.refreshToken().pipe(
       switchMap((response) => {
         isRefreshing = false;
-        refreshTokenSubject.next(response.accessToken);
+        const newToken = response.accessToken ?? 'cookie-refreshed';
+        refreshTokenSubject.next(newToken);
         return next(
-          req.clone({
-            setHeaders: { Authorization: `Bearer ${response.accessToken}` },
-          })
+          response.accessToken
+            ? req.clone({
+                withCredentials: true,
+                setHeaders: { Authorization: `Bearer ${response.accessToken}` },
+              })
+            : req.clone({ withCredentials: true })
         );
       }),
       catchError((err) => {
@@ -71,9 +81,12 @@ function handleTokenRefresh(
     take(1),
     switchMap((token) =>
       next(
-        req.clone({
-          setHeaders: { Authorization: `Bearer ${token}` },
-        })
+        token && token !== 'cookie-refreshed'
+          ? req.clone({
+              withCredentials: true,
+              setHeaders: { Authorization: `Bearer ${token}` },
+            })
+          : req.clone({ withCredentials: true })
       )
     )
   );

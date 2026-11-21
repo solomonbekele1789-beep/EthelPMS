@@ -4,44 +4,63 @@ namespace NGO.PMS.API.Middleware;
 
 /// <summary>
 /// Checks whether the current tenant has access to the requested module.
-/// Returns 403 if the module is not enabled for the tenant's subscription.
-/// Skipped for unauthenticated requests and platform admin routes.
+/// Returns 403 MODULE_DISABLED if the module is not enabled for the tenant's subscription.
 /// </summary>
 public sealed class ModuleAccessMiddleware(RequestDelegate next)
 {
-    // Maps URL segments to module names (as stored in platform.tenant_modules)
-    internal static readonly Dictionary<string, string> RouteToModule = new()
+    internal static readonly Dictionary<string, string> RouteToModule = new(StringComparer.OrdinalIgnoreCase)
     {
         ["projects"] = "projects",
-        ["results-framework"] = "resultsframework",
-        ["intervention-areas"] = "interventionareas",
+        ["results-framework"] = "results-framework",
+        ["intervention-areas"] = "projects",
         ["planning"] = "planning",
-        ["dip"] = "dip",
+        ["plans"] = "planning",
+        ["activities"] = "planning",
+        ["dip"] = "planning",
         ["reporting"] = "reporting",
+        ["reports"] = "reporting",
         ["meal"] = "meal",
+        ["meal-plans"] = "meal",
+        ["indicators"] = "meal",
+        ["evaluations"] = "meal",
         ["participants"] = "participants",
-        ["graduation"] = "graduation",
+        ["graduation"] = "participants",
+        ["graduation-criteria"] = "participants",
         ["procurement"] = "procurement",
-        ["fund-accounting"] = "fundacct",
+        ["purchase-requests"] = "procurement",
+        ["purchase-orders"] = "procurement",
+        ["vendors"] = "procurement",
+        ["fund-accounting"] = "fund-accounting",
+        ["budgets"] = "fund-accounting",
+        ["journal-entries"] = "fund-accounting",
+        ["accounts"] = "fund-accounting",
         ["assets"] = "assets",
         ["training"] = "training",
+        ["trainings"] = "training",
         ["tasks"] = "tasks",
         ["risks"] = "risk",
         ["donors"] = "donors",
+        ["grants"] = "donors",
         ["chat"] = "chat",
+        ["chat-rooms"] = "chat",
         ["notifications"] = "notifications",
         ["documents"] = "documents",
         ["feedback"] = "feedback",
         ["dashboards"] = "dashboards",
+        ["settings"] = "settings",
+        ["knowledge"] = "knowledge",
+        ["partnerships"] = "partnerships",
+        ["system-reports"] = "system-reports",
+        ["import-export"] = "import-export",
     };
 
-    internal static IReadOnlyCollection<string> AllModuleNames => RouteToModule.Values.Distinct().ToList();
+    internal static IReadOnlyCollection<string> AllModuleNames =>
+        RouteToModule.Values.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var path = context.Request.Path.Value?.ToLowerInvariant() ?? "";
+        var path = context.Request.Path.Value?.ToLowerInvariant() ?? string.Empty;
 
-        // Only check /api/v1/{resource} paths, skip auth/identity/platform routes
         if (path.StartsWith("/api/v1/") &&
             !path.StartsWith("/api/v1/auth") &&
             !path.StartsWith("/api/v1/platform") &&
@@ -55,17 +74,19 @@ public sealed class ModuleAccessMiddleware(RequestDelegate next)
 
             if (segment is not null && RouteToModule.TryGetValue(segment, out var moduleName))
             {
-                var tenantAccessor = context.RequestServices
-                    .GetService<ITenantContextAccessor>();
+                var tenantAccessor = context.RequestServices.GetService<ITenantContextAccessor>();
                 var tenant = tenantAccessor?.CurrentTenant;
 
-                if (tenant is not null && !tenant.EnabledModules.Contains(moduleName))
+                if (tenant is not null &&
+                    !tenant.EnabledModules.Contains(moduleName, StringComparer.OrdinalIgnoreCase))
                 {
-                    context.Response.StatusCode = 403;
+                    context.Response.StatusCode = StatusCodes.Status403Forbidden;
                     context.Response.ContentType = "application/json";
                     await context.Response.WriteAsJsonAsync(new
                     {
                         success = false,
+                        code = "MODULE_DISABLED",
+                        message = $"Module '{moduleName}' is not enabled for this organization.",
                         errors = new[] { $"Module '{moduleName}' is not enabled for this organization." }
                     });
                     return;

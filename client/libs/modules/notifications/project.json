@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/notifications/src",
   "prefix": "notifications",
-  "tags": ["scope:notifications", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:notifications",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

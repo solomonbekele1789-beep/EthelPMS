@@ -14,29 +14,27 @@ export default [
         'error',
         {
           enforceBuildableLibDependency: true,
-          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
+          allow: ['^.*/eslint(\.base)?\.config\.[cm]?[jt]s$'],
           depConstraints: [
             {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
+              sourceTag: 'scope:shared-core',
+              onlyDependOnLibsWithTags: ['scope:shared-core'],
+            },
+            {
+              sourceTag: 'scope:shared-ui',
+              onlyDependOnLibsWithTags: ['scope:shared-ui', 'scope:shared-core'],
+            },
+            {
+              sourceTag: 'scope:module',
+              onlyDependOnLibsWithTags: ['scope:shared-core', 'scope:shared-ui'],
+            },
+            {
+              sourceTag: 'scope:app',
+              onlyDependOnLibsWithTags: ['scope:module', 'scope:shared-core', 'scope:shared-ui'],
             },
           ],
         },
       ],
     },
-  },
-  {
-    files: [
-      '**/*.ts',
-      '**/*.tsx',
-      '**/*.cts',
-      '**/*.mts',
-      '**/*.js',
-      '**/*.jsx',
-      '**/*.cjs',
-      '**/*.mjs',
-    ],
-    // Override or add rules here
-    rules: {},
   },
 ];

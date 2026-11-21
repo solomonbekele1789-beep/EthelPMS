@@ -3,7 +3,7 @@ using NGO.PMS.Identity.Domain.Events;
 
 namespace NGO.PMS.Identity.Domain.Entities;
 
-public class User : AuditableEntity, ISoftDeletable
+public class User : AuditableEntity, ISoftDeletable, IMultiTenant
 {
     public string Email { get; private set; } = string.Empty;
     public string PasswordHash { get; private set; } = string.Empty;

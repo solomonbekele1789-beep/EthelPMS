@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/meal/src",
   "prefix": "meal",
-  "tags": ["scope:meal", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:meal",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

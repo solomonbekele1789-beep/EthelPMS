@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/reporting/src",
   "prefix": "reporting",
-  "tags": ["scope:reporting", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:reporting",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }

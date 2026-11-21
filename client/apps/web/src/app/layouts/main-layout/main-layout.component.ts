@@ -9,11 +9,13 @@ import {
   selectIsAuthenticated,
   selectUiSidebarCollapsed,
   UiActions,
+  PermissionService,
 } from '@ethelpms/shared/core';
 import {
   SidebarNavComponent,
   BreadcrumbNavComponent,
   LanguageToggleComponent,
+  ThemeToggleComponent,
   AvatarInitialsComponent,
 } from '@ethelpms/shared/ui';
 
@@ -21,6 +23,7 @@ interface NavItem {
   path: string;
   labelKey: string;
   icon: string;
+  permission?: string;
 }
 
 @Component({
@@ -34,6 +37,7 @@ interface NavItem {
     SidebarNavComponent,
     BreadcrumbNavComponent,
     LanguageToggleComponent,
+  ThemeToggleComponent,
     AvatarInitialsComponent,
   ],
   template: `
@@ -43,7 +47,7 @@ interface NavItem {
         <div class="main-layout__sidebar-header">
           <a routerLink="/dashboard" class="main-layout__brand">
             @if (!sidebarCollapsed()) {
-              <span class="main-layout__brand-text">EthelPMS</span>
+              <span class="main-layout__brand-text">{{ currentUser()?.organizationName || 'EthelPMS' }}</span>
             } @else {
               <span class="main-layout__brand-icon">E</span>
             }
@@ -62,7 +66,7 @@ interface NavItem {
         </div>
 
         <nav class="main-layout__nav">
-          @for (item of navItems; track item.path) {
+          @for (item of visibleNavItems(); track item.path) {
             <a
               class="main-layout__nav-item"
               [routerLink]="item.path"
@@ -97,6 +101,7 @@ interface NavItem {
               <span>Platform Console</span>
             </a>
 
+            <app-theme-toggle />
             <app-language-toggle />
 
             @if (user(); as u) {
@@ -353,6 +358,7 @@ interface NavItem {
 })
 export default class MainLayoutComponent {
   private readonly store = inject(Store);
+  private readonly permissionService = inject(PermissionService);
   private readonly router = inject(Router);
 
   readonly user = this.store.selectSignal(selectCurrentUser);
@@ -363,7 +369,9 @@ export default class MainLayoutComponent {
     { path: '/dashboard', labelKey: 'nav.dashboard', icon: 'dashboard' },
     { path: '/users', labelKey: 'nav.users', icon: 'people' },
     { path: '/roles', labelKey: 'nav.roles', icon: 'admin_panel_settings' },
-    { path: '/offices', labelKey: 'nav.offices', icon: 'business' },
+    { path: '/offices', labelKey: 'nav.offices', icon: 'business', permission: 'identity.offices.read' },
+    { path: '/locations', labelKey: 'nav.locations', icon: 'location_on', permission: 'identity.locations.read' },
+    { path: '/settings/organization', labelKey: 'nav.orgSettings', icon: 'corporate_fare', permission: 'orgsetup.organization.read' },
     // Phase 2+: uncomment as modules are activated
     { path: '/projects', labelKey: 'nav.projects', icon: 'folder_open' },
     { path: '/planning', labelKey: 'nav.planning', icon: 'event_note' },
@@ -388,6 +396,10 @@ export default class MainLayoutComponent {
     { path: '/reports', labelKey: 'nav.reports', icon: 'summarize' },
     { path: '/import-export', labelKey: 'nav.importExport', icon: 'import_export' },
   ];
+
+  readonly visibleNavItems = computed(() =>
+    this.navItems.filter((item) => !item.permission || this.permissionService.hasPermission(item.permission))
+  );
 
   toggleSidebar(): void {
     this.store.dispatch(UiActions.toggleSidebar());

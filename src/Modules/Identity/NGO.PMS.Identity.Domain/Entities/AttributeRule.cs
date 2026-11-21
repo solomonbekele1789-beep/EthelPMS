@@ -6,7 +6,7 @@ namespace NGO.PMS.Identity.Domain.Entities;
 /// ABAC rule: refines a permission with attribute conditions.
 /// Example: permission "projects.reports.read" WHERE office_id = "abc-123"
 /// </summary>
-public class AttributeRule : BaseEntity
+public class AttributeRule : BaseEntity, IMultiTenant
 {
     public Guid PermissionId { get; set; }
     public string AttributeName { get; set; } = string.Empty;

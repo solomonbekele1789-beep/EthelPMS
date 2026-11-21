@@ -28,7 +28,7 @@ public class AccessKeysController : ControllerBase
     {
         var rawKey = await _mediator.Send(
             new CreateAccessKeyCommand(tenantId, request.Label, request.Scopes, request.ExpiresAt), ct);
-        return Ok(new { key = rawKey, message = "Store this key securely. It will not be shown again." });
+        return StatusCode(201, new { key = rawKey, message = "Store this key securely. It will not be shown again." });
     }
 
     [HttpDelete("{keyId:guid}")]

@@ -1,96 +1,59 @@
-name: CI
+name: EthelPMS CI
 
 on:
   push:
-    branches: [main, ethel-sol-branch]
+    branches: [main, develop, ethel-sol-branch]
   pull_request:
-    branches: [main]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-env:
-  DOTNET_VERSION: '10.0.x'
-  DOTNET_NOLOGO: true
-  DOTNET_CLI_TELEMETRY_OPTOUT: true
-  NODE_VERSION: '22'
+    branches: [main, develop]
 
 jobs:
   backend:
-    name: Backend Build & Test
+    name: Backend (.NET 10)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup .NET
+      - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-          dotnet-quality: 'preview'
+          global-json-file: global.json
 
-      - name: Restore
+      - name: Restore dependencies
         run: dotnet restore EthelPMS.slnx
 
       - name: Build
         run: dotnet build EthelPMS.slnx --no-restore --configuration Release
 
-      - name: Test
-        run: dotnet test EthelPMS.slnx --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      - name: Run unit & architecture tests
+        run: dotnet test EthelPMS.slnx --no-build --configuration Release --filter "Category!=Integration" --verbosity normal
 
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: backend-test-results
-          path: '**/test-results.trx'
-
-  frontend-web:
-    name: Frontend Web Build
+  frontend:
+    name: Frontend (Angular / Nx)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          node-version: 22
+          cache: npm
           cache-dependency-path: client/package-lock.json
 
       - name: Install dependencies
-        working-directory: client
-        run: npm install --prefer-offline --no-audit
+        run: npm ci
 
-      - name: Lint
-        working-directory: client
-        run: npx nx lint web
+      - name: Lint web & platform-console
+        run: npx nx run-many -t lint -p web,platform-console,shared-core,shared-ui
 
-      - name: Build
-        working-directory: client
+      - name: Unit tests
+        run: npx nx run-many -t test -p web,platform-console,shared-core,shared-ui --watch=false
+
+      - name: Build web
         run: npx nx build web --configuration=production
 
-  frontend-platform:
-    name: Frontend Platform Console Build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: client/package-lock.json
-
-      - name: Install dependencies
-        working-directory: client
-        run: npm install --prefer-offline --no-audit
-
-      - name: Lint
-        working-directory: client
-        run: npx nx lint platform-console
-
-      - name: Build
-        working-directory: client
+      - name: Build platform-console
         run: npx nx build platform-console --configuration=production

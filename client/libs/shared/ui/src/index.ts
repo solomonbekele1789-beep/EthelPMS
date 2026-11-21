@@ -16,3 +16,7 @@ export * from './lib/breadcrumb-nav/breadcrumb-nav.component';
 export * from './lib/form-field/form-field.component';
 export * from './lib/currency-input/currency-input.component';
 export * from './lib/language-toggle/language-toggle.component';
+export * from './lib/dual-calendar-date-picker/dual-calendar-date-picker.component';
+export * from './lib/location-cascade-selector/location-cascade-selector.component';
+export * from './lib/permission-tree/permission-tree.component';
+export * from './lib/theme-toggle/theme-toggle.component';

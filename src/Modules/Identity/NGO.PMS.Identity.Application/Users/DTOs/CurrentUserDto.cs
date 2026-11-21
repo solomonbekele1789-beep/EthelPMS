@@ -1,5 +1,11 @@
 namespace NGO.PMS.Identity.Application.Users.DTOs;
 
+public record TenantInfoDto(
+    Guid Id,
+    string Name,
+    string Slug,
+    List<string> Modules);
+
 public record CurrentUserDto(
     Guid Id,
     string Email,
@@ -8,4 +14,5 @@ public record CurrentUserDto(
     Guid OrganizationId,
     string OrganizationName,
     List<string> Permissions,
-    List<string> Roles);
+    List<string> Roles,
+    TenantInfoDto? Tenant = null);

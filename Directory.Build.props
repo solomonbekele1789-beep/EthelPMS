@@ -23,5 +23,14 @@
     <AutoMapperVersion>16.2.0</AutoMapperVersion>
     <NpgsqlEFCoreVersion>10.0.3</NpgsqlEFCoreVersion>
     <EFCoreNamingConventionsVersion>10.0.0</EFCoreNamingConventionsVersion>
+    <DapperVersion>2.1.89</DapperVersion>
+    <TestSdkVersion>17.13.0</TestSdkVersion>
+    <XunitVersion>2.9.3</XunitVersion>
+    <XunitRunnerVersion>3.1.4</XunitRunnerVersion>
+    <FluentAssertionsVersion>8.11.0</FluentAssertionsVersion>
+    <NSubstituteVersion>6.2.0</NSubstituteVersion>
+    <BogusVersion>35.6.5</BogusVersion>
+    <CoverletVersion>6.0.4</CoverletVersion>
+    <ArchUnitNetVersion>0.11.4</ArchUnitNetVersion>
   </PropertyGroup>
 </Project>

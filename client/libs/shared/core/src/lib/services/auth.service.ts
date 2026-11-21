@@ -3,28 +3,30 @@ import { Observable, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import { LoginRequest, LoginResponse, UserProfile } from '../models/auth.model';
 
-const ACCESS_TOKEN_KEY = 'ethelpms_access_token';
-const REFRESH_TOKEN_KEY = 'ethelpms_refresh_token';
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly api = inject(ApiService);
+  private accessTokenMemory: string | null = null;
+  private refreshTokenMemory: string | null = null;
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.api.post<LoginResponse>('/auth/login', credentials).pipe(
-      tap((response) => this.storeTokens(response))
+      tap((response) => this.storeTokensInMemory(response))
     );
   }
 
   logout(): Observable<void> {
-    return this.api.post<void>('/auth/logout').pipe(
+    return this.api.post<void>('/auth/logout', {
+      refreshToken: this.refreshTokenMemory ?? undefined,
+    }).pipe(
       tap(() => this.clearTokens())
     );
   }
 
-  refreshToken(refreshToken: string): Observable<LoginResponse> {
-    return this.api.post<LoginResponse>('/auth/refresh', { refreshToken }).pipe(
-      tap((response) => this.storeTokens(response))
+  refreshToken(refreshToken?: string): Observable<LoginResponse> {
+    const token = refreshToken ?? this.refreshTokenMemory ?? undefined;
+    return this.api.post<LoginResponse>('/auth/refresh', token ? { refreshToken: token } : {}).pipe(
+      tap((response) => this.storeTokensInMemory(response))
     );
   }
 
@@ -45,11 +47,11 @@ export class AuthService {
   }
 
   getAccessToken(): string | null {
-    return localStorage.getItem(ACCESS_TOKEN_KEY);
+    return this.accessTokenMemory;
   }
 
   getRefreshToken(): string | null {
-    return localStorage.getItem(REFRESH_TOKEN_KEY);
+    return this.refreshTokenMemory;
   }
 
   isTokenExpired(token: string): boolean {
@@ -61,13 +63,13 @@ export class AuthService {
     }
   }
 
-  private storeTokens(response: LoginResponse): void {
-    localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken);
-    localStorage.setItem(REFRESH_TOKEN_KEY, response.refreshToken);
+  private storeTokensInMemory(response: LoginResponse): void {
+    this.accessTokenMemory = response.accessToken ?? null;
+    this.refreshTokenMemory = response.refreshToken ?? null;
   }
 
   private clearTokens(): void {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
-    localStorage.removeItem(REFRESH_TOKEN_KEY);
+    this.accessTokenMemory = null;
+    this.refreshTokenMemory = null;
   }
 }

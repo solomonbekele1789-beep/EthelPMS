@@ -15,10 +15,15 @@ public class DeleteRoleCommandHandler : IRequestHandler<DeleteRoleCommand>
             .FirstOrDefaultAsync(r => r.Id == request.Id, cancellationToken)
             ?? throw new NotFoundException("Role", request.Id);
 
-        if (role.IsSystemRole) throw new BusinessRuleException("System roles cannot be deleted.");
-        if (role.UserRoles.Count > 0) throw new BusinessRuleException("Cannot delete a role that is assigned to users. Remove all assignments first.");
+        if (role.IsSystemRole)
+            throw new BusinessRuleException("System roles cannot be deleted.");
 
-        _db.Roles.Remove(role); // SoftDeleteInterceptor will handle
+        if (role.UserRoles.Count > 0)
+        {
+            _db.UserRoles.RemoveRange(role.UserRoles);
+        }
+
+        _db.Roles.Remove(role); // SoftDeleteInterceptor handles IsDeleted
         await _db.SaveChangesAsync(cancellationToken);
     }
 }

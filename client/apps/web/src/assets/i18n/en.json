@@ -36,7 +36,8 @@
     "add": "Add",
     "created": "Created",
     "update": "Update",
-    "none": "None"
+    "none": "None",
+    "createdAt": "Created At"
   },
   "auth": {
     "login": {
@@ -78,7 +79,8 @@
       "toggleConfirm": "Toggle password visibility",
       "backToLogin": "Back to login",
       "errorGeneric": "Failed to set password. Please try again."
-    }
+    },
+    "logout": "Sign Out"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -108,7 +110,8 @@
     "reports": "Reports",
     "importExport": "Import/Export",
     "dashboards": "Dashboards",
-    "organizationSettings": "Organization Settings"
+    "organizationSettings": "Organization Settings",
+    "orgSettings": "Organization Settings"
   },
   "dashboard": {
     "welcome": "Welcome, {{name}}",

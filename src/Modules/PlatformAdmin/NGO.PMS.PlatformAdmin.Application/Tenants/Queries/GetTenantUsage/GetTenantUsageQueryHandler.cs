@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NGO.PMS.PlatformAdmin.Application.Abstractions;
 using NGO.PMS.PlatformAdmin.Application.Tenants.DTOs;
 using NGO.PMS.SharedKernel.Exceptions;
 
@@ -8,10 +9,14 @@ namespace NGO.PMS.PlatformAdmin.Application.Tenants.Queries.GetTenantUsage;
 public class GetTenantUsageQueryHandler : IRequestHandler<GetTenantUsageQuery, TenantUsageDto>
 {
     private readonly IPlatformDbContext _db;
+    private readonly ITenantUsageReader? _usageReader;
 
-    public GetTenantUsageQueryHandler(IPlatformDbContext db)
+    public GetTenantUsageQueryHandler(
+        IPlatformDbContext db,
+        ITenantUsageReader? usageReader = null)
     {
         _db = db;
+        _usageReader = usageReader;
     }
 
     public async Task<TenantUsageDto> Handle(GetTenantUsageQuery request, CancellationToken cancellationToken)
@@ -21,17 +26,15 @@ public class GetTenantUsageQueryHandler : IRequestHandler<GetTenantUsageQuery, T
             .FirstOrDefaultAsync(t => t.Id == request.TenantId, cancellationToken)
             ?? throw new NotFoundException("Tenant", request.TenantId);
 
-        // TODO: Cross-module query — the platform module has no direct access to
-        // the identity schema (RLS-isolated). Wire up an ICrossModuleQueryService
-        // or MediatR notification to fetch actual user/project counts from the
-        // Identity and ProjectManagement modules. For now, return limits only.
-        var currentUsers = 0;
-        var currentProjects = 0;
+        var actual = _usageReader is not null
+            ? await _usageReader.GetUsageAsync(tenant.Id, cancellationToken)
+            : new TenantActualUsage(0, 0, 0);
 
         return new TenantUsageDto(
-            CurrentUsers: currentUsers,
+            CurrentUsers: actual.CurrentUsers,
             MaxUsers: tenant.MaxUsers,
-            CurrentProjects: currentProjects,
-            MaxProjects: tenant.MaxProjects);
+            CurrentProjects: actual.CurrentProjects,
+            MaxProjects: tenant.MaxProjects,
+            StorageUsedBytes: actual.StorageUsedBytes);
     }
 }

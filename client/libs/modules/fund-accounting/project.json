@@ -4,9 +4,20 @@
   "projectType": "library",
   "sourceRoot": "libs/modules/fund-accounting/src",
   "prefix": "fund-accounting",
-  "tags": ["scope:fund-accounting", "type:feature"],
+  "tags": [
+    "scope:module",
+    "module:fund-accounting",
+    "type:feature"
+  ],
   "targets": {
-    "lint": { "executor": "@nx/eslint:lint" },
-    "test": { "executor": "@angular/build:unit-test", "options": { "watch": false } }
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
   }
 }
