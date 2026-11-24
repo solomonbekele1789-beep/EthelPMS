@@ -73,6 +73,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new() { Title = "EthelPMS API", Version = "v1" });
+    options.CustomSchemaIds(type => type.FullName?.Replace('+', '.') ?? type.Name);
 });
 
 // ── CORS ─────────────────────────────────────────────────
@@ -298,7 +299,45 @@ if (app.Environment.IsDevelopment())
 
     try
     {
-    var dbUpRunner = sp.GetRequiredService<IDbUpRunner>();
+        if (args.Contains("--reset-db"))
+        {
+            startupLogger.LogWarning("Resetting database schemas (--reset-db flag detected)...");
+            await using var resetConn = new Npgsql.NpgsqlConnection(connectionString);
+            await resetConn.OpenAsync();
+            var dropSql = @"
+                DROP SCHEMA IF EXISTS identity CASCADE;
+                DROP SCHEMA IF EXISTS platform CASCADE;
+                DROP SCHEMA IF EXISTS projects CASCADE;
+                DROP SCHEMA IF EXISTS planning CASCADE;
+                DROP SCHEMA IF EXISTS reporting CASCADE;
+                DROP SCHEMA IF EXISTS meal CASCADE;
+                DROP SCHEMA IF EXISTS participants CASCADE;
+                DROP SCHEMA IF EXISTS procurement CASCADE;
+                DROP SCHEMA IF EXISTS fundacct CASCADE;
+                DROP SCHEMA IF EXISTS assets CASCADE;
+                DROP SCHEMA IF EXISTS training CASCADE;
+                DROP SCHEMA IF EXISTS tasks CASCADE;
+                DROP SCHEMA IF EXISTS risk CASCADE;
+                DROP SCHEMA IF EXISTS donors CASCADE;
+                DROP SCHEMA IF EXISTS collab CASCADE;
+                DROP SCHEMA IF EXISTS content CASCADE;
+                DROP SCHEMA IF EXISTS reference CASCADE;
+                DROP SCHEMA IF EXISTS audit CASCADE;
+                DROP SCHEMA IF EXISTS outbox CASCADE;
+                DROP SCHEMA IF EXISTS dashboards CASCADE;
+                DROP SCHEMA IF EXISTS partnerships CASCADE;
+                DROP SCHEMA IF EXISTS reports CASCADE;
+                DROP SCHEMA IF EXISTS importexport CASCADE;
+                DROP SCHEMA IF EXISTS hangfire CASCADE;
+                DROP TABLE IF EXISTS schemaversions;
+                DROP TABLE IF EXISTS ""__EFMigrationsHistory_Identity"";
+                DROP TABLE IF EXISTS ""__EFMigrationsHistory_Audit"";";
+            await using var cmd = new Npgsql.NpgsqlCommand(dropSql, resetConn);
+            await cmd.ExecuteNonQueryAsync();
+            startupLogger.LogInformation("Database schemas successfully dropped.");
+        }
+
+        var dbUpRunner = sp.GetRequiredService<IDbUpRunner>();
 
     // ── Phase 1: DbUp infrastructure (schemas, roles, extensions, functions) ──
     startupLogger.LogInformation("Phase 1: Running DbUp infrastructure scripts...");
@@ -318,8 +357,15 @@ if (app.Environment.IsDevelopment())
             {
                 var creator = db.Database
                     .GetService<Microsoft.EntityFrameworkCore.Storage.IRelationalDatabaseCreator>();
-                await creator.CreateTablesAsync();
-                log.LogInformation("Created tables for {Context}", typeof(TInterface).Name);
+                if (!await creator.HasTablesAsync())
+                {
+                    await creator.CreateTablesAsync();
+                    log.LogInformation("Created tables for {Context}", typeof(TInterface).Name);
+                }
+                else
+                {
+                    log.LogDebug("Tables for {Context} already exist, skipping", typeof(TInterface).Name);
+                }
             }
             catch (Npgsql.PostgresException ex) when (ex.SqlState is "42P07" or "42710")
             {
@@ -354,9 +400,12 @@ if (app.Environment.IsDevelopment())
     await CreateModuleTables<NGO.PMS.ImportExport.Application.Abstractions.IImportExportDbContext>(sp, startupLogger);
 
     // Audit context — tables may already exist from DbUp script 0005
-    try { await sp.GetRequiredService<AuditDbContext>().Database
-        .GetService<Microsoft.EntityFrameworkCore.Storage.IRelationalDatabaseCreator>()
-        .CreateTablesAsync(); }
+    try {
+        var auditCreator = sp.GetRequiredService<AuditDbContext>().Database
+            .GetService<Microsoft.EntityFrameworkCore.Storage.IRelationalDatabaseCreator>();
+        if (!await auditCreator.HasTablesAsync())
+            await auditCreator.CreateTablesAsync();
+    }
     catch (Npgsql.PostgresException ex) when (ex.SqlState is "42P07" or "42710") { }
 
     // ── Phase 3: DbUp RLS policies + seed data (tables now exist) ──
@@ -428,11 +477,14 @@ try
         job => job.RunAnalyzeAsync(),
         Cron.Weekly(DayOfWeek.Sunday, 4));
 }
-catch (Hangfire.PostgreSql.PostgreSqlDistributedLockException ex)
+catch (Exception ex) when (ex is Hangfire.PostgreSql.PostgreSqlDistributedLockException
+                               or Npgsql.NpgsqlException
+                               or System.Net.Sockets.SocketException)
 {
-    Log.Warning(ex, "Could not register outbox-relay recurring job (stale lock). It will be retried on next startup.");
+    Log.Warning(ex, "Could not register Hangfire recurring jobs (database unavailable). They will be retried on next startup.");
 }
 
+app.MapGet("/", () => Results.Redirect("/swagger"));
 app.MapControllers();
 app.MapHealthChecks("/health");
 app.MapHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions

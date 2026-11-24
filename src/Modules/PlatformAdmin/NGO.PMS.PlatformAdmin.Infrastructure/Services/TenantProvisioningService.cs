@@ -21,7 +21,7 @@ namespace NGO.PMS.PlatformAdmin.Infrastructure.Services;
 /// 3. CreateDefaultRoles (clone identity.role_templates into identity.roles + role_permissions)
 /// 4. CreateAdminUser (insert admin user, assign OrgAdmin role, create setup password token)
 /// 5. EnableModules (populate platform.tenant_modules from subscription tier defaults)
-/// 6. Activate tenant & publish TenantProvisionedIntegrationEvent
+/// 6. Activate tenant and publish TenantProvisionedIntegrationEvent
 /// </summary>
 public class TenantProvisioningService : ITenantProvisioningService
 {

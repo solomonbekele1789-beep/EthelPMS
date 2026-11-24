@@ -38,7 +38,7 @@ public class JwtTokenService : IJwtTokenService
             new("name", $"{user.FirstName} {user.LastName}"),
             new("tenant_id", user.OrganizationId.ToString()),
             new("org_id", user.OrganizationId.ToString()),
-            new("org_name", user.Organization?.Name ?? string.Empty),
+            new("org_name", _db.Organizations.AsNoTracking().Where(o => o.Id == user.OrganizationId).Select(o => o.Name).FirstOrDefault() ?? string.Empty),
         };
 
         foreach (var role in roles)

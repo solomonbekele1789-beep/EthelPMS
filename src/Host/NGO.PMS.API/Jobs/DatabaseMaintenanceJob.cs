@@ -5,7 +5,7 @@ using Npgsql;
 namespace NGO.PMS.API.Jobs;
 
 /// <summary>
-/// Periodic PostgreSQL maintenance job: purges expired refresh tokens (>30d) and runs ANALYZE.
+/// Periodic PostgreSQL maintenance job: purges expired refresh tokens (over 30d) and runs ANALYZE.
 /// </summary>
 public sealed class DatabaseMaintenanceJob(
     IConfiguration configuration,

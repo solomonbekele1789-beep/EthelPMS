@@ -8,7 +8,7 @@ public class ProjectUserViewConfiguration : IEntityTypeConfiguration<ProjectUser
 {
     public void Configure(EntityTypeBuilder<ProjectUserView> builder)
     {
-        builder.ToTable("users", "identity");
+        builder.ToTable("users", "identity", t => t.ExcludeFromMigrations());
         builder.HasKey(e => e.Id);
         builder.Property(e => e.FirstName).HasColumnName("first_name");
         builder.Property(e => e.LastName).HasColumnName("last_name");

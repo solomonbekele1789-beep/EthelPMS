@@ -23,7 +23,7 @@ public class ModuleDependencyTests
         "Partnerships", "SystemReports", "ImportExport"
     ];
 
-    private static readonly Architecture Architecture = new ArchLoader()
+    private static readonly ArchUnitNET.Domain.Architecture Architecture = new ArchLoader()
         .LoadAssemblies(LoadSolutionAssemblies())
         .Build();
 

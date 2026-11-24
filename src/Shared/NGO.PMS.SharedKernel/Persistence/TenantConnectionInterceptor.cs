@@ -34,7 +34,7 @@ public class TenantConnectionInterceptor : DbConnectionInterceptor
         await base.ConnectionOpenedAsync(connection, eventData, cancellationToken);
     }
 
-    public override async Task<InterceptionResult> ConnectionClosingAsync(
+    public override async ValueTask<InterceptionResult> ConnectionClosingAsync(
         DbConnection connection,
         ConnectionEventData eventData,
         InterceptionResult result)

@@ -22,7 +22,6 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, L
             ?? throw new UnauthorizedAccessException("Invalid or expired refresh token.");
 
         var user = await _db.Users
-            .Include(u => u.Organization)
             .Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ThenInclude(r => r.RolePermissions).ThenInclude(rp => rp.Permission)
             .FirstOrDefaultAsync(u => u.Id == existingToken.UserId, cancellationToken)
             ?? throw new NotFoundException(nameof(Domain.Entities.User), existingToken.UserId);
@@ -40,7 +39,7 @@ public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, L
 
         var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
 
-        var org = user.Organization ?? await _db.Organizations.FirstOrDefaultAsync(o => o.Id == user.OrganizationId, cancellationToken);
+        var org = await _db.Organizations.FirstOrDefaultAsync(o => o.Id == user.OrganizationId, cancellationToken);
         var office = user.OfficeId.HasValue
             ? await _db.Offices.FirstOrDefaultAsync(o => o.Id == user.OfficeId, cancellationToken)
             : null;

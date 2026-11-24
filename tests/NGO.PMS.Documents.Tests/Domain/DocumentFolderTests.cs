@@ -5,7 +5,7 @@ namespace NGO.PMS.Documents.Tests.Domain;
 
 public class DocumentFolderTests
 {
-    private const string TenantId = "tenant-001";
+    private static readonly Guid TenantId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
     [Fact]
     public void Create_ValidInput_ReturnsFolder()

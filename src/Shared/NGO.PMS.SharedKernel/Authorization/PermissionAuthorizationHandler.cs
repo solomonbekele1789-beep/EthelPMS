@@ -7,7 +7,7 @@ namespace NGO.PMS.SharedKernel.Authorization;
 /// Handles PermissionRequirement using Hybrid RBAC + ABAC:
 /// 1. SuperAdmin role has platform-wide access.
 /// 2. Checks JWT 'permissions' claims (fast path).
-/// 3. Falls back to database lookup via IPermissionService (handles perm_hash & mid-session changes).
+/// 3. Falls back to database lookup via IPermissionService (handles perm_hash and mid-session changes).
 /// 4. Evaluates ABAC attribute rules when resource context is supplied.
 /// Note: Organization Admin does NOT bypass RBAC or gain platform.* access.
 /// </summary>

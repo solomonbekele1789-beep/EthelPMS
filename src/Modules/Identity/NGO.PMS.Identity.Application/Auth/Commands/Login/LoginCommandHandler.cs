@@ -21,7 +21,6 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
     public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         var user = await _db.Users
-            .Include(u => u.Organization)
             .Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ThenInclude(r => r.RolePermissions).ThenInclude(rp => rp.Permission)
             .FirstOrDefaultAsync(u => u.Email == request.Email.ToLowerInvariant().Trim(), cancellationToken)
             ?? throw new UnauthorizedAccessException("Invalid email or password.");
@@ -51,7 +50,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, LoginResponse>
 
         var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
 
-        var org = user.Organization ?? await _db.Organizations.FirstOrDefaultAsync(o => o.Id == user.OrganizationId, cancellationToken);
+        var org = await _db.Organizations.FirstOrDefaultAsync(o => o.Id == user.OrganizationId, cancellationToken);
         var office = user.OfficeId.HasValue
             ? await _db.Offices.FirstOrDefaultAsync(o => o.Id == user.OfficeId, cancellationToken)
             : null;

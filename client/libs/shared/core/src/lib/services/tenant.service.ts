@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-export interface TenantInfo {
-  id: string;
-  name: string;
-  slug?: string;
-  enabledModules: string[];
-}
+import { TenantInfo } from '../models/auth.model';
 
 const TENANT_ID_KEY = 'ethelpms_tenant_id';
 

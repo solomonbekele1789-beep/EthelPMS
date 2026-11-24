@@ -2,6 +2,7 @@ using FluentAssertions;
 using NGO.PMS.Risk.Domain.Enums;
 using NGO.PMS.Risk.Domain.Events;
 using RiskEntity = NGO.PMS.Risk.Domain.Entities.Risk;
+using RiskMitigation = NGO.PMS.Risk.Domain.Entities.RiskMitigation;
 
 namespace NGO.PMS.Risk.Tests.Domain;
 
@@ -100,7 +101,7 @@ public class RiskTests
     public void Close_WithOpenMitigations_ThrowsInvalidOperationException()
     {
         var risk = CreateDefaultRisk();
-        var mitigation = Domain.Entities.RiskMitigation.Create(
+        var mitigation = RiskMitigation.Create(
             risk.Id,
             "Hire additional staff",
             DateTime.UtcNow.AddDays(30));
@@ -116,7 +117,7 @@ public class RiskTests
     public void Close_AllMitigationsCompleted_Succeeds()
     {
         var risk = CreateDefaultRisk();
-        var mitigation = Domain.Entities.RiskMitigation.Create(
+        var mitigation = RiskMitigation.Create(
             risk.Id,
             "Hire additional staff",
             DateTime.UtcNow.AddDays(30));

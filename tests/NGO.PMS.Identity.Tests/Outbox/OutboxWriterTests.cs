@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using NGO.PMS.Contracts.IntegrationEvents.Identity;
 using NGO.PMS.Identity.Tests.Helpers;
 using NGO.PMS.SharedKernel.Outbox;
-using Xunit;
 
 namespace NGO.PMS.Identity.Tests.Outbox;
 
@@ -12,13 +11,17 @@ public class OutboxWriterTests
     [Fact]
     public async Task WriteAsync_ShouldPersistOutboxMessage_WithEventIdAndOrganizationId()
     {
-        using var db = IdentityTestFixture.CreateDbContext();
-        var writer = new OutboxWriter(db);
         var orgId = Guid.NewGuid();
+        using var db = IdentityTestFixture.CreateInMemoryDbContext(orgId);
+        var writer = new OutboxWriter(db);
         var userId = Guid.NewGuid();
 
-        var evt = new UserCreatedIntegrationEvent(userId, "user@ngo.org", "Test User", orgId)
+        var evt = new UserCreatedIntegrationEvent
         {
+            UserId = userId,
+            Email = "user@ngo.org",
+            FirstName = "Test",
+            LastName = "User",
             OrganizationId = orgId
         };
 

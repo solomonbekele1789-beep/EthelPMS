@@ -26,7 +26,9 @@ export interface UserProfile {
 export interface TenantInfo {
   id: string;
   name: string;
-  identifier: string;
+  identifier?: string;
+  slug?: string;
+  enabledModules: string[];
 }
 
 export interface AuthState {

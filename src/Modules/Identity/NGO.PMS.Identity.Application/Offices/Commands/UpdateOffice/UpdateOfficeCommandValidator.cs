@@ -8,6 +8,7 @@ public class UpdateOfficeCommandValidator : AbstractValidator<UpdateOfficeComman
     {
         RuleFor(x => x.Id).NotEmpty();
         RuleFor(x => x.Name).NotEmpty().MaximumLength(200);
-        RuleFor(x => x.Type).NotEmpty().MaximumLength(50);
+        RuleFor(x => x.Code).NotEmpty().MaximumLength(50);
+        RuleFor(x => x.OfficeType).NotEmpty().MaximumLength(50);
     }
 }

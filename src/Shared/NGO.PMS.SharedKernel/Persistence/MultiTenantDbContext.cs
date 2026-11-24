@@ -7,8 +7,9 @@ namespace NGO.PMS.SharedKernel.Persistence;
 
 /// <summary>
 /// Base DbContext for all tenant-scoped modules.
-/// Enforces global query filters for multi-tenancy (IMultiTenant) and soft-delete (ISoftDeletable),
-/// maps outbox.inbox_messages, and auto-sets/protects OrganizationId on SaveChangesAsync.
+/// Enforces global query filters for multi-tenancy (IMultiTenant.TenantId or OrganizationId)
+/// and soft-delete (ISoftDeletable), maps outbox.inbox_messages, and auto-sets/protects
+/// tenant IDs on SaveChangesAsync.
 /// </summary>
 public abstract class MultiTenantDbContext : DbContext
 {
@@ -33,17 +34,20 @@ public abstract class MultiTenantDbContext : DbContext
 
         modelBuilder.Entity<InboxMessage>(b =>
         {
-            b.ToTable("inbox_messages", "outbox");
-            b.HasKey(x => new { x.EventId, x.HandlerName });
+            b.ToTable("inbox_messages", "outbox", t => t.ExcludeFromMigrations());
+            b.HasKey(x => new { x.Id, x.ConsumerName });
         });
 
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
         {
             var clrType = entityType.ClrType;
-            var isSoftDeletable = typeof(ISoftDeletable).IsAssignableFrom(clrType);
-            var isMultiTenant = typeof(IMultiTenant).IsAssignableFrom(clrType);
+            if (clrType == typeof(OutboxMessage) || clrType == typeof(InboxMessage))
+                continue;
 
-            if (!isSoftDeletable && !isMultiTenant)
+            var isSoftDeletable = typeof(ISoftDeletable).IsAssignableFrom(clrType);
+            var tenantPropName = GetTenantPropertyName(clrType);
+
+            if (!isSoftDeletable && tenantPropName is null)
                 continue;
 
             var parameter = Expression.Parameter(clrType, "e");
@@ -55,15 +59,14 @@ public abstract class MultiTenantDbContext : DbContext
                 combined = Expression.Equal(isDeletedProp, Expression.Constant(false));
             }
 
-            if (isMultiTenant)
+            if (tenantPropName is not null)
             {
-                var orgIdProp = Expression.Property(parameter, nameof(IMultiTenant.OrganizationId));
+                var tenantProp = Expression.Property(parameter, tenantPropName);
                 var currentOrgExpr = Expression.Property(Expression.Constant(this), nameof(CurrentOrganizationId));
                 var emptyGuid = Expression.Constant(Guid.Empty);
-                // Enforce tenant filter whenever an authenticated organization context is present
                 var tenantCondition = Expression.OrElse(
                     Expression.Equal(currentOrgExpr, emptyGuid),
-                    Expression.Equal(orgIdProp, currentOrgExpr));
+                    Expression.Equal(tenantProp, currentOrgExpr));
 
                 combined = combined is null ? tenantCondition : Expression.AndAlso(combined, tenantCondition);
             }
@@ -79,20 +82,41 @@ public abstract class MultiTenantDbContext : DbContext
     {
         var currentOrgId = _currentUser.OrganizationId;
 
-        foreach (var entry in ChangeTracker.Entries<IMultiTenant>())
+        foreach (var entry in ChangeTracker.Entries())
         {
+            if (entry.Entity is OutboxMessage or InboxMessage)
+                continue;
+
+            var tenantPropName = GetTenantPropertyName(entry.Entity.GetType());
+            if (tenantPropName is null)
+                continue;
+
+            var prop = entry.Property(tenantPropName);
             if (entry.State == EntityState.Added &&
-                entry.Entity.OrganizationId == Guid.Empty &&
+                prop.CurrentValue is Guid val &&
+                val == Guid.Empty &&
                 currentOrgId != Guid.Empty)
             {
-                entry.Entity.OrganizationId = currentOrgId;
+                prop.CurrentValue = currentOrgId;
             }
             else if (entry.State == EntityState.Modified)
             {
-                entry.Property(nameof(IMultiTenant.OrganizationId)).IsModified = false;
+                prop.IsModified = false;
             }
         }
 
         return base.SaveChangesAsync(cancellationToken);
+    }
+
+    private static string? GetTenantPropertyName(Type clrType)
+    {
+        if (typeof(IMultiTenant).IsAssignableFrom(clrType))
+            return nameof(IMultiTenant.TenantId);
+
+        var orgProp = clrType.GetProperty("OrganizationId");
+        if (orgProp is not null && orgProp.PropertyType == typeof(Guid))
+            return "OrganizationId";
+
+        return null;
     }
 }

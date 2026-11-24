@@ -29,6 +29,7 @@
     <XunitRunnerVersion>3.1.4</XunitRunnerVersion>
     <FluentAssertionsVersion>8.11.0</FluentAssertionsVersion>
     <NSubstituteVersion>6.2.0</NSubstituteVersion>
+    <MoqVersion>4.20.72</MoqVersion>
     <BogusVersion>35.6.5</BogusVersion>
     <CoverletVersion>6.0.4</CoverletVersion>
     <ArchUnitNetVersion>0.11.4</ArchUnitNetVersion>

@@ -26,7 +26,10 @@ public sealed class IdentityDbContextFactory : IDesignTimeDbContextFactory<Ident
     {
         public Guid UserId => Guid.Empty;
         public string Email => "design-time@ethelpms.local";
+        public string FullName => "Design Time";
         public Guid OrganizationId => Guid.Empty;
+        public IReadOnlyList<string> Permissions => [];
+        public IReadOnlyList<string> Roles => [];
         public bool IsAuthenticated => false;
     }
 }

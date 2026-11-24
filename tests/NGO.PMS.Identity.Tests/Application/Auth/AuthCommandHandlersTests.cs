@@ -11,7 +11,6 @@ using NGO.PMS.Identity.Domain.Entities;
 using NGO.PMS.Identity.Tests.Helpers;
 using NGO.PMS.SharedKernel.Exceptions;
 using NSubstitute;
-using Xunit;
 
 namespace NGO.PMS.Identity.Tests.Application.Auth;
 
@@ -20,15 +19,9 @@ public class AuthCommandHandlersTests
     [Fact]
     public async Task ForgotPassword_ShouldCreate1HourToken_AndSendEmail_ForActiveUser()
     {
-        using var db = IdentityTestFixture.CreateDbContext();
-        var user = new User
-        {
-            OrganizationId = Guid.NewGuid(),
-            Email = "alice@ngo.org",
-            FirstName = "Alice",
-            LastName = "Bekele",
-            IsActive = true
-        };
+        var orgId = Guid.NewGuid();
+        using var db = IdentityTestFixture.CreateInMemoryDbContext(orgId);
+        var user = User.Create("alice@ngo.org", "Alice", "Bekele", orgId);
         db.Users.Add(user);
         await db.SaveChangesAsync();
 
@@ -48,15 +41,9 @@ public class AuthCommandHandlersTests
     [Fact]
     public async Task ResetPassword_ShouldUpdatePassword_AndRevokeAllRefreshTokens()
     {
-        using var db = IdentityTestFixture.CreateDbContext();
-        var user = new User
-        {
-            OrganizationId = Guid.NewGuid(),
-            Email = "bob@ngo.org",
-            FirstName = "Bob",
-            LastName = "Tadesse",
-            IsActive = true
-        };
+        var orgId = Guid.NewGuid();
+        using var db = IdentityTestFixture.CreateInMemoryDbContext(orgId);
+        var user = User.Create("bob@ngo.org", "Bob", "Tadesse", orgId);
         var rawToken = "valid-reset-token";
         var tokenHash = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(rawToken)));
 
@@ -85,15 +72,9 @@ public class AuthCommandHandlersTests
     [Fact]
     public async Task SetupPassword_ShouldReject_WhenPasswordAlreadySet()
     {
-        using var db = IdentityTestFixture.CreateDbContext();
-        var user = new User
-        {
-            OrganizationId = Guid.NewGuid(),
-            Email = "carol@ngo.org",
-            FirstName = "Carol",
-            LastName = "Desta",
-            IsActive = true
-        };
+        var orgId = Guid.NewGuid();
+        using var db = IdentityTestFixture.CreateInMemoryDbContext(orgId);
+        var user = User.Create("carol@ngo.org", "Carol", "Desta", orgId);
         user.SetPassword("existing-hash");
         var rawToken = "setup-token";
         var tokenHash = Convert.ToBase64String(SHA256.HashData(Encoding.UTF8.GetBytes(rawToken)));
@@ -118,7 +99,7 @@ public class AuthCommandHandlersTests
     [Fact]
     public async Task RefreshToken_ShouldThrowUnauthorized_WhenTokenInvalid()
     {
-        using var db = IdentityTestFixture.CreateDbContext();
+        using var db = IdentityTestFixture.CreateInMemoryDbContext();
         var jwt = Substitute.For<IJwtTokenService>();
         jwt.ValidateRefreshTokenAsync(Arg.Any<string>(), Arg.Any<CancellationToken>())
             .Returns((RefreshToken?)null);

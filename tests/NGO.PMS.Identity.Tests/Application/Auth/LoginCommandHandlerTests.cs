@@ -92,7 +92,7 @@ public class LoginCommandHandlerTests
 
         // Act & Assert
         var act = () => handler.Handle(command, CancellationToken.None);
-        await act.Should().ThrowAsync<BusinessRuleException>()
+        await act.Should().ThrowAsync<AccountLockedException>()
             .WithMessage("*locked*");
     }
 
@@ -107,7 +107,7 @@ public class LoginCommandHandlerTests
 
         // Act & Assert
         var act = () => handler.Handle(command, CancellationToken.None);
-        await act.Should().ThrowAsync<BusinessRuleException>()
+        await act.Should().ThrowAsync<UnauthorizedAccessException>()
             .WithMessage("*Invalid email or password*");
     }
 }

@@ -362,6 +362,7 @@ export default class MainLayoutComponent {
   private readonly router = inject(Router);
 
   readonly user = this.store.selectSignal(selectCurrentUser);
+  readonly currentUser = this.user;
   readonly isAuthenticated = this.store.selectSignal(selectIsAuthenticated);
   readonly sidebarCollapsed = this.store.selectSignal(selectUiSidebarCollapsed);
 

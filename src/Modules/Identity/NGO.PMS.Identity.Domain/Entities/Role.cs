@@ -2,7 +2,7 @@ using NGO.PMS.SharedKernel.Domain;
 
 namespace NGO.PMS.Identity.Domain.Entities;
 
-public class Role : AuditableEntity, ISoftDeletable, IMultiTenant
+public class Role : AuditableEntity, ISoftDeletable
 {
     public string Name { get; private set; } = string.Empty;
     public string? Description { get; private set; }
