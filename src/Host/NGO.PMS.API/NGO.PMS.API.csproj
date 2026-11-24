@@ -57,6 +57,7 @@
     <ProjectReference Include="..\..\Modules\Partnerships\NGO.PMS.Partnerships.API\NGO.PMS.Partnerships.API.csproj" />
     <ProjectReference Include="..\..\Modules\SystemReports\NGO.PMS.SystemReports.API\NGO.PMS.SystemReports.API.csproj" />
     <ProjectReference Include="..\..\Modules\ImportExport\NGO.PMS.ImportExport.API\NGO.PMS.ImportExport.API.csproj" />
+    <ProjectReference Include="..\..\Modules\CashBank\NGO.PMS.CashBank.API\NGO.PMS.CashBank.API.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NGO.PMS.CashBank.Infrastructure\NGO.PMS.CashBank.Infrastructure.csproj" />
+    <ProjectReference Include="..\NGO.PMS.CashBank.Application\NGO.PMS.CashBank.Application.csproj" />
+  </ItemGroup>
+
+</Project>

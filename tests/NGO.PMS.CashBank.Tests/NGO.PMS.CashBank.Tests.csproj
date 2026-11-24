@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(TestSdkVersion)" />
+    <PackageReference Include="xunit" Version="$(XunitVersion)" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="$(XunitRunnerVersion)" />
+    <PackageReference Include="FluentAssertions" Version="$(FluentAssertionsVersion)" />
+    <PackageReference Include="NSubstitute" Version="$(NSubstituteVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(EFCoreVersion)" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\CashBank\NGO.PMS.CashBank.Application\NGO.PMS.CashBank.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\CashBank\NGO.PMS.CashBank.Infrastructure\NGO.PMS.CashBank.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

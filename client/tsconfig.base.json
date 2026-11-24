@@ -25,6 +25,7 @@
       "@ethelpms/modules/participants": ["./libs/modules/participants/src/index.ts"],
       "@ethelpms/modules/procurement": ["./libs/modules/procurement/src/index.ts"],
       "@ethelpms/modules/fund-accounting": ["./libs/modules/fund-accounting/src/index.ts"],
+      "@ethelpms/modules/cash-bank": ["./libs/modules/cash-bank/src/index.ts"],
       "@ethelpms/modules/assets": ["./libs/modules/assets/src/index.ts"],
       "@ethelpms/modules/training": ["./libs/modules/training/src/index.ts"],
       "@ethelpms/modules/tasks": ["./libs/modules/tasks/src/index.ts"],

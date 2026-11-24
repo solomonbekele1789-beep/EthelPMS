@@ -381,6 +381,7 @@ export default class MainLayoutComponent {
     { path: '/participants', labelKey: 'nav.participants', icon: 'groups' },
     { path: '/procurement', labelKey: 'nav.procurement', icon: 'shopping_cart' },
     { path: '/finance', labelKey: 'nav.finance', icon: 'account_balance' },
+    { path: '/cash-bank', labelKey: 'nav.cashBank', icon: 'account_balance_wallet' },
     { path: '/assets', labelKey: 'nav.assets', icon: 'inventory_2' },
     { path: '/training', labelKey: 'nav.training', icon: 'school' },
     { path: '/tasks', labelKey: 'nav.tasks', icon: 'task_alt' },

@@ -1,0 +1,23 @@
+{
+  "name": "modules-cash-bank",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/modules/cash-bank/src",
+  "prefix": "cash-bank",
+  "tags": [
+    "scope:module",
+    "module:cash-bank",
+    "type:feature"
+  ],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@angular/build:unit-test",
+      "options": {
+        "watch": false
+      }
+    }
+  }
+}

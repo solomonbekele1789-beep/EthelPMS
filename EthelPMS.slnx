@@ -40,6 +40,12 @@
     <Project Path="src/Modules/FundAccounting/NGO.PMS.FundAccounting.Domain/NGO.PMS.FundAccounting.Domain.csproj" />
     <Project Path="src/Modules/FundAccounting/NGO.PMS.FundAccounting.Infrastructure/NGO.PMS.FundAccounting.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/src/Modules/CashBank/">
+    <Project Path="src/Modules/CashBank/NGO.PMS.CashBank.API/NGO.PMS.CashBank.API.csproj" />
+    <Project Path="src/Modules/CashBank/NGO.PMS.CashBank.Application/NGO.PMS.CashBank.Application.csproj" />
+    <Project Path="src/Modules/CashBank/NGO.PMS.CashBank.Domain/NGO.PMS.CashBank.Domain.csproj" />
+    <Project Path="src/Modules/CashBank/NGO.PMS.CashBank.Infrastructure/NGO.PMS.CashBank.Infrastructure.csproj" />
+  </Folder>
   <Folder Name="/src/Modules/Identity/">
     <Project Path="src/Modules/Identity/NGO.PMS.Identity.API/NGO.PMS.Identity.API.csproj" />
     <Project Path="src/Modules/Identity/NGO.PMS.Identity.Application/NGO.PMS.Identity.Application.csproj" />
@@ -169,6 +175,7 @@
     <Project Path="tests/NGO.PMS.Donors.Tests/NGO.PMS.Donors.Tests.csproj" />
     <Project Path="tests/NGO.PMS.Feedback.Tests/NGO.PMS.Feedback.Tests.csproj" />
     <Project Path="tests/NGO.PMS.FundAccounting.Tests/NGO.PMS.FundAccounting.Tests.csproj" />
+    <Project Path="tests/NGO.PMS.CashBank.Tests/NGO.PMS.CashBank.Tests.csproj" />
     <Project Path="tests/NGO.PMS.MEAL.Tests/NGO.PMS.MEAL.Tests.csproj" />
     <Project Path="tests/NGO.PMS.Notifications.Tests/NGO.PMS.Notifications.Tests.csproj" />
     <Project Path="tests/NGO.PMS.Participants.Tests/NGO.PMS.Participants.Tests.csproj" />

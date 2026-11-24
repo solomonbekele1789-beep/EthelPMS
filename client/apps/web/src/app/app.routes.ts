@@ -118,6 +118,13 @@ export const routes: Routes = [
         loadChildren: () => import('@ethelpms/modules/fund-accounting').then(m => m.fundAccountingRoutes)
       },
 
+      // ── Category A: Cash & Bank Management module ─────────────────
+      {
+        path: 'cash-bank',
+        canActivate: [moduleGuard('cash-bank')],
+        loadChildren: () => import('@ethelpms/modules/cash-bank').then(m => m.cashBankRoutes)
+      },
+
       // ── Phase 7C: Assets module ──────────────────────────────────────
       {
         path: 'assets',
